@@ -1,0 +1,29 @@
+{
+  "name": "podwatch",
+  "version": "0.0.1",
+  "description": "A Kubernetes error monitoring and alerting service",
+  "main": "index.js",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oslabs-beta/podwatch.git"
+  },
+  "keywords": [
+    "kubernetes"
+  ],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oslabs-beta/podwatch/issues"
+  },
+  "homepage": "https://github.com/oslabs-beta/podwatch#readme",
+  "devDependencies": {
+    "lerna": "^6.5.1"
+  }
+}
