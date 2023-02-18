@@ -5,7 +5,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "ts-node-dev src/index.ts",
-    "start": "ts-node src/index.ts"
+    "start": "ts-node src/index.ts",
+    "test": "echo \"Error: no test specified\""
   },
   "dependencies": {
     "ts-node": "^10.9.1"
