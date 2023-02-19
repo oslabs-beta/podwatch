@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev src/index.ts",
     "start": "ts-node src/index.js",
+    "dev:docker": "docker compose up",
     "test": "echo \"Error: no test specified\""
   },
   "dependencies": {
