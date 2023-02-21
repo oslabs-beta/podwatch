@@ -1,11 +1,8 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
-import { UserDocument } from './UserModel';
+import { User } from './UserModel';
 
-/**
- * The attributes required to create a new cluster
- */
-export interface ClusterAttrs {
+export interface Cluster {
   /**
    * The cluster's name, specified by the cluster owner.
    */
@@ -13,19 +10,21 @@ export interface ClusterAttrs {
   /**
    * The cluster's description, specified by the cluster owner.
    */
-  description: string;
+  description?: string;
+  /**
+   * The cluster's owner - this should be a reference to a user document.
+   */
+  owner: User;
+  /**
+   * The cluster's members - this should be an array of references to user documents. These users will be permitted read access to this cluster's dashboard.
+   */
+  members: User[];
+}
+export interface ClusterAttrs extends Cluster {
   /**
    * The cluster's secret - this should be a randomly generated string. It will then be hashed and stored in the database.
    */
   secret: string;
-  /**
-   * The cluster's owner - this should be a reference to a user document.
-   */
-  owner: UserDocument;
-  /**
-   * The cluster's members - this should be an array of references to user documents. These users will be permitted read access to this cluster's dashboard.
-   */
-  members: UserDocument[];
 }
 
 /**
@@ -42,18 +41,23 @@ export interface ClusterDocument extends ClusterAttrs, mongoose.Document {
    * @returns True if the candidate secret matches the hashed secret in the database, false otherwise.
    */
   compareSecret: (candidateSecret: string) => Promise<boolean>;
-  /**
-   * Generates a random secret and returns it. This function does not save the secret to the database.
-   * @returns A random string of 24 characters.
-   */
-  generateSecret: () => Promise<string>;
 }
 
 /**
  * The cluster model interface - this is the interface that will be used to access the cluster model in the database.
  */
 export interface ClusterModel extends mongoose.Model<ClusterDocument> {
+  /**
+   * Creates a new cluster document and returns it.
+   * @param attrs The attributes required to create a new cluster document.
+   * @returns The newly created cluster document.
+   */
   build: (attrs: ClusterAttrs) => ClusterDocument;
+  /**
+   * Generates a random secret and returns it. This function does not save the secret to the database.
+   * @returns A random string of 24 characters from the character set [A-Za-z0-9].
+   */
+  generateSecret: () => Promise<string>;
 }
 
 const clusterSchema = new mongoose.Schema<ClusterAttrs>(
@@ -79,6 +83,7 @@ const clusterSchema = new mongoose.Schema<ClusterAttrs>(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
+        default: [],
       },
     ],
   },
@@ -107,7 +112,7 @@ clusterSchema.methods.compareSecret = async function (candidateSecret: string) {
   return await bcrypt.compare(candidateSecret, this.secret);
 };
 
-clusterSchema.methods.generateSecret = async function () {
+clusterSchema.statics.generateSecret = async function () {
   return new Promise<string>((resolve) => {
     const charSet =
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';

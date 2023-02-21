@@ -1,15 +1,11 @@
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 
-export interface UserAttrs {
+export interface User {
   /**
    * The user's email address
    */
   email: string;
-  /**
-   * The user's password (only required if using a local auth strategy)
-   */
-  password?: string;
   /**
    * The user's auth provider (local, google, github)
    */
@@ -22,6 +18,12 @@ export interface UserAttrs {
    * The user's avatar URL, if provided by the auth provider
    */
   avatar?: string;
+}
+export interface UserAttrs extends User {
+  /**
+   * The user's password (only required if using a local auth strategy)
+   */
+  password?: string;
 }
 
 export interface UserModel extends mongoose.Model<UserDocument> {
