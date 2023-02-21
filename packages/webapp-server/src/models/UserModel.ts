@@ -28,27 +28,11 @@ export interface UserModel extends mongoose.Model<UserDocument> {
   build: (attrs: UserAttrs) => UserDocument;
 }
 
-export interface UserDocument extends mongoose.Document {
+export interface UserDocument extends UserAttrs, mongoose.Document {
   /**
    * The user's mongodb ID
    */
   id: string;
-  /**
-   * The user's email address
-   */
-  email: string;
-  /**
-   * The user's auth provider (local, google, github)
-   */
-  provider: 'local' | 'google' | 'github';
-  /**
-   * The user's auth provider ID (will be undefined if using a local auth strategy)
-   */
-  providerId: string | undefined;
-  /**
-   * THe user's avatar URL, if provided by the auth provider
-   */
-  avatar: string | undefined;
   /**
    * Compare a provided password with the hashed password in the database
    * @param candidatePassword The password to compare
@@ -95,7 +79,6 @@ const userSchema = new mongoose.Schema<UserAttrs>(
   }
 );
 
-// When a user is saved and the password is modified, hash the password
 userSchema.pre('save', async function save(next) {
   if (!this.password) return next();
   if (!this.isModified('password')) return next();
@@ -108,7 +91,10 @@ userSchema.pre('save', async function save(next) {
   }
 });
 
-// Compare a provided password with the hashed password in the database
+userSchema.virtual('password').set(function (password: string) {
+  this.password = password;
+});
+
 userSchema.methods.comparePassword = async function (
   candidatePassword: string
 ) {
@@ -116,11 +102,10 @@ userSchema.methods.comparePassword = async function (
   return await bcrypt.compare(candidatePassword, this.password);
 };
 
-// Use this function to create a new user
 userSchema.statics.build = (attrs: UserAttrs): UserDocument => {
-  return new User(attrs);
+  return new UserModel(attrs);
 };
 
-const User = mongoose.model<UserDocument, UserModel>('User', userSchema);
+const UserModel = mongoose.model<UserDocument, UserModel>('User', userSchema);
 
-export { User };
+export { UserModel };
