@@ -4,8 +4,8 @@ services:
     image: mongo
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: ${MONGODB_USER}
-      MONGO_INITDB_ROOT_PASSWORD: ${MONGODB_PASSWORD}
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
     volumes:
       - podwatch-data:/data/db
   app:
@@ -14,7 +14,7 @@ services:
     depends_on:
       - mongodb
     environment:
-      MONGODB_URI: mongodb://${MONGODB_USER}:${MONGODB_PASSWORD}@mongodb:27017
+      MONGODB_URI: mongodb://admin:password@mongodb:27017
     env_file:
       - .env
     volumes:
