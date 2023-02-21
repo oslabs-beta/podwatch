@@ -19,7 +19,15 @@
     }
   }
 
-  @media screen and (max-width: 768px) {
+  @media screen and (min-width: 768px) {
     width: 100%;
+  }
+
+  @include md-breakpoint {
+    width: 100%;
+  }
+
+  @include lg-breakpoint {
+    justify-content: flex-start;
   }
 }

@@ -1,2 +1,14 @@
 $primary-color: #1a73e8;
 $secondary-color: #8fe81a;
+
+@mixin md-breakpoint {
+  @media screen and (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin lg-breakpoint {
+  @media screen and (min-width: 1024px) {
+    @content;
+  }
+}
