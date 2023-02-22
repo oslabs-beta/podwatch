@@ -1315,6 +1315,7 @@
     read-package-json-fast "^2.0.3"
     which "^2.0.2"
 
+<<<<<<< HEAD
 "@nrwl/cli@15.7.2":
   version "15.7.2"
   resolved "https://registry.npmjs.org/@nrwl/cli/-/cli-15.7.2.tgz"
@@ -1326,6 +1327,43 @@
   version "15.7.2"
   resolved "https://registry.npmjs.org/@nrwl/devkit/-/devkit-15.7.2.tgz"
   integrity sha512-HMGi7L6w2g4IrYwhb04snD8Zr24Z/gzau5i9WUNkwzrjeR1xAm0Cc9WRre221zaeohtK11gyBt7BerT1tgkNwA==
+=======
+<<<<<<< HEAD
+"@npmcli/run-script@^4.1.0", "@npmcli/run-script@^4.1.3":
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/@npmcli/run-script/-/run-script-4.2.1.tgz#c07c5c71bc1c70a5f2a06b0d4da976641609b946"
+  integrity sha512-7dqywvVudPSrRCW5nTHpHgeWnbBtz8cFkOuKrecm6ih+oO9ciydhWt6OF7HlqupRRmB8Q/gECVdB9LMfToJbRg==
+  dependencies:
+    "@npmcli/node-gyp" "^2.0.0"
+    "@npmcli/promise-spawn" "^3.0.0"
+    node-gyp "^9.0.0"
+    read-package-json-fast "^2.0.3"
+    which "^2.0.2"
+
+"@nrwl/cli@15.8.1":
+  version "15.8.1"
+  resolved "https://registry.yarnpkg.com/@nrwl/cli/-/cli-15.8.1.tgz#7ffef613c054f6140a0dcb235d16ff86ea468865"
+  integrity sha512-MB4anWQJ/yqKfusF2b+wYim2/aJGERcEkK/xT9Q7nXwJR/x76cIdggHz/C4zasFAjEHcilwajmF5chk0vArbkA==
+=======
+"@nrwl/cli@15.7.2":
+  version "15.7.2"
+  resolved "https://registry.npmjs.org/@nrwl/cli/-/cli-15.7.2.tgz"
+  integrity sha512-A/72FAW1e0ku8YB/PaCqN9BpVvciO83MS5F5bvX5PA8xCNqe1+iXp/5T2ASnN2lB9zR3fQJmvR7mHKTKQlqQQQ==
+>>>>>>> 9b23696 (if outside the cluster)
+  dependencies:
+    nx "15.8.1"
+
+"@nrwl/devkit@>=15.5.2 < 16":
+<<<<<<< HEAD
+  version "15.8.1"
+  resolved "https://registry.yarnpkg.com/@nrwl/devkit/-/devkit-15.8.1.tgz#edb8fce962e1a98cdf370bd5853b56889bd1ba5c"
+  integrity sha512-DT7DF5ls63ngR5G1nGHbiMApCBPj1ZkI1y6p5GbLGqSMSyiIO6GcehzYnGmY0W9nqpW7U/8kD7WuHmObI/pUTw==
+=======
+  version "15.7.2"
+  resolved "https://registry.npmjs.org/@nrwl/devkit/-/devkit-15.7.2.tgz"
+  integrity sha512-HMGi7L6w2g4IrYwhb04snD8Zr24Z/gzau5i9WUNkwzrjeR1xAm0Cc9WRre221zaeohtK11gyBt7BerT1tgkNwA==
+>>>>>>> 9b23696 (if outside the cluster)
+>>>>>>> 102e995 (if outside the cluster)
   dependencies:
     "@phenomnomnominal/tsquery" "4.1.1"
     ejs "^3.1.7"
@@ -1333,10 +1371,23 @@
     semver "7.3.4"
     tslib "^2.3.0"
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+"@nrwl/nx-darwin-arm64@15.8.1":
+  version "15.8.1"
+  resolved "https://registry.yarnpkg.com/@nrwl/nx-darwin-arm64/-/nx-darwin-arm64-15.8.1.tgz#225978034971982c92e4cc6b91db1c0966257926"
+  integrity sha512-nuubQcXVrxxxjpKHmfQ4bEgCwKsiey1/o9+FB98DoOv70Y2PuxMu/tjXbfNiJBFP72ySrrDmD/vRMKmduOsRSg==
+=======
+>>>>>>> 102e995 (if outside the cluster)
 "@nrwl/nx-darwin-arm64@15.7.2":
   version "15.7.2"
   resolved "https://registry.npmjs.org/@nrwl/nx-darwin-arm64/-/nx-darwin-arm64-15.7.2.tgz"
   integrity sha512-F82exjuqkAkElSTxEcTFeLMhHpbGiccfTQh2VjXMS+ONldxM+Kd7atJjtUG8wKNXfg0lxxjjAdnzLy3iBuN/HQ==
+<<<<<<< HEAD
+=======
+>>>>>>> 9b23696 (if outside the cluster)
+>>>>>>> 102e995 (if outside the cluster)
 
 "@nrwl/nx-darwin-x64@15.7.2":
   version "15.7.2"
@@ -1378,10 +1429,23 @@
   resolved "https://registry.yarnpkg.com/@nrwl/nx-win32-x64-msvc/-/nx-win32-x64-msvc-15.7.2.tgz#cb622a96c0f85c37973420c4817e383783237a84"
   integrity sha512-ARE4qGPgk+e+pSm0uPhHan5UCRtwNYc5ddVNS88NFrVoDTPm5MxYLGdvLnshWWio/Bx526FcwUMSCBWSW8HIFw==
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+"@nrwl/tao@15.8.1":
+  version "15.8.1"
+  resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-15.8.1.tgz#840f3514ad010e8dcdc84b7acbcf7a5deec5f746"
+  integrity sha512-wSoSTSF3tjVjNk6L1vtdSLHCIxEDl232aZN2LMpsVgU2yHnvrik2s9UJQrSDltsMM6vQ5VNKS5Li/AZWmfI79g==
+=======
+>>>>>>> 102e995 (if outside the cluster)
 "@nrwl/tao@15.7.2":
   version "15.7.2"
   resolved "https://registry.npmjs.org/@nrwl/tao/-/tao-15.7.2.tgz"
   integrity sha512-srx9heMIt/QIyuqfewiVYbRpFcD/2pHkTkrEEUKspPd25kzAL2adcAITQKVCHI7/VS2sPdDR67pVsGQPZFBMRQ==
+<<<<<<< HEAD
+=======
+>>>>>>> 9b23696 (if outside the cluster)
+>>>>>>> 102e995 (if outside the cluster)
   dependencies:
     nx "15.7.2"
 
@@ -1779,9 +1843,21 @@
   integrity sha512-hppQEBDmlwhFAXKJX2KnWLYu5yMfi91yazPb2l+lbJiwW+wdo1gNeRA+3RgNSO39WYX2euey41KEwnqesU2Jew==
 
 "@types/serve-static@*":
+<<<<<<< HEAD
   version "1.15.0"
   resolved "https://registry.npmjs.org/@types/serve-static/-/serve-static-1.15.0.tgz"
   integrity sha512-z5xyF6uh8CbjAu9760KDKsH2FcDxZ2tFCsA4HIMWE6IkiYMXfVoa+4f9KX+FN0ZLsaMw1WNG2ETLA6N+/YA+cg==
+=======
+<<<<<<< HEAD
+  version "1.15.1"
+  resolved "https://registry.yarnpkg.com/@types/serve-static/-/serve-static-1.15.1.tgz#86b1753f0be4f9a1bee68d459fcda5be4ea52b5d"
+  integrity sha512-NUo5XNiAdULrJENtJXZZ3fHtfMolzZwczzBbnAeBbqBwG+LaG6YaJtuwzwGSQZ2wsCrxjEhNNjAkKigy3n8teQ==
+=======
+  version "1.15.0"
+  resolved "https://registry.npmjs.org/@types/serve-static/-/serve-static-1.15.0.tgz"
+  integrity sha512-z5xyF6uh8CbjAu9760KDKsH2FcDxZ2tFCsA4HIMWE6IkiYMXfVoa+4f9KX+FN0ZLsaMw1WNG2ETLA6N+/YA+cg==
+>>>>>>> 9b23696 (if outside the cluster)
+>>>>>>> 102e995 (if outside the cluster)
   dependencies:
     "@types/mime" "*"
     "@types/node" "*"
@@ -2024,6 +2100,7 @@ at-least-node@^1.0.0:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 axios@^1.0.0:
   version "1.3.3"
   resolved "https://registry.npmjs.org/axios/-/axios-1.3.3.tgz"
@@ -2031,11 +2108,25 @@ axios@^1.0.0:
 =======
 =======
 >>>>>>> 0b93d5f (working auth strategy, router, private hashed pw info)
+=======
+>>>>>>> 605dbe3 (if outside the cluster)
 axios@^1.0.0, axios@^1.3.4:
+=======
+axios@^1.0.0:
+<<<<<<< HEAD
+>>>>>>> 102e995 (if outside the cluster)
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/axios/-/axios-1.3.4.tgz#f5760cefd9cfb51fd2481acf88c05f67c4523024"
   integrity sha512-toYm+Bsyl6VC5wSkfkbbNB6ROv7KY93PEBBL6xyDczaIHasAiv4wPqQ/c4RjoQzipxRD2W5g21cOqQulZ7rHwQ==
+<<<<<<< HEAD
 >>>>>>> db35232 (edits to get podwatch running within cluster)
+=======
+=======
+  version "1.3.3"
+  resolved "https://registry.npmjs.org/axios/-/axios-1.3.3.tgz"
+  integrity sha512-eYq77dYIFS77AQlhzEL937yUBSepBfPIe8FcgEDN35vMNZKMrs81pgnyrQpwfy4NF4b4XWX1Zgx7yX+25w8QJA==
+>>>>>>> 9b23696 (if outside the cluster)
+>>>>>>> 605dbe3 (if outside the cluster)
   dependencies:
     follow-redirects "^1.15.0"
     form-data "^4.0.0"
@@ -2260,9 +2351,21 @@ camelcase@^5.3.1:
   integrity sha512-L28STB170nwWS63UjtlEOE3dldQApaJXZkOI1uMFfzf3rRuPegHaHesyee+YxQ+W6SvRDQV6UrdOdRiR153wJg==
 
 caniuse-lite@^1.0.30001406:
+<<<<<<< HEAD
   version "1.0.30001456"
   resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001456.tgz"
   integrity sha512-XFHJY5dUgmpMV25UqaD4kVq2LsiaU5rS8fb0f17pCoXQiQslzmFgnfOxfvo1bTpTqf7dwG/N/05CnLCnOEKmzA==
+=======
+<<<<<<< HEAD
+  version "1.0.30001458"
+  resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001458.tgz#871e35866b4654a7d25eccca86864f411825540c"
+  integrity sha512-lQ1VlUUq5q9ro9X+5gOEyH7i3vm+AYVT1WDCVB69XOZ17KZRhnZ9J0Sqz7wTHQaLBJccNCHq8/Ww5LlOIZbB0w==
+=======
+  version "1.0.30001456"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001456.tgz"
+  integrity sha512-XFHJY5dUgmpMV25UqaD4kVq2LsiaU5rS8fb0f17pCoXQiQslzmFgnfOxfvo1bTpTqf7dwG/N/05CnLCnOEKmzA==
+>>>>>>> 9b23696 (if outside the cluster)
+>>>>>>> 102e995 (if outside the cluster)
 
 chalk@4.1.0, chalk@^4.0.2, chalk@^4.1.0:
   version "4.1.0"
@@ -4052,9 +4155,21 @@ lru-cache@^6.0.0:
     yallist "^4.0.0"
 
 lru-cache@^7.4.4, lru-cache@^7.5.1, lru-cache@^7.7.1:
+<<<<<<< HEAD
   version "7.16.1"
   resolved "https://registry.npmjs.org/lru-cache/-/lru-cache-7.16.1.tgz"
   integrity sha512-9kkuMZHnLH/8qXARvYSjNvq8S1GYFFzynQTAfKeaJ0sIrR3PUPuu37Z+EiIANiZBvpfTf2B5y8ecDLSMWlLv+w==
+=======
+<<<<<<< HEAD
+  version "7.17.0"
+  resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.17.0.tgz#00c7ba5919e5ea7c69ff94ddabbf32cb09ab805c"
+  integrity sha512-zSxlVVwOabhVyTi6E8gYv2cr6bXK+8ifYz5/uyJb9feXX6NACVDwY4p5Ut3WC3Ivo/QhpARHU3iujx2xGAYHbQ==
+=======
+  version "7.16.1"
+  resolved "https://registry.npmjs.org/lru-cache/-/lru-cache-7.16.1.tgz"
+  integrity sha512-9kkuMZHnLH/8qXARvYSjNvq8S1GYFFzynQTAfKeaJ0sIrR3PUPuu37Z+EiIANiZBvpfTf2B5y8ecDLSMWlLv+w==
+>>>>>>> 9b23696 (if outside the cluster)
+>>>>>>> 102e995 (if outside the cluster)
 
 make-dir@3.1.0:
   version "3.1.0"
@@ -4201,10 +4316,21 @@ minimatch@3.0.5, minimatch@^3.0.4:
     brace-expansion "^1.1.7"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 minimatch@^3.1.1:
 =======
 minimatch@^3.1.1, minimatch@^3.1.2:
 >>>>>>> 26eee00 (progress from tuesday)
+=======
+minimatch@^3.1.1, minimatch@^3.1.2:
+=======
+<<<<<<< HEAD
+minimatch@^3.0.4, minimatch@^3.1.1, minimatch@^3.1.2:
+=======
+minimatch@^3.1.1:
+>>>>>>> 9b23696 (if outside the cluster)
+>>>>>>> 102e995 (if outside the cluster)
+>>>>>>> 605dbe3 (if outside the cluster)
   version "3.1.2"
   resolved "https://registry.npmjs.org/minimatch/-/minimatch-3.1.2.tgz"
   integrity sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==
@@ -4286,6 +4412,17 @@ minipass@^3.0.0, minipass@^3.1.1, minipass@^3.1.6:
   dependencies:
     yallist "^4.0.0"
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+minipass@^4.0.0:
+  version "4.2.4"
+  resolved "https://registry.yarnpkg.com/minipass/-/minipass-4.2.4.tgz#7d0d97434b6a19f59c5c3221698b48bbf3b2cd06"
+  integrity sha512-lwycX3cBMTvcejsHITUgYj6Gy6A7Nh4Q6h9NP4sTHY1ccJlC7yKzDmiShEHsJ16Jf1nKGDEaiHxiltsJEvk0nQ==
+
+=======
+>>>>>>> 9b23696 (if outside the cluster)
+>>>>>>> 102e995 (if outside the cluster)
 minizlib@^2.1.1, minizlib@^2.1.2:
   version "2.1.2"
   resolved "https://registry.npmjs.org/minizlib/-/minizlib-2.1.2.tgz"
@@ -4367,15 +4504,30 @@ ms@2.0.0:
   integrity sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ms@2.1.2, ms@^2.0.0:
 =======
 ms@2.1.2, ms@^2.0.0, ms@^2.1.1:
 >>>>>>> 26eee00 (progress from tuesday)
+=======
+ms@2.1.2, ms@^2.0.0, ms@^2.1.1:
+=======
+ms@2.1.2, ms@^2.0.0:
+>>>>>>> 102e995 (if outside the cluster)
+>>>>>>> 605dbe3 (if outside the cluster)
   version "2.1.2"
   resolved "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
+<<<<<<< HEAD
 ms@2.1.3:
+=======
+<<<<<<< HEAD
+ms@2.1.3, ms@^2.0.0, ms@^2.1.1:
+=======
+ms@2.1.3:
+>>>>>>> 9b23696 (if outside the cluster)
+>>>>>>> 102e995 (if outside the cluster)
   version "2.1.3"
   resolved "https://registry.npmjs.org/ms/-/ms-2.1.3.tgz"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
@@ -4442,14 +4594,27 @@ node-addon-api@^3.2.1:
   integrity sha512-mmcei9JghVNDYydghQmeDX8KoAm0FAiYyIcUt/N4nhyAipB17pllZQDOJD2fotxABnt4Mdz+dKTO7eftLg4d0A==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> 605dbe3 (if outside the cluster)
 node-addon-api@^5.0.0:
   version "5.1.0"
   resolved "https://registry.npmjs.org/node-addon-api/-/node-addon-api-5.1.0.tgz"
   integrity sha512-eh0GgfEkpnoWDq+VY8OyvYhFEzBk6jIYbRKdIlyTiAXIVJ8PyBaKb0rp7oDtoddbdoHWhq8wwr+XZ81F1rpNdA==
 
+<<<<<<< HEAD
 >>>>>>> 26eee00 (progress from tuesday)
+=======
+<<<<<<< HEAD
+>>>>>>> 605dbe3 (if outside the cluster)
 node-fetch@2.6.7, node-fetch@^2.6.7:
+=======
+node-fetch@2.6.7:
+=======
+node-fetch@2.6.7, node-fetch@^2.6.7:
+>>>>>>> 9b23696 (if outside the cluster)
+>>>>>>> 102e995 (if outside the cluster)
   version "2.6.7"
   resolved "https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.7.tgz"
   integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
@@ -4661,10 +4826,23 @@ npmlog@^6.0.0, npmlog@^6.0.2:
     gauge "^4.0.3"
     set-blocking "^2.0.0"
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+nx@15.8.1, "nx@>=15.5.2 < 16":
+  version "15.8.1"
+  resolved "https://registry.yarnpkg.com/nx/-/nx-15.8.1.tgz#2163423dfd1d0c35ca66eb16db07318357397250"
+  integrity sha512-aXFZw2KKf1wQOKmUod+Q6CEBStnu44P5FODOTZ5CRepmn6msFyvxtSwDgOflYW07VvZbNMuLT4mNWgDiQE0BbA==
+=======
+>>>>>>> 102e995 (if outside the cluster)
 nx@15.7.2, "nx@>=15.5.2 < 16":
   version "15.7.2"
   resolved "https://registry.npmjs.org/nx/-/nx-15.7.2.tgz"
   integrity sha512-VRb+CZCji3G4ikdMAGoh6TeU9Q6n5atRwqRSFhUX63er8zhlMvWHLskPMZC4q/81edo/E7RhbmEVUD5MB0JoeA==
+<<<<<<< HEAD
+=======
+>>>>>>> 9b23696 (if outside the cluster)
+>>>>>>> 102e995 (if outside the cluster)
   dependencies:
     "@nrwl/cli" "15.7.2"
     "@nrwl/tao" "15.7.2"
@@ -4752,9 +4930,21 @@ onetime@^5.1.0, onetime@^5.1.2:
     mimic-fn "^2.1.0"
 
 open@^8.4.0:
+<<<<<<< HEAD
   version "8.4.1"
   resolved "https://registry.npmjs.org/open/-/open-8.4.1.tgz"
   integrity sha512-/4b7qZNhv6Uhd7jjnREh1NjnPxlTq+XNWPG88Ydkj5AILcA5m3ajvcg57pB24EQjKv0dK62XnDqk9c/hkIG5Kg==
+=======
+<<<<<<< HEAD
+  version "8.4.2"
+  resolved "https://registry.yarnpkg.com/open/-/open-8.4.2.tgz#5b5ffe2a8f793dcd2aad73e550cb87b59cb084f9"
+  integrity sha512-7x81NCL719oNbsq/3mh+hVrAWmFuEYUqrq/Iw3kUzH8ReypT9QQ0BLoJS7/G9k6N81XjW4qHWtjWwe/9eLy1EQ==
+=======
+  version "8.4.1"
+  resolved "https://registry.npmjs.org/open/-/open-8.4.1.tgz"
+  integrity sha512-/4b7qZNhv6Uhd7jjnREh1NjnPxlTq+XNWPG88Ydkj5AILcA5m3ajvcg57pB24EQjKv0dK62XnDqk9c/hkIG5Kg==
+>>>>>>> 9b23696 (if outside the cluster)
+>>>>>>> 102e995 (if outside the cluster)
   dependencies:
     define-lazy-prop "^2.0.0"
     is-docker "^2.1.1"
@@ -5322,18 +5512,42 @@ read@1, read@^1.0.7:
     mute-stream "~0.0.4"
 
 readable-stream@3, readable-stream@^3.0.0, readable-stream@^3.0.2, readable-stream@^3.1.1, readable-stream@^3.4.0, readable-stream@^3.6.0:
+<<<<<<< HEAD
   version "3.6.0"
   resolved "https://registry.npmjs.org/readable-stream/-/readable-stream-3.6.0.tgz"
   integrity sha512-BViHy7LKeTz4oNnkcLJ+lVSL6vpiFeX6/d3oSH8zCW7UxP2onchk+vTGB143xuFjHS3deTgkKoXXymXqymiIdA==
+=======
+<<<<<<< HEAD
+  version "3.6.1"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-3.6.1.tgz#f9f9b5f536920253b3d26e7660e7da4ccff9bb62"
+  integrity sha512-+rQmrWMYGA90yenhTYsLWAsLsqVC8osOw6PKE1HDYiO0gdPeKe/xDHNzIAIn4C91YQ6oenEhfYqqc1883qHbjQ==
+=======
+  version "3.6.0"
+  resolved "https://registry.npmjs.org/readable-stream/-/readable-stream-3.6.0.tgz"
+  integrity sha512-BViHy7LKeTz4oNnkcLJ+lVSL6vpiFeX6/d3oSH8zCW7UxP2onchk+vTGB143xuFjHS3deTgkKoXXymXqymiIdA==
+>>>>>>> 9b23696 (if outside the cluster)
+>>>>>>> 102e995 (if outside the cluster)
   dependencies:
     inherits "^2.0.3"
     string_decoder "^1.1.1"
     util-deprecate "^1.0.1"
 
 readable-stream@~2.3.6:
+<<<<<<< HEAD
   version "2.3.7"
   resolved "https://registry.npmjs.org/readable-stream/-/readable-stream-2.3.7.tgz"
   integrity sha512-Ebho8K4jIbHAxnuxi7o42OrZgF/ZTNcsZj6nRKyUmkhLFq8CHItp/fy6hQZuZmP/n3yZ9VBUbp4zz/mX8hmYPw==
+=======
+<<<<<<< HEAD
+  version "2.3.8"
+  resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.8.tgz#91125e8042bba1b9887f49345f6277027ce8be9b"
+  integrity sha512-8p0AUk4XODgIewSi0l8Epjs+EVnWiK7NoDIEGU0HhE7+ZyY8D1IMY7odu5lRrFXGg71L15KG8QrPmum45RTtdA==
+=======
+  version "2.3.7"
+  resolved "https://registry.npmjs.org/readable-stream/-/readable-stream-2.3.7.tgz"
+  integrity sha512-Ebho8K4jIbHAxnuxi7o42OrZgF/ZTNcsZj6nRKyUmkhLFq8CHItp/fy6hQZuZmP/n3yZ9VBUbp4zz/mX8hmYPw==
+>>>>>>> 9b23696 (if outside the cluster)
+>>>>>>> 102e995 (if outside the cluster)
   dependencies:
     core-util-is "~1.0.0"
     inherits "~2.0.3"
@@ -5517,10 +5731,17 @@ semver@^6.0.0:
   integrity sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 semver@^7.3.5, semver@^7.3.7:
 =======
 semver@^7.3.5, semver@^7.3.7, semver@^7.3.8:
 >>>>>>> 26eee00 (progress from tuesday)
+=======
+semver@^7.3.5, semver@^7.3.7, semver@^7.3.8:
+=======
+semver@^7.3.5, semver@^7.3.7:
+>>>>>>> 102e995 (if outside the cluster)
+>>>>>>> 605dbe3 (if outside the cluster)
   version "7.3.8"
   resolved "https://registry.npmjs.org/semver/-/semver-7.3.8.tgz"
   integrity sha512-NB1ctGL5rlHrPJtFDVIVzTyQylMLu9N9VICA6HSFJo8MCGVTMW6gfpicwKmmK/dAjTOrqu5l63JJOpDSrAis3A==
@@ -6357,9 +6578,21 @@ yargs@16.2.0, yargs@^16.2.0:
     yargs-parser "^20.2.2"
 
 yargs@^17.6.2:
+<<<<<<< HEAD
   version "17.7.0"
   resolved "https://registry.npmjs.org/yargs/-/yargs-17.7.0.tgz"
   integrity sha512-dwqOPg5trmrre9+v8SUo2q/hAwyKoVfu8OC1xPHKJGNdxAvPl4sKxL4vBnh3bQz/ZvvGAFeA5H3ou2kcOY8sQQ==
+=======
+<<<<<<< HEAD
+  version "17.7.1"
+  resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.7.1.tgz#34a77645201d1a8fc5213ace787c220eabbd0967"
+  integrity sha512-cwiTb08Xuv5fqF4AovYacTFNxk62th7LKJ6BL9IGUpTJrWoU7/7WdQGTP2SjKf1dUNBGzDd28p/Yfs/GI6JrLw==
+=======
+  version "17.7.0"
+  resolved "https://registry.npmjs.org/yargs/-/yargs-17.7.0.tgz"
+  integrity sha512-dwqOPg5trmrre9+v8SUo2q/hAwyKoVfu8OC1xPHKJGNdxAvPl4sKxL4vBnh3bQz/ZvvGAFeA5H3ou2kcOY8sQQ==
+>>>>>>> 9b23696 (if outside the cluster)
+>>>>>>> 102e995 (if outside the cluster)
   dependencies:
     cliui "^8.0.1"
     escalade "^3.1.1"
@@ -6371,7 +6604,15 @@ yargs@^17.6.2:
 
 yarn@^1.22.19:
   version "1.22.19"
+<<<<<<< HEAD
   resolved "https://registry.npmjs.org/yarn/-/yarn-1.22.19.tgz"
+=======
+<<<<<<< HEAD
+  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.22.19.tgz#4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
+=======
+  resolved "https://registry.npmjs.org/yarn/-/yarn-1.22.19.tgz"
+>>>>>>> 9b23696 (if outside the cluster)
+>>>>>>> 102e995 (if outside the cluster)
   integrity sha512-/0V5q0WbslqnwP91tirOvldvYISzaqhClxzyUKXYxs07yUILIs5jx/k6CFe8bvKSkds5w+eiOqta39Wk3WxdcQ==
 
 yn@3.1.1:
