@@ -13,9 +13,10 @@ const Header = () => {
         <Logo />
         <Navigation
           items={[
-            { label: 'Docs', href: '/' },
-            { label: 'Examples', href: '/' },
-            { label: 'GitRepo', href: '/' },
+            { label: 'Sign In', href: '/', visible: 'mobile' },
+            { label: 'Docs', href: '/', visible: 'all' },
+            { label: 'Examples', href: '/', visible: 'all' },
+            { label: 'GitRepo', href: '/', visible: 'all' },
           ]}
         />
         <div className={styles.signin}>

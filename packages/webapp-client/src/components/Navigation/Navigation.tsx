@@ -8,6 +8,7 @@ import styles from './Navigation.module.scss';
 interface NavigationItem {
   label: string;
   href: string;
+  visible: 'all' | 'desktop' | 'mobile';
 }
 
 interface NavigationProps {
@@ -36,21 +37,25 @@ const Navigation: React.FC<NavigationProps> = ({ items }) => {
           {open ? <CloseIcon /> : <MenuIcon />}
         </IconButton>
         <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-          {items.map((item) => (
-            <Link href={item.href}>
-              <MenuItem key={item.label} onClick={handleClose}>
-                {item.label}
-              </MenuItem>
-            </Link>
-          ))}
+          {items
+            .filter((item) => item.visible !== 'desktop')
+            .map((item) => (
+              <Link href={item.href}>
+                <MenuItem key={item.label} onClick={handleClose}>
+                  {item.label}
+                </MenuItem>
+              </Link>
+            ))}
         </Menu>
       </div>
       <div className={styles.desktop}>
-        {items.map((item) => (
-          <Link href={item.href} className={styles.link}>
-            {item.label}
-          </Link>
-        ))}
+        {items
+          .filter((item) => item.visible !== 'mobile')
+          .map((item) => (
+            <Link href={item.href} className={styles.link}>
+              {item.label}
+            </Link>
+          ))}
       </div>
     </>
   );
