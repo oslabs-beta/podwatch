@@ -8,30 +8,33 @@ import styles from './Header.module.scss';
 
 const Header = () => {
   return (
-    <header className={styles.header}>
-      <div className={styles.contents}>
-        <Logo />
-        <Navigation
-          items={[
-            { label: 'Sign In', href: '/', visible: 'mobile' },
-            { label: 'Docs', href: '/', visible: 'all' },
-            { label: 'Examples', href: '/', visible: 'all' },
-            { label: 'GitRepo', href: '/', visible: 'all' },
-          ]}
-        />
-        <div className={styles.signin}>
-          <Link href="/">
-            <Button variant="contained" color="secondary">
-              Sign In
-            </Button>
-          </Link>
+    <>
+      <div className={styles.spacer}></div>
+      <header className={styles.header}>
+        <div className={styles.contents}>
+          <Logo />
+          <Navigation
+            items={[
+              { label: 'Sign In', href: '/', visible: 'mobile' },
+              { label: 'Docs', href: '/', visible: 'all' },
+              { label: 'Examples', href: '/', visible: 'all' },
+              { label: 'GitRepo', href: '/', visible: 'all' },
+            ]}
+          />
+          <div className={styles.signin}>
+            <Link href="/">
+              <Button variant="contained" color="secondary">
+                Sign In
+              </Button>
+            </Link>
+          </div>
+          <div className={styles.divider}></div>
+          <div className={styles.toggle}>
+            <DarkModeToggle />
+          </div>
         </div>
-        <div className={styles.divider}></div>
-        <div className={styles.toggle}>
-          <DarkModeToggle />
-        </div>
-      </div>
-    </header>
+      </header>
+    </>
   );
 };
 

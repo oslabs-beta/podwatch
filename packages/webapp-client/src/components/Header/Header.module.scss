@@ -1,7 +1,17 @@
 @use '../../styles/variables' as *;
 
+$header-height: 6rem;
+
+.spacer {
+  height: $header-height;
+}
+
 .header {
-  height: 6rem;
+  height: $header-height;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
