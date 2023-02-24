@@ -6,6 +6,9 @@ import {
 } from '@mui/material';
 import React, { PropsWithChildren } from 'react';
 
+/**
+ * This context is used to toggle the color mode state between light or dark by any component in the app.
+ */
 export const ColorModeContext = React.createContext<{
   toggleColorMode: () => void;
 }>({
@@ -26,7 +29,7 @@ const getDesignTokens = (mode: PaletteMode) => ({
           },
         }
       : {
-          // palette values for dark mode
+          // palette values for dark mode (they're mostly the same now but we can adjust this later)
           primary: {
             main: variables.colorPrimary,
           },
@@ -45,6 +48,7 @@ const getDesignTokens = (mode: PaletteMode) => ({
 });
 
 const ThemeProvider: React.FC<PropsWithChildren> = ({ children }) => {
+  //TODO: Get the mode from the user's preferences or from the browser
   const [mode, setMode] = React.useState<PaletteMode>('light');
   const colorMode = React.useMemo(
     () => ({
