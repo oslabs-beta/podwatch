@@ -18,3 +18,31 @@
   max-width: 120rem;
   margin: 0 auto;
 }
+
+.signin {
+  display: none;
+  @include breakpoint-md {
+    display: block;
+    min-width: 8rem;
+    padding-inline: 1rem;
+  }
+}
+
+.divider {
+  display: none;
+  @include breakpoint-md {
+    display: block;
+    width: 1px;
+    height: 2rem;
+    background-color: $color-white;
+    opacity: 0.5;
+  }
+}
+
+.toggle {
+  display: none;
+  @include breakpoint-md {
+    display: block;
+    padding-inline: 1rem;
+  }
+}
