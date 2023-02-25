@@ -1,0 +1,29 @@
+@use '../../styles/variables.scss' as *;
+
+.mobile {
+  @include breakpoint-md {
+    display: none;
+  }
+}
+
+.desktop {
+  display: none;
+
+  @include breakpoint-md {
+    display: block;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 1rem;
+    padding-inline: 2rem;
+  }
+}
+
+.link {
+  transition: color 0.2s ease-in-out;
+  color: $color-white;
+  &:hover {
+    color: $color-secondary;
+  }
+}

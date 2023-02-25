@@ -1,0 +1,15 @@
+@use 'variables.scss' as *;
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: $font-main;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
