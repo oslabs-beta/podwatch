@@ -42,15 +42,20 @@ const useErrorInformation = () => {
 
   const getErrorInformation = React.useCallback(
     (reason: string) => {
-      if (errorInformation) {
-        return errorInformation[reason];
+      if (!errorInformation) {
+        return null;
       }
-      return null;
+      if (!(reason in errorInformation)) {
+        throw new Error(
+          `Error reason ${reason} not found in error information.`
+        );
+      }
+      return errorInformation[reason];
     },
     [errorInformation]
   );
 
-  return { getErrorInformation };
+  return { getErrorInformation, loading: !errorInformation };
 };
 
 export default useErrorInformation;
