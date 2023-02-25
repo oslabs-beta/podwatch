@@ -1,0 +1,163 @@
+{
+  "Failed": {
+    "name": "Container Create Failure",
+    "events": [
+      "FailedToCreateContainer",
+      "FailedToStartContainer",
+      "FailedToMakePodDataDirectories",
+      "FailedToPullImage"
+    ],
+    "description": "The container failed to start.",
+    "references": ["https://docs.docker.com/engine/reference/commandline/run/"]
+  },
+  "FailedKillPod": {
+    "name": "Pod Kill Failure",
+    "events": ["FailedToKillPod"],
+    "description": "The pod could not be killed.",
+    "references": []
+  },
+  "FailedCreatePodContainer": {
+    "name": "Pod Create Failure",
+    "events": ["FailedToCreatePodContainer"],
+    "description": "",
+    "references": []
+  },
+  "NetworkNotReady": {
+    "name": "Network Failure",
+    "events": ["NetworkNotReady"],
+    "description": "",
+    "references": []
+  },
+  "InspectFailed": {
+    "name": "Image Inspect Failure",
+    "events": ["FailedToInspectImage"],
+    "description": "",
+    "references": []
+  },
+  "ErrImageNeverPull": {
+    "name": "Image Policy Error",
+    "events": ["ErrImageNeverPullPolicy"],
+    "description": "",
+    "references": []
+  },
+  "NodeNotSchedulable": {
+    "name": "Node Scheduling Failure",
+    "events": ["NodeNotSchedulable"],
+    "description": "",
+    "references": []
+  },
+  "KubeletSetupFailed": {
+    "name": "Kubelet Setup Failure",
+    "events": ["KubeletSetupFailed"],
+    "description": "",
+    "references": []
+  },
+  "FailedAttachVolume": {
+    "name": "Volume Attachment Error",
+    "events": ["FailedAttachVolume"],
+    "description": "",
+    "references": []
+  },
+  "FailedMount": {
+    "name": "Volume Mount Error",
+    "events": ["FailedMountVolume"],
+    "description": "",
+    "references": []
+  },
+  "VolumeResizeFailed": {
+    "name": "Volume Resize Error",
+    "events": ["VolumeResizeFailed"],
+    "description": "",
+    "references": []
+  },
+  "FileSystemResizeFailed": {
+    "name": "File System Resize Error",
+    "events": ["FileSystemResizeFailed"],
+    "description": "",
+    "references": []
+  },
+  "FailedMapVolume": {
+    "name": "Volume Mapping Error",
+    "events": ["FailedMapVolume"],
+    "description": "",
+    "references": []
+  },
+  "ContainerGCFailed": {
+    "name": "Container GC Error",
+    "events": ["ContainerGCFailed"],
+    "description": "",
+    "references": []
+  },
+  "ImageGCFailed": {
+    "name": "Image GC Error",
+    "events": ["ImageGCFailed"],
+    "description": "",
+    "references": []
+  },
+  "FailedNodeAllocatableEnforcement": {
+    "name": "Node Allocatable Enforcement Error",
+    "events": ["FailedNodeAllocatableEnforcement"],
+    "description": "",
+    "references": []
+  },
+  "FailedCreatePodSandBox": {
+    "name": "Pod Sandbox Creation Error",
+    "events": ["FailedCreatePodSandBox"],
+    "description": "",
+    "references": []
+  },
+  "FailedPodSandBoxStatus": {
+    "name": "Pod Sandbox Status Error",
+    "events": ["FailedPodSandBoxStatus"],
+    "description": "",
+    "references": []
+  },
+  "FailedMountOnFilesystemMismatch": {
+    "name": "Volume Mount Error",
+    "events": ["FailedMountOnFilesystemMismatch"],
+    "description": "",
+    "references": []
+  },
+  "InvalidDiskCapacity": {
+    "name": "Invalid Disk Capacity",
+    "events": ["InvalidDiskCapacity"],
+    "description": "",
+    "references": []
+  },
+  "FreeDiskSpaceFailed": {
+    "name": "Free Disk Space Error",
+    "events": ["FreeDiskSpaceFailed"],
+    "description": "",
+    "references": []
+  },
+  "Unhealthy": {
+    "name": "Unhealthy Container",
+    "events": ["ContainerUnhealthy"],
+    "description": "",
+    "references": []
+  },
+  "ProbeWarning": {
+    "name": "Container Probe Warning",
+    "events": ["ContainerProbeWarning"],
+    "description": "",
+    "references": []
+  },
+  "FailedValidation": {
+    "name": "Pod Validation Error",
+    "events": ["FailedValidation"],
+    "description": "",
+    "references": []
+  },
+  "FailedPostStartHook": {
+    "name": "Pod Post Start Hook Error",
+    "events": ["FailedPostStartHook"],
+    "description": "",
+    "references": []
+  },
+  "FailedPreStopHook": {
+    "name": "Pod Pre Stop Hook Error",
+    "events": ["FailedPreStopHook"],
+    "description": "",
+    "references": []
+  }
+}
