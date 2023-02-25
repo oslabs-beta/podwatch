@@ -4,7 +4,7 @@ const PODWATCH_CLIENT_SECRET = process.env.PODWATCH_CLIENT_SECRET;
 
 import axios from 'axios';
 
-const checkForCustomServer = () => {
+const createAxiosInstance = () => {
     //check if the podwatch custom server url exists
         if(PODWATCH_CUSTOM_SERVER_URL){
             //need to provide our PodWatch client ID and Secret
@@ -28,4 +28,4 @@ const checkForCustomServer = () => {
         }
 }  
 
-export default checkForCustomServer();
+export default createAxiosInstance();
