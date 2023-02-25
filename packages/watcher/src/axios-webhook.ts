@@ -9,7 +9,10 @@ const checkForCustomServer = async () => {
     try {
         if(PODWATCH_CUSTOM_SERVER_URL){
             //need to provide our PodWatch client ID and Secret
-            
+            axios.post(PODWATCH_CUSTOM_SERVER_URL, {
+                clientId: PODWATCH_CLIENT_ID,
+                clientSecret: PODWATCH_CLIENT_SECRET,
+            })
 
         } else {
             //this means they are using their own custom server url
