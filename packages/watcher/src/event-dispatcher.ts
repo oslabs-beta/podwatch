@@ -26,6 +26,7 @@ const eventDispatcher = () => {
 
     const name = JSON.object.metadata.name;
 
+    // if the type is 'Normal', then we will return early
     if (type === 'Normal') return;
 
     const filtered:KErr = {
