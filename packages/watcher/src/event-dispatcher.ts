@@ -62,3 +62,5 @@ const eventDispatcher = () => {
     }
   };
 };
+
+export default eventDispatcher;
