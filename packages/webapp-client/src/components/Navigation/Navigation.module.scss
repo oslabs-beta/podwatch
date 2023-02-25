@@ -15,15 +15,15 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    gap: 1rem;
-    padding-inline: 2rem;
   }
 }
 
 .link {
   transition: color 0.2s ease-in-out;
   color: $color-white;
+  width: 5.2em;
+  text-align: center;
   &:hover {
-    color: $color-secondary;
+    color: $color-white-hover;
   }
 }
