@@ -4,29 +4,28 @@ const PODWATCH_CLIENT_SECRET = process.env.PODWATCH_CLIENT_SECRET;
 
 import axios from 'axios';
 
-const checkForCustomServer = async () => {
+const checkForCustomServer = () => {
     //check if the podwatch custom server url exists
-    try {
         if(PODWATCH_CUSTOM_SERVER_URL){
             //need to provide our PodWatch client ID and Secret
-            axios.post(PODWATCH_CUSTOM_SERVER_URL, {
-                clientId: PODWATCH_CLIENT_ID,
-                clientSecret: PODWATCH_CLIENT_SECRET,
+            const instance = axios.create({
+                baseURL: PODWATCH_CUSTOM_SERVER_URL,
+                timeout: 1000,
+                
             })
+            return instance;
 
         } else {
-            //this means they are using their own custom server url
-            //do something
-
-            //send an axios webhook to their own server
-            axios.post('/', {
-
+            const instance = axios.create({
+                baseURL: 'http://localhost:3001/watch',
+                timeout: 1000,
+                headers: {
+                    clientId: PODWATCH_CLIENT_ID,
+                    clientSecret: PODWATCH_CLIENT_SECRET,
+                }
             })
+            return instance;
         }
-    }
-    catch ( err: any ){
-        //do something with the error
+}  
 
-    }
-    
-}
+export default checkForCustomServer();
