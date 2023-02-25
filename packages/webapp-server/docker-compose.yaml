@@ -1,0 +1,26 @@
+version: '3'
+services:
+  mongodb:
+    image: mongo
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - podwatch-data:/data/db
+  app:
+    build: .
+    restart: always
+    depends_on:
+      - mongodb
+    environment:
+      MONGODB_URI: mongodb://admin:password@mongodb:27017
+    # env_file:
+    #   - .env
+    volumes:
+      - .:/app
+      - /app/node_modules
+    ports:
+      - 3001:3001
+volumes:
+  podwatch-data:
