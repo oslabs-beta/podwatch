@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { Cluster } from './ClusterModel';
 
 export interface NativeKEvent {
   type: string;
@@ -38,11 +39,15 @@ export interface NativeKEvent {
   };
 }
 
-export interface KErrorAttrs {
+export interface KError {
   reason: string;
   message: string;
   timestamp: Date;
   nativeEvent: NativeKEvent;
+}
+
+export interface KErrorAttrs extends KError {
+  cluster: Cluster;
 }
 
 export interface KErrorDocument extends KErrorAttrs, mongoose.Document {
@@ -67,6 +72,11 @@ const kErrorSchema = new mongoose.Schema<KErrorAttrs>(
       type: Date,
       required: true,
     },
+    cluster: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Cluster',
+      required: true,
+    },
     nativeEvent: {
       type: Object,
       required: true,
@@ -83,10 +93,12 @@ const kErrorSchema = new mongoose.Schema<KErrorAttrs>(
 );
 
 kErrorSchema.statics.build = (attrs: KErrorAttrs) => {
-  return new KError(attrs);
+  return new KErrorModel(attrs);
 };
 
-export const KError = mongoose.model<KErrorDocument, KErrorModel>(
+const KErrorModel = mongoose.model<KErrorDocument, KErrorModel>(
   'KError',
   kErrorSchema
 );
+
+export { KErrorModel };
