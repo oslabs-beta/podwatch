@@ -40,9 +40,13 @@ export interface NativeKEvent {
 }
 
 export interface KError {
+  name: string;
   reason: string;
   message: string;
-  timestamp: Date;
+  type: string;
+  count: number;
+  firstTimestamp: Date;
+  lastTimestamp: Date;
   nativeEvent: NativeKEvent;
 }
 
@@ -60,6 +64,10 @@ export interface KErrorModel extends mongoose.Model<KErrorDocument> {
 
 const kErrorSchema = new mongoose.Schema<KErrorAttrs>(
   {
+    name: {
+      type: String,
+      required: true,
+    },
     reason: {
       type: String,
       required: true,
@@ -68,7 +76,19 @@ const kErrorSchema = new mongoose.Schema<KErrorAttrs>(
       type: String,
       required: true,
     },
-    timestamp: {
+    type: {
+      type: String,
+      required: true,
+    },
+    count: {
+      type: Number,
+      required: true,
+    },
+    firstTimestamp: {
+      type: Date,
+      required: true,
+    },
+    lastTimestamp: {
       type: Date,
       required: true,
     },
