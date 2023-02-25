@@ -17,6 +17,9 @@ const eventDispatcher = () => {
   const data: KErr[] = [];
 
   return async (JSON: NativeKEvent) => {
+    // stop the event from being dispatched if the argument is null or if the type is 'Normal'
+    if(!JSON.object || JSON.object.type === 'Normal') return;
+
     // whenever the event is invoked, before the timeout is triggered, the timer is cleared
     clearTimeout(reqTimer);
 
@@ -25,9 +28,6 @@ const eventDispatcher = () => {
       JSON.object;
 
     const name = JSON.object.metadata.name;
-
-    // if the type is 'Normal', then we will return early
-    if (type === 'Normal') return;
 
     const filtered:KErr = {
       name,
