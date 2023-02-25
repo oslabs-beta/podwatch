@@ -47,12 +47,11 @@ export interface KError {
   count: number;
   firstTimestamp: Date;
   lastTimestamp: Date;
+  cluster: Cluster;
   nativeEvent: NativeKEvent;
 }
 
-export interface KErrorAttrs extends KError {
-  cluster: Cluster;
-}
+export interface KErrorAttrs extends KError {}
 
 export interface KErrorDocument extends KErrorAttrs, mongoose.Document {
   id: string;
