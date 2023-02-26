@@ -1,4 +1,13 @@
-import instance from './axios-instance';
+/*
+From axios-webhook notes:
+This function needs to be imported into the Event Dispatcher and then invoked. For example:
+    import createAxiosInstance from './axios-webhook.ts';
+    const instance = createAxiosInstance();
+    instance.get('/someURL')
+*/
+import createAxiosInstance from './axios-webhook';
+
+const instance = createAxiosInstance();
 
 interface KErr {
   name: string;
@@ -18,7 +27,7 @@ const eventDispatcher = () => {
 
   return async (JSON: NativeKEvent) => {
     // stop the event from being dispatched if the argument is null or if the type is 'Normal'
-    if(!JSON.object || JSON.object.type === 'Normal') return;
+    if (!JSON.object || JSON.object.type === 'Normal') return;
 
     // whenever the event is invoked, before the timeout is triggered, the timer is cleared
     clearTimeout(reqTimer);
@@ -29,7 +38,7 @@ const eventDispatcher = () => {
 
     const name = JSON.object.metadata.name;
 
-    const filtered:KErr = {
+    const filtered: KErr = {
       name,
       reason,
       message,
