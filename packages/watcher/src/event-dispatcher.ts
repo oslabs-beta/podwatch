@@ -55,18 +55,14 @@ const eventDispatcher = () => {
     // if the data array is greater than or equal to 20, then we will invoke the Axios instance/req without a timeout
     if (data.length >= 20) {
       // invoke the Axios instance/req
-      await instance.post({
-        data,
-      });
+      await instance.post('/', data);
     }
 
     // otherwise, we will invoke the Axios instance/req with a timeout of 200ms
     else {
       reqTimer = setTimeout(async () => {
         // invoke the Axios instance/req
-        await instance.post({
-          data,
-        });
+        await instance.post('/', data);
       }, 200);
     }
   };
