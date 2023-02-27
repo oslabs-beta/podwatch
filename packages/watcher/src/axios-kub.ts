@@ -16,10 +16,10 @@ const cacert = fs.readFileSync(
 // determine whether it is calling the Kubernetes API from inside or outside the cluster
 const monitorInOrOut = () => {
   //check to see if it is calling the kubernetes API outside the cluster
-  if (podWatch_Port === undefined && podWatch_Token === undefined) {
-    //create Axios Instance
+  if (podWatch_Port !== undefined && podWatch_Token !== undefined) {
+    //create Axios Instance for outside the cluster
     const instanceKub1 = axios.create({
-      //which allows communicaiton to service from anything else running inside the cluster
+      //baseURL connect to localhost at the port specified
       baseURL: `https://localhost:${podWatch_Port}`,
 
       //Bearer Authentication (also called token authentication)
@@ -30,17 +30,22 @@ const monitorInOrOut = () => {
     });
     return instanceKub1;
   }
+  //custom errors for it the user is trying to make a specific port and token but has forgotten one
+  else if (podWatch_Port !== undefined && podWatch_Token === undefined) {
+    const error = 'You are missing the podWatch_Port';
+    throw Error(error);
+  } else if (podWatch_Port === undefined && podWatch_Token !== undefined) {
+    const error2 = 'You are missing the podWatch_Token';
+    throw Error(error2);
+  }
   // inside the cluster
   else if (kubernetes_Host && kubernetes_Port) {
-    //get token /var/run/secrets/kubernetes.io/serviceaccount/token
-    //the kubectl wll check the existance of a service account token file ...once the KUBERNETES_SERVICE_HOST & KUBERNETES_SERVICE_PORT
-    // and service token
-    //are found authenication is assumed
+    //the kubectl wll check the existance of a service account token file ...once the KUBERNETES_SERVICE_HOST & KUBERNETES_SERVICE_PORT & service token
     const KUBE_TOKEN = fs.readFileSync(
       '/var/run/secrets/kubernetes.io/serviceaccount/token',
       'utf-8'
     );
-
+    //create axios instance
     const instanceKub2 = axios.create({
       //From inside the pod, kubernetes api server can be accessible directly on
       baseURL: `https://${kubernetes_Host}:${kubernetes_Port}`,
