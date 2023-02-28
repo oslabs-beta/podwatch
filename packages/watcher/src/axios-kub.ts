@@ -33,10 +33,12 @@ const monitorInOrOut = () => {
   //custom errors for it the user is trying to make a specific port and token but has forgotten one
   else if (podWatch_Port !== undefined && podWatch_Token === undefined) {
     const error = 'You are missing the podWatch_Port';
-    throw Error(error);
+    throw new Error(error);
+    process.exit(1);
   } else if (podWatch_Port === undefined && podWatch_Token !== undefined) {
     const error2 = 'You are missing the podWatch_Token';
-    throw Error(error2);
+    throw new Error(error2);
+    process.exit(1);
   }
   // inside the cluster
   else if (kubernetes_Host && kubernetes_Port) {
