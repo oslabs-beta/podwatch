@@ -1,0 +1,58 @@
+@use '../../styles/variables' as *;
+
+$header-height: 6rem;
+
+.spacer {
+  height: $header-height;
+}
+
+.header {
+  height: $header-height;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: $color-primary;
+  color: $color-white;
+}
+
+.contents {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+.signin {
+  display: none;
+  @include breakpoint-md {
+    display: block;
+    min-width: 8rem;
+    padding-inline: 1rem;
+  }
+}
+
+.divider {
+  display: none;
+  @include breakpoint-md {
+    display: block;
+    width: 1px;
+    height: 2rem;
+    background-color: $color-white;
+    opacity: 0.5;
+  }
+}
+
+.toggle {
+  display: none;
+  @include breakpoint-md {
+    display: block;
+    padding-inline: 1rem;
+  }
+}

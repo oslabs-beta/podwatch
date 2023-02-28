@@ -1,0 +1,8 @@
+@use './variables.scss' as *;
+
+:export {
+  colorPrimary: $color-primary;
+  colorSecondary: $color-secondary;
+  colorWhite: $color-white;
+  fontMain: $font-main;
+}

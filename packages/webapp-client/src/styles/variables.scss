@@ -1,0 +1,24 @@
+$color-primary: #0032b8;
+$color-secondary: #6a4eff;
+
+$color-white: #fff;
+
+$font-main: 'Inter', sans-serif;
+
+@mixin breakpoint-sm {
+  @media (min-width: 512px) {
+    @content;
+  }
+}
+
+@mixin breakpoint-md {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin breakpoint-lg {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}
