@@ -1,4 +1,4 @@
-export interface NativeKEvent {
+export default interface NativeKEvent {
   type: string;
   object: {
     kind: string;
