@@ -39,6 +39,14 @@ const monitorInOrOut = () => {
     const error2 = 'You are missing the podWatch_Token';
     throw new Error(error2);
     process.exit(1);
+  } else if (!podWatch_Port && podWatch_Token) {
+    const error3 = 'podWatch_Port is null';
+    throw new Error(error3);
+    process.exit(1);
+  } else if (podWatch_Port && !podWatch_Token) {
+    const error4 = 'podWatch_Token is null';
+    throw new Error(error4);
+    process.exit(1);
   }
   // inside the cluster
   else if (kubernetes_Host && kubernetes_Port) {
