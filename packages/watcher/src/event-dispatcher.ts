@@ -8,7 +8,7 @@ This function needs to be imported into the Event Dispatcher and then invoked. F
 */
 
 import createAxiosInstance from './axios-webhook';
-import NativeKEvent from './utils/types';
+import { NativeKEvent } from './utils/types';
 
 interface KErr {
   name: string;

@@ -1,4 +1,4 @@
-import { NativeKEvent } from './../../webapp-server/src/models/KErrorModel';
+import { NativeKEvent } from './utils/types';
 import { AxiosInstance } from 'axios';
 import { JsonStreamParser } from './JsonStreamParser';
 import eventDispatcher from './event-dispatcher';

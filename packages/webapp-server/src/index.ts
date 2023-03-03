@@ -4,11 +4,15 @@ import dotenv from 'dotenv';
 import { setupPassport } from './controllers/passportProvider';
 import authRouter from './routes/authRouter';
 
+import { watcherRouter } from './routers/watcherRouter';
+
 dotenv.config();
 
 const app = express();
 
 app.use(express.json());
+
+app.use('/watch', watcherRouter);
 
 const start = async () => {
   try {

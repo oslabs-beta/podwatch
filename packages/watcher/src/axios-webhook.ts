@@ -26,7 +26,7 @@ const createAxiosInstance = () => {
     return instanceCustom;
   } else if (PODWATCH_CLIENT_ID && PODWATCH_CLIENT_SECRET) {
     const instancePodWatch: AxiosInstance = axios.create({
-      baseURL: 'http://localhost:3001/watch',
+      baseURL: 'http://host.docker.internal:3001/watch',
       timeout: 1000,
       headers: {
         clientId: PODWATCH_CLIENT_ID,
