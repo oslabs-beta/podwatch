@@ -1,19 +1,21 @@
 @use '@/styles/variables.scss' as *;
 
-.container {
+.LandingContent {
+  background-color: $color-dark;
+  width: calc(100vw - 4rem);
+  margin-left: 2rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
   height: calc(100vh - $header-height);
-  width: 100vw;
   text-align: center;
-    @include breakpoint-md {
+  @include breakpoint-md {
     width: 50vw;
   }
 }
 
 .logo {
-  width: 15em;
-  height: 15em;
+  width: 20vh;
+  height: 20vh;
 }
