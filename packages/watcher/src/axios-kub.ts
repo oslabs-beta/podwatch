@@ -45,31 +45,30 @@ const monitorInOrOut = () => {
     process.exit(1);
   }
   // inside the cluster
-  else if (kubernetes_Host && kubernetes_Port) {
-    //the kubectl wll check the existance of a service account token file ...once the KUBERNETES_SERVICE_HOST & KUBERNETES_SERVICE_PORT & service token
-    const KUBE_TOKEN = fs.readFileSync(
-      '/var/run/secrets/kubernetes.io/serviceaccount/token',
-      'utf-8'
-    );
 
-    const cacert = fs.readFileSync(
-      '/var/run/secrets/kubernetes.io/serviceaccount/ca.crt'
-    );
-    //create axios instance
-    const instanceKub2 = axios.create({
-      //From inside the pod, kubernetes api server can be accessible directly on
-      baseURL: `https://${kubernetes_Host}:${kubernetes_Port}`,
+  //the kubectl wll check the existance of a service account token file ...once the KUBERNETES_SERVICE_HOST & KUBERNETES_SERVICE_PORT & service token
+  const KUBE_TOKEN = fs.readFileSync(
+    '/var/run/secrets/kubernetes.io/serviceaccount/token',
+    'utf-8'
+  );
 
-      headers: {
-        Authorization: `Bearer ${KUBE_TOKEN}`,
-        'Content-Type': 'application/json',
-      },
-      httpsAgent: new https.Agent({
-        ca: cacert,
-      }),
-    });
-    return instanceKub2;
-  }
+  const cacert = fs.readFileSync(
+    '/var/run/secrets/kubernetes.io/serviceaccount/ca.crt'
+  );
+  //create axios instance
+  const instanceKub2 = axios.create({
+    //From inside the pod, kubernetes api server can be accessible directly on
+    baseURL: `https://${kubernetes_Host}:${kubernetes_Port}`,
+
+    headers: {
+      Authorization: `Bearer ${KUBE_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    httpsAgent: new https.Agent({
+      ca: cacert,
+    }),
+  });
+  return instanceKub2;
 };
 
 export default monitorInOrOut();

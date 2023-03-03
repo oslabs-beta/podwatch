@@ -55,4 +55,4 @@ This function needs to be imported into the Event Dispatcher and then invoked. F
     const instance = createAxiosInstance();
     instance.get('/someURL')
 */
-export default createAxiosInstance;
+export default createAxiosInstance();
