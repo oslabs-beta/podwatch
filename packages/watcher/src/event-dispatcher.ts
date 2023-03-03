@@ -1,3 +1,4 @@
+import { AxiosInstance } from 'axios';
 /*
 From axios-webhook notes:
 This function needs to be imported into the Event Dispatcher and then invoked. For example:
@@ -7,8 +8,6 @@ This function needs to be imported into the Event Dispatcher and then invoked. F
 */
 import createAxiosInstance from './axios-webhook';
 import NativeKEvent from './utils/types';
-
-const instance = createAxiosInstance();
 
 interface KErr {
   name: string;
@@ -21,7 +20,7 @@ interface KErr {
   nativeEvent: NativeKEvent;
 }
 
-const eventDispatcher = () => {
+const eventDispatcher = (instance: AxiosInstance) => {
   // leverage closure to persist data between invocations
   let reqTimer: NodeJS.Timeout;
   const data: KErr[] = [];
