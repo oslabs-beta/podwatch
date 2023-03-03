@@ -2,20 +2,59 @@
 
 .LandingContent {
   background-color: $color-dark;
-  width: calc(100vw - 4rem);
-  margin-left: 2rem;
+  border-radius: 1em;
+  transform: translateY(-5em);
+  width: calc(100vw - 2rem);
+  margin-left: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-around;
-  height: calc(100vh - $header-height);
+  justify-content: space-between;
+  height: calc(150vh - $header-height);
   text-align: center;
+  color: $color-white;
+  margin-bottom: $header-height;
   @include breakpoint-md {
     width: 50vw;
   }
 }
 
+.text {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 12em;
+  width: 80%;
+}
+
 .logo {
-  width: 20vh;
-  height: 20vh;
+  width: 40vh;
+  height: 40vh;
+}
+
+.logoBox {
+
+  margin-left: 3em;
+  border-radius: 1em 0 0 1em;
+  width: 40vh;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  background: rgb(2, 50, 183);
+  background: linear-gradient(
+    180deg,
+    rgba(2, 50, 183, 1) 0%,
+    rgba(2, 50, 183, 0.1708029197080292) 81%
+  );
+
+  .schoolLogo {
+    filter: brightness(0) invert(1);
+    width: 20vh;
+    height: 20vh;
+  }
 }
