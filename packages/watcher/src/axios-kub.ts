@@ -9,10 +9,6 @@ const kubernetes_Host = process.env.KUBERNETES_SERVICE_HOST;
 const kubernetes_Port = process.env.KUBERNETES_SERVICE_PORT;
 import https from 'https';
 
-const cacert = fs.readFileSync(
-  '/var/run/secrets/kubernetes.io/serviceaccount/ca.crt'
-);
-
 // determine whether it is calling the Kubernetes API from inside or outside the cluster
 const monitorInOrOut = () => {
   //check to see if it is calling the kubernetes API outside the cluster
@@ -55,6 +51,10 @@ const monitorInOrOut = () => {
       '/var/run/secrets/kubernetes.io/serviceaccount/token',
       'utf-8'
     );
+
+    const cacert = fs.readFileSync(
+      '/var/run/secrets/kubernetes.io/serviceaccount/ca.crt'
+    );
     //create axios instance
     const instanceKub2 = axios.create({
       //From inside the pod, kubernetes api server can be accessible directly on
@@ -62,7 +62,7 @@ const monitorInOrOut = () => {
 
       headers: {
         Authorization: `Bearer ${KUBE_TOKEN}`,
-        'Content-Type': 'applicaiton/json',
+        'Content-Type': 'application/json',
       },
       httpsAgent: new https.Agent({
         ca: cacert,
