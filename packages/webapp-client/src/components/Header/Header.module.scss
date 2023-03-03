@@ -1,21 +1,29 @@
 @use '../../styles/variables' as *;
 
 .spacer {
-  height: $header-height;
+  display: grid;
+  height: calc($header-height + 7em);
+  background-color: $color-primary;
+  width: 100vw;
+  @include breakpoint-md {
+    height: $header-height;
+  }
 }
 
 .header {
-  height: $header-height;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 0.5rem;
-  background-color: $color-primary;
   color: $color-white;
+  padding: 0.7em;
+}
+
+.corner {
+  display: flex;
+  align-items: center;
 }
 
 .contents {
@@ -28,7 +36,7 @@
 }
 
 .signin {
-  display: none;
+  min-width: 0em;
   @include breakpoint-md {
     display: block;
     min-width: 8rem;
@@ -37,7 +45,6 @@
 }
 
 .divider {
-  display: none;
   @include breakpoint-md {
     display: block;
     width: 1px;
@@ -48,8 +55,9 @@
 }
 
 .toggle {
-  display: none;
+  margin-left: 2rem;
   @include breakpoint-md {
+    margin-left: 0rem;
     display: block;
     padding-inline: 1rem;
   }

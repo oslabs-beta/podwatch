@@ -21,16 +21,18 @@ const Header = () => {
               { label: 'GitRepo', href: '/', visible: 'all' },
             ]}
           />
-          <div className={styles.signin}>
-            <Link href="/">
-              <Button variant="contained" color="secondary">
-                Sign In
-              </Button>
-            </Link>
-          </div>
-          <div className={styles.divider}></div>
-          <div className={styles.toggle}>
-            <DarkModeToggle />
+          <div className={styles.corner}>
+            <div className={styles.signin}>
+              <Link href="/">
+                <Button variant="contained" color="secondary">
+                  Sign In
+                </Button>
+              </Link>
+            </div>
+            <div className={styles.divider} />
+            <div className={styles.toggle}>
+              <DarkModeToggle />
+            </div>
           </div>
         </div>
       </header>

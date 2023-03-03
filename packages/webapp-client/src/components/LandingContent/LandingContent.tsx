@@ -7,9 +7,11 @@ import osLabs from '/public/images/logo/os-labs.png';
 
 const LandingContent: React.FC = () => {
   return (
-    <div className={styles.container}>
-      <h2>PodWatch</h2>
-      <h1>Kubernetes Error Hub</h1>
+    <div className={styles.LandingContent}>
+      <div className={styles.text}>
+        <h2>PodWatch</h2>
+        <h1>Kubernetes Error Hub</h1>
+      </div>
       <Chip label="V0.0.1" color="primary" />
       <span className="imgs">
         <Image className={styles.logo} src={codeSmith} alt="CodeSmith" />

@@ -1,11 +1,5 @@
 @use '../../styles/variables.scss' as *;
 
-.mobile {
-  @include breakpoint-md {
-    display: none;
-  }
-}
-
 .desktop {
   display: none;
 
