@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "nodemon src/index.ts",
-    "start": "ts-node src/index.js",
+    "start": "ts-node src/index.ts",
     "dev:docker": "docker compose down && docker compose up --build",
     "test": "echo \"Error: no test specified\""
   },
