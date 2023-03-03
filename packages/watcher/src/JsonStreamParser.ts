@@ -1,4 +1,4 @@
-import { Transform } from 'stream';
+import { Transform, TransformCallback } from 'stream';
 
 // Create a custom Transform stream that concatenates the chunks
 // until it forms a complete JSON object
@@ -39,6 +39,13 @@ export class JsonStreamParser extends Transform {
     }
 
     // Call the callback function to let the stream know we're ready for the next chunk
+    callback();
+  }
+
+  _flush(callback: TransformCallback): void {
+    // If there's anything left in the buffer, it's invalid JSON
+    // So we can just ignore it
+    this.buffer = '';
     callback();
   }
 }

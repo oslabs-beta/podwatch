@@ -16,12 +16,13 @@ const monitorInOrOut = () => {
     //create Axios Instance for outside the cluster
     const instanceKub1 = axios.create({
       //baseURL connect to localhost at the port specified
-      baseURL: `https://localhost:${podWatch_Port}`,
+      baseURL: `http://host.docker.internal:${podWatch_Port}`,
 
       //Bearer Authentication (also called token authentication)
       //is a mechanism used to authorize clients by sending a security token
       headers: {
         Authorization: `Bearer ${podWatch_Token}`,
+        'Content-Type': 'application/json',
       },
     });
     return instanceKub1;
