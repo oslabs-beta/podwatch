@@ -1,4 +1,4 @@
-import { JsonStreamParser } from './_JsonStreamParser';
+import { JsonStreamParser } from './JsonStreamParser';
 import kubernetesInstance from './axios-kub';
 import webhookInstance from './axios-webhook';
 import eventDispatcher from './event-dispatcher';
