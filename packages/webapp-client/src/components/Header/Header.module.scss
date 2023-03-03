@@ -1,8 +1,7 @@
 @use '../../styles/variables' as *;
 
 .spacer {
-  display: grid;
-  height: calc($header-height + 7em);
+  height: calc($header-height + 5rem);
   background-color: $color-primary;
   width: 100vw;
   @include breakpoint-md {
@@ -12,6 +11,7 @@
 
 .header {
   position: fixed;
+  background-color: $color-primary;
   top: 0;
   left: 0;
   width: 100%;
@@ -19,6 +19,7 @@
   align-items: center;
   color: $color-white;
   padding: 0.7em;
+  z-index: 1;
 }
 
 .corner {
