@@ -3,7 +3,6 @@
 .spacer {
   height: calc($header-height + 5rem);
   background-color: $color-primary;
-  width: 100vw;
   @include breakpoint-md {
     height: $header-height;
   }
@@ -14,7 +13,7 @@
   background-color: $color-primary;
   top: 0;
   left: 0;
-  width: 100%;
+  width: 100vw;
   display: flex;
   align-items: center;
   color: $color-white;
@@ -31,7 +30,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 100%;
+  width: 100vw;
   max-width: 120rem;
   margin: 0 auto;
 }
