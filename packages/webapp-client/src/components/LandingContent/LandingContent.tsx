@@ -5,6 +5,7 @@ import Image from 'next/image';
 import codeSmith from '/public/images/logo/code-smith.png';
 import osLabs from '/public/images/logo/os-labs.png';
 import logo from '/public/images/logo/256.png';
+import Link from 'next/link';
 
 const LandingContent: React.FC = () => {
   return (
@@ -14,10 +15,32 @@ const LandingContent: React.FC = () => {
         <h1>Kubernetes Error Hub</h1>
         <Chip label="V0.0.1" color="primary" />
       </div>
-      <Image className={styles.logo} src={logo} alt="podWatch" />
+      <Image
+        draggable={false}
+        className={styles.logo}
+        src={logo}
+        alt="podWatch"
+      />
       <span className={styles.logoBox}>
-        <Image className={styles.schoolLogo} src={codeSmith} alt="CodeSmith" />
-        <Image className={styles.schoolLogo} src={osLabs} alt="OSLabs" />
+        <h3>
+          Contributing <br /> Organizations
+        </h3>
+        <Link href="/">
+          <Image
+            draggable={false}
+            className={styles.schoolLogo}
+            src={codeSmith}
+            alt="CodeSmith"
+          />
+        </Link>
+        <Link href="/">
+          <Image
+            draggable={false}
+            className={styles.schoolLogo}
+            src={osLabs}
+            alt="OSLabs"
+          />
+        </Link>
       </span>
     </div>
   );
