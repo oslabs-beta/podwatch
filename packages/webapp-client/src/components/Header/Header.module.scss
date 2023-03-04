@@ -1,16 +1,14 @@
 @use '../../styles/variables' as *;
 
 .spacer {
-  height: calc($header-height + 5rem);
+  height: $header-height;
   background-color: $color-primary;
-  @include breakpoint-md {
-    height: $header-height;
-  }
 }
 
 .header {
   position: fixed;
   background-color: $color-primary;
+  height: $header-height;
   top: 0;
   left: 0;
   width: 100vw;

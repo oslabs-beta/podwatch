@@ -1,0 +1,12 @@
+@use '../../styles/variables' as *;
+
+$overlap-height: 5em;
+
+.spacer {
+  height: $overlap-height;
+  background-color: $color-primary;
+}
+
+.content {
+  transform: translateY(-$overlap-height);
+}

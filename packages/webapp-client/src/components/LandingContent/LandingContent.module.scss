@@ -1,9 +1,16 @@
 @use '@/styles/variables.scss' as *;
 
+// $overlap-height: 5em;
+
+// .spacer {
+//   height: $overlap-height;
+//   background-color: $color-primary;
+// }
+
 .LandingContent {
   background-color: $color-dark;
   border-radius: 1em;
-  transform: translateY(-5em);
+  // transform: translateY(-$overlap-height);
   width: calc(100vw - 2rem);
   margin-left: 1rem;
   display: flex;

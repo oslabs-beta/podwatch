@@ -6,10 +6,11 @@ import codeSmith from '/public/images/logo/code-smith.png';
 import osLabs from '/public/images/logo/os-labs.png';
 import logo from '/public/images/logo/256.png';
 import Link from 'next/link';
+import OverlapSpacer from '../OverlapSpacer/OverlapSpacer';
 
 const LandingContent: React.FC = () => {
   return (
-    <div className={styles.LandingContent}>
+    <OverlapSpacer className={styles.LandingContent}>
       <div className={styles.text}>
         <h1>PodWatch</h1>
         <h1>Kubernetes Error Hub</h1>
@@ -42,7 +43,7 @@ const LandingContent: React.FC = () => {
           />
         </Link>
       </span>
-    </div>
+    </OverlapSpacer>
   );
 };
 
