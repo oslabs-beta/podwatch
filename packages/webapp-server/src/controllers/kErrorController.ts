@@ -15,8 +15,8 @@ export interface KErr {
 
 export const kErrorController = {
   getCluster: async (req: Request, res: Response, next: NextFunction) => {
-    const clusterId = req.headers['clientId'] as string;
-    const clusterSecret = req.headers['clientSecret'] as string;
+    const clusterId = req.headers['clusterId'] as string;
+    const clusterSecret = req.headers['clusterSecret'] as string;
 
     if (!clusterId || !clusterSecret) {
       return next({
