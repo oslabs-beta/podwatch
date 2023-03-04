@@ -15,8 +15,8 @@ export interface KErr {
 
 export const kErrorController = {
   getCluster: async (req: Request, res: Response, next: NextFunction) => {
-    const clusterId = req.headers['clusterId'] as string;
-    const clusterSecret = req.headers['clusterSecret'] as string;
+    const clusterId = req.headers['clientId'] as string;
+    const clusterSecret = req.headers['clientSecret'] as string;
 
     if (!clusterId || !clusterSecret) {
       return next({
@@ -95,33 +95,6 @@ export const kErrorController = {
       return next({
         log: 'Error getting kErrors',
         message: 'Error getting kErrors',
-        status: 500,
-        error,
-      });
-    }
-  },
-  getOne: async (req: Request, res: Response, next: NextFunction) => {
-    const cluster = res.locals.cluster;
-    const { id } = req.params;
-
-    try {
-      const kError = await KErrorModel.findOne({ _id: id, cluster });
-
-      if (!kError) {
-        return next({
-          log: 'kError not found',
-          message: 'kError not found',
-          status: 404,
-        });
-      }
-
-      res.locals.kError = kError;
-
-      return next();
-    } catch (error) {
-      return next({
-        log: 'Error getting kError',
-        message: 'Error getting kError',
         status: 500,
         error,
       });

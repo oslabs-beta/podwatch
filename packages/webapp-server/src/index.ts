@@ -4,7 +4,9 @@ import dotenv from 'dotenv';
 import { setupPassport } from './controllers/passportProvider';
 import authRouter from './routes/authRouter';
 
-import { watcherRouter } from './routers/watcherRouter';
+import watcherRouter from './routers/watcherRouter';
+import kErrorRouter from './routers/kErrorRouter';
+
 import { errorHandler } from './errors/errorHandler';
 
 dotenv.config();
@@ -21,6 +23,7 @@ app.use('/auth', authRouter);
 app.use(errorHandler);
 
 app.use('/watch', watcherRouter);
+app.use('/kerrors', kErrorRouter);
 
 app.use(errorHandler);
 
