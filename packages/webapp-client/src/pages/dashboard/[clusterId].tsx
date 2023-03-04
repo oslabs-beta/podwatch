@@ -1,5 +1,6 @@
 import { GetServerSideProps, NextPage } from 'next';
 import React from 'react';
+import ErrorList from '../../components/ErrorList/ErrorList';
 import { Cluster } from '../../types/Cluster';
 import { KError } from '../../types/KError';
 
@@ -9,7 +10,11 @@ interface DashboardPageProps {
 }
 
 const Dashboard: NextPage<DashboardPageProps> = ({ cluster, kErrors }) => {
-  return <div>Dashboard</div>;
+  return (
+    <div>
+      <ErrorList initialErrors={kErrors} clusterId={cluster.id} />
+    </div>
+  );
 };
 
 export const getServerSideProps: GetServerSideProps<
