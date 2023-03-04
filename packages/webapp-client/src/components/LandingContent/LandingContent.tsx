@@ -4,7 +4,7 @@ import { Chip } from '@mui/material';
 import Image from 'next/image';
 import codeSmith from '/public/images/logo/code-smith.png';
 import osLabs from '/public/images/logo/os-labs.png';
-import logo from '/public/images/logo/256.png';
+import logo from '/public/images/logo/512.png';
 import Link from 'next/link';
 import OverlapSpacer from '../OverlapSpacer/OverlapSpacer';
 
@@ -26,22 +26,24 @@ const LandingContent: React.FC = () => {
         <h3>
           Contributing <br /> Organizations
         </h3>
-        <Link href="/">
-          <Image
-            draggable={false}
-            className={styles.schoolLogo}
-            src={codeSmith}
-            alt="CodeSmith"
-          />
-        </Link>
-        <Link href="/">
-          <Image
-            draggable={false}
-            className={styles.schoolLogo}
-            src={osLabs}
-            alt="OSLabs"
-          />
-        </Link>
+        <span className={styles.schools}>
+          <Link href="/">
+            <Image
+              draggable={false}
+              className={styles.schoolLogo}
+              src={codeSmith}
+              alt="CodeSmith"
+            />
+          </Link>
+          <Link href="/">
+            <Image
+              draggable={false}
+              className={styles.schoolLogo}
+              src={osLabs}
+              alt="OSLabs"
+            />
+          </Link>
+        </span>
       </span>
     </OverlapSpacer>
   );

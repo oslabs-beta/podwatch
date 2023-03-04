@@ -1,16 +1,8 @@
 @use '@/styles/variables.scss' as *;
 
-// $overlap-height: 5em;
-
-// .spacer {
-//   height: $overlap-height;
-//   background-color: $color-primary;
-// }
-
 .LandingContent {
   background-color: $color-dark;
   border-radius: 1em;
-  // transform: translateY(-$overlap-height);
   width: calc(100vw - 2rem);
   margin-left: 1rem;
   display: flex;
@@ -25,7 +17,11 @@
     margin: 0;
     border-radius: 0;
     width: 99vw;
+    height: calc(95vh - $header-height - $header-height);
     transform: translateY(0);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    place-items: center;
   }
   .text {
     margin-top: 3rem;
@@ -58,10 +54,28 @@
       rgba(2, 50, 183, 0.1708029197080292) 81%
     );
 
+    h3{
+        font-size: 2rem;
+    }
+    @include breakpoint-md {
+      width: 45vh;
+      height: 30vh;
+    }
+    .schools{
+      display: flex;
+      flex-direction: column;
+      @include breakpoint-md {
+        flex-direction: row;
+      }
+    }
     .schoolLogo {
       filter: brightness(0) invert(1);
       width: 20vh;
       height: 20vh;
+      @include breakpoint-md {
+        width: 10vh;
+        height: 10vh;
+      }
     }
   }
 }
