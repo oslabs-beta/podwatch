@@ -2,6 +2,10 @@ import { User } from './User';
 
 export interface Cluster {
   /**
+   * The cluster's unique identifier.
+   */
+  id: string;
+  /**
    * The cluster's name, specified by the cluster owner.
    */
   name: string;
