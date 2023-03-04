@@ -12,4 +12,13 @@ kErrorRouter.get(
   }
 );
 
+kErrorRouter.get(
+  '/:id',
+  kErrorController.getCluster,
+  kErrorController.getOne,
+  (req, res) => {
+    res.status(200).json(res.locals.kError);
+  }
+);
+
 export default kErrorRouter;

@@ -100,4 +100,31 @@ export const kErrorController = {
       });
     }
   },
+  getOne: async (req: Request, res: Response, next: NextFunction) => {
+    const cluster = res.locals.cluster;
+    const { id } = req.params;
+
+    try {
+      const kError = await KErrorModel.findOne({ _id: id, cluster });
+
+      if (!kError) {
+        return next({
+          log: 'kError not found',
+          message: 'kError not found',
+          status: 404,
+        });
+      }
+
+      res.locals.kError = kError;
+
+      return next();
+    } catch (error) {
+      return next({
+        log: 'Error getting kError',
+        message: 'Error getting kError',
+        status: 500,
+        error,
+      });
+    }
+  },
 };
