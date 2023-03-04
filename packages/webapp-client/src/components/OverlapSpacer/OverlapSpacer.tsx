@@ -8,7 +8,7 @@ interface OverlapSpacerProps {
 
 const OverlapSpacer: React.FC<OverlapSpacerProps> = ({
   children,
-  className,
+  className = '',
 }) => {
   return (
     <>
