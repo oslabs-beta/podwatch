@@ -14,8 +14,7 @@ export interface KErr {
 }
 
 export const kErrorController = {
-  saveAll: async (req: Request, res: Response, next: NextFunction) => {
-    const kErrors: KErr[] = req.body;
+  getCluster: async (req: Request, res: Response, next: NextFunction) => {
     const clusterId = req.headers['clientId'] as string;
     const clusterSecret = req.headers['clientSecret'] as string;
 
@@ -45,6 +44,13 @@ export const kErrorController = {
       });
     }
 
+    res.locals.cluster = cluster;
+    return next();
+  },
+  saveAll: async (req: Request, res: Response, next: NextFunction) => {
+    const kErrors: KErr[] = req.body;
+    const cluster = res.locals.cluster;
+
     const saveError = async (kError: KErr) => {
       const { firstTimestamp, lastTimestamp } = kError;
       const kErrorModel = KErrorModel.build({
@@ -65,6 +71,30 @@ export const kErrorController = {
       return next({
         log: 'Error saving kErrors',
         message: 'Error saving kErrors',
+        status: 500,
+        error,
+      });
+    }
+  },
+  getMany: async (req: Request, res: Response, next: NextFunction) => {
+    const cluster = res.locals.cluster;
+
+    const limit = Number(req.query.limit) || 50;
+    const skip = Number(req.query.skip) || 0;
+
+    try {
+      const kErrors = await KErrorModel.find({ cluster }, null, {
+        limit,
+        skip,
+      });
+
+      res.locals.kErrors = kErrors;
+
+      return next();
+    } catch (error) {
+      return next({
+        log: 'Error getting kErrors',
+        message: 'Error getting kErrors',
         status: 500,
         error,
       });

@@ -2,7 +2,9 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 
-import { watcherRouter } from './routers/watcherRouter';
+import watcherRouter from './routers/watcherRouter';
+import kErrorRouter from './routers/kErrorRouter';
+
 import { errorHandler } from './errors/errorHandler';
 
 dotenv.config();
@@ -12,6 +14,7 @@ const app = express();
 app.use(express.json());
 
 app.use('/watch', watcherRouter);
+app.use('/kerrors', kErrorRouter);
 
 app.use(errorHandler);
 
