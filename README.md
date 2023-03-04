@@ -116,7 +116,7 @@ spec:
       serviceAccountName: podwatch-serviceaccount
 ```
 
-The PODWATCH_CUSTOM_SERVER_URL should be your endpoint to receive errors from PodWatch. This endpoint will be called by PodWatch with a POST request, with a request body that looks like this:
+The PODWATCH_CUSTOM_SERVER_URL should be your endpoint to receive errors from PodWatch. This endpoint will be called by PodWatch with a POST request, with a request body that will be an array of the following:
 
 ```json
 {
