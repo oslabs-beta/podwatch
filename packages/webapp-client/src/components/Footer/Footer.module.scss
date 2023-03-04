@@ -1,0 +1,40 @@
+@use '../../styles/variables' as *;
+
+.footer {
+  overflow: hidden;
+  background: rgb(2, 50, 183);
+  background: rgb(2, 50, 183);
+  background: linear-gradient(
+    180deg,
+    rgba(2, 50, 183, 1) 0%,
+    rgba(0, 25, 144, 1) 81%
+  );
+
+  display: flex;
+  justify-content: space-evenly;
+
+  color: $color-white;
+
+  width: 100vw;
+  height: $header-height;
+
+  font-size: 3rem;
+  position: fixed;
+  bottom: -1px;
+  z-index: 1;
+
+  .link {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 20%;
+    height: 4rem;
+    .icon {
+      scale: 1.4;
+    }
+    p {
+      font-size: 1rem;
+    }
+  }
+}

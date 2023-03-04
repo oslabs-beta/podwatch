@@ -1,17 +1,17 @@
 # PodWatch
 
-Quickly and easily monitor errors within a Kubernetes cluster. PodWatch provides a simple and easy way to stream all errors coming from your cluster into the PodWatch Service or customer service developed by you. You can generate notifications, trigger webhooks, and view all your errors in one convenient place.
+Quickly and easily monitor errors within a Kubernetes cluster. PodWatch provides a simple and easy way to stream all errors coming from your cluster into the PodWatch Web Service or to a custom server developed by you. You can generate notifications, trigger webhooks, and view all your errors in one convenient place.
 
 ## Getting started
 
 ### Prerequisites
 
 - A running Kubernetes cluster
-- Access to apply new configurations to the cluster
+- Administrative access to apply new roles, role bindings, service accounts and deployments to the cluster
 
 ### Setup
 
-Setup is quick and easy, taking less than five minutes. First, head to the PodWatch website and create an account. Add a new cluster to your account, and get your cluster ID and secret. If you do not wish to use the PodWatch web service, you can skip down to the [Custom Server](#custom-server) instructions.
+Setup is quick and easy, taking less than five minutes. First, head to the PodWatch website and create an account. Add a new cluster to your account, and get your cluster ID and secret. If you do not wish to use the PodWatch Web Service, you can skip down to the [Custom Server](#custom-server) instructions.
 
 Next, create the Kubernetes YAML config files for PodWatch. You will need a Deployment, ServiceAccount, ClusterRole, and ClusterRoleBinding. Provided below are some examples that can be copied and added into your cluster. Once you create these files, you can simply add them to your cluster with `kubectl apply -f podwatch`, where `podwatch` is a directory containing all four config files (alternatively you can apply them one-at-a-time if you choose).
 
@@ -88,7 +88,7 @@ roleRef:
 
 ### Custom Server
 
-Optionally, if you prefer not to use the PodWatch web service, you can still set up your own custom server with a webhook that will be called by PodWatch upon receiving errors from the cluster. Within this custom server, you can set up custom actions, messages, notifications, or any other custom responses to cluster errors.
+Optionally, if you prefer not to use the PodWatch Web Service, you can still set up your own custom server with a webhook that will be called by PodWatch upon receiving errors from the cluster. Within this custom server, you can set up custom actions, messages, notifications, or any other custom responses to cluster errors.
 
 To set up a custom server, you can use the following deployment config (which is similar to the config example above, with different env variables). You will still need to create a ServiceAccount, ClusterRole, and ClusterRoleBinding as in the provided examples above.
 
