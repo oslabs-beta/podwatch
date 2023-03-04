@@ -1,5 +1,9 @@
 @use 'variables.scss' as *;
 
+body{
+  background: $color-dark;
+}
+
 *,
 *::before,
 *::after {
