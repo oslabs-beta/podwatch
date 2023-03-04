@@ -32,7 +32,7 @@ export const createCluster = async (
       ],
     });
     await newCluster.save();
-    res.locals.cluster = newCluster;
+    res.locals.newCluster = newCluster;
     return next();
   } catch (err) {
     return next(err);
@@ -54,7 +54,7 @@ export const getAllClusters = async (
         provider: user.provider,
       },
     }).exec();
-    res.locals.allcluster = clusters;
+    res.locals.allClusters = clusters;
     return next();
   } catch (err) {
     return next(err);
@@ -87,6 +87,8 @@ export const getCluster = async (
       cluster.owner.provider !== user.provider
     ) {
       throw new Error("This cluster doesn't belong to this user");
+    } else {
+      res.locals.getCluster = cluster;
     }
   } catch (err) {
     return next(err);
@@ -99,11 +101,55 @@ export const updateCluster = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { id } = req.params;
-  if (!id) {
-    throw new Error('Must provide cluster id');
+  try {
+    //get the id from the url
+    const { id } = req.params;
+    //if no id provided
+    if (!id) {
+      throw new Error('Must provide cluster id');
+    }
+    //get the specific user from the request
+    const user = req.user as User;
+    if (!user) {
+      throw new Error('Must be logged in to update cluster');
+    }
+    ClusterModel.findByIdAndUpdate(
+      id,
+      {
+        owner: {
+          email: user.email,
+          provider: user.provider,
+        },
+      },
+      function (err: Error, docs: object): void {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log('Updated Cluster: ', docs);
+        }
+      }
+    );
+  } catch (err) {
+    return next(err);
   }
-  const user = req.user as User;
 };
 
 //cluster/:id delete cluster  with given id
+export const deleteCluster = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { id } = req.params;
+    ClusterModel.findByIdAndDelete(id, (err: Error, result: Object): void => {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log('cluster has been deleted');
+      }
+    });
+  } catch (err) {
+    return next(err);
+  }
+};
