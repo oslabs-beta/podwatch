@@ -5,6 +5,7 @@ import { setupPassport } from './controllers/passportProvider';
 import authRouter from './routes/authRouter';
 
 import { watcherRouter } from './routers/watcherRouter';
+import { errorHandler } from './errors/errorHandler';
 
 dotenv.config();
 
@@ -20,6 +21,8 @@ app.use('/auth', authRouter);
 app.use(errorHandler);
 
 app.use('/watch', watcherRouter);
+
+app.use(errorHandler);
 
 const start = async () => {
   try {
