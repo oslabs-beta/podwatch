@@ -1,12 +1,16 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import clusterRouter from './routers/clusterRouter';
 
 dotenv.config();
 
 const app = express();
 
 app.use(express.json());
+
+//routers
+app.use('/cluster', clusterRouter);
 
 const start = async () => {
   try {
