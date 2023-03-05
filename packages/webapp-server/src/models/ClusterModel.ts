@@ -19,6 +19,8 @@ export interface Cluster {
    * The cluster's members - this should be an array of references to user documents. These users will be permitted read access to this cluster's dashboard.
    */
   members: User[];
+
+  id: string;
 }
 export interface ClusterAttrs extends Cluster {
   /**
@@ -86,6 +88,9 @@ const clusterSchema = new mongoose.Schema<ClusterAttrs>(
         default: [],
       },
     ],
+    id: {
+      type: String,
+    },
   },
   {
     toJSON: {
