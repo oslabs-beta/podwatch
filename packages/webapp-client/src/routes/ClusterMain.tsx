@@ -1,7 +1,7 @@
 import React from 'react';
 import ClusterSummary from '../pages/clusterManagement/clusterManagement';
-const Home = () => {
+const ClusterMain = () => {
   return <ClusterSummary />;
 };
 
-export default Home;
+export default ClusterMain;

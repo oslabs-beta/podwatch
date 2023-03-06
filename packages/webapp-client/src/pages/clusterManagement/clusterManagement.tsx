@@ -20,12 +20,13 @@ const ClusterSummary = () => {
   const [clusters, setClusters] = React.useState<Cluster[]>([]);
   React.useEffect(() => {
     const fetchClusters = async () => {
-      const response = await fetch('/cluster/');
+      const response = await fetch('/cluster');
       const clusters = await response.json();
       setClusters(clusters);
     };
     fetchClusters();
   }, []);
+
   const navigate = useNavigate();
 
   //   const createCluster = () => {
