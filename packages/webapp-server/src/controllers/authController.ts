@@ -1,8 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
 import { UserModel } from '../models/UserModel';
-import jwt from 'jsonwebtoken';
-import { UserDocument } from '../models/UserModel';
-import passport from 'passport';
 
 /**
  * This middleware function will log a user in with the provided email and password. It will then set the user's id on the session and set the user on res.locals.user. It will then call next() to allow the request to continue. If the email or password are not provided, this function will throw an error. If the email is not found in the database, or if the password does not match the password in the database, this function will throw an error.
@@ -16,51 +13,28 @@ export const loginWithEmailAndPw = async (
   res: Response,
   next: NextFunction
 ) => {
-  const { email, password } = req.body; // Abc123
-  if (!email || !password) {
-    return next({
-      log: 'Email or password missing from request body.',
-      message: 'Invalid credentials',
-      status: 403,
-    });
-  }
-
   try {
-    console.log(`Searching for ${email} in the db`);
+    const { email, password } = req.body; // Abc123
+    if (!email || !password) {
+      throw new Error('Email and password are required');
+    }
+
     const user = await UserModel.findOne({ email });
-
-    console.log(`User ${user?.id} found.`);
-
     if (!user) {
-      return next({
-        log: 'Attempted sign in failed, no matching user in db',
-        message: 'Invalid credentials',
-        status: 403,
-      });
-    }
-
-    console.log('Comparing password');
-    const userAuthenticated = await user.comparePassword(password);
+      throw new Error('Invalid email or password');
+    } else {
+        const userAuthenticated = await user.comparePassword(password);
     if (!userAuthenticated) {
-      return next({
-        log: 'Attempted sign in failed, wrong password',
-        message: 'Invalid credentials',
-        status: 403,
-      });
+      throw new Error('Invalid email or password');
     }
 
-    console.log('Assigning req.user');
-
-    req.user = user;
+    req.session.userId = user.id;
+    res.locals.user = user;
 
     return next();
+    }
   } catch (error) {
-    return next({
-      log: 'Error occurred while attempting to sign in',
-      message: 'Unexpected error occurred',
-      status: 500,
-      error,
-    });
+    return next(error);
   }
 };
 
@@ -76,25 +50,17 @@ export const registerWithEmailAndPw = async (
   res: Response,
   next: NextFunction
 ) => {
-  console.log('Registering new user...');
-
-  const { email, password } = req.body;
-  if (!email || !password) {
-    return next({
-      log: 'Email or password missing from request body.',
-      message: 'Invalid credentials',
-      status: 403,
-    });
-  }
-
-  // TODO: Validate email is in correct format and password is long enough with required characters
-
-  // TODO: Check if email is already in use
-
   try {
-    console.log(`Creating user ${email}`);
+    const { email, password } = req.body;
+    if (!email || !password) {
+      throw new Error('Email and password are required');
+    }
 
-    const user = UserModel.build({
+    // TODO: Validate email is in correct format and password is long enough with required characters
+
+    // TODO: Check if email is already in use
+
+    const user = new UserModel({
       email,
       password,
       provider: 'local',
@@ -102,58 +68,40 @@ export const registerWithEmailAndPw = async (
 
     await user.save();
 
-    console.log('User created and saved');
-
-    req.user = user;
+    res.locals.user = user;
 
     return next();
   } catch (error) {
-    return next({
-      error,
-      log: 'An error occurred trying to create new user',
-      message: 'User account creation failed',
-      status: 500,
-    });
+    return next(error);
   }
 };
 
-export const generateJwt = (
+/**
+ * This middleware function closes the gap between OAuth and traditional login. If the user is not using OAuth, the the req.user will be undefined. The req.user will then be populated with the user's information by using the userID property on req.session. If there is no req.session.userID or there is not matching user in the database, this function will not error. It will simply call next() and allow the request to continue. Use this middleware with each request before using any other middleware that accesses user data on the req.user property.
+ * @param req
+ * @param res
+ * @param next
+ * @returns
+ */
+export const getUser = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const user = req.user as UserDocument;
-
-  if (!user) {
-    return next({
-      log: 'No user on request object, cannot create JWT',
-      message: 'You must log in to use this',
-      status: 403,
-    });
+  try {
+    const { userId } = req.session;
+    if (!userId) {
+      return next();
+    }
+    const user = await UserModel.findById(userId);
+    if (!user) {
+      return next();
+    }
+    req.user = user;
+    return next();
+  } catch (error) {
+    return next(error);
   }
-
-  console.log(`Generating JWT for user ${user.email}`);
-
-  const token = jwt.sign(
-    {
-      sub: user.id,
-      email: user.email,
-    },
-    process.env.JWT_TOKEN || 'abc'
-  );
-
-  console.log(`Token generated: ${token}`);
-
-  res.cookie('podwatch_jwt', token, {
-    // httpOnly: true,
-    // secure: true,
-    signed: true,
-    maxAge: 1000 * 60 * 60 * 24, // 1 day
-  });
-
-  console.log('Cookie assigned');
-
-  return next();
 };
 
 /**
@@ -168,6 +116,9 @@ export const authenticateUser = async (
   res: Response,
   next: NextFunction
 ) => {
-  const passportMiddleware = passport.authenticate('jwt', { session: false });
-  return passportMiddleware(req, res, next);
+  if (req.user) {
+    console.log('Authenticated user: ', req.user);
+    return next();
+  }
+  res.status(401).redirect('/signin');
 };
