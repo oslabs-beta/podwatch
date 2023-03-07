@@ -34,8 +34,8 @@ const ErrorLog: React.FC<ErrorLogProps> = ({ initialErrors, clusterId }) => {
   }
 
   return (
-    <OverlapSpacer className={styles.container}>
-      <ul>
+    <OverlapSpacer className={styles.spacer}>
+      <ul className={styles.container}>
         {errors.map((error) => {
           const info = getErrorInformation(error.reason);
           return <ErrorItem key={error.id} error={error} info={info} />;
