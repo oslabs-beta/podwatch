@@ -4,6 +4,7 @@ import { KError } from '../../types/KError';
 import ErrorItem from '../ErrorItem/ErrorItem';
 import OverlapSpacer from '../OverlapSpacer/OverlapSpacer';
 import styles from './ErrorLog.module.scss';
+import { mockKErrors } from './mockKErrors';
 
 interface ErrorLogProps {
   initialErrors: KError[];
@@ -25,6 +26,7 @@ const ErrorLog: React.FC<ErrorLogProps> = ({ initialErrors, clusterId }) => {
       // });
       // const errors = await response.json();
       // setErrors(errors);
+      setTimeout(() => setErrors(mockKErrors), 1000);
     };
     getErrors();
   }, []);
