@@ -10,9 +10,14 @@ import { Request, Response, Router } from 'express';
 
 const router = Router();
 //get all clusters associated with user
-router.get('/', getAllClusters, (req: Request, res: Response) => {
-  return res.status(200).send(res.locals.allClusters);
-});
+router.get(
+  '/',
+  authenicateUser,
+  getAllClusters,
+  (req: Request, res: Response) => {
+    return res.status(200).send(res.locals.allClusters);
+  }
+);
 
 //create cluster associated with user
 router.post(
