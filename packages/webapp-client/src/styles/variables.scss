@@ -10,6 +10,7 @@ $color-white-hover: #fff;
 $font-main: 'Inter', sans-serif;
 
 $header-height: 6rem;
+$footer-height: 6rem;
 
 @mixin breakpoint-sm {
   @media (min-width: 512px) {
