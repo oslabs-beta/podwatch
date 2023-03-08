@@ -1,6 +1,6 @@
 import React from 'react';
 //import the model for the cluster
-import { Cluster } from '../../../../../webapp-server/src/models/ClusterModel';
+import { Cluster } from '../../../../webapp-server/src/models/ClusterModel';
 import {
   Card,
   CardActionArea,

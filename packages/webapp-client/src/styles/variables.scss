@@ -1,10 +1,14 @@
 $color-primary: #0032b8;
 $color-secondary: #6a4eff;
 
+$color-dark: #1a1a1a;
+
 $color-white: #d1d1d1;
 $color-white-hover: #fff;
 
 $font-main: 'Inter', sans-serif;
+
+$header-height: 6rem;
 
 @mixin breakpoint-sm {
   @media (min-width: 512px) {
