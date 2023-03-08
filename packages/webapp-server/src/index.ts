@@ -1,14 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import cookieParser from 'cookie-parser';
 import { setupPassport } from './controllers/passportProvider';
-
-import watcherRouter from './routers/watcherRouter';
-import kErrorRouter from './routers/kErrorRouter';
-import authRouter from './routers/authRouter';
-
-import { errorHandler } from './errors/errorHandler';
+import authRouter from './routes/authRouter';
 
 dotenv.config();
 
@@ -33,6 +27,9 @@ const start = async () => {
   }
 
   setupPassport(app);
+
+  //use the auth router for any calls to the /auth route
+  app.use('/auth', authRouter);
 
   app.listen(3001, () => {
     console.log('Listening on port 3001');
