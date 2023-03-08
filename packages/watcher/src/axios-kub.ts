@@ -16,12 +16,13 @@ const monitorInOrOut = () => {
     //create Axios Instance for outside the cluster
     const instanceKub1 = axios.create({
       //baseURL connect to localhost at the port specified
-      baseURL: `https://localhost:${podWatch_Port}`,
+      baseURL: `http://host.docker.internal:${podWatch_Port}`,
 
       //Bearer Authentication (also called token authentication)
       //is a mechanism used to authorize clients by sending a security token
       headers: {
         Authorization: `Bearer ${podWatch_Token}`,
+        'Content-Type': 'application/json',
       },
     });
     return instanceKub1;
@@ -45,31 +46,30 @@ const monitorInOrOut = () => {
     process.exit(1);
   }
   // inside the cluster
-  else if (kubernetes_Host && kubernetes_Port) {
-    //the kubectl wll check the existance of a service account token file ...once the KUBERNETES_SERVICE_HOST & KUBERNETES_SERVICE_PORT & service token
-    const KUBE_TOKEN = fs.readFileSync(
-      '/var/run/secrets/kubernetes.io/serviceaccount/token',
-      'utf-8'
-    );
 
-    const cacert = fs.readFileSync(
-      '/var/run/secrets/kubernetes.io/serviceaccount/ca.crt'
-    );
-    //create axios instance
-    const instanceKub2 = axios.create({
-      //From inside the pod, kubernetes api server can be accessible directly on
-      baseURL: `https://${kubernetes_Host}:${kubernetes_Port}`,
+  //the kubectl wll check the existance of a service account token file ...once the KUBERNETES_SERVICE_HOST & KUBERNETES_SERVICE_PORT & service token
+  const KUBE_TOKEN = fs.readFileSync(
+    '/var/run/secrets/kubernetes.io/serviceaccount/token',
+    'utf-8'
+  );
 
-      headers: {
-        Authorization: `Bearer ${KUBE_TOKEN}`,
-        'Content-Type': 'application/json',
-      },
-      httpsAgent: new https.Agent({
-        ca: cacert,
-      }),
-    });
-    return instanceKub2;
-  }
+  const cacert = fs.readFileSync(
+    '/var/run/secrets/kubernetes.io/serviceaccount/ca.crt'
+  );
+  //create axios instance
+  const instanceKub2 = axios.create({
+    //From inside the pod, kubernetes api server can be accessible directly on
+    baseURL: `https://${kubernetes_Host}:${kubernetes_Port}`,
+
+    headers: {
+      Authorization: `Bearer ${KUBE_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+    httpsAgent: new https.Agent({
+      ca: cacert,
+    }),
+  });
+  return instanceKub2;
 };
 
 export default monitorInOrOut();

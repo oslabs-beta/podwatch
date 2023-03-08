@@ -1,0 +1,18 @@
+@use '../../styles/variables' as *;
+
+$overlap-height: 5em;
+
+.spacer {
+  height: $overlap-height;
+  background-color: $color-primary;
+  @include breakpoint-md {
+    display: none;
+  }
+}
+
+.content {
+  transform: translateY(-$overlap-height);
+  @include breakpoint-md {
+    transform: translateY(0);
+  }
+}

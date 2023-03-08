@@ -32,7 +32,7 @@ const Navigation: React.FC<NavigationProps> = ({ items }) => {
 
   return (
     <>
-      <div className={styles.mobile}>
+      {/* <div className={styles.mobile}>
         <IconButton onClick={handleClick} sx={{ color: 'white' }}>
           {open ? <CloseIcon /> : <MenuIcon />}
         </IconButton>
@@ -47,7 +47,7 @@ const Navigation: React.FC<NavigationProps> = ({ items }) => {
               </Link>
             ))}
         </Menu>
-      </div>
+      </div> */}
       <div className={styles.desktop}>
         {items
           .filter((item) => item.visible !== 'mobile')
