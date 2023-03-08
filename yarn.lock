@@ -1316,6 +1316,7 @@
     which "^2.0.2"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 "@nrwl/cli@15.7.2":
   version "15.7.2"
   resolved "https://registry.npmjs.org/@nrwl/cli/-/cli-15.7.2.tgz"
@@ -1328,6 +1329,8 @@
   resolved "https://registry.npmjs.org/@nrwl/devkit/-/devkit-15.7.2.tgz"
   integrity sha512-HMGi7L6w2g4IrYwhb04snD8Zr24Z/gzau5i9WUNkwzrjeR1xAm0Cc9WRre221zaeohtK11gyBt7BerT1tgkNwA==
 =======
+=======
+>>>>>>> e500d9b (progress from tuesday)
 <<<<<<< HEAD
 "@npmcli/run-script@^4.1.0", "@npmcli/run-script@^4.1.3":
   version "4.2.1"
@@ -1363,7 +1366,23 @@
   resolved "https://registry.npmjs.org/@nrwl/devkit/-/devkit-15.7.2.tgz"
   integrity sha512-HMGi7L6w2g4IrYwhb04snD8Zr24Z/gzau5i9WUNkwzrjeR1xAm0Cc9WRre221zaeohtK11gyBt7BerT1tgkNwA==
 >>>>>>> 9b23696 (if outside the cluster)
+<<<<<<< HEAD
 >>>>>>> 102e995 (if outside the cluster)
+=======
+=======
+"@nrwl/cli@15.7.2":
+  version "15.7.2"
+  resolved "https://registry.npmjs.org/@nrwl/cli/-/cli-15.7.2.tgz"
+  integrity sha512-A/72FAW1e0ku8YB/PaCqN9BpVvciO83MS5F5bvX5PA8xCNqe1+iXp/5T2ASnN2lB9zR3fQJmvR7mHKTKQlqQQQ==
+  dependencies:
+    nx "15.7.2"
+
+"@nrwl/devkit@>=15.5.2 < 16":
+  version "15.7.2"
+  resolved "https://registry.npmjs.org/@nrwl/devkit/-/devkit-15.7.2.tgz"
+  integrity sha512-HMGi7L6w2g4IrYwhb04snD8Zr24Z/gzau5i9WUNkwzrjeR1xAm0Cc9WRre221zaeohtK11gyBt7BerT1tgkNwA==
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
   dependencies:
     "@phenomnomnominal/tsquery" "4.1.1"
     ejs "^3.1.7"
@@ -1372,22 +1391,36 @@
     tslib "^2.3.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> e500d9b (progress from tuesday)
 <<<<<<< HEAD
 "@nrwl/nx-darwin-arm64@15.8.1":
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/@nrwl/nx-darwin-arm64/-/nx-darwin-arm64-15.8.1.tgz#225978034971982c92e4cc6b91db1c0966257926"
   integrity sha512-nuubQcXVrxxxjpKHmfQ4bEgCwKsiey1/o9+FB98DoOv70Y2PuxMu/tjXbfNiJBFP72ySrrDmD/vRMKmduOsRSg==
 =======
+<<<<<<< HEAD
 >>>>>>> 102e995 (if outside the cluster)
+=======
+=======
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
 "@nrwl/nx-darwin-arm64@15.7.2":
   version "15.7.2"
   resolved "https://registry.npmjs.org/@nrwl/nx-darwin-arm64/-/nx-darwin-arm64-15.7.2.tgz"
   integrity sha512-F82exjuqkAkElSTxEcTFeLMhHpbGiccfTQh2VjXMS+ONldxM+Kd7atJjtUG8wKNXfg0lxxjjAdnzLy3iBuN/HQ==
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 9b23696 (if outside the cluster)
 >>>>>>> 102e995 (if outside the cluster)
+=======
+>>>>>>> 9b23696 (if outside the cluster)
+=======
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
 
 "@nrwl/nx-darwin-x64@15.7.2":
   version "15.7.2"
@@ -1430,22 +1463,36 @@
   integrity sha512-ARE4qGPgk+e+pSm0uPhHan5UCRtwNYc5ddVNS88NFrVoDTPm5MxYLGdvLnshWWio/Bx526FcwUMSCBWSW8HIFw==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> e500d9b (progress from tuesday)
 <<<<<<< HEAD
 "@nrwl/tao@15.8.1":
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/@nrwl/tao/-/tao-15.8.1.tgz#840f3514ad010e8dcdc84b7acbcf7a5deec5f746"
   integrity sha512-wSoSTSF3tjVjNk6L1vtdSLHCIxEDl232aZN2LMpsVgU2yHnvrik2s9UJQrSDltsMM6vQ5VNKS5Li/AZWmfI79g==
 =======
+<<<<<<< HEAD
 >>>>>>> 102e995 (if outside the cluster)
+=======
+=======
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
 "@nrwl/tao@15.7.2":
   version "15.7.2"
   resolved "https://registry.npmjs.org/@nrwl/tao/-/tao-15.7.2.tgz"
   integrity sha512-srx9heMIt/QIyuqfewiVYbRpFcD/2pHkTkrEEUKspPd25kzAL2adcAITQKVCHI7/VS2sPdDR67pVsGQPZFBMRQ==
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 9b23696 (if outside the cluster)
 >>>>>>> 102e995 (if outside the cluster)
+=======
+>>>>>>> 9b23696 (if outside the cluster)
+=======
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
   dependencies:
     nx "15.7.2"
 
@@ -1844,10 +1891,13 @@
 
 "@types/serve-static@*":
 <<<<<<< HEAD
+<<<<<<< HEAD
   version "1.15.0"
   resolved "https://registry.npmjs.org/@types/serve-static/-/serve-static-1.15.0.tgz"
   integrity sha512-z5xyF6uh8CbjAu9760KDKsH2FcDxZ2tFCsA4HIMWE6IkiYMXfVoa+4f9KX+FN0ZLsaMw1WNG2ETLA6N+/YA+cg==
 =======
+=======
+>>>>>>> e500d9b (progress from tuesday)
 <<<<<<< HEAD
   version "1.15.1"
   resolved "https://registry.yarnpkg.com/@types/serve-static/-/serve-static-1.15.1.tgz#86b1753f0be4f9a1bee68d459fcda5be4ea52b5d"
@@ -1857,7 +1907,15 @@
   resolved "https://registry.npmjs.org/@types/serve-static/-/serve-static-1.15.0.tgz"
   integrity sha512-z5xyF6uh8CbjAu9760KDKsH2FcDxZ2tFCsA4HIMWE6IkiYMXfVoa+4f9KX+FN0ZLsaMw1WNG2ETLA6N+/YA+cg==
 >>>>>>> 9b23696 (if outside the cluster)
+<<<<<<< HEAD
 >>>>>>> 102e995 (if outside the cluster)
+=======
+=======
+  version "1.15.0"
+  resolved "https://registry.npmjs.org/@types/serve-static/-/serve-static-1.15.0.tgz"
+  integrity sha512-z5xyF6uh8CbjAu9760KDKsH2FcDxZ2tFCsA4HIMWE6IkiYMXfVoa+4f9KX+FN0ZLsaMw1WNG2ETLA6N+/YA+cg==
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
   dependencies:
     "@types/mime" "*"
     "@types/node" "*"
@@ -2114,7 +2172,11 @@ axios@^1.0.0, axios@^1.3.4:
 =======
 axios@^1.0.0:
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 102e995 (if outside the cluster)
+=======
+<<<<<<< HEAD
+>>>>>>> e500d9b (progress from tuesday)
   version "1.3.4"
   resolved "https://registry.yarnpkg.com/axios/-/axios-1.3.4.tgz#f5760cefd9cfb51fd2481acf88c05f67c4523024"
   integrity sha512-toYm+Bsyl6VC5wSkfkbbNB6ROv7KY93PEBBL6xyDczaIHasAiv4wPqQ/c4RjoQzipxRD2W5g21cOqQulZ7rHwQ==
@@ -2126,7 +2188,15 @@ axios@^1.0.0:
   resolved "https://registry.npmjs.org/axios/-/axios-1.3.3.tgz"
   integrity sha512-eYq77dYIFS77AQlhzEL937yUBSepBfPIe8FcgEDN35vMNZKMrs81pgnyrQpwfy4NF4b4XWX1Zgx7yX+25w8QJA==
 >>>>>>> 9b23696 (if outside the cluster)
+<<<<<<< HEAD
 >>>>>>> 605dbe3 (if outside the cluster)
+=======
+=======
+  version "1.3.3"
+  resolved "https://registry.npmjs.org/axios/-/axios-1.3.3.tgz"
+  integrity sha512-eYq77dYIFS77AQlhzEL937yUBSepBfPIe8FcgEDN35vMNZKMrs81pgnyrQpwfy4NF4b4XWX1Zgx7yX+25w8QJA==
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> 5adf026 (progress from tuesday)
   dependencies:
     follow-redirects "^1.15.0"
     form-data "^4.0.0"
@@ -2352,10 +2422,13 @@ camelcase@^5.3.1:
 
 caniuse-lite@^1.0.30001406:
 <<<<<<< HEAD
+<<<<<<< HEAD
   version "1.0.30001456"
   resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001456.tgz"
   integrity sha512-XFHJY5dUgmpMV25UqaD4kVq2LsiaU5rS8fb0f17pCoXQiQslzmFgnfOxfvo1bTpTqf7dwG/N/05CnLCnOEKmzA==
 =======
+=======
+>>>>>>> e500d9b (progress from tuesday)
 <<<<<<< HEAD
   version "1.0.30001458"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001458.tgz#871e35866b4654a7d25eccca86864f411825540c"
@@ -2365,7 +2438,15 @@ caniuse-lite@^1.0.30001406:
   resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001456.tgz"
   integrity sha512-XFHJY5dUgmpMV25UqaD4kVq2LsiaU5rS8fb0f17pCoXQiQslzmFgnfOxfvo1bTpTqf7dwG/N/05CnLCnOEKmzA==
 >>>>>>> 9b23696 (if outside the cluster)
+<<<<<<< HEAD
 >>>>>>> 102e995 (if outside the cluster)
+=======
+=======
+  version "1.0.30001456"
+  resolved "https://registry.npmjs.org/caniuse-lite/-/caniuse-lite-1.0.30001456.tgz"
+  integrity sha512-XFHJY5dUgmpMV25UqaD4kVq2LsiaU5rS8fb0f17pCoXQiQslzmFgnfOxfvo1bTpTqf7dwG/N/05CnLCnOEKmzA==
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
 
 chalk@4.1.0, chalk@^4.0.2, chalk@^4.1.0:
   version "4.1.0"
@@ -4156,10 +4237,13 @@ lru-cache@^6.0.0:
 
 lru-cache@^7.4.4, lru-cache@^7.5.1, lru-cache@^7.7.1:
 <<<<<<< HEAD
+<<<<<<< HEAD
   version "7.16.1"
   resolved "https://registry.npmjs.org/lru-cache/-/lru-cache-7.16.1.tgz"
   integrity sha512-9kkuMZHnLH/8qXARvYSjNvq8S1GYFFzynQTAfKeaJ0sIrR3PUPuu37Z+EiIANiZBvpfTf2B5y8ecDLSMWlLv+w==
 =======
+=======
+>>>>>>> e500d9b (progress from tuesday)
 <<<<<<< HEAD
   version "7.17.0"
   resolved "https://registry.yarnpkg.com/lru-cache/-/lru-cache-7.17.0.tgz#00c7ba5919e5ea7c69ff94ddabbf32cb09ab805c"
@@ -4169,7 +4253,15 @@ lru-cache@^7.4.4, lru-cache@^7.5.1, lru-cache@^7.7.1:
   resolved "https://registry.npmjs.org/lru-cache/-/lru-cache-7.16.1.tgz"
   integrity sha512-9kkuMZHnLH/8qXARvYSjNvq8S1GYFFzynQTAfKeaJ0sIrR3PUPuu37Z+EiIANiZBvpfTf2B5y8ecDLSMWlLv+w==
 >>>>>>> 9b23696 (if outside the cluster)
+<<<<<<< HEAD
 >>>>>>> 102e995 (if outside the cluster)
+=======
+=======
+  version "7.16.1"
+  resolved "https://registry.npmjs.org/lru-cache/-/lru-cache-7.16.1.tgz"
+  integrity sha512-9kkuMZHnLH/8qXARvYSjNvq8S1GYFFzynQTAfKeaJ0sIrR3PUPuu37Z+EiIANiZBvpfTf2B5y8ecDLSMWlLv+w==
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
 
 make-dir@3.1.0:
   version "3.1.0"
@@ -4317,20 +4409,34 @@ minimatch@3.0.5, minimatch@^3.0.4:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 minimatch@^3.1.1:
 =======
 minimatch@^3.1.1, minimatch@^3.1.2:
 >>>>>>> 26eee00 (progress from tuesday)
 =======
+=======
+>>>>>>> 5adf026 (progress from tuesday)
 minimatch@^3.1.1, minimatch@^3.1.2:
 =======
+=======
+>>>>>>> e500d9b (progress from tuesday)
 <<<<<<< HEAD
 minimatch@^3.0.4, minimatch@^3.1.1, minimatch@^3.1.2:
 =======
 minimatch@^3.1.1:
 >>>>>>> 9b23696 (if outside the cluster)
+<<<<<<< HEAD
 >>>>>>> 102e995 (if outside the cluster)
+<<<<<<< HEAD
 >>>>>>> 605dbe3 (if outside the cluster)
+=======
+=======
+=======
+minimatch@^3.1.1, minimatch@^3.1.2:
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
+>>>>>>> 5adf026 (progress from tuesday)
   version "3.1.2"
   resolved "https://registry.npmjs.org/minimatch/-/minimatch-3.1.2.tgz"
   integrity sha512-J7p63hRiAjw1NDEww1W7i37+ByIrOWO5XQQAzZ3VOcL0PNybwpfmV/N05zFAzwQ9USyEcX6t3UO+K5aqBQOIHw==
@@ -4413,7 +4519,10 @@ minipass@^3.0.0, minipass@^3.1.1, minipass@^3.1.6:
     yallist "^4.0.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> e500d9b (progress from tuesday)
 <<<<<<< HEAD
 minipass@^4.0.0:
   version "4.2.4"
@@ -4422,7 +4531,12 @@ minipass@^4.0.0:
 
 =======
 >>>>>>> 9b23696 (if outside the cluster)
+<<<<<<< HEAD
 >>>>>>> 102e995 (if outside the cluster)
+=======
+=======
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
 minizlib@^2.1.1, minizlib@^2.1.2:
   version "2.1.2"
   resolved "https://registry.npmjs.org/minizlib/-/minizlib-2.1.2.tgz"
@@ -4505,29 +4619,50 @@ ms@2.0.0:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ms@2.1.2, ms@^2.0.0:
 =======
 ms@2.1.2, ms@^2.0.0, ms@^2.1.1:
 >>>>>>> 26eee00 (progress from tuesday)
 =======
+=======
+>>>>>>> 5adf026 (progress from tuesday)
 ms@2.1.2, ms@^2.0.0, ms@^2.1.1:
 =======
 ms@2.1.2, ms@^2.0.0:
 >>>>>>> 102e995 (if outside the cluster)
+<<<<<<< HEAD
 >>>>>>> 605dbe3 (if outside the cluster)
+=======
+=======
+ms@2.1.2, ms@^2.0.0:
+=======
+ms@2.1.2, ms@^2.0.0, ms@^2.1.1:
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
+>>>>>>> 5adf026 (progress from tuesday)
   version "2.1.2"
   resolved "https://registry.npmjs.org/ms/-/ms-2.1.2.tgz"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 ms@2.1.3:
 =======
+=======
+>>>>>>> e500d9b (progress from tuesday)
 <<<<<<< HEAD
 ms@2.1.3, ms@^2.0.0, ms@^2.1.1:
 =======
 ms@2.1.3:
 >>>>>>> 9b23696 (if outside the cluster)
+<<<<<<< HEAD
 >>>>>>> 102e995 (if outside the cluster)
+=======
+=======
+ms@2.1.3:
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
   version "2.1.3"
   resolved "https://registry.npmjs.org/ms/-/ms-2.1.3.tgz"
   integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
@@ -4604,17 +4739,29 @@ node-addon-api@^5.0.0:
   integrity sha512-eh0GgfEkpnoWDq+VY8OyvYhFEzBk6jIYbRKdIlyTiAXIVJ8PyBaKb0rp7oDtoddbdoHWhq8wwr+XZ81F1rpNdA==
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> 26eee00 (progress from tuesday)
 =======
 <<<<<<< HEAD
 >>>>>>> 605dbe3 (if outside the cluster)
+=======
+<<<<<<< HEAD
+>>>>>>> 5adf026 (progress from tuesday)
 node-fetch@2.6.7, node-fetch@^2.6.7:
 =======
+=======
+>>>>>>> e500d9b (progress from tuesday)
 node-fetch@2.6.7:
 =======
 node-fetch@2.6.7, node-fetch@^2.6.7:
 >>>>>>> 9b23696 (if outside the cluster)
+<<<<<<< HEAD
 >>>>>>> 102e995 (if outside the cluster)
+=======
+=======
+node-fetch@2.6.7, node-fetch@^2.6.7:
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
   version "2.6.7"
   resolved "https://registry.npmjs.org/node-fetch/-/node-fetch-2.6.7.tgz"
   integrity sha512-ZjMPFEfVx5j+y2yF35Kzx5sF7kDzxuDj6ziH4FFbOp87zKDZNx8yExJIb05OGF4Nlt9IHFIMBkRl41VdvcNdbQ==
@@ -4827,22 +4974,36 @@ npmlog@^6.0.0, npmlog@^6.0.2:
     set-blocking "^2.0.0"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> e500d9b (progress from tuesday)
 <<<<<<< HEAD
 nx@15.8.1, "nx@>=15.5.2 < 16":
   version "15.8.1"
   resolved "https://registry.yarnpkg.com/nx/-/nx-15.8.1.tgz#2163423dfd1d0c35ca66eb16db07318357397250"
   integrity sha512-aXFZw2KKf1wQOKmUod+Q6CEBStnu44P5FODOTZ5CRepmn6msFyvxtSwDgOflYW07VvZbNMuLT4mNWgDiQE0BbA==
 =======
+<<<<<<< HEAD
 >>>>>>> 102e995 (if outside the cluster)
+=======
+=======
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
 nx@15.7.2, "nx@>=15.5.2 < 16":
   version "15.7.2"
   resolved "https://registry.npmjs.org/nx/-/nx-15.7.2.tgz"
   integrity sha512-VRb+CZCji3G4ikdMAGoh6TeU9Q6n5atRwqRSFhUX63er8zhlMvWHLskPMZC4q/81edo/E7RhbmEVUD5MB0JoeA==
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 >>>>>>> 9b23696 (if outside the cluster)
 >>>>>>> 102e995 (if outside the cluster)
+=======
+>>>>>>> 9b23696 (if outside the cluster)
+=======
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
   dependencies:
     "@nrwl/cli" "15.7.2"
     "@nrwl/tao" "15.7.2"
@@ -4931,10 +5092,13 @@ onetime@^5.1.0, onetime@^5.1.2:
 
 open@^8.4.0:
 <<<<<<< HEAD
+<<<<<<< HEAD
   version "8.4.1"
   resolved "https://registry.npmjs.org/open/-/open-8.4.1.tgz"
   integrity sha512-/4b7qZNhv6Uhd7jjnREh1NjnPxlTq+XNWPG88Ydkj5AILcA5m3ajvcg57pB24EQjKv0dK62XnDqk9c/hkIG5Kg==
 =======
+=======
+>>>>>>> e500d9b (progress from tuesday)
 <<<<<<< HEAD
   version "8.4.2"
   resolved "https://registry.yarnpkg.com/open/-/open-8.4.2.tgz#5b5ffe2a8f793dcd2aad73e550cb87b59cb084f9"
@@ -4944,7 +5108,15 @@ open@^8.4.0:
   resolved "https://registry.npmjs.org/open/-/open-8.4.1.tgz"
   integrity sha512-/4b7qZNhv6Uhd7jjnREh1NjnPxlTq+XNWPG88Ydkj5AILcA5m3ajvcg57pB24EQjKv0dK62XnDqk9c/hkIG5Kg==
 >>>>>>> 9b23696 (if outside the cluster)
+<<<<<<< HEAD
 >>>>>>> 102e995 (if outside the cluster)
+=======
+=======
+  version "8.4.1"
+  resolved "https://registry.npmjs.org/open/-/open-8.4.1.tgz"
+  integrity sha512-/4b7qZNhv6Uhd7jjnREh1NjnPxlTq+XNWPG88Ydkj5AILcA5m3ajvcg57pB24EQjKv0dK62XnDqk9c/hkIG5Kg==
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
   dependencies:
     define-lazy-prop "^2.0.0"
     is-docker "^2.1.1"
@@ -5513,10 +5685,13 @@ read@1, read@^1.0.7:
 
 readable-stream@3, readable-stream@^3.0.0, readable-stream@^3.0.2, readable-stream@^3.1.1, readable-stream@^3.4.0, readable-stream@^3.6.0:
 <<<<<<< HEAD
+<<<<<<< HEAD
   version "3.6.0"
   resolved "https://registry.npmjs.org/readable-stream/-/readable-stream-3.6.0.tgz"
   integrity sha512-BViHy7LKeTz4oNnkcLJ+lVSL6vpiFeX6/d3oSH8zCW7UxP2onchk+vTGB143xuFjHS3deTgkKoXXymXqymiIdA==
 =======
+=======
+>>>>>>> e500d9b (progress from tuesday)
 <<<<<<< HEAD
   version "3.6.1"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-3.6.1.tgz#f9f9b5f536920253b3d26e7660e7da4ccff9bb62"
@@ -5526,7 +5701,15 @@ readable-stream@3, readable-stream@^3.0.0, readable-stream@^3.0.2, readable-stre
   resolved "https://registry.npmjs.org/readable-stream/-/readable-stream-3.6.0.tgz"
   integrity sha512-BViHy7LKeTz4oNnkcLJ+lVSL6vpiFeX6/d3oSH8zCW7UxP2onchk+vTGB143xuFjHS3deTgkKoXXymXqymiIdA==
 >>>>>>> 9b23696 (if outside the cluster)
+<<<<<<< HEAD
 >>>>>>> 102e995 (if outside the cluster)
+=======
+=======
+  version "3.6.0"
+  resolved "https://registry.npmjs.org/readable-stream/-/readable-stream-3.6.0.tgz"
+  integrity sha512-BViHy7LKeTz4oNnkcLJ+lVSL6vpiFeX6/d3oSH8zCW7UxP2onchk+vTGB143xuFjHS3deTgkKoXXymXqymiIdA==
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
   dependencies:
     inherits "^2.0.3"
     string_decoder "^1.1.1"
@@ -5534,10 +5717,13 @@ readable-stream@3, readable-stream@^3.0.0, readable-stream@^3.0.2, readable-stre
 
 readable-stream@~2.3.6:
 <<<<<<< HEAD
+<<<<<<< HEAD
   version "2.3.7"
   resolved "https://registry.npmjs.org/readable-stream/-/readable-stream-2.3.7.tgz"
   integrity sha512-Ebho8K4jIbHAxnuxi7o42OrZgF/ZTNcsZj6nRKyUmkhLFq8CHItp/fy6hQZuZmP/n3yZ9VBUbp4zz/mX8hmYPw==
 =======
+=======
+>>>>>>> e500d9b (progress from tuesday)
 <<<<<<< HEAD
   version "2.3.8"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.3.8.tgz#91125e8042bba1b9887f49345f6277027ce8be9b"
@@ -5547,7 +5733,15 @@ readable-stream@~2.3.6:
   resolved "https://registry.npmjs.org/readable-stream/-/readable-stream-2.3.7.tgz"
   integrity sha512-Ebho8K4jIbHAxnuxi7o42OrZgF/ZTNcsZj6nRKyUmkhLFq8CHItp/fy6hQZuZmP/n3yZ9VBUbp4zz/mX8hmYPw==
 >>>>>>> 9b23696 (if outside the cluster)
+<<<<<<< HEAD
 >>>>>>> 102e995 (if outside the cluster)
+=======
+=======
+  version "2.3.7"
+  resolved "https://registry.npmjs.org/readable-stream/-/readable-stream-2.3.7.tgz"
+  integrity sha512-Ebho8K4jIbHAxnuxi7o42OrZgF/ZTNcsZj6nRKyUmkhLFq8CHItp/fy6hQZuZmP/n3yZ9VBUbp4zz/mX8hmYPw==
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
   dependencies:
     core-util-is "~1.0.0"
     inherits "~2.0.3"
@@ -5732,16 +5926,28 @@ semver@^6.0.0:
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 semver@^7.3.5, semver@^7.3.7:
 =======
 semver@^7.3.5, semver@^7.3.7, semver@^7.3.8:
 >>>>>>> 26eee00 (progress from tuesday)
 =======
+=======
+>>>>>>> 5adf026 (progress from tuesday)
 semver@^7.3.5, semver@^7.3.7, semver@^7.3.8:
 =======
 semver@^7.3.5, semver@^7.3.7:
 >>>>>>> 102e995 (if outside the cluster)
+<<<<<<< HEAD
 >>>>>>> 605dbe3 (if outside the cluster)
+=======
+=======
+semver@^7.3.5, semver@^7.3.7:
+=======
+semver@^7.3.5, semver@^7.3.7, semver@^7.3.8:
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
+>>>>>>> 5adf026 (progress from tuesday)
   version "7.3.8"
   resolved "https://registry.npmjs.org/semver/-/semver-7.3.8.tgz"
   integrity sha512-NB1ctGL5rlHrPJtFDVIVzTyQylMLu9N9VICA6HSFJo8MCGVTMW6gfpicwKmmK/dAjTOrqu5l63JJOpDSrAis3A==
@@ -6579,10 +6785,13 @@ yargs@16.2.0, yargs@^16.2.0:
 
 yargs@^17.6.2:
 <<<<<<< HEAD
+<<<<<<< HEAD
   version "17.7.0"
   resolved "https://registry.npmjs.org/yargs/-/yargs-17.7.0.tgz"
   integrity sha512-dwqOPg5trmrre9+v8SUo2q/hAwyKoVfu8OC1xPHKJGNdxAvPl4sKxL4vBnh3bQz/ZvvGAFeA5H3ou2kcOY8sQQ==
 =======
+=======
+>>>>>>> e500d9b (progress from tuesday)
 <<<<<<< HEAD
   version "17.7.1"
   resolved "https://registry.yarnpkg.com/yargs/-/yargs-17.7.1.tgz#34a77645201d1a8fc5213ace787c220eabbd0967"
@@ -6592,7 +6801,15 @@ yargs@^17.6.2:
   resolved "https://registry.npmjs.org/yargs/-/yargs-17.7.0.tgz"
   integrity sha512-dwqOPg5trmrre9+v8SUo2q/hAwyKoVfu8OC1xPHKJGNdxAvPl4sKxL4vBnh3bQz/ZvvGAFeA5H3ou2kcOY8sQQ==
 >>>>>>> 9b23696 (if outside the cluster)
+<<<<<<< HEAD
 >>>>>>> 102e995 (if outside the cluster)
+=======
+=======
+  version "17.7.0"
+  resolved "https://registry.npmjs.org/yargs/-/yargs-17.7.0.tgz"
+  integrity sha512-dwqOPg5trmrre9+v8SUo2q/hAwyKoVfu8OC1xPHKJGNdxAvPl4sKxL4vBnh3bQz/ZvvGAFeA5H3ou2kcOY8sQQ==
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
   dependencies:
     cliui "^8.0.1"
     escalade "^3.1.1"
@@ -6605,14 +6822,23 @@ yargs@^17.6.2:
 yarn@^1.22.19:
   version "1.22.19"
 <<<<<<< HEAD
+<<<<<<< HEAD
   resolved "https://registry.npmjs.org/yarn/-/yarn-1.22.19.tgz"
 =======
+=======
+>>>>>>> e500d9b (progress from tuesday)
 <<<<<<< HEAD
   resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.22.19.tgz#4ba7fc5c6e704fce2066ecbfb0b0d8976fe62447"
 =======
   resolved "https://registry.npmjs.org/yarn/-/yarn-1.22.19.tgz"
 >>>>>>> 9b23696 (if outside the cluster)
+<<<<<<< HEAD
 >>>>>>> 102e995 (if outside the cluster)
+=======
+=======
+  resolved "https://registry.npmjs.org/yarn/-/yarn-1.22.19.tgz"
+>>>>>>> 26eee00 (progress from tuesday)
+>>>>>>> e500d9b (progress from tuesday)
   integrity sha512-/0V5q0WbslqnwP91tirOvldvYISzaqhClxzyUKXYxs07yUILIs5jx/k6CFe8bvKSkds5w+eiOqta39Wk3WxdcQ==
 
 yn@3.1.1:
