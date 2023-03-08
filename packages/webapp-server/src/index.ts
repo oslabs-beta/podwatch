@@ -1,11 +1,12 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import cookieParser from 'cookie-parser';
 import { setupPassport } from './controllers/passportProvider';
-import authRouter from './routes/authRouter';
 
 import watcherRouter from './routers/watcherRouter';
 import kErrorRouter from './routers/kErrorRouter';
+import authRouter from './routers/authRouter';
 
 import { errorHandler } from './errors/errorHandler';
 
@@ -22,11 +23,6 @@ app.use('/auth', authRouter);
 
 app.use(errorHandler);
 
-app.use('/watch', watcherRouter);
-app.use('/kerrors', kErrorRouter);
-
-app.use(errorHandler);
-
 const start = async () => {
   try {
     await mongoose.connect(process.env.MONGODB_URI || '');
@@ -37,9 +33,6 @@ const start = async () => {
   }
 
   setupPassport(app);
-
-  //use the auth router for any calls to the /auth route
-  app.use('/auth', authRouter);
 
   app.listen(3001, () => {
     console.log('Listening on port 3001');
