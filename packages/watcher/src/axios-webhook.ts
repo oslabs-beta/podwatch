@@ -26,11 +26,11 @@ const createAxiosInstance = () => {
     return instanceCustom;
   } else if (PODWATCH_CLIENT_ID && PODWATCH_CLIENT_SECRET) {
     const instancePodWatch: AxiosInstance = axios.create({
-      baseURL: 'http://localhost:3001/watch',
+      baseURL: 'http://host.docker.internal:3001/watch',
       timeout: 1000,
       headers: {
-        clientId: PODWATCH_CLIENT_ID,
-        clientSecret: PODWATCH_CLIENT_SECRET,
+        clusterId: PODWATCH_CLIENT_ID,
+        clusterSecret: PODWATCH_CLIENT_SECRET,
       },
     });
     return instancePodWatch;
@@ -55,4 +55,4 @@ This function needs to be imported into the Event Dispatcher and then invoked. F
     const instance = createAxiosInstance();
     instance.get('/someURL')
 */
-export default createAxiosInstance;
+export default createAxiosInstance();

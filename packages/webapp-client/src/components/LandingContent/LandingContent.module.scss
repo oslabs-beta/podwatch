@@ -1,0 +1,67 @@
+@use '@/styles/variables.scss' as *;
+
+// $overlap-height: 5em;
+
+// .spacer {
+//   height: $overlap-height;
+//   background-color: $color-primary;
+// }
+
+.LandingContent {
+  background-color: $color-dark;
+  border-radius: 1em;
+  // transform: translateY(-$overlap-height);
+  width: calc(100vw - 2rem);
+  margin-left: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: calc(156vh - $header-height);
+  text-align: center;
+  color: $color-white;
+  margin-bottom: 8rem;
+  @include breakpoint-md {
+    margin: 0;
+    border-radius: 0;
+    width: 99vw;
+    transform: translateY(0);
+  }
+  .text {
+    margin-top: 3rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 12em;
+    width: 80%;
+  }
+
+  .logo {
+    width: 40vh;
+    height: 40vh;
+  }
+
+  .logoBox {
+    border-radius: 2em;
+    width: 40vh;
+    height: 55vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    background: rgb(2, 50, 183);
+    background: linear-gradient(
+      180deg,
+      rgba(2, 50, 183, 1) 0%,
+      rgba(2, 50, 183, 0.1708029197080292) 81%
+    );
+
+    .schoolLogo {
+      filter: brightness(0) invert(1);
+      width: 20vh;
+      height: 20vh;
+    }
+  }
+}
