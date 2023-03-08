@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
+import { setupPassport } from './controllers/passportProvider';
+import authRouter from './routes/authRouter';
 
 dotenv.config();
 
@@ -16,6 +18,11 @@ const start = async () => {
     console.log('Error connecting to MongoDB');
     console.error(err);
   }
+
+  setupPassport(app);
+
+  //use the auth router for any calls to the /auth route
+  app.use('/auth', authRouter);
 
   app.listen(3001, () => {
     console.log('Listening on port 3001');
