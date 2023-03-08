@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import { ClusterModel } from '../models/ClusterModel';
+import { ClusterModel, ClusterModel } from '../models/ClusterModel';
 import { User } from '../models/UserModel';
 
 //create a new cluster associated with use
@@ -9,28 +9,15 @@ export const createCluster = async (
   next: NextFunction
 ) => {
   try {
-    const { name, secret, description, owner, members } = req.body;
-    if (!name || !secret || !owner)
-      throw new Error('Must provide name, secret, and owner');
+    const { name, description, owner, members } = req.body;
+    if (!name || !owner) throw new Error('Must provide name and owner');
     const user = req.user as User;
     if (!user)
       throw new Error('User must be logged in to create a new cluster');
 
-    const newCluster = new ClusterModel({
-      name,
-      secret,
-      description,
-      owner: {
-        email: user.email,
-        provider: user.provider,
-      },
-      members: [
-        {
-          email: user.email,
-          provider: user.provider,
-        },
-      ],
-    });
+    const newCluster = ClusterModel.build;
+    const secret = ClusterModel.generateSecret;
+    newCluster.secret = secret;
     await newCluster.save();
     res.locals.newCluster = newCluster;
     return next();
