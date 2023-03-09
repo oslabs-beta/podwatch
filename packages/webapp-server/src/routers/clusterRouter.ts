@@ -5,37 +5,41 @@ import {
   updateCluster,
   deleteCluster,
 } from '../controllers/clusterController';
-import { authenicateUser } from '../controllers/authUserController';
+import { authenticateUser } from '../controllers/authController';
 import { Request, Response, Router } from 'express';
 
 const router = Router();
 //get all clusters associated with user
 router.get(
   '/',
-  authenicateUser,
+  authenticateUser,
   getAllClusters,
   (req: Request, res: Response) => {
-    return res.status(200).send(res.locals.allClusters);
+    // return res.status(200).send("YAY")
+    return res.status(200).json(res.locals.allClusters);
   }
 );
 
 //create cluster associated with user
 router.post(
   '/',
-  authenicateUser,
+  authenticateUser,
   createCluster,
   (req: Request, res: Response) => {
-    return res.status(201).send(res.locals.newCluster);
+    return res.status(201).json({
+      cluster: res.locals.newCluster,
+      secret: res.locals.newCluster.secret,
+    });
   }
 );
 
 //get specific cluster
 router.get(
   '/:id',
-  authenicateUser,
+  authenticateUser,
   getCluster,
   (req: Request, res: Response) => {
-    return res.status(200).send(res.locals.getCluster);
+    return res.status(200).json(res.locals.getCluster);
   }
 );
 
@@ -43,10 +47,10 @@ router.get(
 
 router.patch(
   '/:id',
-  authenicateUser,
+  authenticateUser,
   updateCluster,
   (req: Request, res: Response) => {
-    return res.status(200).send(res.locals.getCluster);
+    return res.status(201).json(res.locals.getCluster);
   }
 );
 
@@ -54,10 +58,10 @@ router.patch(
 
 router.delete(
   '/:id',
-  authenicateUser,
+  authenticateUser,
   deleteCluster,
   (req: Request, res: Response) => {
-    return res.status(200).send(res.locals.getCluster);
+    return res.status(200).json(res.locals.getCluster);
   }
 );
 

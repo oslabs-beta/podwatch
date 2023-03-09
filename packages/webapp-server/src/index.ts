@@ -9,6 +9,7 @@ import kErrorRouter from './routers/kErrorRouter';
 import authRouter from './routers/authRouter';
 
 import { errorHandler } from './errors/errorHandler';
+//import clusterRouter
 import clusterRouter from './routers/clusterRouter';
 
 dotenv.config();
@@ -18,14 +19,13 @@ const app = express();
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
 
+//routers
 app.use('/watch', watcherRouter);
 app.use('/kerrors', kErrorRouter);
 app.use('/auth', authRouter);
+app.use('/cluster', clusterRouter);
 
 app.use(errorHandler);
-
-//routers
-app.use('/cluster', clusterRouter);
 
 const start = async () => {
   try {
