@@ -1,7 +1,6 @@
 @use '../../styles/variables' as *;
 
 .footer {
-  overflow: hidden;
   background: rgb(2, 50, 183);
   background: rgb(2, 50, 183);
   background: linear-gradient(
@@ -35,6 +34,13 @@
     }
     p {
       font-size: 1rem;
+    }
+  }
+  @include breakpoint-md {
+    height: 7em;
+    position: static;
+    .link {
+      display: none;
     }
   }
 }

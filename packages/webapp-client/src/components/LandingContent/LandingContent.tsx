@@ -12,8 +12,10 @@ const LandingContent: React.FC = () => {
   return (
     <OverlapSpacer className={styles.LandingContent}>
       <div className={styles.text}>
-        <h1>PodWatch</h1>
+        <h1 className={styles.title}>PodWatch</h1>
         <h1>Kubernetes Error Hub</h1>
+        <p>Streamline your Kubernetes monitoring with Pod Watch</p>
+        <br />
         <Chip label="V0.0.1" color="primary" />
       </div>
       <Image

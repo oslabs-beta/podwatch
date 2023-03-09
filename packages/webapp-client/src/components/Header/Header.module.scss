@@ -35,7 +35,9 @@
 
 .signin {
   min-width: 0em;
+  margin-right: 1em;
   @include breakpoint-md {
+    margin-right: 0em;
     display: block;
     min-width: 8rem;
     padding-inline: 1rem;
