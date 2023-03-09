@@ -15,7 +15,7 @@ const Header = () => {
           <Logo />
           <Navigation
             items={[
-              { label: 'Sign In', href: '/', visible: 'mobile' },
+              { label: 'Sign In', href: '/auth/signin', visible: 'mobile' },
               { label: 'Docs', href: '/', visible: 'all' },
               { label: 'Examples', href: '/', visible: 'all' },
               { label: 'GitRepo', href: '/', visible: 'all' },
@@ -23,7 +23,7 @@ const Header = () => {
           />
           <div className={styles.corner}>
             <div className={styles.signin}>
-              <Link href="/">
+              <Link href="/auth/signin">
                 <Button variant="contained" color="secondary">
                   Sign In
                 </Button>
