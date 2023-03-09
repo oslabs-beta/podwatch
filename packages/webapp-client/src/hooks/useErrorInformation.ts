@@ -37,8 +37,9 @@ const useErrorInformation = () => {
   React.useEffect(() => {
     const fetchErrorInformation = async () => {
       const response = await fetch('/api/errors');
-      const json = await response.json();
-      setErrorInformation(json);
+      const data = await response.json();
+      console.log('data: ', data);
+      setErrorInformation(JSON.parse(data));
     };
     fetchErrorInformation();
   }, []);
