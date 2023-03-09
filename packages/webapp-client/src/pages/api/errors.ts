@@ -6,7 +6,7 @@ export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  const infoDirectory = path.join(process.cwd(), 'info');
+  const infoDirectory = path.join(process.cwd(), 'public/info');
   const errorInfoContents = await fs.readFile(
     path.join(infoDirectory, 'kerror-desc-info.json'),
     'utf8'
