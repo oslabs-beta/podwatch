@@ -15,8 +15,8 @@ services:
       - mongodb
     environment:
       MONGODB_URI: mongodb://admin:password@mongodb:27017
-    # env_file:
-    #   - .env
+    env_file:
+      - .env
     volumes:
       - .:/app
       - /app/node_modules
