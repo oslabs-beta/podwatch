@@ -1,9 +1,11 @@
 import React from 'react';
 import styles from './CluterManagement.module.scss';
-import Cluster from '../../../../webapp-server/src/models/ClusterModel';
+// import { Cluster } from '/Users/katherinecromer/Desktop/podwatch/packages/webapp-server/src/models/ClusterModel';
 import Card from '@mui/material/Card';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Unstable_Grid2';
+import Button from '@mui/joy/Button';
+import { Cluster } from '/Users/katherinecromer/Desktop/podwatch/packages/webapp-server/src/models/ClusterModel';
 
 interface ClusterProps {
   owner: string;
@@ -40,7 +42,6 @@ const ClusterManagement: React.FC<ClusterProps> = () => {
                 spacing={0}
                 direction="column"
                 alignItems="center"
-                justify="center"
                 style={{ minHeight: '100vh' }}
               >
                 <div key={cluster.id}>
@@ -49,13 +50,14 @@ const ClusterManagement: React.FC<ClusterProps> = () => {
                       <Typography
                         variant="body1"
                         fontSize="large"
-                        className={styles.name}
+                        //className={styles.name}
                       >
                         {cluster.name}
                       </Typography>
                       <Typography className={styles.date}>
                         Last Issued March 7 2023
                       </Typography>
+                      <Button className={styles.status} />
                     </Card>
                   </Grid>
                 </div>

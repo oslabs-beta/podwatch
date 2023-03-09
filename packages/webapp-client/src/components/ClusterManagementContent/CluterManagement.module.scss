@@ -24,6 +24,18 @@
   letter-spacing: 0.5px;
   text-align: center;
 }
+
+.active {
+  position: absolute;
+  left: 0px;
+  right: 0.02px;
+  top: 0px;
+  bottom: 0px;
+
+  /* Green/Base */
+  background: #23c16b;
+  border-radius: 100px;
+}
 // typography {
 //   font-family: Mulish;
 //   font-size: 25px;
