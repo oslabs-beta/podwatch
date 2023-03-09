@@ -65,7 +65,11 @@ const ErrorItem: React.FC<ErrorItemProps> = ({ error, info }) => {
                 return (
                   <div className={styles.link}>
                     <LaunchIcon fontSize="small" />
-                    <a href={reference} rel="noopener noreferrer">
+                    <a
+                      href={reference}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
                       {reference}
                     </a>
                   </div>
