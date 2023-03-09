@@ -66,11 +66,11 @@ const ErrorItem: React.FC<ErrorItemProps> = ({ error, info }) => {
                   <div className={styles.link}>
                     <LaunchIcon fontSize="small" />
                     <a
-                      href={reference}
+                      href={reference.href}
                       rel="noopener noreferrer"
                       target="_blank"
                     >
-                      {reference}
+                      {reference.title}
                     </a>
                   </div>
                 );
