@@ -6,7 +6,7 @@ interface UserContext {
   setUser: (user: User) => void;
 }
 
-const UserContext = React.createContext<UserContext>({
+export const UserContext = React.createContext<UserContext>({
   user: null,
   setUser: () => {},
 });
