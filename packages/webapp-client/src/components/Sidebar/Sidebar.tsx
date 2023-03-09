@@ -74,7 +74,7 @@ const Sidebar: React.FC<SidebarProps> = ({ pageName }) => {
             </ListItem>
           ))}
         </List>
-        <Divider />
+        <Divider sx={{ marginTop: 'auto' }} />
         <List>
           <ListItem disablePadding>
             <ListItemButton>
