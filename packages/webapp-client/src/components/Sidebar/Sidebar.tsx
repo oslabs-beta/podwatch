@@ -1,3 +1,7 @@
+import DataUsageOutlinedIcon from '@mui/icons-material/DataUsageOutlined';
+import HexagonOutlinedIcon from '@mui/icons-material/HexagonOutlined';
+import SettingsIcon from '@mui/icons-material/Settings';
+import TokenIcon from '@mui/icons-material/Token';
 import {
   Divider,
   Drawer,
@@ -6,17 +10,21 @@ import {
   ListItemButton,
   ListItemIcon,
   ListItemText,
-  Toolbar,
 } from '@mui/material';
 import React from 'react';
+import { Cluster } from '../../types/Cluster';
 import styles from './Sidebar.module.scss';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 
 const drawerWidth = 240;
 
-const Sidebar = () => {
-  // return <nav className={styles.container}>Sidebar</nav>;
+interface SidebarProps {
+  pageName: string;
+}
+
+const Sidebar: React.FC<SidebarProps> = ({ pageName }) => {
+  // TODO: Fetch clusters from API
+  const clusters: Cluster[] = [];
+
   return (
     <div className={styles.container}>
       <Drawer
@@ -32,32 +40,50 @@ const Sidebar = () => {
         variant="permanent"
         anchor="left"
       >
-        <Toolbar />
+        <List>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <DataUsageOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary={'Overview'} />
+            </ListItemButton>
+          </ListItem>
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <HexagonOutlinedIcon />
+              </ListItemIcon>
+              <ListItemText primary={pageName} />
+            </ListItemButton>
+          </ListItem>
+        </List>
         <Divider />
         <List>
-          {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-            <ListItem key={text} disablePadding>
+          <ListItem>
+            <ListItemText primary={'Quick View'} />
+          </ListItem>
+          {clusters.map((cluster, index) => (
+            <ListItem key={cluster.id} disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                  <TokenIcon />
                 </ListItemIcon>
-                <ListItemText primary={text} />
+                <ListItemText primary={cluster.name} />
               </ListItemButton>
             </ListItem>
           ))}
         </List>
         <Divider />
         <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem key={text} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                </ListItemIcon>
-                <ListItemText primary={text} />
-              </ListItemButton>
-            </ListItem>
-          ))}
+          <ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+                <SettingsIcon />
+              </ListItemIcon>
+              <ListItemText primary="Settings" />
+            </ListItemButton>
+          </ListItem>
         </List>
       </Drawer>
     </div>

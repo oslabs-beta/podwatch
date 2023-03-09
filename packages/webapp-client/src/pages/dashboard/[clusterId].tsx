@@ -1,8 +1,5 @@
-import { Grid, Stack } from '@mui/material';
 import { GetServerSideProps, NextPage } from 'next';
-import React from 'react';
 import ErrorLog from '../../components/ErrorLog/ErrorLog';
-import Sidebar from '../../components/Sidebar/Sidebar';
 import SidebarContent from '../../components/SidebarContent/SidebarContent';
 import { Cluster } from '../../types/Cluster';
 import { KError } from '../../types/KError';
@@ -14,7 +11,7 @@ interface DashboardPageProps {
 
 const Dashboard: NextPage<DashboardPageProps> = ({ cluster, kErrors }) => {
   return (
-    <SidebarContent>
+    <SidebarContent pageName={cluster.name}>
       <ErrorLog initialErrors={kErrors} clusterId={cluster.id} />
     </SidebarContent>
   );
