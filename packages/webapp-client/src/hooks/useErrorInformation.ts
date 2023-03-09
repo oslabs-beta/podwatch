@@ -16,7 +16,10 @@ export interface KErrorInformation {
   /**
    * A list of references to Kubernetes documentation or other resources that can help resolve the error.
    */
-  references: string[];
+  references: {
+    title: string;
+    href: string;
+  }[];
 }
 
 export interface KErrorInformationMap {
