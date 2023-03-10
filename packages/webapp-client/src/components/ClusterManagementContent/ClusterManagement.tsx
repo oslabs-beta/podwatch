@@ -7,8 +7,10 @@ import CardActions from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import ClusterCard from '../ClusterCard/ClusterCard';
 
-import { Cluster } from '/Users/katherinecromer/Desktop/podwatch/packages/webapp-server/src/models/ClusterModel';
+// import { Cluster } from '/Users/katherinecromer/Desktop/podwatch/packages/webapp-server/src/models/ClusterModel';
+
 // interface ClusterProps {
 //   owner: string;
 // }
@@ -35,81 +37,21 @@ const ClusterManagement: React.FC = () => {
   ];
   return (
     <>
-      <div className="spacer" />
-      <div className="ClusterManagement">
-        <div className={styles.extraBlue}>
-          <div className={styles.header}>
-            <Typography
-              sx={{
-                color: '#eeeeee',
-                textAlign: 'center',
-                fontSize: 18,
-                fontFamily: 'Mulish',
-              }}
-            >
-              All Clusters
-            </Typography>
-            <div className={styles.backgroundBlack}>
-              <div>
-                {clusters.map((cluster: any) => {
-                  return (
-                    <div key={cluster.id}>
-                      <Card
-                        sx={{ minWidth: 275, m: 2 }}
-                        className={styles.card}
-                      >
-                        <CardContent>
-                          <Typography sx={{ fontSize: 22 }}>
-                            {cluster.name}
-                            <Button
-                              size="small"
-                              className={styles.active}
-                              sx={{ color: '#eeeeee' }}
-                            >
-                              ONLINE
-                            </Button>
-                          </Typography>
-
-                          <Typography
-                            sx={{ mb: 1.5, fontSize: 12 }}
-                            className={styles.date}
-                          >
-                            March 9, 2023
-                          </Typography>
-                          <Typography variant="body2">
-                            LAST ISSUE 0 DAYS AGO
-                          </Typography>
-                        </CardContent>
-                      </Card>
-                      {/* <Card sx={{ m: 1 }} className={styles.card}>
-                        <CardContent>
-                          <Typography variant="body1" className={styles.name}>
-                            {cluster.name}
-                          </Typography>
-
-                          <Typography className={styles.date}>
-                            March 9, 2023
-                          </Typography>
-
-                          <Typography className={styles.issueDate}>
-                            LAST ISSUE 0 DAYS AGO
-                          </Typography>
-
-                          <Typography className={styles.active}>
-                            ONLINE
-                          </Typography>
-                        </CardContent>
-                        <CardActions>
-                          <Button size="small">Learn More</Button>
-                        </CardActions>
-                      </Card> */}
-                    </div>
-                  );
-                })}
-              </div>
-            </div>
-          </div>
+      <div className={styles.spacer}>
+        <div>
+          <p>All Clusters</p>
         </div>
+      </div>
+      <div className={styles.ClusterManagement}>
+        {clusters.map((cluster) => {
+          return (
+              <ClusterCard
+                name={cluster.name}
+                owner={cluster.owner}
+                clID={cluster.id}
+              />
+          );
+        })}
       </div>
     </>
   );

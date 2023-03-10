@@ -1,82 +1,47 @@
 @use '@/styles/variables.scss' as *;
 
+.spacer {
+  height: 5em;
+  width: 100vw;
+  background-color: $color-primary;
+  position: fixed;
+  -webkit-clip-path: polygon(
+    0% 100%,
+    32% 100%,
+    32% 71%,
+    65% 71%,
+    71% 100%,
+    100% 100%,
+    100% 0%,
+    0% 0%
+  );
+  clip-path: polygon(
+    0% 100%,
+    5% 100%,
+    20% 55%,
+    80% 55%,
+    95% 100%,
+    100% 100%,
+    100% 0%,
+    0% 0%
+  );
+  p {
+    background-color: $color-secondary;
+    color: $color-white;
+    position: absolute;
+    padding: 1em 0.5em;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 125px;
+    text-align: center;
+    border-radius: 1em 1em 0 0;
+  }
+}
 .ClusterManagement {
-  height: 300vh;
-}
-.extraBlue {
-  position: absolute;
-  width: 390px;
-  height: 188.85px;
-
-  background: #0032b8;
-  box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
-}
-.header {
-  position: relative;
-  width: 131.64px;
-  height: 38px;
-  left: 20px;
-  right: 0.02px;
-
-  /* Primary/Base */
-  background: #6b4eff;
-  border-radius: 8px;
-}
-.backgroundBlack {
-  //position: absolute;
-  width: 345px;
-  height: 287.34px;
+  background-color: green;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 15px;
-
-  /* Ink/Darker
-
-Dark background
-*/
-  background-color: $color-dark;
-  border-radius: 9px;
 }
-.card {
-  height: 106px;
-  width: 313px;
-  left: -717px;
-  top: -468px;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  background-color: #404446;
-}
-
-.name {
-  background-color: #404446;
-}
-
-.issueDate {
-  font-family: Mulish;
-  font-size: 11px;
-  font-weight: 700;
-  line-height: 14px;
-  letter-spacing: 0.5px;
-  text-align: center;
-}
-
-.active {
-  left: 100px;
-  right: 0.02px;
-  top: 0px;
-  bottom: 0px;
-
-  /* Green/Base */
-  background: #23c16b;
-  border-radius: 100px;
-}
-// typography {
-//   font-family: Mulish;
-//   font-size: 25px;
-//   font-weight: 700;
-//   line-height: 31px;
-//   letter-spacing: 0.4000000059604645px;
-//   text-align: left;
-// }
