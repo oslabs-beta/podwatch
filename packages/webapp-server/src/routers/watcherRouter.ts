@@ -1,4 +1,5 @@
 import { Request, Response, Router } from 'express';
+import { kErrorController } from '../controllers/kErrorController';
 
 const watcherRouter = Router();
 
