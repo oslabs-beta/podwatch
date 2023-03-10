@@ -59,7 +59,7 @@ const userSchema = new mongoose.Schema<UserAttrs>(
     },
     password: {
       type: String,
-      select: false,
+      // select: false,
       // Password is required if the user is using the local provider
       required: function (this: UserDocument) {
         return this.provider === 'local';
@@ -73,10 +73,18 @@ const userSchema = new mongoose.Schema<UserAttrs>(
     toJSON: {
       // Include virtual getters as properties (such as _id -> id) when converting to JSON
       virtuals: true,
+      transform: (doc, ret, options) => {
+        delete ret.password;
+        return ret;
+      },
     },
     toObject: {
       // Include virtual getters as properties (such as _id -> id) when converting to objects
       virtuals: true,
+      transform: (doc, ret, options) => {
+        delete ret.password;
+        return ret;
+      },
     },
   }
 );
@@ -93,14 +101,15 @@ userSchema.pre('save', async function save(next) {
   }
 });
 
-userSchema.virtual('password').set(function (password: string) {
-  this.password = password;
-});
+// userSchema.virtual('password').set(function (password: string) {
+//   this.password = password;
+// });
 
 userSchema.methods.comparePassword = async function (
   candidatePassword: string
 ) {
   if (this.provider !== 'local') return false;
+  console.log(`Comparing ${candidatePassword} to hashed ${this.password}.`);
   return await bcrypt.compare(candidatePassword, this.password);
 };
 

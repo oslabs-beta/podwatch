@@ -71,7 +71,7 @@ const clusterSchema = new mongoose.Schema<ClusterAttrs>(
     secret: {
       type: String,
       required: true,
-      select: false,
+      // select: false,
     },
     description: {
       type: String,
@@ -94,10 +94,20 @@ const clusterSchema = new mongoose.Schema<ClusterAttrs>(
   },
   {
     toJSON: {
+      // Include virtual getters as properties (such as _id -> id) when converting to JSON
       virtuals: true,
+      transform: (doc, ret, options) => {
+        delete ret.secret;
+        return ret;
+      },
     },
     toObject: {
+      // Include virtual getters as properties (such as _id -> id) when converting to objects
       virtuals: true,
+      transform: (doc, ret, options) => {
+        delete ret.secret;
+        return ret;
+      },
     },
   }
 );
@@ -129,9 +139,9 @@ clusterSchema.statics.generateSecret = async function () {
   });
 };
 
-clusterSchema.virtual('secret').set(function (this: ClusterDocument, secret) {
-  this.secret = secret;
-});
+// clusterSchema.virtual('secret').set(function (this: ClusterDocument, secret) {
+//   this.secret = secret;
+// });
 
 clusterSchema.statics.build = (attrs: ClusterAttrs) => {
   return new ClusterModel(attrs);
