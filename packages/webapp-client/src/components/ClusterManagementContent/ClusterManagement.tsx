@@ -1,17 +1,19 @@
 import React from 'react';
 import styles from './CluterManagement.module.scss';
-// import { Cluster } from '/Users/katherinecromer/Desktop/podwatch/packages/webapp-server/src/models/ClusterModel';
+//import Cluster from '../../../../webapp-server/src/models/ClusterModel';
 import Card from '@mui/material/Card';
+import { CardHeader } from '@mui/material';
+import CardActions from '@mui/material';
+import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import Grid from '@mui/material/Unstable_Grid2';
-import Button from '@mui/joy/Button';
+import Button from '@mui/material/Button';
+
 import { Cluster } from '/Users/katherinecromer/Desktop/podwatch/packages/webapp-server/src/models/ClusterModel';
+// interface ClusterProps {
+//   owner: string;
+// }
 
-interface ClusterProps {
-  owner: string;
-}
-
-const ClusterManagement: React.FC<ClusterProps> = () => {
+const ClusterManagement: React.FC = () => {
   //const [clusters, setClusters] = React.useState<Cluster[]>;
   //   React.useEffect(() => {
   //     const fetchClusters = async () => {
@@ -27,43 +29,86 @@ const ClusterManagement: React.FC<ClusterProps> = () => {
   //     };
   //   }, []);
   const clusters = [
-    { name: 'Codesmith Project', owner: 'Codesmith', id: '1234' },
-    { name: 'Codesmith Project2', owner: 'Codesmith', id: '1235' },
+    { name: 'Project 1', owner: 'Codesmith', id: '1234' },
+    { name: 'Project2', owner: 'Codesmith', id: '1235' },
+    { name: 'Project3', owner: 'Codesmith', id: '1235' },
   ];
   return (
     <>
       <div className="spacer" />
       <div className="ClusterManagement">
-        <div>
-          {clusters.map((cluster: any) => {
-            return (
-              <Grid
-                container
-                spacing={0}
-                direction="column"
-                alignItems="center"
-                style={{ minHeight: '100vh' }}
-              >
-                <div key={cluster.id}>
-                  <Grid>
-                    <Card sx={{ m: 1 }} className={styles.card}>
-                      <Typography
-                        variant="body1"
-                        fontSize="large"
-                        //className={styles.name}
+        <div className={styles.extraBlue}>
+          <div className={styles.header}>
+            <Typography
+              sx={{
+                color: '#eeeeee',
+                textAlign: 'center',
+                fontSize: 18,
+                fontFamily: 'Mulish',
+              }}
+            >
+              All Clusters
+            </Typography>
+            <div className={styles.backgroundBlack}>
+              <div>
+                {clusters.map((cluster: any) => {
+                  return (
+                    <div key={cluster.id}>
+                      <Card
+                        sx={{ minWidth: 275, m: 2 }}
+                        className={styles.card}
                       >
-                        {cluster.name}
-                      </Typography>
-                      <Typography className={styles.date}>
-                        Last Issued March 7 2023
-                      </Typography>
-                      <Button className={styles.status} />
-                    </Card>
-                  </Grid>
-                </div>
-              </Grid>
-            );
-          })}
+                        <CardContent>
+                          <Typography sx={{ fontSize: 22 }}>
+                            {cluster.name}
+                            <Button
+                              size="small"
+                              className={styles.active}
+                              sx={{ color: '#eeeeee' }}
+                            >
+                              ONLINE
+                            </Button>
+                          </Typography>
+
+                          <Typography
+                            sx={{ mb: 1.5, fontSize: 12 }}
+                            className={styles.date}
+                          >
+                            March 9, 2023
+                          </Typography>
+                          <Typography variant="body2">
+                            LAST ISSUE 0 DAYS AGO
+                          </Typography>
+                        </CardContent>
+                      </Card>
+                      {/* <Card sx={{ m: 1 }} className={styles.card}>
+                        <CardContent>
+                          <Typography variant="body1" className={styles.name}>
+                            {cluster.name}
+                          </Typography>
+
+                          <Typography className={styles.date}>
+                            March 9, 2023
+                          </Typography>
+
+                          <Typography className={styles.issueDate}>
+                            LAST ISSUE 0 DAYS AGO
+                          </Typography>
+
+                          <Typography className={styles.active}>
+                            ONLINE
+                          </Typography>
+                        </CardContent>
+                        <CardActions>
+                          <Button size="small">Learn More</Button>
+                        </CardActions>
+                      </Card> */}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
