@@ -70,10 +70,11 @@
         .teamLink {
           padding: 0.5em 0;
           background-color: rgba(154, 208, 255, 0.147);
-          box-shadow: 10px 10px 23px -3px rgba(0, 0, 0, 0.75);
-          -webkit-box-shadow: 10px 10px 23px -3px rgba(0, 0, 0, 0.75);
-          -moz-box-shadow: 10px 10px 23px -3px rgba(0, 0, 0, 0.75);
+          transition: 200ms;
           border-radius: 1em;
+          box-shadow: 3px 3px 23px -3px rgba(0, 82, 185, 0.75);
+          -webkit-box-shadow: 3px 3px 23px -3px rgba(0, 82, 185, 0.75);
+          -moz-box-shadow: 3px 3px 23px -3px rgba(0, 82, 185, 0.75);
           width: 27vw;
           display: flex;
           flex-direction: column;
@@ -87,6 +88,11 @@
               0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 55px blue,
               0 0 75px blue;
           }
+        }
+        .teamLink:hover {
+          box-shadow: 3px 3px 23px -3px rgba(0, 0, 0, 0.75);
+          -webkit-box-shadow: 3px 3px 23px -3px rgba(0, 0, 0, 0.75);
+          -moz-box-shadow: 3px 3px 23px -3px rgba(0, 0, 0, 0.75);
         }
       }
     }
