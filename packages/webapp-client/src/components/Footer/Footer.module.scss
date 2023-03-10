@@ -1,7 +1,6 @@
 @use '../../styles/variables' as *;
 
 .footer {
-  overflow: hidden;
   background: rgb(2, 50, 183);
   background: rgb(2, 50, 183);
   background: linear-gradient(
@@ -9,13 +8,13 @@
     rgba(2, 50, 183, 1) 0%,
     rgba(0, 25, 144, 1) 81%
   );
-
+  width: 100%;
   display: flex;
   justify-content: space-evenly;
 
   color: $color-white;
 
-  width: 100vw;
+  width: 99vw;
   height: $footer-height;
 
   font-size: 3rem;
@@ -35,6 +34,67 @@
     }
     p {
       font-size: 1rem;
+    }
+  }
+  .desktop {
+    display: none;
+  }
+  @include breakpoint-md {
+    height: 17em;
+    position: relative;
+    .link {
+      display: none;
+    }
+    .desktop {
+      width: 99%;
+      height: 100%;
+      position: absolute;
+      bottom: 0;
+      display: flex;
+      img {
+        border-radius: 50%;
+        width: 25vh;
+      }
+      a {
+        font-size: 0.35em;
+      }
+      p {
+        font-size: 0.35em;
+      }
+      .teamLinks {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: wrap;
+        .teamLink {
+          padding: 0.5em 0;
+          background-color: rgba(154, 208, 255, 0.147);
+          transition: 200ms;
+          border-radius: 1em;
+          box-shadow: 3px 3px 23px -3px rgba(0, 82, 185, 0.75);
+          -webkit-box-shadow: 3px 3px 23px -3px rgba(0, 82, 185, 0.75);
+          -moz-box-shadow: 3px 3px 23px -3px rgba(0, 82, 185, 0.75);
+          width: 27vw;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          a {
+            transition: 200ms;
+          }
+          a:hover {
+            color: #ffffff;
+            text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff,
+              0 0 20px blue, 0 0 30px blue, 0 0 40px blue, 0 0 55px blue,
+              0 0 75px blue;
+          }
+        }
+        .teamLink:hover {
+          box-shadow: 3px 3px 23px -3px rgba(0, 0, 0, 0.75);
+          -webkit-box-shadow: 3px 3px 23px -3px rgba(0, 0, 0, 0.75);
+          -moz-box-shadow: 3px 3px 23px -3px rgba(0, 0, 0, 0.75);
+        }
+      }
     }
   }
 }
