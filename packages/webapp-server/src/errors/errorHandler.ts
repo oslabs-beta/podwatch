@@ -34,6 +34,10 @@ export const errorHandler = (
   res: Response,
   next: NextFunction
 ) => {
+  if (err instanceof Error) {
+    console.error(err);
+  }
+
   const errorObj = { ...defaultError, ...err };
   console.log(errorObj.log);
   if (errorObj.error) {

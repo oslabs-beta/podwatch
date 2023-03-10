@@ -122,6 +122,7 @@ export const generateJwt = (
   res: Response,
   next: NextFunction
 ) => {
+  console.log('Generating JWT...');
   const user = req.user as UserDocument;
 
   if (!user) {

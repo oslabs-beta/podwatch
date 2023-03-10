@@ -1,3 +1,4 @@
+import { authenticateUser } from './../controllers/authController';
 import { Request, Response, Router } from 'express';
 import {
   registerWithEmailAndPw,
@@ -7,6 +8,14 @@ import {
 import passport from 'passport';
 
 const authRouter = Router();
+
+authRouter.get('/user', authenticateUser, (req: Request, res: Response) => {
+  if (req.user) {
+    res.status(200).json(req.user);
+  } else {
+    res.status(401).json({ message: 'User not logged in' });
+  }
+});
 
 authRouter.post(
   '/local/signup',
@@ -35,10 +44,10 @@ authRouter.get(
 
 authRouter.get(
   '/google/callback',
-  passport.authenticate('google'),
+  passport.authenticate('google', { failureRedirect: '/login' }),
   generateJwt,
   (req: Request, res: Response) => {
-    res.redirect('/dashboard/1');
+    res.redirect('http://localhost:3000/dashboard/1');
   }
 );
 

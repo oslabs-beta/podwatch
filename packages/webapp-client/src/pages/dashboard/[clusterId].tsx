@@ -2,6 +2,7 @@ import { GetServerSideProps, NextPage } from 'next';
 import useSWR from 'swr';
 import ErrorLog from '../../components/ErrorLog/ErrorLog';
 import SidebarContent from '../../components/SidebarContent/SidebarContent';
+import useAuthenticate from '../../hooks/useAuthenticate';
 import { Cluster } from '../../types/Cluster';
 import { KError } from '../../types/KError';
 import serverInstance, { serverFetcher } from '../../utils/serverInstance';
@@ -11,6 +12,7 @@ interface DashboardPageProps {
 }
 
 const Dashboard: NextPage<DashboardPageProps> = ({ clusterId }) => {
+  useAuthenticate('/signin');
   const { data: cluster } = useSWR(`/cluster/${clusterId}`, serverFetcher, {
     revalidateIfStale: false,
     revalidateOnFocus: false,

@@ -16,7 +16,7 @@ const ErrorLog: React.FC<ErrorLogProps> = ({ clusterId }) => {
   const { getErrorInformation, loading } = useErrorInformation();
   const { errors } = useErrors(clusterId);
 
-  if (true || loading || !errors) {
+  if (loading || !errors) {
     return (
       <div className={styles.loading}>
         <CircularProgress />

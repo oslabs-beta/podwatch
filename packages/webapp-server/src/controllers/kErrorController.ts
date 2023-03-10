@@ -20,12 +20,14 @@ export const kErrorController = {
     res: Response,
     next: NextFunction
   ) => {
-    const clusterId = req.headers['clusterId'] as string;
-    const clusterSecret = req.headers['clusterSecret'] as string;
+    const clusterId = req.headers['clusterid'] as string;
+    const clusterSecret = req.headers['clustersecret'] as string;
 
     if (!clusterId || !clusterSecret) {
       return next({
-        log: 'Missing clusterId or clusterSecret in request headers',
+        log: `Missing clusterId or clusterSecret in request headers: ${JSON.stringify(
+          req.headers
+        )}`,
         message: 'Missing clusterId or clusterSecret in request headers',
         status: 400,
       });
