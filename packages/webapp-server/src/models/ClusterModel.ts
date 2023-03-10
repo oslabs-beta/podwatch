@@ -119,7 +119,8 @@ clusterSchema.pre('save', async function (done) {
 });
 
 clusterSchema.methods.compareSecret = async function (candidateSecret: string) {
-  return await bcrypt.compare(candidateSecret, this.secret);
+  const authenticated = await bcrypt.compare(candidateSecret, this.secret);
+  return authenticated;
 };
 
 clusterSchema.statics.generateSecret = async function () {

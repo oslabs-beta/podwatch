@@ -146,8 +146,8 @@ export const generateJwt = (
   console.log(`Token generated: ${token}`);
 
   res.cookie('podwatch_jwt', token, {
-    // httpOnly: true,
-    // secure: true,
+    httpOnly: true,
+    secure: true,
     signed: true,
     maxAge: 1000 * 60 * 60 * 24, // 1 day
   });

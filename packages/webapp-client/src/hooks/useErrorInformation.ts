@@ -38,7 +38,6 @@ const useErrorInformation = () => {
     const fetchErrorInformation = async () => {
       const response = await fetch('/api/errors');
       const data = await response.json();
-      console.log('data: ', data);
       setErrorInformation(JSON.parse(data));
     };
     fetchErrorInformation();
@@ -50,9 +49,8 @@ const useErrorInformation = () => {
         return null;
       }
       if (!(reason in errorInformation)) {
-        throw new Error(
-          `Error reason ${reason} not found in error information.`
-        );
+        console.log(`Error reason ${reason} not found in error information.`);
+        return null;
       }
       return errorInformation[reason];
     },

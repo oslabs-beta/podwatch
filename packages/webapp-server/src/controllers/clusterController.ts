@@ -26,6 +26,7 @@ export const createCluster = async (
     const newCluster = await ClusterModel.build(clusterInfo);
     await newCluster.save();
     res.locals.newCluster = newCluster;
+    res.locals.newSecret = secret;
     return next();
   } catch (err) {
     return next(err);

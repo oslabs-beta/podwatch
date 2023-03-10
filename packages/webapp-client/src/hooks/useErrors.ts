@@ -1,10 +1,10 @@
 import useSWR from 'swr';
-import { serverFetcher } from '../utils/serverInstance';
+import serverInstance, { serverFetcher } from '../utils/serverInstance';
 import { KError } from '../types/KError';
 
 const useErrors = (clusterId: string) => {
   const { data, error, isLoading } = useSWR<KError[]>(
-    `/errors`,
+    `/kerrors/${clusterId}`,
     serverFetcher,
     {
       refreshInterval: 5000,

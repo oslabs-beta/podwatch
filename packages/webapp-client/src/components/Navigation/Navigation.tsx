@@ -35,7 +35,7 @@ const Navigation: React.FC<NavigationProps> = ({ items }) => {
       {items
         .filter((item) => item.visible !== 'mobile')
         .map((item) => (
-          <Link href={item.href} className={styles.link}>
+          <Link key={item.label} href={item.href} className={styles.link}>
             {item.label}
           </Link>
         ))}

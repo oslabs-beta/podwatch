@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import cookieParser from 'cookie-parser';
 import { setupPassport } from './controllers/passportProvider';
 import session from 'express-session';
+import cors from 'cors';
 
 import watcherRouter from './routers/watcherRouter';
 import kErrorRouter from './routers/kErrorRouter';
@@ -19,6 +20,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
+app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
 app.use(
   session({
     secret: process.env.COOKIE_SECRET || '',

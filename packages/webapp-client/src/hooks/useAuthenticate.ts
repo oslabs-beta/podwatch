@@ -18,17 +18,19 @@ const useAuthenticate = (redirect?: string) => {
       return;
     }
     const getUser = async () => {
-      const { data, status } = await serverInstance.get('/auth/user');
-      if (status === 200) {
+      try {
+        const { data, status } = await serverInstance.get('/auth/user');
         setUser(data);
         return;
-      }
-      if (redirect) {
-        router.push('/signin');
+      } catch (error) {
+        console.error(error);
+        if (redirect) {
+          router.push('/signin');
+        }
       }
     };
     getUser();
-  }, [user]);
+  }, []);
 
   return { user, setUser };
 };

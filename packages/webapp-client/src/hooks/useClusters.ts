@@ -8,9 +8,16 @@ const useClusters = () => {
 
   React.useEffect(() => {
     const fetchClusters = async () => {
-      const { data } = await serverInstance.get<Cluster[]>('/cluster');
-      setClusters(data);
-      setLoading(false);
+      try {
+        const { data } = await serverInstance.get<Cluster[]>('/cluster');
+        if (data) {
+          setClusters(data);
+        }
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(false);
+      }
     };
     fetchClusters();
   }, []);

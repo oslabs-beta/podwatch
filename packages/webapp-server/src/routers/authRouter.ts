@@ -11,6 +11,7 @@ const authRouter = Router();
 
 authRouter.get('/user', authenticateUser, (req: Request, res: Response) => {
   if (req.user) {
+    console.log('Returning user');
     res.status(200).json(req.user);
   } else {
     res.status(401).json({ message: 'User not logged in' });
@@ -22,7 +23,7 @@ authRouter.post(
   registerWithEmailAndPw,
   generateJwt,
   (req: Request, res: Response) => {
-    res.status(200).json(req.user);
+    res.redirect('http://localhost:3000/cluster');
   }
 );
 
@@ -31,7 +32,7 @@ authRouter.post(
   loginWithEmailAndPw,
   generateJwt,
   (req: Request, res: Response) => {
-    res.status(200).json(req.user);
+    res.redirect('http://localhost:3000/cluster');
   }
 );
 
@@ -47,7 +48,7 @@ authRouter.get(
   passport.authenticate('google', { failureRedirect: '/login' }),
   generateJwt,
   (req: Request, res: Response) => {
-    res.redirect('http://localhost:3000/dashboard/1');
+    res.redirect('http://localhost:3000/cluster');
   }
 );
 

@@ -33,7 +33,7 @@ export const kErrorController = {
       });
     }
 
-    const cluster = await ClusterModel.findOne({ clusterId });
+    const cluster = await ClusterModel.findById(clusterId);
     if (!cluster) {
       return next({
         log: 'Cluster not found',
@@ -45,7 +45,7 @@ export const kErrorController = {
     const authenticated = await cluster.compareSecret(clusterSecret);
     if (!authenticated) {
       return next({
-        log: 'Cluster secret does not match',
+        log: `Cluster secret does not match: ${authenticated}`,
         message: 'Cluster secret does not match',
         status: 401,
       });
@@ -54,23 +54,25 @@ export const kErrorController = {
     res.locals.cluster = cluster;
     return next();
   },
-  getClusterFromBody: async (
+  getClusterFromParams: async (
     req: Request,
     res: Response,
     next: NextFunction
   ) => {
-    const { clusterId } = req.body;
+    const { clusterId } = req.params;
     const user = req.user as UserDocument;
 
     if (!clusterId) {
       return next({
-        log: 'Missing clusterId in request body',
-        message: 'Missing clusterId in request body',
+        log:
+          'Missing clusterId in request params. Got: ' +
+          JSON.stringify(req.params),
+        message: 'Missing clusterId in request params',
         status: 400,
       });
     }
     try {
-      const cluster = await ClusterModel.findById(clusterId);
+      const cluster = await ClusterModel.findById(clusterId).populate('owner');
       if (!cluster) {
         return next({
           log: 'Cluster not found',
@@ -79,8 +81,11 @@ export const kErrorController = {
         });
       }
 
+      console.log('User id: ', user.id);
+      console.log('Cluster owner id: ', cluster.owner.id);
+
       if (
-        cluster.owner.id !== user.id ||
+        cluster.owner.id !== user.id &&
         !cluster.members.some((member) => member.id === user.id)
       ) {
         return next({
@@ -138,6 +143,7 @@ export const kErrorController = {
 
     try {
       const kErrors = await KErrorModel.find({ cluster: cluster.id }, null, {
+        sort: { lastTimestamp: -1 },
         limit,
         skip,
       });

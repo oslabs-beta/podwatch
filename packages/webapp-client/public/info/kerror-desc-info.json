@@ -19,6 +19,21 @@
       }
     ]
   },
+  "BackOff": {
+    "name": "Container Backoff",
+    "events": ["BackOff"],
+    "description": "The container is restarting too frequently and is being throttled.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Container Restart Policy)",
+        "href": "https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy"
+      },
+      {
+        "title": "Kubernetes Documentation (Container Lifecycle)",
+        "href": "https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/"
+      }
+    ]
+  },
   "FailedKillPod": {
     "name": "Pod Kill Failure",
     "events": ["FailedToKillPod"],
