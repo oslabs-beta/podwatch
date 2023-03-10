@@ -7,7 +7,6 @@ const kErrorRouter = Router();
 kErrorRouter.get(
   '/',
   authenticateUser,
-  kErrorController.getCluster,
   kErrorController.getMany,
   (req, res) => {
     return res.status(200).json(res.locals.kErrors);
@@ -17,7 +16,6 @@ kErrorRouter.get(
 kErrorRouter.get(
   '/:id',
   authenticateUser,
-  kErrorController.getCluster,
   kErrorController.getOne,
   (req, res) => {
     res.status(200).json(res.locals.kError);

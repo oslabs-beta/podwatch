@@ -1,18 +1,29 @@
 import { GetServerSideProps, NextPage } from 'next';
+import useSWR from 'swr';
 import ErrorLog from '../../components/ErrorLog/ErrorLog';
 import SidebarContent from '../../components/SidebarContent/SidebarContent';
 import { Cluster } from '../../types/Cluster';
 import { KError } from '../../types/KError';
+import serverInstance, { serverFetcher } from '../../utils/serverInstance';
 
 interface DashboardPageProps {
-  cluster: Cluster;
-  kErrors: KError[];
+  clusterId: string;
 }
 
-const Dashboard: NextPage<DashboardPageProps> = ({ cluster, kErrors }) => {
+const Dashboard: NextPage<DashboardPageProps> = ({ clusterId }) => {
+  const { data: cluster } = useSWR(`/cluster/${clusterId}`, serverFetcher, {
+    revalidateIfStale: false,
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
+
+  if (!cluster) {
+    return null;
+  }
+
   return (
     <SidebarContent pageName={cluster.name}>
-      <ErrorLog initialErrors={kErrors} clusterId={cluster.id} />
+      <ErrorLog clusterId={clusterId} />
     </SidebarContent>
   );
 };
@@ -28,25 +39,9 @@ export const getServerSideProps: GetServerSideProps<
 
   const clusterId = params.clusterId as string;
 
-  //TODO: Prefetch cluster data to serve as props
-  const cluster: Cluster = {
-    id: clusterId,
-    name: 'Cluster 1',
-    description: 'This is a cluster',
-    owner: {
-      id: '1',
-      email: 'a@a.a',
-      provider: 'local',
-    },
-    members: [],
-  };
-
-  const kErrors: KError[] = [];
-
   return {
     props: {
-      cluster,
-      kErrors,
+      clusterId,
     },
   };
 };

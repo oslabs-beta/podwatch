@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { ClusterModel } from '../models/ClusterModel';
-import { NativeKEvent, KErrorModel } from '../models/KErrorModel';
+import { KErrorModel, NativeKEvent } from '../models/KErrorModel';
+import { UserDocument } from '../models/UserModel';
 
 export interface KErr {
   name: string;
@@ -14,7 +15,11 @@ export interface KErr {
 }
 
 export const kErrorController = {
-  getCluster: async (req: Request, res: Response, next: NextFunction) => {
+  getClusterFromHeaders: async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     const clusterId = req.headers['clusterId'] as string;
     const clusterSecret = req.headers['clusterSecret'] as string;
 
@@ -46,6 +51,53 @@ export const kErrorController = {
 
     res.locals.cluster = cluster;
     return next();
+  },
+  getClusterFromBody: async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { clusterId } = req.body;
+    const user = req.user as UserDocument;
+
+    if (!clusterId) {
+      return next({
+        log: 'Missing clusterId in request body',
+        message: 'Missing clusterId in request body',
+        status: 400,
+      });
+    }
+    try {
+      const cluster = await ClusterModel.findById(clusterId);
+      if (!cluster) {
+        return next({
+          log: 'Cluster not found',
+          message: 'Cluster not found',
+          status: 404,
+        });
+      }
+
+      if (
+        cluster.owner.id !== user.id ||
+        !cluster.members.some((member) => member.id === user.id)
+      ) {
+        return next({
+          log: 'User does not have access to cluster',
+          message: 'Access denied',
+          status: 403,
+        });
+      }
+
+      res.locals.cluster = cluster;
+      return next();
+    } catch (error) {
+      return next({
+        log: 'Error getting cluster from body',
+        message: 'Error getting cluster from body',
+        status: 500,
+        error,
+      });
+    }
   },
   saveAll: async (req: Request, res: Response, next: NextFunction) => {
     const kErrors: KErr[] = req.body;
@@ -83,7 +135,7 @@ export const kErrorController = {
     const skip = Number(req.query.skip) || 0;
 
     try {
-      const kErrors = await KErrorModel.find({ cluster }, null, {
+      const kErrors = await KErrorModel.find({ cluster: cluster.id }, null, {
         limit,
         skip,
       });
@@ -101,11 +153,10 @@ export const kErrorController = {
     }
   },
   getOne: async (req: Request, res: Response, next: NextFunction) => {
-    const cluster = res.locals.cluster;
     const { id } = req.params;
 
     try {
-      const kError = await KErrorModel.findOne({ _id: id, cluster });
+      const kError = await KErrorModel.findById(id);
 
       if (!kError) {
         return next({

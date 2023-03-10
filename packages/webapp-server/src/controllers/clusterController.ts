@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { ClusterAttrs, ClusterModel } from '../models/ClusterModel';
-import { User, UserModel } from '../models/UserModel';
+import { User, UserDocument, UserModel } from '../models/UserModel';
 
 //create a new cluster associated with use
 export const createCluster = async (
@@ -11,7 +11,7 @@ export const createCluster = async (
   try {
     const { name, description } = req.body;
     if (!name) throw new Error('Must provide name');
-    const user = req.user as User;
+    const user = req.user as UserDocument;
     if (!user)
       throw new Error('User must be logged in to create a new cluster');
 
