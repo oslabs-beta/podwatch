@@ -12,8 +12,6 @@ export const createCluster = async (
     const { name, description } = req.body;
     if (!name) throw new Error('Must provide name');
     const user = req.user as UserDocument;
-    if (!user)
-      throw new Error('User must be logged in to create a new cluster');
 
     const secret = await ClusterModel.generateSecret();
     const clusterInfo: ClusterAttrs = {
@@ -23,7 +21,7 @@ export const createCluster = async (
       secret,
       members: [],
     };
-    const newCluster = await ClusterModel.build(clusterInfo);
+    const newCluster = ClusterModel.build(clusterInfo);
     await newCluster.save();
     res.locals.newCluster = newCluster;
     res.locals.newSecret = secret;

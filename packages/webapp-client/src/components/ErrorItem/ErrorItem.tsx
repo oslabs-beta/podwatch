@@ -69,7 +69,7 @@ const ErrorItem: React.FC<ErrorItemProps> = ({ error, info }) => {
               <h4>Read More</h4>
               {info.references.map((reference) => {
                 return (
-                  <div className={styles.link}>
+                  <div key={reference.title} className={styles.link}>
                     <LaunchIcon fontSize="small" />
                     <a
                       href={reference.href}

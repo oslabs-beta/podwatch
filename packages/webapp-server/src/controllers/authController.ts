@@ -122,7 +122,6 @@ export const generateJwt = (
   res: Response,
   next: NextFunction
 ) => {
-  console.log('Generating JWT...');
   const user = req.user as UserDocument;
 
   if (!user) {
@@ -142,8 +141,6 @@ export const generateJwt = (
     },
     process.env.JWT_TOKEN || 'abc'
   );
-
-  console.log(`Token generated: ${token}`);
 
   res.cookie('podwatch_jwt', token, {
     httpOnly: true,

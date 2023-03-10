@@ -81,9 +81,6 @@ export const kErrorController = {
         });
       }
 
-      console.log('User id: ', user.id);
-      console.log('Cluster owner id: ', cluster.owner.id);
-
       if (
         cluster.owner.id !== user.id &&
         !cluster.members.some((member) => member.id === user.id)

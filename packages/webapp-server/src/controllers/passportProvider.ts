@@ -88,13 +88,8 @@ export const setupPassport = (app: Express) => {
   // );
 
   const cookieExtractor = function (req: Request) {
-    console.log('Extract JWT from cookies');
     if (req && req.signedCookies) {
-      console.log('signed cookies:', JSON.stringify(req.signedCookies));
-      console.log('cookies:', JSON.stringify(req.cookies));
-
       const token = req.signedCookies['podwatch_jwt'];
-      console.log('Found token:', token);
       return token;
     }
     return null;
@@ -107,12 +102,9 @@ export const setupPassport = (app: Express) => {
         secretOrKey: process.env.JWT_TOKEN || 'abc',
       },
       async function (jwt_payload, done) {
-        console.log('Validating JWT...');
-
         let user: UserDocument | null;
         try {
           user = await UserModel.findOne({ _id: jwt_payload.sub });
-          console.log('Found user in database');
         } catch (error: any) {
           console.log('Error occurred searching for user in db');
           return done(error, false);
