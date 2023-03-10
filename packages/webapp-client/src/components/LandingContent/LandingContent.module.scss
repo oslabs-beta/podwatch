@@ -100,8 +100,8 @@
       font-size: 2rem;
     }
     @include breakpoint-md {
-      width: 45vh;
-      height: 30vh;
+      width: 55vh;
+      height: 40vh;
     }
     .schools {
       display: flex;
@@ -115,8 +115,8 @@
       width: 20vh;
       height: 20vh;
       @include breakpoint-md {
-        width: 10vh;
-        height: 10vh;
+        width: 20vh;
+        height: 20vh;
         transition: 500ms;
         cursor: pointer;
       }

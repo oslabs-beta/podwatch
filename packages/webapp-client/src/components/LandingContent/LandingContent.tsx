@@ -10,7 +10,7 @@ import OverlapSpacer from '../OverlapSpacer/OverlapSpacer';
 
 const LandingContent: React.FC = () => {
   return (
-    <div className={styles.Landing}>
+    <div className={styles.Landing}  >
       <OverlapSpacer className={styles.LandingContent}>
         <div className={styles.text}>
           <h1 className={styles.title}>PodWatch</h1>
