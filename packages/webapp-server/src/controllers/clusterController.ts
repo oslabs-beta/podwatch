@@ -39,15 +39,19 @@ export const getAllClusters = async (
   next: NextFunction
 ) => {
   try {
-    const user = req.user as User;
-    if (!user) throw new Error('Must be logged in to get clusters');
+    const user = req.user as UserDocument;
+
     const clusters = await ClusterModel.find({
-      owner: user,
-    }).exec();
+      owner: user.id,
+    });
     res.locals.allClusters = clusters;
     return next();
   } catch (err) {
-    return next(err);
+    return next({
+      status: 400,
+      message: 'Error getting all clusters',
+      log: err,
+    });
   }
 };
 
@@ -65,9 +69,7 @@ export const getCluster = async (
     }
 
     const user = req.user as User;
-    if (!user) {
-      throw new Error('Please log in to get cluster info');
-    }
+
     const cluster: any = await ClusterModel.findById(id);
     if (!cluster) throw new Error('No cluster matching that id');
     const searchUser: any = await UserModel.findById(cluster.owner.valueOf());
@@ -76,7 +78,11 @@ export const getCluster = async (
     res.locals.getCluster = cluster;
     return next();
   } catch (err) {
-    return next(err);
+    return next({
+      status: 400,
+      message: 'Error getting cluster',
+      log: err,
+    });
   }
 };
 
