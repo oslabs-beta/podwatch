@@ -1,7 +1,6 @@
 @use '../../styles/variables' as *;
 
 .footer {
-  overflow: hidden;
   background: rgb(2, 50, 183);
   background: rgb(2, 50, 183);
   background: linear-gradient(
@@ -9,13 +8,13 @@
     rgba(2, 50, 183, 1) 0%,
     rgba(0, 25, 144, 1) 81%
   );
-
+  width: 100%;
   display: flex;
   justify-content: space-evenly;
 
   color: $color-white;
 
-  width: 100vw;
+  width: 99vw;
   height: $footer-height;
 
   font-size: 3rem;
@@ -35,6 +34,40 @@
     }
     p {
       font-size: 1rem;
+    }
+  }
+  .desktop {
+    display: none;
+  }
+  @include breakpoint-md {
+    height: 17em;
+    position: relative;
+    .link {
+      display: none;
+    }
+    .desktop {
+      width: 99%;
+      height: 100%;
+      position: absolute;
+      bottom: 0;
+      display: flex;
+      img {
+        border-radius: 50%;
+        width: 25vh;
+      }
+      a {
+        font-size: 0.35em;
+      }
+      p {
+        font-size: 0.35em;
+      }
+      .teamLinks {
+        width: 100%;
+        display: flex;
+        justify-content: space-evenly;
+        align-items: center;
+        flex-wrap: wrap;
+      }
     }
   }
 }
