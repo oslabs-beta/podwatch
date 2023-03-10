@@ -1,0 +1,14 @@
+@use '../../styles/variables.scss' as *;
+.container {
+  display: none;
+
+  @include breakpoint-md {
+    width: 240px;
+    height: calc(100vh - $header-height - $footer-height);
+    // background-color: $color-charcoal;
+    // display: flex;
+    // flex-direction: column;
+    position: relative;
+    display: inline-block;
+  }
+}

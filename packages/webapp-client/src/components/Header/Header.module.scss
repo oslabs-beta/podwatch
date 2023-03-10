@@ -53,7 +53,7 @@
 }
 
 .toggle {
-  margin-left: 2rem;
+  display: none;
   @include breakpoint-md {
     margin-left: 0rem;
     display: block;

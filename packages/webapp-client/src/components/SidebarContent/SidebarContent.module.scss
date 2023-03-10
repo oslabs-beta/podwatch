@@ -1,0 +1,21 @@
+@use '../../styles/variables.scss' as *;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+
+  @include breakpoint-md {
+    flex-direction: row;
+    width: 100vw;
+    height: calc(100vh - $header-height - $footer-height);
+  }
+}
+
+.content {
+  width: 100%;
+  @include breakpoint-md {
+    // width: calc(100vw - 240px);
+    padding: 2rem;
+  }
+}
