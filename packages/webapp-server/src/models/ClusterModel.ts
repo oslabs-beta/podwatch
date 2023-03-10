@@ -86,9 +86,6 @@ const clusterSchema = new mongoose.Schema<ClusterAttrs>(
         default: [],
       },
     ],
-    id: {
-      type: String,
-    },
   },
   {
     toJSON: {
