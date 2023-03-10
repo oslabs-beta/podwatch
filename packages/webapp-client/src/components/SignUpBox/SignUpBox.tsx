@@ -1,17 +1,15 @@
 import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
 import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import styles from './SignUpBox.module.scss';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import GoogleIcon from '@mui/icons-material/Google';
+import { IconButton } from '@mui/material';
 
 function Copyright(props: any) {
   return (
@@ -26,8 +24,6 @@ function Copyright(props: any) {
   );
 }
 
-const theme = createTheme();
-
 interface SignUpProps {};
 
 const SignUpBox: React.FC<React.PropsWithChildren<SignUpProps>> = () => {
@@ -41,15 +37,9 @@ const SignUpBox: React.FC<React.PropsWithChildren<SignUpProps>> = () => {
   };
 
   return (
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
+      <Container className={styles.main}>
         <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
+          className={styles.innerBox}
         >
           {/* <Typography component="h1" variant="h5">
             Sign up
@@ -58,6 +48,7 @@ const SignUpBox: React.FC<React.PropsWithChildren<SignUpProps>> = () => {
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
+                className={styles.input}
                   autoComplete="given-name"
                   name="firstName"
                   required
@@ -69,6 +60,7 @@ const SignUpBox: React.FC<React.PropsWithChildren<SignUpProps>> = () => {
               </Grid>
               <Grid item xs={12} sm={6}>
                 <TextField
+                className={styles.input}
                   required
                   fullWidth
                   id="lastName"
@@ -79,6 +71,7 @@ const SignUpBox: React.FC<React.PropsWithChildren<SignUpProps>> = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                className={styles.input}
                   required
                   fullWidth
                   id="email"
@@ -89,6 +82,7 @@ const SignUpBox: React.FC<React.PropsWithChildren<SignUpProps>> = () => {
               </Grid>
               <Grid item xs={12}>
                 <TextField
+                className={styles.input}
                   required
                   fullWidth
                   name="password"
@@ -100,6 +94,7 @@ const SignUpBox: React.FC<React.PropsWithChildren<SignUpProps>> = () => {
               </Grid>
             </Grid>
             <Button
+            className={styles.button}
               type="submit"
               fullWidth
               variant="contained"
@@ -109,10 +104,14 @@ const SignUpBox: React.FC<React.PropsWithChildren<SignUpProps>> = () => {
             </Button>
             <Grid container justifyContent="flex-end">
               <Grid item>
-                <Link href="/auth/signin" variant="body2">
+                <Link href="/auth/signin" variant="body2" color='secondary'>
                   Already have an account? Sign in
                 </Link>
               </Grid>
+            </Grid>
+            <Grid className={styles.oauthIcons}>
+                <IconButton><GitHubIcon className={styles.oauthItem}/></IconButton>
+                <IconButton><GoogleIcon className={styles.oauthItem}/></IconButton>
             </Grid>
           </Box>
         </Box>
