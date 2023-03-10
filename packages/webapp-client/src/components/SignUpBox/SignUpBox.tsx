@@ -96,6 +96,7 @@ const SignUpBox: React.FC<React.PropsWithChildren<SignUpProps>> = () => {
             <Button
             className={styles.button}
               type="submit"
+              color='secondary'
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}

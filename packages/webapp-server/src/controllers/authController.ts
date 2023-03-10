@@ -123,6 +123,8 @@ export const generateJwt = (
   next: NextFunction
 ) => {
   const user = req.user as UserDocument;
+  console.log('Inside of generate jwt middleware')
+  console.log(user)
 
   if (!user) {
     return next({

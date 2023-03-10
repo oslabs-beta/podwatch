@@ -10,6 +10,7 @@ import styles from './SignInBox.module.scss';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import GoogleIcon from '@mui/icons-material/Google';
 import { IconButton } from '@mui/material';
+import { useRouter } from 'next/router';
 
 function Copyright(props: any) {
   return (
@@ -28,13 +29,28 @@ function Copyright(props: any) {
 interface SignInProps {};
 
 const SignInBox: React.FC<React.PropsWithChildren<SignInProps>> = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const router = useRouter();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+    const body = JSON.stringify({
+      email,
+      password,
     });
+    const response = await fetch('/auth/local/signin', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body,
+    });
+
+    if (response.status === 200) {
+
+      router.push('/');
+    }
   };
 
   return (
@@ -42,7 +58,7 @@ const SignInBox: React.FC<React.PropsWithChildren<SignInProps>> = () => {
         <Box className={styles.innerBox}>
           <Box component="form" className ={styles.form} onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField
-            className={styles.input}
+              className={styles.input}
               margin="normal"
               required
               fullWidth
@@ -51,10 +67,12 @@ const SignInBox: React.FC<React.PropsWithChildren<SignInProps>> = () => {
               name="email"
               color='secondary'
               autoComplete="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               autoFocus
             />
             <TextField
-            className={styles.input}
+              className={styles.input}
               margin="normal"
               required
               fullWidth
@@ -64,6 +82,8 @@ const SignInBox: React.FC<React.PropsWithChildren<SignInProps>> = () => {
               id="password"
               color='secondary'
               autoComplete="current-password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <Button
             className={styles.button}
@@ -88,8 +108,8 @@ const SignInBox: React.FC<React.PropsWithChildren<SignInProps>> = () => {
               </Grid>
             </Grid>
             <Grid className={styles.oauthIcons}>
-                <IconButton><GitHubIcon className={styles.oauthItem}/></IconButton>
-                <IconButton><GoogleIcon className={styles.oauthItem}/></IconButton>
+                <IconButton ><GitHubIcon className={styles.oauthItem}/></IconButton>
+                <IconButton href="http://localhost:3001/auth/google"><GoogleIcon className={styles.oauthItem}/></IconButton>
             </Grid>
             
           </Box>

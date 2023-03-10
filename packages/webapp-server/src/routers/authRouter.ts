@@ -35,10 +35,13 @@ authRouter.get(
 
 authRouter.get(
   '/google/callback',
-  passport.authenticate('google'),
+  passport.authenticate('google', {
+    failureRedirect: 'http://localhost:3000/auth/signin',
+  }),
   generateJwt,
   (req: Request, res: Response) => {
-    res.redirect('/dashboard/1');
+    console.log('here is where it fails: after generating jwt')
+    res.redirect('http://localhost:3000/dashboard/1');
   }
 );
 

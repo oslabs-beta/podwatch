@@ -7,7 +7,6 @@ import {
   Profile as GoogleProfile,
 } from 'passport-google-oauth20';
 import { Strategy as JwtStrategy, ExtractJwt } from 'passport-jwt';
-import jwt from 'jsonwebtoken';
 
 import { UserModel, UserDocument } from '../models/UserModel';
 
