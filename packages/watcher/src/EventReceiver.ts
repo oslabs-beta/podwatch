@@ -97,7 +97,7 @@ export class KEventReceiver {
   private ejectStream() {
     if (this.stream) {
       this.stream.unpipe(this.jsonStreamParser);
-      this.jsonStreamParser.end();
+      // this.jsonStreamParser.end();
     }
   }
 
