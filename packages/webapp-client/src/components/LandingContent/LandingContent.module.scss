@@ -1,5 +1,27 @@
 @use '@/styles/variables.scss' as *;
-
+.Landing {
+  @include breakpoint-md {
+    background: linear-gradient(130deg, #ad90c1 0%, rgb(3, 0, 84) 100%),
+      linear-gradient(130deg, #09007b 0%, rgba(15, 0, 66, 0) 30%),
+      linear-gradient(129.96deg, rgb(255, 47, 47) 10.43%, rgb(0, 4, 96) 92.78%),
+      radial-gradient(
+        100% 246.94% at 100% 0%,
+        rgb(255, 255, 255) 0%,
+        rgba(37, 0, 66, 0.8) 100%
+      ),
+      linear-gradient(121.18deg, rgb(11, 0, 134) 0.45%, rgb(27, 0, 62) 100%),
+      linear-gradient(154.03deg, rgb(206, 0, 0) 0%, rgb(255, 0, 61) 74.04%),
+      linear-gradient(341.1deg, rgb(178, 91, 186) 7.52%, rgb(16, 0, 119) 77.98%),
+      linear-gradient(222.34deg, rgb(169, 0, 0) 12.99%, rgb(0, 255, 224) 87.21%),
+      linear-gradient(
+        150.76deg,
+        rgb(183, 213, 0) 15.35%,
+        rgb(34, 0, 170) 89.57%
+      );
+    background-blend-mode: overlay, normal, overlay, color-burn, screen, overlay,
+      difference, difference, normal;
+  }
+}
 .LandingContent {
   background-color: $color-dark;
   border-radius: 1em;
@@ -14,11 +36,12 @@
   color: $color-white;
   margin-bottom: 8rem;
   @include breakpoint-md {
+    background-color: transparent;
     margin: 0;
     justify-content: space-evenly;
     border-radius: 0;
     width: 50vw;
-    height: calc(95vh - $header-height);
+    height: 90vh;
     transform: translateY(0);
   }
   .text {
@@ -49,11 +72,11 @@
     height: 40vh;
     margin-bottom: 8em;
     @include breakpoint-md {
-      height: 50vh;
-      width: 50vh;
+      width: 60vh;
+      height: 60vh;
       position: absolute;
-      right: -35vw;
-      top: 7vh;
+      right: -40vw;
+      top: 15vh;
     }
   }
 
