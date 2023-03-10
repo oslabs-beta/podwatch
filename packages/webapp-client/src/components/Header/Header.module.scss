@@ -37,12 +37,13 @@
   min-width: 0em;
   @include breakpoint-md {
     display: block;
-    min-width: 8rem;
+    // min-width: 8rem;
     padding-inline: 1rem;
   }
 }
 
 .divider {
+  display: none;
   @include breakpoint-md {
     display: block;
     width: 1px;
@@ -53,6 +54,7 @@
 }
 
 .toggle {
+  display: none;
   margin-left: 2rem;
   @include breakpoint-md {
     margin-left: 0rem;

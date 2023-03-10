@@ -31,33 +31,15 @@ const Navigation: React.FC<NavigationProps> = ({ items }) => {
   };
 
   return (
-    <>
-      {/* <div className={styles.mobile}>
-        <IconButton onClick={handleClick} sx={{ color: 'white' }}>
-          {open ? <CloseIcon /> : <MenuIcon />}
-        </IconButton>
-        <Menu anchorEl={anchorEl} open={open} onClose={handleClose}>
-          {items
-            .filter((item) => item.visible !== 'desktop')
-            .map((item) => (
-              <Link href={item.href}>
-                <MenuItem key={item.label} onClick={handleClose}>
-                  {item.label}
-                </MenuItem>
-              </Link>
-            ))}
-        </Menu>
-      </div> */}
-      <div className={styles.desktop}>
-        {items
-          .filter((item) => item.visible !== 'mobile')
-          .map((item) => (
-            <Link href={item.href} className={styles.link}>
-              {item.label}
-            </Link>
-          ))}
-      </div>
-    </>
+    <div className={styles.desktop}>
+      {items
+        .filter((item) => item.visible !== 'mobile')
+        .map((item) => (
+          <Link href={item.href} className={styles.link}>
+            {item.label}
+          </Link>
+        ))}
+    </div>
   );
 };
 
