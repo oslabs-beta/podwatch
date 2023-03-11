@@ -1,7 +1,7 @@
 import { NativeKEvent } from './utils/types';
 import { AxiosInstance } from 'axios';
 import { JsonStreamParser } from './JsonStreamParser';
-import eventDispatcher from './event-dispatcher';
+import { EventDispatcher } from './EventDispatcher';
 
 export class KEventReceiver {
   private resourceVersion: string | null = null;
@@ -11,7 +11,7 @@ export class KEventReceiver {
   constructor(
     private readonly kubernetesInstance: AxiosInstance,
     private readonly jsonStreamParser: JsonStreamParser,
-    private readonly dispatch: ReturnType<typeof eventDispatcher>
+    private readonly eventDispatcher: EventDispatcher
   ) {}
 
   public async start() {
@@ -68,8 +68,7 @@ export class KEventReceiver {
         }
 
         this.resourceVersion = event.object.metadata.resourceVersion;
-
-        this.dispatch(event);
+        this.eventDispatcher.dispatch(event);
       });
 
       this.jsonStreamParser.on('error', (error: any) => {

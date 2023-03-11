@@ -1,0 +1,1 @@
+export const MAX_DISPATCH_QUEUE_SIZE = 20;
