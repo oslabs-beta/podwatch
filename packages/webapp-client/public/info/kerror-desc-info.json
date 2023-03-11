@@ -320,5 +320,27 @@
         "href": "https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/"
       }
     ]
+  },
+  "FailedToCreateEndpoint": {
+    "name": "Endpoint Creation Error",
+    "events": ["FailedToCreateEndpoint"],
+    "description": "This error occurs when Kubernetes fails to create an endpoint for a service. This could be due to issues with the container runtime or the node's networking setup, such as lack of permissions or conflicting network settings.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Services)",
+        "href": "https://kubernetes.io/docs/concepts/services-networking/service/"
+      }
+    ]
+  },
+  "FailedToUpdateEndpoint": {
+    "name": "Endpoint Update Error",
+    "events": ["FailedToUpdateEndpoint"],
+    "description": "This error occurs when Kubernetes fails to update an endpoint for a service. This could be due to issues with the container runtime or the node's networking setup, such as lack of permissions or conflicting network settings.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Services)",
+        "href": "https://kubernetes.io/docs/concepts/services-networking/service/"
+      }
+    ]
   }
 }
