@@ -63,6 +63,7 @@ const Footer = () => {
           <div className={styles.teamLinks}>
             {teamLinks.map((link) => (
               <TeamLink
+                key={link.name}
                 name={link.name}
                 image={link.image}
                 github={link.github}

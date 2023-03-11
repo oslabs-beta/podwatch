@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 const serverInstance = axios.create({
   baseURL: process.env.API_URL || 'http://localhost:3001',
-  timeout: 2500,
+  timeout: 5000,
   withCredentials: true,
 });
 
