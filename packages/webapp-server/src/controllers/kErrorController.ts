@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { ClusterModel } from '../models/ClusterModel';
-import { NativeKEvent, KErrorModel } from '../models/KErrorModel';
+import { KErrorModel, NativeKEvent } from '../models/KErrorModel';
+import { UserDocument } from '../models/UserModel';
 
 export interface KErr {
   name: string;
@@ -14,19 +15,25 @@ export interface KErr {
 }
 
 export const kErrorController = {
-  getCluster: async (req: Request, res: Response, next: NextFunction) => {
-    const clusterId = req.headers['clusterId'] as string;
-    const clusterSecret = req.headers['clusterSecret'] as string;
+  getClusterFromHeaders: async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const clusterId = req.headers['clusterid'] as string;
+    const clusterSecret = req.headers['clustersecret'] as string;
 
     if (!clusterId || !clusterSecret) {
       return next({
-        log: 'Missing clusterId or clusterSecret in request headers',
+        log: `Missing clusterId or clusterSecret in request headers: ${JSON.stringify(
+          req.headers
+        )}`,
         message: 'Missing clusterId or clusterSecret in request headers',
         status: 400,
       });
     }
 
-    const cluster = await ClusterModel.findOne({ clusterId });
+    const cluster = await ClusterModel.findById(clusterId);
     if (!cluster) {
       return next({
         log: 'Cluster not found',
@@ -38,7 +45,7 @@ export const kErrorController = {
     const authenticated = await cluster.compareSecret(clusterSecret);
     if (!authenticated) {
       return next({
-        log: 'Cluster secret does not match',
+        log: `Cluster secret does not match: ${authenticated}`,
         message: 'Cluster secret does not match',
         status: 401,
       });
@@ -46,6 +53,55 @@ export const kErrorController = {
 
     res.locals.cluster = cluster;
     return next();
+  },
+  getClusterFromParams: async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const { clusterId } = req.params;
+    const user = req.user as UserDocument;
+
+    if (!clusterId) {
+      return next({
+        log:
+          'Missing clusterId in request params. Got: ' +
+          JSON.stringify(req.params),
+        message: 'Missing clusterId in request params',
+        status: 400,
+      });
+    }
+    try {
+      const cluster = await ClusterModel.findById(clusterId).populate('owner');
+      if (!cluster) {
+        return next({
+          log: 'Cluster not found',
+          message: 'Cluster not found',
+          status: 404,
+        });
+      }
+
+      if (
+        cluster.owner.id !== user.id &&
+        !cluster.members.some((member) => member.id === user.id)
+      ) {
+        return next({
+          log: 'User does not have access to cluster',
+          message: 'Access denied',
+          status: 403,
+        });
+      }
+
+      res.locals.cluster = cluster;
+      return next();
+    } catch (error) {
+      return next({
+        log: 'Error getting cluster from body',
+        message: 'Error getting cluster from body',
+        status: 500,
+        error,
+      });
+    }
   },
   saveAll: async (req: Request, res: Response, next: NextFunction) => {
     const kErrors: KErr[] = req.body;
@@ -83,7 +139,8 @@ export const kErrorController = {
     const skip = Number(req.query.skip) || 0;
 
     try {
-      const kErrors = await KErrorModel.find({ cluster }, null, {
+      const kErrors = await KErrorModel.find({ cluster: cluster.id }, null, {
+        sort: { lastTimestamp: -1 },
         limit,
         skip,
       });
@@ -101,11 +158,10 @@ export const kErrorController = {
     }
   },
   getOne: async (req: Request, res: Response, next: NextFunction) => {
-    const cluster = res.locals.cluster;
     const { id } = req.params;
 
     try {
-      const kError = await KErrorModel.findOne({ _id: id, cluster });
+      const kError = await KErrorModel.findById(id);
 
       if (!kError) {
         return next({

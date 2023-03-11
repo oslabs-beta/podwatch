@@ -5,9 +5,9 @@ import { authenticateUser } from '../controllers/authController';
 const kErrorRouter = Router();
 
 kErrorRouter.get(
-  '/',
+  '/:clusterId',
   authenticateUser,
-  kErrorController.getCluster,
+  kErrorController.getClusterFromParams,
   kErrorController.getMany,
   (req, res) => {
     return res.status(200).json(res.locals.kErrors);
@@ -15,9 +15,9 @@ kErrorRouter.get(
 );
 
 kErrorRouter.get(
-  '/:id',
+  '/:clusterId/:id',
   authenticateUser,
-  kErrorController.getCluster,
+  kErrorController.getClusterFromParams,
   kErrorController.getOne,
   (req, res) => {
     res.status(200).json(res.locals.kError);

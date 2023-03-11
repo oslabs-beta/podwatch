@@ -21,12 +21,15 @@ export const setupPassport = (app: Express) => {
         clientSecret: process.env.GOOGLE_CLIENT_SECRET || '',
         callbackURL: 'http://localhost:3001/auth/google/callback',
       },
-      function (
+      async function (
         accessToken: string,
         refreshToken: string,
         profile: GoogleProfile,
         done: GoogleVerifyCallback
       ) {
+        console.log(
+          `Signing in with Google profile: ${JSON.stringify(profile)}`
+        );
         if (!profile.emails || !profile.emails[0]) {
           return done(
             new Error('No email associated with Google account'),
@@ -38,14 +41,33 @@ export const setupPassport = (app: Express) => {
 
         const avatar = photos ? photos[0].value : '';
 
+        try {
+          const existingUser = await UserModel.findOne({
+            email: emails[0].value,
+          });
+          if (existingUser) {
+            console.log('User already exists in db');
+            return done(null, existingUser);
+          }
+        } catch (error: any) {
+          console.log('Error occurred searching for user in db');
+          return done(error, false);
+        }
+
         const user = UserModel.build({
           email: emails[0].value,
           provider: 'google',
-          providerId: profile.id,
+          providerId: id,
           avatar,
         });
 
-        done(null, user);
+        await user.save();
+
+        console.log(
+          `Created user: ${JSON.stringify(user)} from Google profile`
+        );
+
+        return done(null, user);
       }
     )
   );
@@ -66,13 +88,8 @@ export const setupPassport = (app: Express) => {
   // );
 
   const cookieExtractor = function (req: Request) {
-    console.log('Extract JWT from cookies');
     if (req && req.signedCookies) {
-      console.log('signed cookies:', JSON.stringify(req.signedCookies));
-      console.log('cookies:', JSON.stringify(req.cookies));
-
       const token = req.signedCookies['podwatch_jwt'];
-      console.log('Found token:', token);
       return token;
     }
     return null;
@@ -85,12 +102,9 @@ export const setupPassport = (app: Express) => {
         secretOrKey: process.env.JWT_TOKEN || 'abc',
       },
       async function (jwt_payload, done) {
-        console.log('Validating JWT...');
-
         let user: UserDocument | null;
         try {
           user = await UserModel.findOne({ _id: jwt_payload.sub });
-          console.log('Found user in database');
         } catch (error: any) {
           console.log('Error occurred searching for user in db');
           return done(error, false);

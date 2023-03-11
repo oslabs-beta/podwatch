@@ -41,7 +41,11 @@ const ErrorItem: React.FC<ErrorItemProps> = ({ error, info }) => {
         </div>
         <div className={styles.header}>
           <h2>{error.reason}</h2>
-          <time>{error.firstTimestamp.toLocaleTimeString()}</time>
+          <time>{`${new Date(
+            error.firstTimestamp
+          ).toLocaleDateString()} ${new Date(
+            error.firstTimestamp
+          ).toLocaleTimeString()}`}</time>
         </div>
       </div>
       {expanded && (
@@ -51,26 +55,28 @@ const ErrorItem: React.FC<ErrorItemProps> = ({ error, info }) => {
             <p>{error.message}</p>
             <p>Name: {error.name}</p>
             <p>Count: {error.count}</p>
-            <p>First Timestamp: {error.firstTimestamp.toISOString()}</p>
-            <p>Last Timestamp: {error.lastTimestamp.toISOString()}</p>
+            <p>First Timestamp: {error.firstTimestamp}</p>
+            <p>Last Timestamp: {error.lastTimestamp}</p>
           </div>
 
           {info && (
             <div className={styles.info}>
               <h3>{info.name}</h3>
               <p>{info?.description}</p>
-              <p>Potential causes include {info.events.join(', ')}</p>
+              <p>
+                Associated Kubernetes events include: {info.events.join(', ')}
+              </p>
               <h4>Read More</h4>
               {info.references.map((reference) => {
                 return (
-                  <div className={styles.link}>
+                  <div key={reference.title} className={styles.link}>
                     <LaunchIcon fontSize="small" />
                     <a
-                      href={reference}
+                      href={reference.href}
                       rel="noopener noreferrer"
                       target="_blank"
                     >
-                      {reference}
+                      {reference.title}
                     </a>
                   </div>
                 );
