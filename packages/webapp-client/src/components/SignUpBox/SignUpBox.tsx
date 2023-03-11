@@ -10,6 +10,7 @@ import styles from './SignUpBox.module.scss';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import GoogleIcon from '@mui/icons-material/Google';
 import { IconButton } from '@mui/material';
+import { useRouter } from 'next/router';
 
 function Copyright(props: any) {
   return (
@@ -27,23 +28,39 @@ function Copyright(props: any) {
 interface SignUpProps {};
 
 const SignUpBox: React.FC<React.PropsWithChildren<SignUpProps>> = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+
+  const [firstName, setFirstName] = React.useState('');
+  const [lastName, setLastName] = React.useState('');
+  const [email, setEmail] = React.useState('');
+  const [password, setPassword] = React.useState('');
+
+  const router = useRouter();
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
+    const body = JSON.stringify({
+      firstName,
+      lastName,
+      email,
+      password,
     });
+    console.log(body);
+    const response = await fetch('/auth/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body,
+    });
+
+    if (response.status === 200) {
+      router.push('/');
   };
+};
 
   return (
       <Container className={styles.main}>
         <Box
           className={styles.innerBox}
         >
-          {/* <Typography component="h1" variant="h5">
-            Sign up
-          </Typography> */}
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
@@ -55,6 +72,8 @@ const SignUpBox: React.FC<React.PropsWithChildren<SignUpProps>> = () => {
                   fullWidth
                   id="firstName"
                   label="First Name"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
                   autoFocus
                 />
               </Grid>
@@ -67,6 +86,8 @@ const SignUpBox: React.FC<React.PropsWithChildren<SignUpProps>> = () => {
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -78,6 +99,8 @@ const SignUpBox: React.FC<React.PropsWithChildren<SignUpProps>> = () => {
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -90,6 +113,8 @@ const SignUpBox: React.FC<React.PropsWithChildren<SignUpProps>> = () => {
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Grid>
             </Grid>

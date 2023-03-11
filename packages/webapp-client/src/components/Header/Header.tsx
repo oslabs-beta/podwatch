@@ -12,7 +12,7 @@ const Header = () => {
       <div className={styles.spacer}></div>
       <header className={styles.header}>
         <div className={styles.contents}>
-          <Logo />
+          <Button href='/'><Logo /></Button>
           <Navigation
             items={[
               { label: 'Sign In', href: '/auth/signin', visible: 'mobile' },

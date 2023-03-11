@@ -41,14 +41,13 @@ const SignInBox: React.FC<React.PropsWithChildren<SignInProps>> = () => {
       email,
       password,
     });
-    const response = await fetch('/auth/local/signin', {
+    const response = await fetch('http://localhost:3001/auth/local/signin', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body,
     });
 
     if (response.status === 200) {
-
       router.push('/');
     }
   };
@@ -109,7 +108,7 @@ const SignInBox: React.FC<React.PropsWithChildren<SignInProps>> = () => {
             </Grid>
             <Grid className={styles.oauthIcons}>
                 <IconButton ><GitHubIcon className={styles.oauthItem}/></IconButton>
-                <IconButton href="http://localhost:3001/auth/google"><GoogleIcon className={styles.oauthItem}/></IconButton>
+                <IconButton href="http://localhost:3001/auth/google" type='submit'><GoogleIcon className={styles.oauthItem}/></IconButton>
             </Grid>
             
           </Box>
