@@ -1,0 +1,9 @@
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  height: 100%;
+  font-size: large;
+  filter: drop-shadow(0 0 0.5rem rgba(0, 0, 0, 0.5));
+}

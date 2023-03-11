@@ -25,5 +25,11 @@
   "homepage": "https://github.com/oslabs-beta/podwatch#readme",
   "devDependencies": {
     "lerna": "^6.5.1"
+  },
+  "dependencies": {
+    "next": "^13.2.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "yarn": "^1.22.19"
   }
 }

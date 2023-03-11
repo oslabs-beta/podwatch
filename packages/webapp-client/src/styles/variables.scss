@@ -1,0 +1,31 @@
+$color-primary: #0032b8;
+$color-secondary: #6a4eff;
+
+$color-dark: #1a1a1a;
+$color-charcoal: #2a2a2a;
+
+$color-white: #d1d1d1;
+$color-white-hover: #fff;
+
+$font-main: 'Inter', sans-serif;
+
+$header-height: 6rem;
+$footer-height: 6rem;
+
+@mixin breakpoint-sm {
+  @media (min-width: 512px) {
+    @content;
+  }
+}
+
+@mixin breakpoint-md {
+  @media (min-width: 768px) {
+    @content;
+  }
+}
+
+@mixin breakpoint-lg {
+  @media (min-width: 1024px) {
+    @content;
+  }
+}

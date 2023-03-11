@@ -1,0 +1,47 @@
+@use '@/styles/variables.scss' as *;
+
+.spacer {
+  height: 5em;
+  width: 100vw;
+  background-color: $color-primary;
+  position: fixed;
+  -webkit-clip-path: polygon(
+    0% 100%,
+    32% 100%,
+    32% 71%,
+    65% 71%,
+    71% 100%,
+    100% 100%,
+    100% 0%,
+    0% 0%
+  );
+  clip-path: polygon(
+    0% 100%,
+    5% 100%,
+    20% 55%,
+    80% 55%,
+    95% 100%,
+    100% 100%,
+    100% 0%,
+    0% 0%
+  );
+  p {
+    background-color: $color-secondary;
+    color: $color-white;
+    position: absolute;
+    padding: 1em 0.5em;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 125px;
+    text-align: center;
+    border-radius: 1em 1em 0 0;
+  }
+}
+.ClusterManagement {
+  background-color: green;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

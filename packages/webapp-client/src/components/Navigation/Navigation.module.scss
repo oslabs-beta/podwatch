@@ -1,0 +1,23 @@
+@use '../../styles/variables.scss' as *;
+
+.desktop {
+  display: none;
+
+  @include breakpoint-md {
+    display: block;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+}
+
+.link {
+  transition: color 0.2s ease-in-out;
+  color: $color-white;
+  width: 5.2em;
+  text-align: center;
+  &:hover {
+    color: $color-white-hover;
+  }
+}

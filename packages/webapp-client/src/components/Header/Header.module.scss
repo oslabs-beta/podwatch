@@ -1,0 +1,64 @@
+@use '../../styles/variables' as *;
+
+.spacer {
+  height: $header-height;
+  background-color: $color-primary;
+}
+
+.header {
+  position: fixed;
+  background-color: $color-primary;
+  height: $header-height;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  color: $color-white;
+  padding: 0.7em;
+  z-index: 1;
+}
+
+.corner {
+  display: flex;
+  align-items: center;
+}
+
+.contents {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100vw;
+  max-width: 120rem;
+  margin: 0 auto;
+}
+
+.signin {
+  min-width: 0em;
+  @include breakpoint-md {
+    display: block;
+    // min-width: 8rem;
+    padding-inline: 1rem;
+  }
+}
+
+.divider {
+  display: none;
+  @include breakpoint-md {
+    display: block;
+    width: 1px;
+    height: 2rem;
+    background-color: $color-white;
+    opacity: 0.5;
+  }
+}
+
+.toggle {
+  display: none;
+  margin-left: 2rem;
+  @include breakpoint-md {
+    margin-left: 0rem;
+    display: block;
+    padding-inline: 1rem;
+  }
+}

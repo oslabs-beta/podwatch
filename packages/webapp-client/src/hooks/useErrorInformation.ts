@@ -1,0 +1,63 @@
+import React from 'react';
+
+export interface KErrorInformation {
+  /**
+   * A human readable name for the error.
+   */
+  name: string;
+  /**
+   * A list of Kubernetes events that can cause this error.
+   */
+  events: string[];
+  /**
+   * A description of the error, including what can cause it and how to resolve it.
+   */
+  description: string;
+  /**
+   * A list of references to Kubernetes documentation or other resources that can help resolve the error.
+   */
+  references: {
+    title: string;
+    href: string;
+  }[];
+}
+
+export interface KErrorInformationMap {
+  [key: string]: KErrorInformation;
+}
+
+/**
+ * A custom hook that fetches error information and provides a function to get the error information for a given error reason.
+ * @returns A function getErrorInformation that takes the error reason as an argument and returns the error information for that particular error. This includes the error name, a list of Kubernetes events that can cause the error, a description of the error, and a list of references to Kubernetes documentation or other resources that can help resolve the error.
+ */
+const useErrorInformation = () => {
+  const [errorInformation, setErrorInformation] =
+    React.useState<KErrorInformationMap | null>(null);
+
+  React.useEffect(() => {
+    const fetchErrorInformation = async () => {
+      const response = await fetch('/api/errors');
+      const data = await response.json();
+      setErrorInformation(JSON.parse(data));
+    };
+    fetchErrorInformation();
+  }, []);
+
+  const getErrorInformation = React.useCallback(
+    (reason: string) => {
+      if (!errorInformation) {
+        return null;
+      }
+      if (!(reason in errorInformation)) {
+        console.log(`Error reason ${reason} not found in error information.`);
+        return null;
+      }
+      return errorInformation[reason];
+    },
+    [errorInformation]
+  );
+
+  return { getErrorInformation, loading: !errorInformation };
+};
+
+export default useErrorInformation;

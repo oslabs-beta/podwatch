@@ -1,0 +1,346 @@
+{
+  "Failed": {
+    "name": "Container Create Failure",
+    "events": [
+      "FailedToCreateContainer",
+      "FailedToStartContainer",
+      "FailedToMakePodDataDirectories",
+      "FailedToPullImage"
+    ],
+    "description": "The container failed to start.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Container Lifecycle)",
+        "href": "https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/"
+      },
+      {
+        "title": "Docker Documentation",
+        "href": "https://docs.docker.com/engine/reference/commandline/run/"
+      }
+    ]
+  },
+  "BackOff": {
+    "name": "Container Backoff",
+    "events": ["BackOff"],
+    "description": "The container is restarting too frequently and is being throttled.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Container Restart Policy)",
+        "href": "https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#restart-policy"
+      },
+      {
+        "title": "Kubernetes Documentation (Container Lifecycle)",
+        "href": "https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/"
+      }
+    ]
+  },
+  "FailedKillPod": {
+    "name": "Pod Kill Failure",
+    "events": ["FailedToKillPod"],
+    "description": "This error indicates that Kubernetes failed to terminate a pod gracefully, possibly due to a resource conflict or an unresponsive application. Kubernetes first attempts to gracefully terminate a pod by sending it a termination signal; however, if the pod fails to respond, Kubernetes will force-terminate the pod. This error may also occur if Kubernetes is unable to communicate with the container runtime.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Pod Termination)",
+        "href": "https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-termination"
+      },
+      {
+        "title": "Kubernetes Documentation (Container Runtimes)",
+        "href": "https://kubernetes.io/docs/setup/production-environment/container-runtimes/"
+      }
+    ]
+  },
+  "FailedCreatePodContainer": {
+    "name": "Pod Create Failure",
+    "events": ["FailedToCreatePodContainer"],
+    "description": "This error occurs when Kubernetes is unable to create a container for a pod. This could be caused by a misconfigured pod spec, an unavailable image or registry, insufficient resources, or conflicts with other pods.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Pod Lifecycle)",
+        "href": "https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/"
+      },
+      {
+        "title": "Kubernetes Documentation (Container Images)",
+        "href": "https://kubernetes.io/docs/concepts/containers/images/"
+      }
+    ]
+  },
+  "NetworkNotReady": {
+    "name": "Network Failure",
+    "events": ["NetworkNotReady"],
+    "description": "This error event indicates that the pod is unable to connect to the network. This could be due to a misconfigured pod networking, DNS issues, or network congestion. The pod will remain in the \"pending\" state until the network issue is resolved.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Pod Networking)",
+        "href": "https://kubernetes.io/docs/concepts/cluster-administration/networking/"
+      }
+    ]
+  },
+  "InspectFailed": {
+    "name": "Image Inspect Failure",
+    "events": ["FailedToInspectImage"],
+    "description": "This error event occurs when Kubernetes is unable to inspect the specified container image. This could be due to a misconfigured image registry, an incorrect image name, or a network issue.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Container Images)",
+        "href": "https://kubernetes.io/docs/concepts/containers/images/"
+      },
+      {
+        "title": "Kubernetes Documentation (Image Registry)",
+        "href": "https://kubernetes.io/docs/concepts/containers/images/#using-a-private-registry"
+      }
+    ]
+  },
+  "ErrImageNeverPull": {
+    "name": "Image Policy Error",
+    "events": ["ErrImageNeverPullPolicy"],
+    "description": "This error occurs when Kubernetes is unable to pull the container image for a pod. This could be due to an incorrect image name, insufficient permissions to pull the image, or the image not being available in the specified registry. This error can also occur if the pod's imagePullPolicy is set to Never, which instructs Kubernetes not to pull the image even if it is not present locally.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Image Pull Policy)",
+        "href": "https://kubernetes.io/docs/concepts/containers/images/#updating-images"
+      }
+    ]
+  },
+  "NodeNotSchedulable": {
+    "name": "Node Scheduling Failure",
+    "events": ["NodeNotSchedulable"],
+    "description": "This error occurs when a node in the Kubernetes cluster is unable to schedule new pods due to resource constraints, configuration issues, or other problems. Possible causes include insufficient CPU, memory or storage capacity, node taints, or node affinity settings.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Scheduling)",
+        "href": "https://kubernetes.io/docs/concepts/scheduling-eviction/"
+      }
+    ]
+  },
+  "KubeletSetupFailed": {
+    "name": "Kubelet Setup Failure",
+    "events": ["KubeletSetupFailed"],
+    "description": "This error occurs when the Kubelet, a node agent that communicates with the Kubernetes API server, encounters a configuration or runtime issue preventing it from functioning properly. Possible causes include incorrect API server endpoint settings, network connectivity issues, or problems with the Kubelet configuration file.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Kubelet)",
+        "href": "https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/"
+      }
+    ]
+  },
+  "FailedAttachVolume": {
+    "name": "Volume Attachment Error",
+    "events": ["FailedAttachVolume"],
+    "description": "This error occurs when Kubernetes fails to attach a persistent volume to a pod. This could be due to a variety of reasons, such as the volume not being available, a configuration issue with the storage provider, or insufficient permissions to access the volume.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Persistent Volumes)",
+        "href": "https://kubernetes.io/docs/concepts/storage/persistent-volumes/"
+      }
+    ]
+  },
+  "FailedMount": {
+    "name": "Volume Mount Error",
+    "events": ["FailedMountVolume"],
+    "description": "This error occurs when Kubernetes fails to mount a volume to the pod's file system. This could be due to a misconfiguration in the volume specification, a problem with the volume plugin, or file system errors on the underlying storage.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Persistent Volumes)",
+        "href": "https://kubernetes.io/docs/concepts/storage/persistent-volumes/"
+      }
+    ]
+  },
+  "VolumeResizeFailed": {
+    "name": "Volume Resize Error",
+    "events": ["VolumeResizeFailed"],
+    "description": "This error occurs when Kubernetes fails to resize a persistent volume. This could be due to a variety of reasons, such as the underlying storage not supporting resizing, insufficient permissions to modify the volume, or conflicts with other volumes on the same storage device.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Persistent Volumes)",
+        "href": "https://kubernetes.io/docs/concepts/storage/persistent-volumes/"
+      }
+    ]
+  },
+  "FileSystemResizeFailed": {
+    "name": "File System Resize Error",
+    "events": ["FileSystemResizeFailed"],
+    "description": "This error occurs when Kubernetes fails to resize the file system on a persistent volume. This could be due to a variety of reasons, such as the file system not supporting resizing, a misconfiguration in the volume specification, or file system errors on the underlying storage.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Persistent Volumes)",
+        "href": "https://kubernetes.io/docs/concepts/storage/persistent-volumes/"
+      }
+    ]
+  },
+  "FailedMapVolume": {
+    "name": "Volume Mapping Error",
+    "events": ["FailedMapVolume"],
+    "description": "This error occurs when Kubernetes fails to map a volume to the pod's file system. This could be due to a misconfiguration in the volume specification, a problem with the volume plugin, or file system errors on the underlying storage.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Persistent Volumes)",
+        "href": "https://kubernetes.io/docs/concepts/storage/persistent-volumes/"
+      }
+    ]
+  },
+  "ContainerGCFailed": {
+    "name": "Container GC Error",
+    "events": ["ContainerGCFailed"],
+    "description": "This error occurs when Kubernetes fails to garbage collect unused containers. This could be due to a variety of reasons, such as insufficient resources to perform garbage collection, a misconfiguration in the container runtime, or conflicts with other system processes.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Garbage Collection)",
+        "href": "https://kubernetes.io/docs/concepts/workloads/controllers/garbage-collection/"
+      }
+    ]
+  },
+  "ImageGCFailed": {
+    "name": "Image GC Error",
+    "events": ["ImageGCFailed"],
+    "description": "This error occurs when Kubernetes fails to garbage collect unused container images. This could be due to a variety of reasons, such as insufficient resources to perform garbage collection, a misconfiguration in the container runtime, or conflicts with other system processes.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Garbage Collection)",
+        "href": "https://kubernetes.io/docs/concepts/workloads/controllers/garbage-collection/"
+      }
+    ]
+  },
+  "FailedNodeAllocatableEnforcement": {
+    "name": "Node Allocatable Enforcement Error",
+    "events": ["FailedNodeAllocatableEnforcement"],
+    "description": "This error occurs when Kubernetes fails to enforce node allocatable resources, such as CPU and memory. This could be due to a misconfiguration in the cluster settings, insufficient resources to perform enforcement, or conflicts with other system processes.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Node Allocatable)",
+        "href": "https://kubernetes.io/docs/tasks/administer-cluster/reserve-compute-resources/"
+      }
+    ]
+  },
+  "FailedCreatePodSandBox": {
+    "name": "Pod Sandbox Creation Error",
+    "events": ["FailedCreatePodSandBox"],
+    "description": "This error occurs when Kubernetes fails to create a sandbox for a pod. This could be due to issues with the container runtime or the node's networking setup, such as lack of permissions or conflicting network settings.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Pod Sandboxes)",
+        "href": "https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-sandboxes"
+      }
+    ]
+  },
+  "FailedPodSandBoxStatus": {
+    "name": "Pod Sandbox Status Error",
+    "events": ["FailedPodSandBoxStatus"],
+    "description": "This error occurs when Kubernetes fails to get the status of a pod sandbox. This could be due to issues with the container runtime or the node's networking setup, such as lack of permissions or conflicting network settings.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Pod Sandboxes)",
+        "href": "https://kubernetes.io/docs/concepts/workloads/pods/pod-lifecycle/#pod-sandboxes"
+      }
+    ]
+  },
+  "FailedMountOnFilesystemMismatch": {
+    "name": "Volume Mount Error",
+    "events": ["FailedMountOnFilesystemMismatch"],
+    "description": "This error occurs when Kubernetes fails to mount a volume because the file system type of the volume does not match that of the node. This could be due to a misconfiguration in the volume specification, or the node not supporting the file system type of the volume.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Persistent Volumes)",
+        "href": "https://kubernetes.io/docs/concepts/storage/persistent-volumes/"
+      }
+    ]
+  },
+  "InvalidDiskCapacity": {
+    "name": "Invalid Disk Capacity",
+    "events": ["InvalidDiskCapacity"],
+    "description": "This error occurs when Kubernetes detects an invalid disk capacity for a persistent volume. This could be due to a misconfiguration in the volume specification, or issues with the underlying storage.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Persistent Volumes)",
+        "href": "https://kubernetes.io/docs/concepts/storage/persistent-volumes/"
+      }
+    ]
+  },
+  "FreeDiskSpaceFailed": {
+    "name": "Free Disk Space Error",
+    "events": ["FreeDiskSpaceFailed"],
+    "description": "This error occurs when Kubernetes fails to check the amount of free disk space on a node. This could be due to issues with the node's disk setup or permissions, or conflicts with other system processes.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Persistent Volumes)",
+        "href": "https://kubernetes.io/docs/concepts/storage/persistent-volumes/"
+      }
+    ]
+  },
+  "Unhealthy": {
+    "name": "Unhealthy Container",
+    "events": ["ContainerUnhealthy"],
+    "description": "This error occurs when Kubernetes detects that a container is not healthy, meaning it is not responding to health checks or is returning errors. This could be due to misconfigurations in the liveness or readiness probes, issues with the container runtime, or problems with the application running inside the container.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Liveness and Readiness Probes)",
+        "href": "https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/"
+      }
+    ]
+  },
+  "ProbeWarning": {
+    "name": "Container Probe Warning",
+    "events": ["ContainerProbeWarning"],
+    "description": "This error occurs when Kubernetes detects that a container's liveness or readiness probes are failing intermittently or returning warnings instead of success. This could be due to the application taking too long to start up or respond to probes, or issues with the container runtime or the node's networking setup.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Liveness and Readiness Probes)",
+        "href": "https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/"
+      }
+    ]
+  },
+  "FailedValidation": {
+    "name": "Pod Validation Error",
+    "events": ["FailedValidation"],
+    "description": "This error occurs when Kubernetes fails to validate a resource, such as a pod or service. This could be due to a variety of reasons, such as misconfigured resource definitions or conflicts with other resources in the cluster.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Pods)",
+        "href": "https://kubernetes.io/docs/concepts/workloads/pods/pod/"
+      }
+    ]
+  },
+  "FailedPostStartHook": {
+    "name": "Pod Post Start Hook Error",
+    "events": ["FailedPostStartHook"],
+    "description": "This error occurs when Kubernetes fails to execute a post-start hook for a container. Post-start hooks are scripts or commands that run after a container is started. This could be due to issues with the hook script, such as syntax errors or missing dependencies, or conflicts with other system processes.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Container Lifecycle Hooks)",
+        "href": "https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/"
+      }
+    ]
+  },
+  "FailedPreStopHook": {
+    "name": "Pod Pre Stop Hook Error",
+    "events": ["FailedPreStopHook"],
+    "description": "This error occurs when Kubernetes fails to execute a pre-stop hook for a container. Pre-stop hooks are scripts or commands that run before a container is terminated. This could be due to issues with the hook script, such as syntax errors or missing dependencies, or conflicts with other system processes.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Container Lifecycle Hooks)",
+        "href": "https://kubernetes.io/docs/concepts/containers/container-lifecycle-hooks/"
+      }
+    ]
+  },
+  "FailedToCreateEndpoint": {
+    "name": "Endpoint Creation Error",
+    "events": ["FailedToCreateEndpoint"],
+    "description": "This error occurs when Kubernetes fails to create an endpoint for a service. This could be due to issues with the container runtime or the node's networking setup, such as lack of permissions or conflicting network settings.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Services)",
+        "href": "https://kubernetes.io/docs/concepts/services-networking/service/"
+      }
+    ]
+  },
+  "FailedToUpdateEndpoint": {
+    "name": "Endpoint Update Error",
+    "events": ["FailedToUpdateEndpoint"],
+    "description": "This error occurs when Kubernetes fails to update an endpoint for a service. This could be due to issues with the container runtime or the node's networking setup, such as lack of permissions or conflicting network settings.",
+    "references": [
+      {
+        "title": "Kubernetes Documentation (Services)",
+        "href": "https://kubernetes.io/docs/concepts/services-networking/service/"
+      }
+    ]
+  }
+}
