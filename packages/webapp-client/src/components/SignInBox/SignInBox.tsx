@@ -11,6 +11,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import GoogleIcon from '@mui/icons-material/Google';
 import { IconButton } from '@mui/material';
 import { useRouter } from 'next/router';
+import serverInstance from '@/utils/serverInstance';
 
 function Copyright(props: any) {
   return (
@@ -25,11 +26,9 @@ function Copyright(props: any) {
   );
 }
 
-
-interface SignInProps {};
+interface SignInProps {}
 
 const SignInBox: React.FC<React.PropsWithChildren<SignInProps>> = () => {
-
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
 
@@ -37,84 +36,101 @@ const SignInBox: React.FC<React.PropsWithChildren<SignInProps>> = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const body = JSON.stringify({
-      email,
-      password,
-    });
-    const response = await fetch('http://localhost:3001/auth/local/signin', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body,
-    });
+    // const body = JSON.stringify({
+    //   email,
+    //   password,
+    // });
+    // const response = await fetch('http://localhost:3001/auth/local/signin', {
+    //   method: 'POST',
+    //   headers: { 'Content-Type': 'application/json' },
+    //   body,
+    // });
 
-    if (response.status === 200) {
-      router.push('/');
+    try {
+      await serverInstance.post('/auth/local/signin', 
+        {email, password});
+      router.push('/cluster')
+    } catch (err) {
+      console.log(err);
     }
+
+    //   if (response.status === 200) {
+    //     router.push('/');
+    //   }
   };
 
   return (
-      <Container className={styles.main}>
-        <Box className={styles.innerBox}>
-          <Box component="form" className ={styles.form} onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
-            <TextField
-              className={styles.input}
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              color='secondary'
-              autoComplete="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              autoFocus
-            />
-            <TextField
-              className={styles.input}
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              color='secondary'
-              autoComplete="current-password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-            <Button
+    <Container className={styles.main}>
+      <Box className={styles.innerBox}>
+        <Box
+          component="form"
+          className={styles.form}
+          onSubmit={handleSubmit}
+          noValidate
+          sx={{ mt: 1 }}
+        >
+          <TextField
+            className={styles.input}
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Email Address"
+            name="email"
+            color="secondary"
+            autoComplete="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            autoFocus
+          />
+          <TextField
+            className={styles.input}
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Password"
+            type="password"
+            id="password"
+            color="secondary"
+            autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button
             className={styles.button}
-            color='secondary'
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
-              Sign In
-            </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2" color='secondary'>
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/auth/signup" variant="body2" color='secondary'>
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
+            color="secondary"
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+          >
+            Sign In
+          </Button>
+          <Grid container>
+            <Grid item xs>
+              <Link href="#" variant="body2" color="secondary">
+                Forgot password?
+              </Link>
             </Grid>
-            <Grid className={styles.oauthIcons}>
-                <IconButton ><GitHubIcon className={styles.oauthItem}/></IconButton>
-                <IconButton href="http://localhost:3001/auth/google" type='submit'><GoogleIcon className={styles.oauthItem}/></IconButton>
+            <Grid item>
+              <Link href="/auth/signup" variant="body2" color="secondary">
+                {"Don't have an account? Sign Up"}
+              </Link>
             </Grid>
-            
-          </Box>
+          </Grid>
+          <Grid className={styles.oauthIcons}>
+            <IconButton>
+              <GitHubIcon className={styles.oauthItem} />
+            </IconButton>
+            <IconButton href="http://localhost:3001/auth/google">
+              <GoogleIcon className={styles.oauthItem} />
+            </IconButton>
+          </Grid>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
-      </Container>
+      </Box>
+      <Copyright sx={{ mt: 8, mb: 4 }} />
+    </Container>
   );
 };
 

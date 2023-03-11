@@ -13,20 +13,11 @@ const Header = () => {
   const getUserAvatar = () => {
     if (!user) {
       return (
-        <Link href="/signin">
+        <Link href="/auth/signin">
           <Button
             variant="contained"
             color="secondary"
             sx={{ minWidth: '6rem' }}
-            // onClick={() =>
-            //   // TODO: Replace with navigation to login page
-            //   setUser({
-            //     id: '1',
-            //     provider: 'google',
-            //     email: 'a@a.a',
-            //     avatar: 'https://source.unsplash.com/random/?headshot',
-            //   })
-            // }
           >
             Sign In
           </Button>

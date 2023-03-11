@@ -17,6 +17,7 @@ export const loginWithEmailAndPw = async (
   next: NextFunction
 ) => {
   const { email, password } = req.body; // Abc123
+  console.log(req.body);
   if (!email || !password) {
     return next({
       log: 'Email or password missing from request body.',

@@ -13,13 +13,11 @@ import authRouter from './routers/authRouter';
 import { errorHandler } from './errors/errorHandler';
 //import clusterRouter
 import clusterRouter from './routers/clusterRouter';
-import cors from 'cors';
 
 dotenv.config();
 
 
 const app = express();
-app.use(cors);
 
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));

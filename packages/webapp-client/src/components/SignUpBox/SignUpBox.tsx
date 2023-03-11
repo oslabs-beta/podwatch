@@ -11,6 +11,7 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import GoogleIcon from '@mui/icons-material/Google';
 import { IconButton } from '@mui/material';
 import { useRouter } from 'next/router';
+import serverInstance from '@/utils/serverInstance';
 
 function Copyright(props: any) {
   return (
@@ -38,22 +39,36 @@ const SignUpBox: React.FC<React.PropsWithChildren<SignUpProps>> = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const body = JSON.stringify({
+    // const body = JSON.stringify({
+    //   firstName,
+    //   lastName,
+    //   email,
+    //   password,
+    // });
+    // console.log(body);
+  //   const response = await fetch('/auth/register', {
+  //     method: 'POST',
+  //     headers: { 'Content-Type': 'application/json' },
+  //     body,
+  //   });
+
+  //   if (response.status === 200) {
+  //     router.push('/');
+  // };
+  try {
+    await serverInstance.post('/auth/local/signup', {
+    
       firstName,
       lastName,
       email,
       password,
-    });
-    console.log(body);
-    const response = await fetch('/auth/register', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body,
-    });
-
-    if (response.status === 200) {
-      router.push('/');
-  };
+    
+  });
+  router.push('/cluster')
+}
+catch(err){
+  console.log(err);
+}
 };
 
   return (
