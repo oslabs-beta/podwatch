@@ -28,7 +28,7 @@ router.post(
   (req: Request, res: Response) => {
     return res.status(201).json({
       cluster: res.locals.newCluster,
-      secret: res.locals.newCluster.secret,
+      secret: res.locals.newSecret,
     });
   }
 );

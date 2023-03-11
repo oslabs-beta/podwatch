@@ -8,8 +8,8 @@ export interface KError {
   message: string;
   type: string;
   count: number;
-  firstTimestamp: Date;
-  lastTimestamp: Date;
+  firstTimestamp: string;
+  lastTimestamp: string;
   cluster: Cluster;
   nativeEvent: NativeKEvent;
 }

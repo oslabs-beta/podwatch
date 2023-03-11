@@ -29,8 +29,8 @@ const createAxiosInstance = () => {
       baseURL: 'http://host.docker.internal:3001/watch',
       timeout: 1000,
       headers: {
-        clusterId: PODWATCH_CLIENT_ID,
-        clusterSecret: PODWATCH_CLIENT_SECRET,
+        clusterid: PODWATCH_CLIENT_ID,
+        clustersecret: PODWATCH_CLIENT_SECRET,
       },
     });
     return instancePodWatch;

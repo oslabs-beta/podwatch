@@ -1,3 +1,4 @@
+import { authenticateUser } from './../controllers/authController';
 import { Request, Response, Router } from 'express';
 import {
   registerWithEmailAndPw,
@@ -8,12 +9,20 @@ import passport from 'passport';
 
 const authRouter = Router();
 
+authRouter.get('/user', authenticateUser, (req: Request, res: Response) => {
+  if (req.user) {
+    res.status(200).json(req.user);
+  } else {
+    res.status(401).json({ message: 'User not logged in' });
+  }
+});
+
 authRouter.post(
   '/local/signup',
   registerWithEmailAndPw,
   generateJwt,
   (req: Request, res: Response) => {
-    res.status(200).json(req.user);
+    res.redirect('http://localhost:3000/cluster');
   }
 );
 
@@ -22,7 +31,7 @@ authRouter.post(
   loginWithEmailAndPw,
   generateJwt,
   (req: Request, res: Response) => {
-    res.status(200).json(req.user);
+    res.redirect('http://localhost:3000/cluster');
   }
 );
 
@@ -35,13 +44,10 @@ authRouter.get(
 
 authRouter.get(
   '/google/callback',
-  passport.authenticate('google', {
-    failureRedirect: 'http://localhost:3000/auth/signin',
-  }),
+  passport.authenticate('google', { failureRedirect: '/login' }),
   generateJwt,
   (req: Request, res: Response) => {
-    console.log('here is where it fails: after generating jwt')
-    res.redirect('http://localhost:3000/dashboard/1');
+    res.redirect('http://localhost:3000/cluster');
   }
 );
 

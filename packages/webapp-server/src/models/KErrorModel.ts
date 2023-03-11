@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { Cluster } from './ClusterModel';
+import { ClusterDocument } from './ClusterModel';
 
 export interface NativeKEvent {
   type: string;
@@ -47,7 +47,7 @@ export interface KError {
   count: number;
   firstTimestamp: Date;
   lastTimestamp: Date;
-  cluster: Cluster;
+  cluster: ClusterDocument;
   nativeEvent: NativeKEvent;
 }
 

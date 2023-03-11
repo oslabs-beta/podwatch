@@ -1,6 +1,6 @@
-import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
-import { User } from './UserModel';
+import mongoose from 'mongoose';
+import { UserDocument } from './UserModel';
 
 export interface Cluster {
   /**
@@ -14,13 +14,11 @@ export interface Cluster {
   /**
    * The cluster's owner - this should be a reference to a user document.
    */
-  owner: User;
+  owner: UserDocument;
   /**
    * The cluster's members - this should be an array of references to user documents. These users will be permitted read access to this cluster's dashboard.
    */
-  members: User[];
-
-  id: string;
+  members: UserDocument[];
 }
 export interface ClusterAttrs extends Cluster {
   /**
@@ -88,9 +86,6 @@ const clusterSchema = new mongoose.Schema<ClusterAttrs>(
         default: [],
       },
     ],
-    id: {
-      type: String,
-    },
   },
   {
     toJSON: {
@@ -124,7 +119,8 @@ clusterSchema.pre('save', async function (done) {
 });
 
 clusterSchema.methods.compareSecret = async function (candidateSecret: string) {
-  return await bcrypt.compare(candidateSecret, this.secret);
+  const authenticated = await bcrypt.compare(candidateSecret, this.secret);
+  return authenticated;
 };
 
 clusterSchema.statics.generateSecret = async function () {

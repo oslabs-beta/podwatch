@@ -12,6 +12,7 @@ import {
   ListItemText,
 } from '@mui/material';
 import React from 'react';
+import useClusters from '../../hooks/useClusters';
 import { Cluster } from '../../types/Cluster';
 import styles from './Sidebar.module.scss';
 
@@ -22,8 +23,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ pageName }) => {
-  // TODO: Fetch clusters from API
-  const clusters: Cluster[] = [];
+  const { clusters } = useClusters();
 
   return (
     <div className={styles.container}>
