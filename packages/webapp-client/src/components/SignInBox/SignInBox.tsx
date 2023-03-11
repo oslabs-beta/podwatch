@@ -79,6 +79,7 @@ const SignInBox: React.FC<React.PropsWithChildren<SignInProps>> = () => {
             name="email"
             color="secondary"
             autoComplete="email"
+            sx={{ input: { color: 'white' } }}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             autoFocus
@@ -93,6 +94,7 @@ const SignInBox: React.FC<React.PropsWithChildren<SignInProps>> = () => {
             type="password"
             id="password"
             color="secondary"
+            sx={{ input: { color: 'white' } }}
             autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}

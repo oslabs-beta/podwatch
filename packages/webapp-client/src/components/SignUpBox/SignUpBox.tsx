@@ -87,6 +87,7 @@ catch(err){
                   fullWidth
                   id="firstName"
                   label="First Name"
+                  sx={{ input: { color: 'white' } }}
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                   autoFocus
@@ -101,6 +102,7 @@ catch(err){
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
+                  sx={{ input: { color: 'white' } }}
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                 />
@@ -114,6 +116,7 @@ catch(err){
                   label="Email Address"
                   name="email"
                   autoComplete="email"
+                  sx={{ input: { color: 'white' } }}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -128,6 +131,7 @@ catch(err){
                   type="password"
                   id="password"
                   autoComplete="new-password"
+                  sx={{ input: { color: 'white' } }}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
