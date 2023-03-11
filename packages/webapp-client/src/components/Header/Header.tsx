@@ -37,10 +37,11 @@ const Header = () => {
       <div className={styles.spacer}></div>
       <header className={styles.header}>
         <div className={styles.contents}>
-          <Button href='/'><Logo /></Button>
+          <Link href="/">
+            <Logo />
+          </Link>
           <Navigation
             items={[
-              { label: 'Sign In', href: '/auth/signin', visible: 'mobile' },
               { label: 'Docs', href: '/', visible: 'all' },
               { label: 'Examples', href: '/', visible: 'all' },
               { label: 'GitRepo', href: '/', visible: 'all' },

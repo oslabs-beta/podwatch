@@ -19,34 +19,40 @@ import TeamLink from '../TeamLink/TeamLink';
 const Footer = () => {
   const teamLinks = [
     {
+      name: 'Alex',
       image: Alex.src,
       github: 'https://github.com/WVAviator',
       linkedin: 'https://www.linkedin.com/in/wvaviator/',
       personal: 'https://www.wvaviator.com',
+      email: 'wvaviator@gmail.com',
     },
     {
+      name: 'Andrew',
       image: Andrew.src,
       github: 'https://github.com/drewluu',
       linkedin: 'https://www.linkedin.com/in/andrew-luu-143113b5/',
-      personal: 'drewluu24@gmail.com',
+      email: 'drewluu24@gmail.com',
     },
     {
+      name: 'Katherine',
       image: Katherine.src,
       github: 'https://github.com/',
       linkedin: 'https://www.linkedin.com/in/',
-      personal: 'kmcromer1@gmail.com',
+      email: 'kmcromer1@gmail.com',
     },
     {
+      name: 'Maria',
       image: Maria.src,
       github: 'https://github.com/mashkn',
       linkedin: 'https://www.linkedin.com/in/mariyanovok/',
-      personal: 'mariya.novokhatska@gmail.com',
+      email: 'mariya.novokhatska@gmail.com',
     },
     {
+      name: 'Roy',
       image: Roy.src,
       github: 'https://github.com/Hidinkyu',
       linkedin: 'https://www.linkedin.com/in/roysbae/',
-      personal: 'roysbae@gmail.com',
+      email: 'roysbae@gmail.com',
     },
   ];
   return (
@@ -57,10 +63,13 @@ const Footer = () => {
           <div className={styles.teamLinks}>
             {teamLinks.map((link) => (
               <TeamLink
+                key={link.name}
+                name={link.name}
                 image={link.image}
                 github={link.github}
                 linkedin={link.linkedin}
                 personal={link.personal}
+                email={link.email}
               />
             ))}
 

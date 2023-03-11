@@ -42,16 +42,16 @@ const ErrorItem: React.FC<ErrorItemProps> = ({ error, info }) => {
         <div className={styles.header}>
           <h2>{error.reason}</h2>
           <time>{`${new Date(
-            error.firstTimestamp
+            error.lastTimestamp
           ).toLocaleDateString()} ${new Date(
-            error.firstTimestamp
+            error.lastTimestamp
           ).toLocaleTimeString()}`}</time>
         </div>
       </div>
       {expanded && (
         <div className={styles.details}>
           <div className={styles.main}>
-            <h4>{error.type}</h4>
+            <h3>{error.type}</h3>
             <p>{error.message}</p>
             <p>Name: {error.name}</p>
             <p>Count: {error.count}</p>
