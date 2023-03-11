@@ -22,7 +22,7 @@ authRouter.post(
   registerWithEmailAndPw,
   generateJwt,
   (req: Request, res: Response) => {
-    res.redirect('http://localhost:3000/cluster');
+    res.status(200).send();
   }
 );
 
@@ -31,7 +31,7 @@ authRouter.post(
   loginWithEmailAndPw,
   generateJwt,
   (req: Request, res: Response) => {
-    res.redirect('http://localhost:3000/cluster');
+    res.status(200).send();
   }
 );
 

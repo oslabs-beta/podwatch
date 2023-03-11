@@ -25,7 +25,7 @@ const useAuthenticate = (redirect?: string) => {
       } catch (error) {
         console.error(error);
         if (redirect) {
-          router.push('/signin');
+          router.push('/auth/signin');
         }
       }
     };

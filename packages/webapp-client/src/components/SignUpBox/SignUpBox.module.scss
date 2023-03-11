@@ -1,0 +1,51 @@
+@use '../../styles/variables' as *;
+
+.main {
+    background-color: lighten($color-dark,10%);
+    height:100vh;
+}
+
+.innerBox {
+    padding-top: 2rem;
+    display: flex;
+    justify-content: center;
+}
+
+.input {
+    background-color: $color-dark;
+    color: $color-secondary;
+    border-radius: 5px;
+    label {
+        color: $color-white;
+        font-size: 10pt;
+    }
+}
+
+.oauthIcons {
+    display: flex;
+    justify-content: center;
+
+}
+
+.oauthItem {
+    color: $color-white;
+    margin: 2rem;
+    font-size: 40pt;
+}
+
+.form {
+    max-width: 50rem;
+
+}
+
+.button {
+    background-color: $color-secondary;
+    border-radius: 20px;
+}
+
+.Box {
+    margin-top: 8;
+    display: 'flex';
+    flex-direction: 'column';
+    align-items: 'center';
+}

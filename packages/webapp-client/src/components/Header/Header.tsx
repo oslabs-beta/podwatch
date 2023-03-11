@@ -13,20 +13,11 @@ const Header = () => {
   const getUserAvatar = () => {
     if (!user) {
       return (
-        <Link href="/signin">
+        <Link href="/auth/signin">
           <Button
             variant="contained"
             color="secondary"
             sx={{ minWidth: '6rem' }}
-            // onClick={() =>
-            //   // TODO: Replace with navigation to login page
-            //   setUser({
-            //     id: '1',
-            //     provider: 'google',
-            //     email: 'a@a.a',
-            //     avatar: 'https://source.unsplash.com/random/?headshot',
-            //   })
-            // }
           >
             Sign In
           </Button>
@@ -46,9 +37,10 @@ const Header = () => {
       <div className={styles.spacer}></div>
       <header className={styles.header}>
         <div className={styles.contents}>
-          <Logo />
+          <Button href='/'><Logo /></Button>
           <Navigation
             items={[
+              { label: 'Sign In', href: '/auth/signin', visible: 'mobile' },
               { label: 'Docs', href: '/', visible: 'all' },
               { label: 'Examples', href: '/', visible: 'all' },
               { label: 'GitRepo', href: '/', visible: 'all' },
