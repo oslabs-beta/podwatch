@@ -2,6 +2,7 @@ import DataUsageOutlinedIcon from '@mui/icons-material/DataUsageOutlined';
 import HexagonOutlinedIcon from '@mui/icons-material/HexagonOutlined';
 import SettingsIcon from '@mui/icons-material/Settings';
 import TokenIcon from '@mui/icons-material/Token';
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import {
   Divider,
   Drawer,
@@ -11,6 +12,7 @@ import {
   ListItemIcon,
   ListItemText,
 } from '@mui/material';
+import Link from 'next/link';
 import React from 'react';
 import useClusters from '../../hooks/useClusters';
 import { Cluster } from '../../types/Cluster';
@@ -64,18 +66,30 @@ const Sidebar: React.FC<SidebarProps> = ({ pageName }) => {
             <ListItemText primary={'Quick View'} />
           </ListItem>
           {clusters.map((cluster, index) => (
-            <ListItem key={cluster.id} disablePadding>
-              <ListItemButton>
-                <ListItemIcon>
-                  <TokenIcon />
-                </ListItemIcon>
-                <ListItemText primary={cluster.name} />
-              </ListItemButton>
-            </ListItem>
+            <Link href={`/dashboard/${cluster.id}`}>
+              <ListItem key={cluster.id} disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <TokenIcon />
+                  </ListItemIcon>
+                  <ListItemText primary={cluster.name} />
+                </ListItemButton>
+              </ListItem>
+            </Link>
           ))}
         </List>
         <Divider sx={{ marginTop: 'auto' }} />
         <List>
+          <Link href={'/cluster/create'}>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <AddCircleOutlineIcon />
+                </ListItemIcon>
+                <ListItemText primary="Create Cluster" />
+              </ListItemButton>
+            </ListItem>
+          </Link>
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>

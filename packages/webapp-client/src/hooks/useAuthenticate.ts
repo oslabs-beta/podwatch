@@ -23,7 +23,7 @@ const useAuthenticate = (redirect?: string) => {
         setUser(data);
         return;
       } catch (error) {
-        console.error(error);
+        console.log(`User not signed in.${redirect ? ' Redirecting...' : ''}}`);
         if (redirect) {
           router.push('/auth/signin');
         }
