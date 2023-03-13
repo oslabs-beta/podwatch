@@ -1,4 +1,4 @@
-import { JsonStreamParser } from './JsonStreamParser';
+import { JsonStreamParser } from './json-parser/JsonStreamParser';
 import { EventDispatcher } from './EventDispatcher';
 import { KEventReceiver } from './EventReceiver';
 import { EnvConfiguration } from './configuration/environment/EnvConfiguration';
