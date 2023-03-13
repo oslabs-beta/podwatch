@@ -1,7 +1,7 @@
 import { NativeKEvent } from './utils/types';
 import { AxiosInstance } from 'axios';
 import { JsonStreamParser } from './json-parser/JsonStreamParser';
-import { EventDispatcher } from './EventDispatcher';
+import { EventDispatcher } from './dispatcher/EventDispatcher';
 
 export class KEventReceiver {
   private resourceVersion: string | null = null;

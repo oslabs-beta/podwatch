@@ -1,6 +1,9 @@
 import { AxiosInstance } from 'axios';
-import { MAX_DISPATCH_QUEUE_SIZE } from './utils/constants';
-import { KError, NativeKEvent } from './utils/types';
+import {
+  DISPATCH_IDLE_TIMEOUT,
+  MAX_DISPATCH_QUEUE_SIZE,
+} from '../utils/constants';
+import { KError, NativeKEvent } from '../utils/types';
 
 export class EventDispatcher {
   private timeout: NodeJS.Timeout | null = null;
@@ -29,13 +32,14 @@ export class EventDispatcher {
 
     this.timeout = setTimeout(async () => {
       await this.sendData();
-    });
+    }, DISPATCH_IDLE_TIMEOUT);
   }
 
   private async sendData() {
     try {
-      await this.webhookInstance.post('/', this.dataQueue);
+      const data = this.dataQueue;
       this.dataQueue = [];
+      await this.webhookInstance.post('/', data);
     } catch (error) {
       console.error(error);
     }

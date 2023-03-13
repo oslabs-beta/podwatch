@@ -1,5 +1,5 @@
 import { JsonStreamParser } from './json-parser/JsonStreamParser';
-import { EventDispatcher } from './EventDispatcher';
+import { EventDispatcher } from './dispatcher/EventDispatcher';
 import { KEventReceiver } from './EventReceiver';
 import { EnvConfiguration } from './configuration/environment/EnvConfiguration';
 import { Logger } from './logger/Logger';
