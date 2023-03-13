@@ -1,6 +1,6 @@
 import { JsonStreamParser } from './json-parser/JsonStreamParser';
 import { EventDispatcher } from './dispatcher/EventDispatcher';
-import { KEventReceiver } from './EventReceiver';
+import { EventReceiver } from './receiver/EventReceiver';
 import { EnvConfiguration } from './configuration/environment/EnvConfiguration';
 import { Logger } from './logger/Logger';
 import { KubernetesInstanceFactory } from './axios-instances/KubernetesInstanceFactory';
@@ -37,7 +37,7 @@ logger.log('Instantiating event dispatcher');
 const eventDispatcher = new EventDispatcher(webhookInstance);
 
 logger.log('Instantiating event receiver');
-const receiver = new KEventReceiver(
+const receiver = new EventReceiver(
   kubernetesInstance,
   jsonStreamParser,
   eventDispatcher
