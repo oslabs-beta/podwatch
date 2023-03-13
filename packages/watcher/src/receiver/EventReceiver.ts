@@ -1,4 +1,4 @@
-import { NativeKEvent } from '../utils/types';
+import { NativeKEvent } from '../types/types';
 import { AxiosInstance } from 'axios';
 import { JsonStreamParser } from '../json-parser/JsonStreamParser';
 import { EventDispatcher } from '../dispatcher/EventDispatcher';

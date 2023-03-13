@@ -18,6 +18,11 @@ const config = new EnvConfiguration(
     PODWATCH_CUSTOM_SERVER_URL: process.env.PODWATCH_CUSTOM_SERVER_URL,
     PODWATCH_CLIENT_ID: process.env.PODWATCH_CLIENT_ID,
     PODWATCH_CLIENT_SECRET: process.env.PODWATCH_CLIENT_SECRET,
+    MAX_DISPATCH_QUEUE_SIZE: process.env.MAX_DISPATCH_QUEUE_SIZE,
+    DISPATCH_IDLE_TIMEOUT: process.env.DISPATCH_IDLE_TIMEOUT,
+    WEBHOOK_INSTANCE_TIMEOUT: process.env.WEBHOOK_INSTANCE_TIMEOUT,
+    PODWATCH_WEB_SERVICE_URL: process.env.PODWATCH_WEB_SERVICE_URL,
+    EXTERNAL_KUBERNETES_PROXY_HOST: process.env.EXTERNAL_KUBERNETES_PROXY_HOST,
   },
   logger
 );
@@ -34,7 +39,7 @@ logger.log('Instantiating JSON stream parser');
 const jsonStreamParser = new JsonStreamParser();
 
 logger.log('Instantiating event dispatcher');
-const eventDispatcher = new EventDispatcher(webhookInstance, logger);
+const eventDispatcher = new EventDispatcher(webhookInstance, config, logger);
 
 logger.log('Instantiating event receiver');
 const receiver = new EventReceiver(

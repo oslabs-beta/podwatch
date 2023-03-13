@@ -1,4 +1,3 @@
-import { EXTERNAL_KUBERNETES_PROXY_HOST } from './../utils/constants';
 import axios from 'axios';
 import { AxiosInstanceFactory } from './AxiosInstanceFactory';
 import fs from 'fs';
@@ -21,7 +20,7 @@ export class KubernetesInstanceFactory extends AxiosInstanceFactory {
 
   private createExternalInstance() {
     const token = this.config.get('PODWATCH_SERVICE_ACCOUNT_TOKEN');
-    const host = EXTERNAL_KUBERNETES_PROXY_HOST;
+    const host = this.config.get('EXTERNAL_KUBERNETES_PROXY_HOST');
     const port = this.config.get('PODWATCH_PORT');
     return axios.create({
       baseURL: `${host}:${port}`,

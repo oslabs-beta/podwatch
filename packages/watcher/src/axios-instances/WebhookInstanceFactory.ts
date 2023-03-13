@@ -1,8 +1,4 @@
 import axios, { AxiosInstance } from 'axios';
-import {
-  PODWATCH_WEB_SERVICE_URL,
-  WEBHOOK_INSTANCE_TIMEOUT,
-} from '../utils/constants';
 import { AxiosInstanceFactory } from './AxiosInstanceFactory';
 
 export class WebhookInstanceFactory extends AxiosInstanceFactory {
@@ -21,24 +17,27 @@ export class WebhookInstanceFactory extends AxiosInstanceFactory {
   }
 
   private createCustomServerInstance(): AxiosInstance {
-    const url = this.config.get('PODWATCH_CUSTOM_SERVER_URL');
+    const baseURL = this.config.get('PODWATCH_CUSTOM_SERVER_URL');
+    const timeout = Number(this.config.get('WEBHOOK_INSTANCE_TIMEOUT'));
 
     return axios.create({
-      baseURL: url,
-      timeout: WEBHOOK_INSTANCE_TIMEOUT,
+      baseURL,
+      timeout,
     });
   }
 
   private createWebInstance(): AxiosInstance {
-    const id = this.config.get('PODWATCH_CLIENT_ID');
-    const secret = this.config.get('PODWATCH_CLIENT_SECRET');
+    const clusterId = this.config.get('PODWATCH_CLIENT_ID');
+    const clusterSecret = this.config.get('PODWATCH_CLIENT_SECRET');
+    const baseURL = this.config.get('PODWATCH_WEB_SERVICE_URL');
+    const timeout = Number(this.config.get('WEBHOOK_INSTANCE_TIMEOUT'));
 
     return axios.create({
-      baseURL: PODWATCH_WEB_SERVICE_URL,
-      timeout: WEBHOOK_INSTANCE_TIMEOUT,
+      baseURL,
+      timeout,
       headers: {
-        clusterid: id,
-        clustersecret: secret,
+        'Cluster-ID': clusterId,
+        'Cluster-Secret': clusterSecret,
       },
     });
   }

@@ -1,10 +1,7 @@
-import { AxiosError, AxiosInstance } from 'axios';
+import { AxiosInstance } from 'axios';
+import { EnvConfiguration } from '../configuration/environment/EnvConfiguration';
 import { Logger } from '../logger/Logger';
-import {
-  DISPATCH_IDLE_TIMEOUT,
-  MAX_DISPATCH_QUEUE_SIZE,
-} from '../utils/constants';
-import { KError, NativeKEvent } from '../utils/types';
+import { KError, NativeKEvent } from '../types/types';
 
 export class EventDispatcher {
   private timeout: NodeJS.Timeout | null = null;
@@ -12,6 +9,7 @@ export class EventDispatcher {
 
   constructor(
     private readonly webhookInstance: AxiosInstance,
+    private readonly config: EnvConfiguration,
     private readonly logger: Logger
   ) {}
 
@@ -24,13 +22,16 @@ export class EventDispatcher {
   }
 
   private enqueueData(kError: KError) {
+    const maxQueueLength = Number(this.config.get('MAX_DISPATCH_QUEUE_SIZE'));
+    const idleTimeout = Number(this.config.get('DISPATCH_IDLE_TIMEOUT'));
+
     this.dataQueue.push(kError);
 
     if (this.timeout) {
       clearTimeout(this.timeout);
     }
 
-    if (this.dataQueue.length >= MAX_DISPATCH_QUEUE_SIZE) {
+    if (this.dataQueue.length >= maxQueueLength) {
       this.logger.log(
         `Dispatching ${this.dataQueue.length} queued errors (max queue length reached)`
       );
@@ -43,14 +44,14 @@ export class EventDispatcher {
         `Dispatching ${this.dataQueue.length} queued errors (idle timeout reached)`
       );
       await this.sendData();
-    }, DISPATCH_IDLE_TIMEOUT);
+    }, idleTimeout);
   }
 
   private async sendData() {
     try {
       const data = this.dataQueue;
       this.dataQueue = [];
-      await this.webhookInstance.post('/', data);
+      await this.webhookInstance.post('/watch', data);
     } catch (error: any) {
       this.logger.error(
         'Encountered an error dispatching error data: ',

@@ -2,8 +2,8 @@ import { AxiosInstance } from 'axios';
 import {
   DISPATCH_IDLE_TIMEOUT,
   MAX_DISPATCH_QUEUE_SIZE,
-} from '../utils/constants';
-import { NativeKEvent } from '../utils/types';
+} from '../types/constants';
+import { NativeKEvent } from '../types/types';
 import { EventDispatcher } from './EventDispatcher';
 
 describe('EventDispatcher', () => {

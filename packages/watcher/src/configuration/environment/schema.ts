@@ -8,6 +8,11 @@ export interface EnvSchema {
   PODWATCH_CUSTOM_SERVER_URL: string | undefined;
   PODWATCH_CLIENT_ID: string | undefined;
   PODWATCH_CLIENT_SECRET: string | undefined;
+  MAX_DISPATCH_QUEUE_SIZE: string | undefined;
+  DISPATCH_IDLE_TIMEOUT: string | undefined;
+  WEBHOOK_INSTANCE_TIMEOUT: string | undefined;
+  PODWATCH_WEB_SERVICE_URL: string | undefined;
+  EXTERNAL_KUBERNETES_PROXY_HOST: string | undefined;
 }
 
 const envSchema = Joi.object({
@@ -56,6 +61,15 @@ const envSchema = Joi.object({
       'any.only': 'Please set the PODWATCH_CLIENT_SECRET environment variable.',
     }),
   }),
+  MAX_DISPATCH_QUEUE_SIZE: Joi.string().default('20'),
+  DISPATCH_IDLE_TIMEOUT: Joi.string().default('1000'),
+  WEBHOOK_INSTANCE_TIMEOUT: Joi.string().default('2500'),
+  PODWATCH_WEB_SERVICE_URL: Joi.string().default(
+    'http://host.docker.internal:3001'
+  ),
+  EXTERNAL_KUBERNETES_PROXY_HOST: Joi.string().default(
+    'http://host.docker.internal'
+  ),
 })
   .and('KUBERNETES_SERVICE_HOST', 'KUBERNETES_SERVICE_PORT')
   .and('PODWATCH_CLIENT_ID', 'PODWATCH_CLIENT_SECRET')
