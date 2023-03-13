@@ -34,13 +34,14 @@ logger.log('Instantiating JSON stream parser');
 const jsonStreamParser = new JsonStreamParser();
 
 logger.log('Instantiating event dispatcher');
-const eventDispatcher = new EventDispatcher(webhookInstance);
+const eventDispatcher = new EventDispatcher(webhookInstance, logger);
 
 logger.log('Instantiating event receiver');
 const receiver = new EventReceiver(
   kubernetesInstance,
   jsonStreamParser,
-  eventDispatcher
+  eventDispatcher,
+  logger
 );
 
 logger.log('Starting event receiver');

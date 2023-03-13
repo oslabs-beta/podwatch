@@ -3,6 +3,7 @@ import { AxiosInstance } from 'axios';
 import { EventReceiver } from './EventReceiver';
 import { EventDispatcher } from '../dispatcher/EventDispatcher';
 import { Readable } from 'stream';
+import { Logger } from '../logger/Logger';
 
 describe('EventReceiver', () => {
   const mockStream = {
@@ -39,10 +40,16 @@ describe('EventReceiver', () => {
     dispatch: jest.fn(),
   } as unknown as EventDispatcher;
 
+  const mockLogger = {
+    log: jest.fn(),
+    error: jest.fn(),
+  } as unknown as Logger;
+
   const receiver: EventReceiver = new EventReceiver(
     mockKubernetesInstance,
     mockJsonParser,
-    mockDispatcher
+    mockDispatcher,
+    mockLogger
   );
 
   it('should be defined', () => {

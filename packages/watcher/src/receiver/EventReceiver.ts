@@ -2,6 +2,7 @@ import { NativeKEvent } from '../utils/types';
 import { AxiosInstance } from 'axios';
 import { JsonStreamParser } from '../json-parser/JsonStreamParser';
 import { EventDispatcher } from '../dispatcher/EventDispatcher';
+import { Logger } from '../logger/Logger';
 
 export class EventReceiver {
   private resourceVersion: string | null = null;
@@ -11,7 +12,8 @@ export class EventReceiver {
   constructor(
     private readonly kubernetesInstance: AxiosInstance,
     private readonly jsonStreamParser: JsonStreamParser,
-    private readonly eventDispatcher: EventDispatcher
+    private readonly eventDispatcher: EventDispatcher,
+    private readonly logger: Logger
   ) {
     this.jsonStreamParser.on('json', this.handleStreamEventReceived);
     this.jsonStreamParser.on('error', this.handleStreamError);
@@ -24,7 +26,7 @@ export class EventReceiver {
   }
 
   private handleStreamEventReceived(event: NativeKEvent) {
-    console.log('Received event with reason: ', event.object.reason);
+    this.logger.log('Received event with reason: ', event.object.reason);
 
     if (event.type === 'ERROR') {
       // Sometimes an error event will emit when the resource version is too old
@@ -45,15 +47,14 @@ export class EventReceiver {
       const events = response.data.items;
       const lastEvent = events[events.length - 1];
 
-      console.log(
+      this.logger.log(
         'Setting initial resource version to: ',
         lastEvent.metadata.resourceVersion
       );
 
       this.resourceVersion = lastEvent.metadata.resourceVersion;
     } catch (error) {
-      console.error('Error getting initial resource version: ');
-      console.error(error);
+      this.logger.error('Error getting initial resource version: ', error);
       this.resourceVersion = null;
     }
   }
@@ -66,7 +67,7 @@ export class EventReceiver {
     }
 
     const endpoint = `/api/v1/events?${params.toString()}`;
-    console.log('Establishing event stream from endpoint: ', endpoint);
+    this.logger.log('Establishing event stream from endpoint: ', endpoint);
 
     try {
       const response = await this.kubernetesInstance.get(endpoint, {
@@ -76,7 +77,7 @@ export class EventReceiver {
       this.stream.pipe(this.jsonStreamParser);
 
       // this.jsonStreamParser.on('json', (event: NativeKEvent) => {
-      //   console.log('Received event with reason: ', event.object.reason);
+      //   this.logger.log('Received event with reason: ', event.object.reason);
 
       //   if (event.type === 'ERROR') {
       //     // Sometimes an error event will emit when the resource version is too old
@@ -92,18 +93,18 @@ export class EventReceiver {
       // });
 
       // this.jsonStreamParser.on('error', (error: any) => {
-      //   console.log('Error occurred while parsing event stream:');
-      //   console.error(error);
+      //   this.logger.log('Error occurred while parsing event stream:');
+      //   this.logger.error(error);
 
       //   this.handleStreamError(error);
       // });
 
       // this.jsonStreamParser.on('close', () => {
-      //   console.log(`Event stream ended by server.`);
+      //   this.logger.log(`Event stream ended by server.`);
 
       //   this.ejectStream();
 
-      //   console.log(
+      //   this.logger.log(
       //     `Reconnecting with last resource version: ${this.resourceVersion}`
       //   );
       //   this.establishEventStream();
@@ -128,8 +129,8 @@ export class EventReceiver {
   }
 
   private handleStreamError(error: any) {
-    console.error('Error in event stream: ');
-    console.error(error);
+    this.logger.error('Error in event stream: ');
+    this.logger.error(error);
 
     this.ejectStream();
     if (!this.shouldRestart()) {
@@ -137,7 +138,7 @@ export class EventReceiver {
     }
 
     setTimeout(() => {
-      console.log(
+      this.logger.log(
         `Retrying with last resource version: ${this.resourceVersion}`
       );
       this.establishEventStream();
@@ -151,7 +152,7 @@ export class EventReceiver {
     }, 5000);
 
     if (this.restartAttempts >= 3) {
-      console.error(
+      this.logger.error(
         `Too many restart attempts (${this.restartAttempts} attempts in the last 5 seconds).`
       );
       return false;
