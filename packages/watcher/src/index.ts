@@ -1,14 +1,15 @@
 import { JsonStreamParser } from './JsonStreamParser';
-import kubernetesInstance from './axios-kub';
-import webhookInstance from './axios-webhook';
 import { EventDispatcher } from './EventDispatcher';
 import { KEventReceiver } from './EventReceiver';
 import { EnvConfiguration } from './configuration/environment/EnvConfiguration';
 import { Logger } from './logger/Logger';
+import { KubernetesInstanceFactory } from './axios-instances/KubernetesInstanceFactory';
+import { WebhookInstanceFactory } from './axios-instances/WebhookInstanceFactory';
 
 const logger = new Logger();
 
-const configuration = new EnvConfiguration(
+logger.log('Building environment configuration');
+const config = new EnvConfiguration(
   {
     KUBERNETES_SERVICE_HOST: process.env.KUBERNETES_SERVICE_HOST,
     KUBERNETES_SERVICE_PORT: process.env.KUBERNETES_SERVICE_PORT,
@@ -21,18 +22,26 @@ const configuration = new EnvConfiguration(
   logger
 );
 
-console.log('Instantiating JSON stream parser');
+logger.log('Creating connection instance for cluster');
+const kubernetesInstanceFactory = new KubernetesInstanceFactory(config, logger);
+const kubernetesInstance = kubernetesInstanceFactory.create();
+
+logger.log('Create connection instance for webhook');
+const webhookInstanceFactory = new WebhookInstanceFactory(config, logger);
+const webhookInstance = webhookInstanceFactory.create();
+
+logger.log('Instantiating JSON stream parser');
 const jsonStreamParser = new JsonStreamParser();
 
-console.log('Instantiating event dispatcher');
+logger.log('Instantiating event dispatcher');
 const eventDispatcher = new EventDispatcher(webhookInstance);
 
-console.log('Instantiating event receiver');
+logger.log('Instantiating event receiver');
 const receiver = new KEventReceiver(
   kubernetesInstance,
   jsonStreamParser,
   eventDispatcher
 );
 
-console.log('Starting event receiver');
+logger.log('Starting event receiver');
 receiver.start();

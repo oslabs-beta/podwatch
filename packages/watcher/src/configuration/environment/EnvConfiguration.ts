@@ -2,7 +2,7 @@ import Joi from 'joi';
 import { Logger } from '../../logger/Logger';
 import { Configuration } from '../Configuration';
 import { InvalidEnvironmentException } from './InvalidEnvironmentException';
-import envSchema, { EnvSchema } from './environment-schema';
+import envSchema, { EnvSchema } from './schema';
 
 export class EnvConfiguration extends Configuration<EnvSchema> {
   constructor(env: EnvSchema, logger: Logger) {
