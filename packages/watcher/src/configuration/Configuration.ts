@@ -1,30 +1,42 @@
 import Joi from 'joi';
+import { Logger } from '../logger/Logger';
 
 export abstract class Configuration<T> {
-  protected readonly env: T;
-  protected readonly schema: Joi.ObjectSchema;
-
-  constructor(env: T, schema: Joi.ObjectSchema) {
-    this.env = env;
-    this.schema = schema;
-  }
+  constructor(
+    protected readonly env: T,
+    protected readonly schema: Joi.ObjectSchema,
+    protected readonly logger: Logger
+  ) {}
 
   public abstract get(key: keyof T): string | undefined;
 
-  protected async validate() {
+  public async validate() {
     try {
-      const { warning } = await this.schema.validateAsync(this.env, {
+      const validation = await this.schema.validateAsync(this.env, {
         warnings: true,
       });
 
+      const warning = validation.warning as unknown as Joi.ValidationError;
+
       if (warning) {
-        warning.forEach((warning) => {
-          console.warn(warning.message);
-        });
+        this.handleWarning(warning);
       }
-    } catch (error) {
-      console.error(error);
-      process.exit(1);
+
+      this.logger.log('Configuration validated');
+    } catch (error: any) {
+      this.handleError(error);
     }
+  }
+
+  protected handleWarning(warning: Joi.ValidationError) {
+    warning.details.forEach((warning) => {
+      this.logger.warn(warning.message);
+    });
+  }
+
+  protected handleError(error: Joi.ValidationError) {
+    error.details.forEach((error) => {
+      this.logger.error(error.message);
+    });
   }
 }
