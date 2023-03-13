@@ -1,16 +1,36 @@
 import { AxiosInstance } from 'axios';
-import {
-  DISPATCH_IDLE_TIMEOUT,
-  MAX_DISPATCH_QUEUE_SIZE,
-} from '../types/constants';
+import { EnvConfiguration } from '../configuration/environment/EnvConfiguration';
+import { Logger } from '../logger/Logger';
 import { NativeKEvent } from '../types/types';
 import { EventDispatcher } from './EventDispatcher';
+
+const DISPATCH_IDLE_TIMEOUT = 100;
+const MAX_DISPATCH_QUEUE_SIZE = 5;
 
 describe('EventDispatcher', () => {
   const mockWebhookInstance = {
     post: jest.fn(),
   } as unknown as AxiosInstance;
-  const dispatcher: EventDispatcher = new EventDispatcher(mockWebhookInstance);
+
+  const mockConfig = {
+    get: jest.fn((key: string) => {
+      return {
+        DISPATCH_IDLE_TIMEOUT,
+        MAX_DISPATCH_QUEUE_SIZE,
+      }[key];
+    }),
+  } as unknown as EnvConfiguration;
+
+  const mockLogger = {
+    log: jest.fn(),
+    error: jest.fn(),
+  } as unknown as Logger;
+
+  const dispatcher: EventDispatcher = new EventDispatcher(
+    mockWebhookInstance,
+    mockConfig,
+    mockLogger
+  );
 
   const mockEvent = {
     object: {
@@ -53,7 +73,7 @@ describe('EventDispatcher', () => {
     await delay(DISPATCH_IDLE_TIMEOUT + 100);
 
     expect(mockWebhookInstance.post).toHaveBeenCalledTimes(1);
-    expect(mockWebhookInstance.post).toHaveBeenCalledWith('/', [
+    expect(mockWebhookInstance.post).toHaveBeenCalledWith('/watch', [
       convertedEvent,
     ]);
   });
@@ -65,7 +85,7 @@ describe('EventDispatcher', () => {
     await delay(DISPATCH_IDLE_TIMEOUT + 100);
 
     expect(mockWebhookInstance.post).toHaveBeenCalledTimes(1);
-    expect(mockWebhookInstance.post).toHaveBeenCalledWith('/', [
+    expect(mockWebhookInstance.post).toHaveBeenCalledWith('/watch', [
       convertedEvent,
       convertedEvent,
     ]);

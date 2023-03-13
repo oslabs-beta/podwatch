@@ -22,6 +22,11 @@ describe('EnvConfiguration', () => {
         PODWATCH_CUSTOM_SERVER_URL: undefined,
         PODWATCH_CLIENT_ID: 'test',
         PODWATCH_CLIENT_SECRET: 'test',
+        MAX_DISPATCH_QUEUE_SIZE: undefined,
+        DISPATCH_IDLE_TIMEOUT: undefined,
+        WEBHOOK_INSTANCE_TIMEOUT: undefined,
+        PODWATCH_WEB_SERVICE_URL: undefined,
+        EXTERNAL_KUBERNETES_PROXY_HOST: undefined,
       },
       logger
     );
@@ -41,6 +46,11 @@ describe('EnvConfiguration', () => {
         PODWATCH_CUSTOM_SERVER_URL: 'https://localhost:3000',
         PODWATCH_CLIENT_ID: undefined,
         PODWATCH_CLIENT_SECRET: undefined,
+        MAX_DISPATCH_QUEUE_SIZE: undefined,
+        DISPATCH_IDLE_TIMEOUT: undefined,
+        WEBHOOK_INSTANCE_TIMEOUT: undefined,
+        PODWATCH_WEB_SERVICE_URL: undefined,
+        EXTERNAL_KUBERNETES_PROXY_HOST: undefined,
       },
       logger
     );
@@ -60,6 +70,11 @@ describe('EnvConfiguration', () => {
         PODWATCH_CUSTOM_SERVER_URL: undefined,
         PODWATCH_CLIENT_ID: 'test',
         PODWATCH_CLIENT_SECRET: 'test',
+        MAX_DISPATCH_QUEUE_SIZE: undefined,
+        DISPATCH_IDLE_TIMEOUT: undefined,
+        WEBHOOK_INSTANCE_TIMEOUT: undefined,
+        PODWATCH_WEB_SERVICE_URL: undefined,
+        EXTERNAL_KUBERNETES_PROXY_HOST: undefined,
       },
       logger
     );
@@ -79,6 +94,11 @@ describe('EnvConfiguration', () => {
         PODWATCH_CUSTOM_SERVER_URL: undefined,
         PODWATCH_CLIENT_ID: 'test',
         PODWATCH_CLIENT_SECRET: 'test',
+        MAX_DISPATCH_QUEUE_SIZE: undefined,
+        DISPATCH_IDLE_TIMEOUT: undefined,
+        WEBHOOK_INSTANCE_TIMEOUT: undefined,
+        PODWATCH_WEB_SERVICE_URL: undefined,
+        EXTERNAL_KUBERNETES_PROXY_HOST: undefined,
       },
       logger
     );
@@ -100,6 +120,11 @@ describe('EnvConfiguration', () => {
         PODWATCH_CUSTOM_SERVER_URL: 'test',
         PODWATCH_CLIENT_ID: 'test',
         PODWATCH_CLIENT_SECRET: 'test',
+        MAX_DISPATCH_QUEUE_SIZE: undefined,
+        DISPATCH_IDLE_TIMEOUT: undefined,
+        WEBHOOK_INSTANCE_TIMEOUT: undefined,
+        PODWATCH_WEB_SERVICE_URL: undefined,
+        EXTERNAL_KUBERNETES_PROXY_HOST: undefined,
       },
       logger
     );
@@ -121,6 +146,11 @@ describe('EnvConfiguration', () => {
         PODWATCH_CUSTOM_SERVER_URL: 'test',
         PODWATCH_CLIENT_ID: undefined,
         PODWATCH_CLIENT_SECRET: undefined,
+        MAX_DISPATCH_QUEUE_SIZE: undefined,
+        DISPATCH_IDLE_TIMEOUT: undefined,
+        WEBHOOK_INSTANCE_TIMEOUT: undefined,
+        PODWATCH_WEB_SERVICE_URL: undefined,
+        EXTERNAL_KUBERNETES_PROXY_HOST: undefined,
       },
       logger
     );
@@ -142,6 +172,11 @@ describe('EnvConfiguration', () => {
         PODWATCH_CUSTOM_SERVER_URL: undefined,
         PODWATCH_CLIENT_ID: undefined,
         PODWATCH_CLIENT_SECRET: undefined,
+        MAX_DISPATCH_QUEUE_SIZE: undefined,
+        DISPATCH_IDLE_TIMEOUT: undefined,
+        WEBHOOK_INSTANCE_TIMEOUT: undefined,
+        PODWATCH_WEB_SERVICE_URL: undefined,
+        EXTERNAL_KUBERNETES_PROXY_HOST: undefined,
       },
       logger
     );
@@ -163,6 +198,11 @@ describe('EnvConfiguration', () => {
         PODWATCH_CUSTOM_SERVER_URL: 'test',
         PODWATCH_CLIENT_ID: undefined,
         PODWATCH_CLIENT_SECRET: undefined,
+        MAX_DISPATCH_QUEUE_SIZE: undefined,
+        DISPATCH_IDLE_TIMEOUT: undefined,
+        WEBHOOK_INSTANCE_TIMEOUT: undefined,
+        PODWATCH_WEB_SERVICE_URL: undefined,
+        EXTERNAL_KUBERNETES_PROXY_HOST: undefined,
       },
       logger
     );
@@ -184,6 +224,11 @@ describe('EnvConfiguration', () => {
         PODWATCH_CUSTOM_SERVER_URL: 'test',
         PODWATCH_CLIENT_ID: undefined,
         PODWATCH_CLIENT_SECRET: undefined,
+        MAX_DISPATCH_QUEUE_SIZE: undefined,
+        DISPATCH_IDLE_TIMEOUT: undefined,
+        WEBHOOK_INSTANCE_TIMEOUT: undefined,
+        PODWATCH_WEB_SERVICE_URL: undefined,
+        EXTERNAL_KUBERNETES_PROXY_HOST: undefined,
       },
       logger
     );
@@ -205,6 +250,11 @@ describe('EnvConfiguration', () => {
         PODWATCH_CUSTOM_SERVER_URL: undefined,
         PODWATCH_CLIENT_ID: undefined,
         PODWATCH_CLIENT_SECRET: 'test',
+        MAX_DISPATCH_QUEUE_SIZE: undefined,
+        DISPATCH_IDLE_TIMEOUT: undefined,
+        WEBHOOK_INSTANCE_TIMEOUT: undefined,
+        PODWATCH_WEB_SERVICE_URL: undefined,
+        EXTERNAL_KUBERNETES_PROXY_HOST: undefined,
       },
       logger
     );
@@ -215,5 +265,33 @@ describe('EnvConfiguration', () => {
       InvalidEnvironmentException
     );
     expect(errorSpy).toHaveBeenCalledTimes(1);
+  });
+
+  it('sets default values for optional env vars', async () => {
+    const config = new EnvConfiguration(
+      {
+        KUBERNETES_SERVICE_HOST: undefined,
+        KUBERNETES_SERVICE_PORT: undefined,
+        PODWATCH_SERVICE_ACCOUNT_TOKEN: 'test',
+        PODWATCH_PORT: '8080',
+        PODWATCH_CUSTOM_SERVER_URL: 'test',
+        PODWATCH_CLIENT_ID: undefined,
+        PODWATCH_CLIENT_SECRET: undefined,
+        MAX_DISPATCH_QUEUE_SIZE: undefined,
+        DISPATCH_IDLE_TIMEOUT: undefined,
+        WEBHOOK_INSTANCE_TIMEOUT: undefined,
+        PODWATCH_WEB_SERVICE_URL: undefined,
+        EXTERNAL_KUBERNETES_PROXY_HOST: undefined,
+      },
+      logger
+    );
+
+    await expect(config.validate()).resolves.toBeUndefined();
+
+    expect(config.get('MAX_DISPATCH_QUEUE_SIZE')).toBeDefined();
+    expect(config.get('DISPATCH_IDLE_TIMEOUT')).toBeDefined();
+    expect(config.get('WEBHOOK_INSTANCE_TIMEOUT')).toBeDefined();
+    expect(config.get('PODWATCH_WEB_SERVICE_URL')).toBeDefined();
+    expect(config.get('EXTERNAL_KUBERNETES_PROXY_HOST')).toBeDefined();
   });
 });

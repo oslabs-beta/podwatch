@@ -3,7 +3,7 @@ import { Logger } from '../logger/Logger';
 
 export abstract class Configuration<T> {
   constructor(
-    protected readonly env: T,
+    protected env: T,
     protected readonly schema: Joi.ObjectSchema,
     protected readonly logger: Logger
   ) {}
@@ -22,6 +22,7 @@ export abstract class Configuration<T> {
         this.handleWarning(warning);
       }
 
+      this.env = validation.value as T;
       this.logger.log('Configuration validated');
     } catch (error: any) {
       this.handleError(error);

@@ -61,9 +61,15 @@ const envSchema = Joi.object({
       'any.only': 'Please set the PODWATCH_CLIENT_SECRET environment variable.',
     }),
   }),
-  MAX_DISPATCH_QUEUE_SIZE: Joi.string().default('20'),
-  DISPATCH_IDLE_TIMEOUT: Joi.string().default('1000'),
-  WEBHOOK_INSTANCE_TIMEOUT: Joi.string().default('2500'),
+  MAX_DISPATCH_QUEUE_SIZE: Joi.string()
+    .regex(/^-?\d+$/)
+    .default('20'),
+  DISPATCH_IDLE_TIMEOUT: Joi.string()
+    .regex(/^-?\d+$/)
+    .default('1000'),
+  WEBHOOK_INSTANCE_TIMEOUT: Joi.string()
+    .regex(/^-?\d+$/)
+    .default('2500'),
   PODWATCH_WEB_SERVICE_URL: Joi.string().default(
     'http://host.docker.internal:3001'
   ),
