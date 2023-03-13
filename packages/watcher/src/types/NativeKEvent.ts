@@ -35,14 +35,3 @@ export interface NativeKEvent {
     reportingInstance: string;
   };
 }
-
-export interface KError {
-  name: string;
-  reason: string;
-  message: string;
-  type: string;
-  firstTimestamp: string;
-  lastTimestamp: string;
-  count: number;
-  nativeEvent: NativeKEvent;
-}

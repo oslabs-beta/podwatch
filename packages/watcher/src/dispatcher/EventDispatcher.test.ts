@@ -1,7 +1,7 @@
 import { AxiosInstance } from 'axios';
 import { EnvConfiguration } from '../configuration/environment/EnvConfiguration';
 import { Logger } from '../logger/Logger';
-import { NativeKEvent } from '../types/types';
+import { NativeKEvent } from '../types/NativeKEvent';
 import { EventDispatcher } from './EventDispatcher';
 
 const DISPATCH_IDLE_TIMEOUT = 100;

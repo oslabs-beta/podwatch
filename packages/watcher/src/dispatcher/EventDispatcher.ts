@@ -1,7 +1,8 @@
 import { AxiosInstance } from 'axios';
 import { EnvConfiguration } from '../configuration/environment/EnvConfiguration';
 import { Logger } from '../logger/Logger';
-import { KError, NativeKEvent } from '../types/types';
+import { NativeKEvent } from '../types/NativeKEvent';
+import { KError } from '../types/KError';
 
 export class EventDispatcher {
   private timeout: NodeJS.Timeout | null = null;
