@@ -62,20 +62,16 @@ const envSchema = Joi.object({
     }),
   }),
   MAX_DISPATCH_QUEUE_SIZE: Joi.string()
-    .regex(/^-?\d+$/)
-    .default('20'),
+    .required()
+    .regex(/^-?\d+$/),
   DISPATCH_IDLE_TIMEOUT: Joi.string()
     .regex(/^-?\d+$/)
-    .default('1000'),
+    .required(),
   WEBHOOK_INSTANCE_TIMEOUT: Joi.string()
     .regex(/^-?\d+$/)
-    .default('2500'),
-  PODWATCH_WEB_SERVICE_URL: Joi.string().default(
-    'http://host.docker.internal:3001'
-  ),
-  EXTERNAL_KUBERNETES_PROXY_HOST: Joi.string().default(
-    'http://host.docker.internal'
-  ),
+    .required(),
+  PODWATCH_WEB_SERVICE_URL: Joi.string().required(),
+  EXTERNAL_KUBERNETES_PROXY_HOST: Joi.string().required(),
 })
   .and('KUBERNETES_SERVICE_HOST', 'KUBERNETES_SERVICE_PORT')
   .and('PODWATCH_CLIENT_ID', 'PODWATCH_CLIENT_SECRET')

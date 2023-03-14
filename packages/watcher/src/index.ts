@@ -5,6 +5,9 @@ import { EnvConfiguration } from './configuration/environment/EnvConfiguration';
 import { Logger } from './logger/Logger';
 import { KubernetesInstanceFactory } from './axios-instances/KubernetesInstanceFactory';
 import { WebhookInstanceFactory } from './axios-instances/WebhookInstanceFactory';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const logger = new Logger();
 
@@ -18,11 +21,15 @@ const config = new EnvConfiguration(
     PODWATCH_CUSTOM_SERVER_URL: process.env.PODWATCH_CUSTOM_SERVER_URL,
     PODWATCH_CLIENT_ID: process.env.PODWATCH_CLIENT_ID,
     PODWATCH_CLIENT_SECRET: process.env.PODWATCH_CLIENT_SECRET,
-    MAX_DISPATCH_QUEUE_SIZE: process.env.MAX_DISPATCH_QUEUE_SIZE,
-    DISPATCH_IDLE_TIMEOUT: process.env.DISPATCH_IDLE_TIMEOUT,
-    WEBHOOK_INSTANCE_TIMEOUT: process.env.WEBHOOK_INSTANCE_TIMEOUT,
-    PODWATCH_WEB_SERVICE_URL: process.env.PODWATCH_WEB_SERVICE_URL,
-    EXTERNAL_KUBERNETES_PROXY_HOST: process.env.EXTERNAL_KUBERNETES_PROXY_HOST,
+    MAX_DISPATCH_QUEUE_SIZE: process.env.MAX_DISPATCH_QUEUE_SIZE || '20',
+    DISPATCH_IDLE_TIMEOUT: process.env.DISPATCH_IDLE_TIMEOUT || '1000',
+    WEBHOOK_INSTANCE_TIMEOUT: process.env.WEBHOOK_INSTANCE_TIMEOUT || '2500',
+    PODWATCH_WEB_SERVICE_URL:
+      process.env.PODWATCH_WEB_SERVICE_URL ||
+      'http://host.docker.internal:3001',
+    EXTERNAL_KUBERNETES_PROXY_HOST:
+      process.env.EXTERNAL_KUBERNETES_PROXY_HOST ||
+      'http://host.docker.internal',
   },
   logger
 );

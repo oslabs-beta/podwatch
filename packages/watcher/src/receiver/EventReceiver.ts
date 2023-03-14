@@ -3,42 +3,23 @@ import { AxiosInstance } from 'axios';
 import { JsonStreamParser } from '../json-parser/JsonStreamParser';
 import { EventDispatcher } from '../dispatcher/EventDispatcher';
 import { Logger } from '../logger/Logger';
+import { Readable } from 'stream';
 
 export class EventReceiver {
   private resourceVersion: string | null = null;
   private restartAttempts: number = 0;
-  private stream: any;
+  private stream: Readable | null = null;
 
   constructor(
     private readonly kubernetesInstance: AxiosInstance,
     private readonly jsonStreamParser: JsonStreamParser,
     private readonly eventDispatcher: EventDispatcher,
     private readonly logger: Logger
-  ) {
-    this.jsonStreamParser.on('json', this.handleStreamEventReceived);
-    this.jsonStreamParser.on('error', this.handleStreamError);
-    this.jsonStreamParser.on('close', this.handleStreamDisconnect);
-  }
+  ) {}
 
   public async start() {
     await this.getInitialResourceVersion();
     await this.establishEventStream();
-  }
-
-  private handleStreamEventReceived(event: NativeKEvent) {
-    this.logger.log('Received event with reason: ', event.object.reason);
-
-    if (event.type === 'ERROR') {
-      // Sometimes an error event will emit when the resource version is too old
-      // In this case, we should just restart the stream with no resource version
-      this.resourceVersion = null;
-      this.handleStreamError(event);
-
-      return;
-    }
-
-    this.resourceVersion = event.object.metadata.resourceVersion;
-    this.eventDispatcher.dispatch(event);
   }
 
   private async getInitialResourceVersion() {
@@ -73,76 +54,62 @@ export class EventReceiver {
       const response = await this.kubernetesInstance.get(endpoint, {
         responseType: 'stream',
       });
-      this.stream = response.data;
+      this.stream = response.data as Readable;
       this.stream.pipe(this.jsonStreamParser);
 
-      // this.jsonStreamParser.on('json', (event: NativeKEvent) => {
-      //   this.logger.log('Received event with reason: ', event.object.reason);
+      this.jsonStreamParser.on('json', (event: NativeKEvent) =>
+        this.handleStreamEventReceived(event)
+      );
+      this.jsonStreamParser.on('error', (error: any) =>
+        this.handleStreamError(error)
+      );
+      this.jsonStreamParser.on('close', () => this.handleStreamReconnect());
 
-      //   if (event.type === 'ERROR') {
-      //     // Sometimes an error event will emit when the resource version is too old
-      //     // In this case, we should just restart the stream with no resource version
-      //     this.resourceVersion = null;
-      //     this.handleStreamError(event);
-
-      //     return;
-      //   }
-
-      //   this.resourceVersion = event.object.metadata.resourceVersion;
-      //   this.eventDispatcher.dispatch(event);
-      // });
-
-      // this.jsonStreamParser.on('error', (error: any) => {
-      //   this.logger.log('Error occurred while parsing event stream:');
-      //   this.logger.error(error);
-
-      //   this.handleStreamError(error);
-      // });
-
-      // this.jsonStreamParser.on('close', () => {
-      //   this.logger.log(`Event stream ended by server.`);
-
-      //   this.ejectStream();
-
-      //   this.logger.log(
-      //     `Reconnecting with last resource version: ${this.resourceVersion}`
-      //   );
-      //   this.establishEventStream();
-      // });
+      this.logger.log('Event stream established.');
     } catch (error) {
       this.handleStreamError(error);
     }
   }
 
-  private handleStreamDisconnect() {
-    this.ejectStream();
-    if (this.shouldRestart()) {
-      this.establishEventStream();
-    }
-  }
+  private handleStreamEventReceived(event: NativeKEvent) {
+    this.logger.log('Received event with reason: ', event.object.reason);
 
-  private ejectStream() {
-    if (this.stream) {
-      this.stream.unpipe(this.jsonStreamParser);
-      // this.jsonStreamParser.end();
+    if (event.object.reason === 'Expired') {
+      this.logger.log(
+        'Latest resource version too old. Unsetting current resource version and restarting stream.'
+      );
+
+      this.resourceVersion = null;
+      this.handleStreamReconnect();
+
+      return;
     }
+
+    this.resourceVersion = event.object.metadata.resourceVersion;
+    this.eventDispatcher.dispatch(event);
   }
 
   private handleStreamError(error: any) {
     this.logger.error('Error in event stream: ');
     this.logger.error(error);
 
-    this.ejectStream();
-    if (!this.shouldRestart()) {
-      return;
-    }
+    this.handleStreamReconnect(1000);
+  }
 
-    setTimeout(() => {
-      this.logger.log(
-        `Retrying with last resource version: ${this.resourceVersion}`
-      );
-      this.establishEventStream();
-    }, 1000);
+  private handleStreamReconnect(delay = 0) {
+    this.ejectStream();
+    if (this.shouldRestart()) {
+      setTimeout(() => {
+        this.logger.log('Attempting to reconnect to event stream');
+        this.establishEventStream();
+      }, delay);
+    }
+  }
+
+  private ejectStream() {
+    if (this.stream) {
+      this.stream.unpipe(this.jsonStreamParser);
+    }
   }
 
   private shouldRestart(): boolean {
