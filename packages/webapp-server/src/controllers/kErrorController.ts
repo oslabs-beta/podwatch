@@ -20,8 +20,8 @@ export const kErrorController = {
     res: Response,
     next: NextFunction
   ) => {
-    const clusterId = req.headers['clusterid'] as string;
-    const clusterSecret = req.headers['clustersecret'] as string;
+    const clusterId = req.get('Cluster-ID') as string;
+    const clusterSecret = req.get('Cluster-Secret') as string;
 
     if (!clusterId || !clusterSecret) {
       return next({
