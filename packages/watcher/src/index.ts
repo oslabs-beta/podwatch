@@ -34,11 +34,14 @@ const config = new EnvConfiguration(
   logger
 );
 
+logger.log('Validating environment configuration');
+config.validate();
+
 logger.log('Creating connection instance for cluster');
 const kubernetesInstanceFactory = new KubernetesInstanceFactory(config, logger);
 const kubernetesInstance = kubernetesInstanceFactory.create();
 
-logger.log('Create connection instance for webhook');
+logger.log('Creating connection instance for webhook');
 const webhookInstanceFactory = new WebhookInstanceFactory(config, logger);
 const webhookInstance = webhookInstanceFactory.create();
 
