@@ -5,6 +5,9 @@ import { EventDispatcher } from '../dispatcher/EventDispatcher';
 import { Logger } from '../logger/Logger';
 import { Readable } from 'stream';
 
+/**
+ * The EventReceiver is responsible for establishing an event stream from the Kubernetes API and dispatching the events to the EventDispatcher.
+ */
 export class EventReceiver {
   private resourceVersion: string | null = null;
   private restartAttempts: number = 0;
@@ -17,11 +20,17 @@ export class EventReceiver {
     private readonly logger: Logger
   ) {}
 
+  /**
+   * Starts the event receiver by establishing an event stream from the Kubernetes API.
+   */
   public async start() {
     await this.getInitialResourceVersion();
     await this.establishEventStream();
   }
 
+  /**
+   * Sets the initial resource version by making a request to the Kubernetes API for the latest events. The resource version will then be used to establish a watch stream that will receive all events from that point on.
+   */
   private async getInitialResourceVersion() {
     try {
       const response = await this.kubernetesInstance.get('/api/v1/events');
@@ -40,6 +49,9 @@ export class EventReceiver {
     }
   }
 
+  /**
+   * Establishes an event stream from the Kubernetes API. The stream will be piped to a JSON parser that will emit JSON objects as they are received. The JSON objects will then be dispatched to the event dispatcher.
+   */
   private async establishEventStream() {
     const params = new URLSearchParams();
     params.set('watch', 'true');
@@ -71,6 +83,10 @@ export class EventReceiver {
     }
   }
 
+  /**
+   * Processes an event received from the event stream. If the event is an 'Expired' event, the resource version will be unset and the stream will be restarted. Otherwise, the resource version will be updated and the event will be dispatched to the event dispatcher.
+   * @param event An event received from the event stream.
+   */
   private handleStreamEventReceived(event: NativeKEvent) {
     this.logger.log('Received event with reason: ', event.object.reason);
 
@@ -96,6 +112,10 @@ export class EventReceiver {
     this.handleStreamReconnect(1000);
   }
 
+  /**
+   * Restarts the event stream after a delay. If the stream has been restarted too many times in a short period of time, the stream will not be restarted.
+   * @param delay The delay in milliseconds before the stream will be restarted.
+   */
   private handleStreamReconnect(delay = 0) {
     this.ejectStream();
     if (this.shouldRestart()) {
@@ -106,12 +126,19 @@ export class EventReceiver {
     }
   }
 
+  /**
+   * Ejects the stream from the JSON parser and removes all event listeners.
+   */
   private ejectStream() {
     if (this.stream) {
       this.stream.unpipe(this.jsonStreamParser);
     }
   }
 
+  /**
+   * Determines whether the stream should be restarted. If the stream has been restarted too many times in a short period of time, the stream will not be restarted.
+   * @returns True if the stream should be restarted, false otherwise.
+   */
   private shouldRestart(): boolean {
     this.restartAttempts++;
     setTimeout(() => {
