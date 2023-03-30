@@ -1,4 +1,8 @@
 import { Transform, TransformCallback } from 'stream';
+
+/**
+ * A transform stream that parses JSON objects from a stream of data.
+ */
 export class JsonStreamParser extends Transform {
   private buffer: string;
 
@@ -7,6 +11,12 @@ export class JsonStreamParser extends Transform {
     this.buffer = '';
   }
 
+  /**
+   * Transforms the stream of data into JSON objects.
+   * @param chunk A chunk of data from the stream that may contain multiple or partial JSON objects.
+   * @param encoding
+   * @param callback A callback to be called when the chunk has been processed.
+   */
   _transform(chunk: any, encoding: any, callback: any) {
     this.buffer += chunk.toString();
 
@@ -24,6 +34,10 @@ export class JsonStreamParser extends Transform {
     callback();
   }
 
+  /**
+   * Clears the buffer when the stream has been flushed.
+   * @param callback A callback to be called when the stream has been flushed.
+   */
   _flush(callback: TransformCallback): void {
     this.buffer = '';
     callback();
