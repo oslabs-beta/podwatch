@@ -1,3 +1,6 @@
+/**
+ * NativeKEvent is the type of the event that is sent by the kubernetes API
+ */
 export interface NativeKEvent {
   type: string;
   object: {
