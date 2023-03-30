@@ -42,7 +42,7 @@ const Header = () => {
           </Link>
           <Navigation
             items={[
-              { label: 'Docs', href: '/', visible: 'all' },
+              { label: 'Docs', href: '/docs/documents', visible: 'all' },
               { label: 'Examples', href: '/', visible: 'all' },
               { label: 'GitRepo', href: '/', visible: 'all' },
             ]}
