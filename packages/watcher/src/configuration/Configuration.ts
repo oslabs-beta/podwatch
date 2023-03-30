@@ -1,6 +1,9 @@
 import Joi from 'joi';
 import { Logger } from '../logger/Logger';
 
+/**
+ * An abstract class to manage the application configuration.
+ */
 export abstract class Configuration<T> {
   constructor(
     protected env: T,
@@ -8,8 +11,15 @@ export abstract class Configuration<T> {
     protected readonly logger: Logger
   ) {}
 
+  /**
+   * An abstract method to get a configuration value.
+   * @param key The key of the configuration value to get.
+   */
   public abstract get(key: keyof T): string | undefined;
 
+  /**
+   * Validates the configuration using Joi and the provided schema.
+   */
   public async validate() {
     try {
       const validation = await this.schema.validateAsync(this.env, {
@@ -29,12 +39,20 @@ export abstract class Configuration<T> {
     }
   }
 
+  /**
+   * Handles a Joi warning.
+   * @param warning A Joi warning.
+   */
   protected handleWarning(warning: Joi.ValidationError) {
     warning.details.forEach((warning) => {
       this.logger.warn(warning.message);
     });
   }
 
+  /**
+   * Handles a Joi error.
+   * @param error A Joi error.
+   */
   protected handleError(error: Joi.ValidationError) {
     error.details.forEach((error) => {
       this.logger.error(error.message);
