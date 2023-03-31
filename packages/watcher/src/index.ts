@@ -30,6 +30,7 @@ const config = new EnvConfiguration(
     EXTERNAL_KUBERNETES_PROXY_HOST:
       process.env.EXTERNAL_KUBERNETES_PROXY_HOST ||
       'http://host.docker.internal',
+    HEARTBEAT_INTERVAL: process.env.HEARTBEAT_INTERVAL || '30000',
   },
   logger
 );
