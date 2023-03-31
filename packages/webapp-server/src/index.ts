@@ -13,9 +13,9 @@ import authRouter from './routers/authRouter';
 import { errorHandler } from './errors/errorHandler';
 //import clusterRouter
 import clusterRouter from './routers/clusterRouter';
+import statusRouter from './routers/statusRouter';
 
 dotenv.config();
-
 
 const app = express();
 
@@ -35,6 +35,7 @@ app.use('/watch', watcherRouter);
 app.use('/kerrors', kErrorRouter);
 app.use('/auth', authRouter);
 app.use('/cluster', clusterRouter);
+app.use('/status', statusRouter);
 
 app.use(errorHandler);
 

@@ -46,7 +46,7 @@ export class Heartbeat {
    */
   private async sendData(heartbeatData: HearbeatData) {
     try {
-      await this.webhookInstance.post('/heartbeat', heartbeatData);
+      await this.webhookInstance.post('/status', heartbeatData);
     } catch (error) {
       this.logger.error('Failed to send heartbeat data', error);
     }
