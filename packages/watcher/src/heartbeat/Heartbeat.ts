@@ -1,4 +1,4 @@
-import { AxiosInstance } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios';
 import { EnvConfiguration } from '../configuration/environment/EnvConfiguration';
 import { HearbeatData } from '../types/HeartbeatData';
 import { Logger } from './../logger/Logger';
@@ -51,8 +51,9 @@ export class Heartbeat {
   private async sendData(heartbeatData: HearbeatData) {
     try {
       await this.webhookInstance.post('/status', heartbeatData);
-    } catch (error) {
-      this.logger.error('Failed to send heartbeat data', error);
+    } catch (error: unknown) {
+      this.logger.error('Failed to send heartbeat data');
+      this.logger.error(`Error: ${(error as AxiosError).message}`);
     }
   }
 }

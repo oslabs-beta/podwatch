@@ -1,5 +1,5 @@
 import { NativeKEvent } from '../types/NativeKEvent';
-import { AxiosInstance } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios';
 import { JsonStreamParser } from '../json-parser/JsonStreamParser';
 import { EventDispatcher } from '../dispatcher/EventDispatcher';
 import { Logger } from '../logger/Logger';
@@ -107,7 +107,7 @@ export class EventReceiver {
 
   private handleStreamError(error: any) {
     this.logger.warn('Error in event stream: ');
-    this.logger.warn(error);
+    this.logger.warn(`Error: ${(error as AxiosError).message}`);
 
     this.handleStreamReconnect(1000);
   }

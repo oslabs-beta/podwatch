@@ -15,11 +15,12 @@ export const statusController = {
       const statusUpdate = StatusModel.build({
         status,
         logs,
-        timestamp,
+        timestamp: new Date(timestamp),
         cluster: clusterId,
       });
 
       await statusUpdate.save();
+      return next();
     } catch (error) {
       return next({
         log: 'Error saving status',

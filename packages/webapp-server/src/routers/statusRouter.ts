@@ -10,7 +10,7 @@ statusRouter.post(
   kErrorController.getClusterFromHeaders,
   statusController.processHeartbeat,
   (req: Request, res: Response) => {
-    res.sendStatus(200);
+    res.status(200).send('OK');
   }
 );
 
@@ -30,7 +30,7 @@ statusRouter.get(
   kErrorController.getClusterFromParams,
   statusController.getStatusLogs,
   (req: Request, res: Response) => {
-    res.status(200).json(res.locals.status);
+    res.status(200).json(res.locals.logs);
   }
 );
 
