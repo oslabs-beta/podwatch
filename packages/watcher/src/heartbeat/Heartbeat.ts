@@ -26,6 +26,10 @@ export class Heartbeat {
    * The heartbeat method is responsible for queuing heartbeat data for dispatch. The queue is maintained to ensure all data is eventually sent to the Podwatch Service or custom server.
    */
   private heartbeat() {
+    this.logger.log(
+      'Sending heartbeat data with service status report and logs'
+    );
+
     this.dataQueue.push({
       status: this.logger.status,
       timestamp: new Date(),

@@ -9,6 +9,8 @@ export const statusController = {
     const clusterId = res.locals.cluster.id;
     const { status, logs, timestamp } = req.body;
 
+    console.log(`Received heartbeat from ${clusterId}: ${status}`);
+
     try {
       const statusUpdate = StatusModel.build({
         status,

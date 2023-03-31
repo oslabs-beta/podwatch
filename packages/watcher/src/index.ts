@@ -12,7 +12,7 @@ dotenv.config();
 
 const logger = new Logger();
 
-logger.log('Building environment configuration');
+logger.info('Building environment configuration');
 const config = new EnvConfiguration(
   {
     KUBERNETES_SERVICE_HOST: process.env.KUBERNETES_SERVICE_HOST,
@@ -36,27 +36,27 @@ const config = new EnvConfiguration(
   logger
 );
 
-logger.log('Validating environment configuration');
+logger.info('Validating environment configuration');
 config.validate();
 
-logger.log('Creating connection instance for cluster');
+logger.info('Creating connection instance for cluster');
 const kubernetesInstanceFactory = new KubernetesInstanceFactory(config, logger);
 const kubernetesInstance = kubernetesInstanceFactory.create();
 
-logger.log('Creating connection instance for webhook');
+logger.info('Creating connection instance for webhook');
 const webhookInstanceFactory = new WebhookInstanceFactory(config, logger);
 const webhookInstance = webhookInstanceFactory.create();
 
-logger.log('Creating heartbeat for service status reporting');
+logger.info('Creating heartbeat for service status reporting');
 new Heartbeat(webhookInstance, config, logger);
 
-logger.log('Instantiating JSON stream parser');
+logger.info('Instantiating JSON stream parser');
 const jsonStreamParser = new JsonStreamParser();
 
-logger.log('Instantiating event dispatcher');
+logger.info('Instantiating event dispatcher');
 const eventDispatcher = new EventDispatcher(webhookInstance, config, logger);
 
-logger.log('Instantiating event receiver');
+logger.info('Instantiating event receiver');
 const receiver = new EventReceiver(
   kubernetesInstance,
   jsonStreamParser,
@@ -64,5 +64,5 @@ const receiver = new EventReceiver(
   logger
 );
 
-logger.log('Starting event receiver');
+logger.info('Starting event receiver');
 receiver.start();

@@ -91,7 +91,7 @@ export class EventReceiver {
     this.logger.log('Received event with reason: ', event.object.reason);
 
     if (event.object.reason === 'Expired') {
-      this.logger.log(
+      this.logger.warn(
         'Latest resource version too old. Unsetting current resource version and restarting stream.'
       );
 
@@ -106,8 +106,8 @@ export class EventReceiver {
   }
 
   private handleStreamError(error: any) {
-    this.logger.error('Error in event stream: ');
-    this.logger.error(error);
+    this.logger.warn('Error in event stream: ');
+    this.logger.warn(error);
 
     this.handleStreamReconnect(1000);
   }
@@ -120,7 +120,7 @@ export class EventReceiver {
     this.ejectStream();
     if (this.shouldRestart()) {
       setTimeout(() => {
-        this.logger.log('Attempting to reconnect to event stream');
+        this.logger.info('Attempting to reconnect to event stream');
         this.establishEventStream();
       }, delay);
     }

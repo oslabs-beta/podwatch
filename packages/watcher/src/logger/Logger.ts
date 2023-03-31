@@ -1,4 +1,5 @@
 import { ServiceStatus } from '../types/ServiceStatus';
+import { Log } from '../types/Log';
 
 /**
  * The logger class provides a simple, centralized interface for logging messages to the console with different log levels.
@@ -8,15 +9,27 @@ export class Logger {
   private serviceStatus: ServiceStatus = 'OK';
 
   /**
-   * Logs a general log message to the console and saves it to the log queue
+   * Logs a general log message to the console. Does not save it to the log queue.
    * @param message
    * @param args
    */
   public log(message: string, ...args: any[]): void {
+    this.serviceStatus = 'OK';
+    console.log(message, ...args);
+  }
+
+  /**
+   * Logs an info message to the console and saves it to the log queue
+   * @param message
+   * @param args
+   */
+  public info(message: string, ...args: any[]): void {
+    this.serviceStatus = 'OK';
+
     const log = {
       message,
       args,
-      level: 'log',
+      level: 'info',
       timestamp: new Date(),
     };
 

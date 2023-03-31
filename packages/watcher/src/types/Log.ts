@@ -1,4 +1,4 @@
-interface Log {
+export interface Log {
   message: string;
   args: any[];
   level: string;
