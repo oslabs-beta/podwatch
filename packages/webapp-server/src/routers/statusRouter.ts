@@ -24,4 +24,14 @@ statusRouter.get(
   }
 );
 
+statusRouter.get(
+  '/:clusterId/logs',
+  authenticateUser,
+  kErrorController.getClusterFromParams,
+  statusController.getStatusLogs,
+  (req: Request, res: Response) => {
+    res.status(200).json(res.locals.status);
+  }
+);
+
 export default statusRouter;

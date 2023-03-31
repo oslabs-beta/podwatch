@@ -1,7 +1,10 @@
 import { NextFunction, Request, Response } from 'express';
-import { StatusModel } from '../models/StatusModel';
+import { Log, StatusModel } from '../models/StatusModel';
 
 export const statusController = {
+  /**
+   * A middleware function to process a heartbeat from a cluster. Expects the cluster to have already been assigned to res.locals.cluster.
+   */
   processHeartbeat: async (req: Request, res: Response, next: NextFunction) => {
     const clusterId = res.locals.cluster.id;
     const { status, logs, timestamp } = req.body;
@@ -24,6 +27,9 @@ export const statusController = {
       });
     }
   },
+  /**
+   * A middleware function that returns the most recent status for a cluster. Expects the cluster to have already been assigned to res.locals.cluster.
+   */
   getStatus: async (req: Request, res: Response, next: NextFunction) => {
     const clusterId = res.locals.cluster.id;
 
@@ -56,6 +62,41 @@ export const statusController = {
       return next({
         log: 'Error getting status',
         message: 'Error getting status',
+        status: 500,
+        error,
+      });
+    }
+  },
+  /**
+   * Returns the most recent logs for a cluster. Expects the cluster to have already been assigned to res.locals.cluster. Optional query parameters: limit, page
+   */
+  getStatusLogs: async (req: Request, res: Response, next: NextFunction) => {
+    const clusterId = res.locals.cluster.id;
+    const { limit, page } = req.query;
+
+    const skip = (Number(page) || 0) * (Number(limit) || 100);
+
+    try {
+      const statusUpdates = await StatusModel.find(
+        { cluster: clusterId },
+        null,
+        {
+          sort: { timestamp: -1 },
+          limit: Number(limit) || 100,
+          skip,
+        }
+      );
+
+      const logs = statusUpdates.reduce((acc: Log[], status) => {
+        return acc.concat(status.logs);
+      }, []);
+
+      res.locals.logs = logs;
+      return next();
+    } catch (error) {
+      return next({
+        log: 'Error getting status logs',
+        message: 'Error getting status logs',
         status: 500,
         error,
       });
