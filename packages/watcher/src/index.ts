@@ -6,6 +6,7 @@ import { Logger } from './logger/Logger';
 import { KubernetesInstanceFactory } from './axios-instances/KubernetesInstanceFactory';
 import { WebhookInstanceFactory } from './axios-instances/WebhookInstanceFactory';
 import dotenv from 'dotenv';
+import { Heartbeat } from './heartbeat/Heartbeat';
 
 dotenv.config();
 
@@ -45,6 +46,9 @@ const kubernetesInstance = kubernetesInstanceFactory.create();
 logger.log('Creating connection instance for webhook');
 const webhookInstanceFactory = new WebhookInstanceFactory(config, logger);
 const webhookInstance = webhookInstanceFactory.create();
+
+logger.log('Creating heartbeat for service status reporting');
+new Heartbeat(webhookInstance, config, logger);
 
 logger.log('Instantiating JSON stream parser');
 const jsonStreamParser = new JsonStreamParser();
