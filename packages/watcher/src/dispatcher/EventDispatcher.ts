@@ -4,6 +4,9 @@ import { Logger } from '../logger/Logger';
 import { NativeKEvent } from '../types/NativeKEvent';
 import { KError } from '../types/KError';
 
+/**
+ * EventDispatcher is responsible for dispatching events to the Podwatch web application or custom server.
+ */
 export class EventDispatcher {
   private timeout: NodeJS.Timeout | null = null;
   private dataQueue: KError[] = [];
@@ -14,6 +17,11 @@ export class EventDispatcher {
     private readonly logger: Logger
   ) {}
 
+  /**
+   * The dispatch method is responsible for queuing events for dispatch. The queued events will be sent when the queue length reaches the max queue length or when the idle timeout is reached.
+   * @param event The Kubernetes event to be dispatched.
+   * @returns
+   */
   public dispatch(event: NativeKEvent) {
     if (!EventDispatcher.shouldDispatch(event)) return;
     this.logger.log('Queuing event for dispatch: ', event.object.reason);
@@ -22,6 +30,11 @@ export class EventDispatcher {
     this.enqueueData(kError);
   }
 
+  /**
+   * Enqueues data for dispatch. If the queue length reaches the max queue length or the idle timeout is reached, the queue will be sent to the Podwatch web application or custom server.
+   * @param kError A formatted KError object.
+   * @returns
+   */
   private enqueueData(kError: KError) {
     const maxQueueLength = Number(this.config.get('MAX_DISPATCH_QUEUE_SIZE'));
     const idleTimeout = Number(this.config.get('DISPATCH_IDLE_TIMEOUT'));
@@ -48,6 +61,9 @@ export class EventDispatcher {
     }, idleTimeout);
   }
 
+  /**
+   * Sends the queued data to the Podwatch web application or custom server.
+   */
   private async sendData() {
     try {
       const data = this.dataQueue;
@@ -62,10 +78,20 @@ export class EventDispatcher {
     }
   }
 
+  /**
+   * Determines if an event should be dispatched. Only events with a type of Warning or Error will be dispatched.
+   * @param event The native Kubernetes event.
+   * @returns A boolean indicating if the event should be dispatched.
+   */
   private static shouldDispatch(event: NativeKEvent) {
     return event.object && event.object.type !== 'Normal';
   }
 
+  /**
+   * Converts a NativeKEvent to a KError.
+   * @param event The native Kubernetes event.
+   * @returns A formatted KError object.
+   */
   private static buildKError(event: NativeKEvent): KError {
     const { reason, message, type, firstTimestamp, lastTimestamp, count } =
       event.object;

@@ -1,20 +1,77 @@
 import Joi from 'joi';
 
+/**
+ * A type to represent the application environment variables.
+ */
 export interface EnvSchema {
+  /**
+   * The service account token used to authenticate with the Kubernetes API when the service is hosted outside the cluster.
+   */
   PODWATCH_SERVICE_ACCOUNT_TOKEN: string | undefined;
+
+  /**
+   * The port used to host the service when the service is hosted outside the cluster.
+   */
   PODWATCH_PORT: string | undefined;
+
+  /**
+   * The host of the Kubernetes API when the service is hosted inside the cluster. This is automatically set by Kubernetes.
+   */
   KUBERNETES_SERVICE_HOST: string | undefined;
+
+  /**
+   * The port of the Kubernetes API when the service is hosted inside the cluster. This is automatically set by Kubernetes.
+   */
   KUBERNETES_SERVICE_PORT: string | undefined;
+
+  /**
+   * The URL of a custom Podwatch server to use instead of the Podwatch Web Service. This will dispatch events to the custom server instead of the Podwatch Web Service.
+   */
   PODWATCH_CUSTOM_SERVER_URL: string | undefined;
+
+  /**
+   * The client ID used to identify the cluster with the Podwatch Web Service.
+   */
   PODWATCH_CLIENT_ID: string | undefined;
+
+  /**
+   * The client secret used to authenticate with the Podwatch Web Service.
+   */
   PODWATCH_CLIENT_SECRET: string | undefined;
+
+  /**
+   * The maximum number of events to dispatch at once.
+   * @default 20
+   */
   MAX_DISPATCH_QUEUE_SIZE: string | undefined;
+
+  /**
+   * The amount of time to wait before dispatching events.
+   * @default 1000
+   */
   DISPATCH_IDLE_TIMEOUT: string | undefined;
+
+  /**
+   * The amount of time to wait before timing out a webhook instance. The dispatcher will give up on a webhook instance after this amount of time.
+   * @default 10000
+   */
   WEBHOOK_INSTANCE_TIMEOUT: string | undefined;
+
+  /**
+   * The URL of the Podwatch Web Service. Not meant to be set by the user. To set a custom URL for dispatching events, use PODWATCH_CUSTOM_SERVER_URL.
+   */
   PODWATCH_WEB_SERVICE_URL: string | undefined;
+
+  /**
+   * The host of the Kubernetes API when the service is hosted outside the cluster. This is used to proxy requests to the Kubernetes API. Only required if the service is hosted on a different host than the Kubernetes API.
+   * @default http://host.docker.internal
+   */
   EXTERNAL_KUBERNETES_PROXY_HOST: string | undefined;
 }
 
+/**
+ * The schema for the application environment variables.
+ */
 const envSchema = Joi.object({
   PODWATCH_SERVICE_ACCOUNT_TOKEN: Joi.string().when('KUBERNETES_SERVICE_HOST', {
     is: Joi.exist(),
