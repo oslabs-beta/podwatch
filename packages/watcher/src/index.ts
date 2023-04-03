@@ -23,7 +23,7 @@ const config = new EnvConfiguration(
     PODWATCH_CLIENT_SECRET: process.env.PODWATCH_CLIENT_SECRET,
     MAX_DISPATCH_QUEUE_SIZE: process.env.MAX_DISPATCH_QUEUE_SIZE || '20',
     DISPATCH_IDLE_TIMEOUT: process.env.DISPATCH_IDLE_TIMEOUT || '1000',
-    WEBHOOK_INSTANCE_TIMEOUT: process.env.WEBHOOK_INSTANCE_TIMEOUT || '2500',
+    WEBHOOK_INSTANCE_TIMEOUT: process.env.WEBHOOK_INSTANCE_TIMEOUT || '10000',
     PODWATCH_WEB_SERVICE_URL:
       process.env.PODWATCH_WEB_SERVICE_URL ||
       'http://host.docker.internal:3001',
@@ -34,11 +34,14 @@ const config = new EnvConfiguration(
   logger
 );
 
+logger.log('Validating environment configuration');
+config.validate();
+
 logger.log('Creating connection instance for cluster');
 const kubernetesInstanceFactory = new KubernetesInstanceFactory(config, logger);
 const kubernetesInstance = kubernetesInstanceFactory.create();
 
-logger.log('Create connection instance for webhook');
+logger.log('Creating connection instance for webhook');
 const webhookInstanceFactory = new WebhookInstanceFactory(config, logger);
 const webhookInstance = webhookInstanceFactory.create();
 
