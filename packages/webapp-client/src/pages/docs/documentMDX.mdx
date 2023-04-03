@@ -4,6 +4,7 @@
 PodWatch provides a simple and easy way to stream all errors coming from your cluster into the PodWatch Web Service or to a custom server developed by you. You can generate notifications, trigger webhooks, and view all your errors in one convenient place.
 <br />
 <br />
+![Kubernetes Errors](https://heroku-blog-files.s3.amazonaws.com/posts/1518733263-kuber-blog-post-animation.gif)
 <br />
 <br />
 # Getting Started
@@ -20,16 +21,17 @@ PodWatch provides a simple and easy way to stream all errors coming from your cl
 <br />
 ## SetUp
 <br />
-Setup is quick and easy, taking less than five minutes. First, head to the PodWatch website and create an account. Add a new cluster to your account, and get your cluster ID and secret. If you do not wish to use the PodWatch Web Service, you can skip down to the <span style = {{ color:'lightBlue'}}>[Custom Server](#custom-server)</span> instructions.
+Setup is quick and easy, taking less than five minutes. First, head to the PodWatch website and create an account. Add a new cluster to your account, and get your cluster ID and secret. If you do not wish to use the PodWatch Web Service, you can skip down to the <span style = {{ color:'#0032b8'}}>[**Custom Server**](#custom-server)</span> instructions.
 <br />
 Next, create the Kubernetes YAML config files for PodWatch. You will need a Deployment, ServiceAccount, ClusterRole, and ClusterRoleBinding. Provided below are some examples that can be copied and added into your cluster. Once you create these files, you can simply add them to your cluster with <span style = {{padding: '.1rem', backgroundColor:'grey'}}>kubectl apply -f podwatch </span>, where podwatch is a directory containing all four config files (alternatively you can apply them one-at-a-time if you choose).
 <br />
 <br />
 ## Deployment
 <br />
-<div id="copycode" style = {{padding: '1rem', backgroundColor:'grey',overflow: "auto", maxWidth: "1380px"}} >
 
-```yml
+<div id="copycode1" style = {{padding: '1rem', backgroundColor:'grey',overflow: "auto", maxWidth: "1380px"}} >
+<div id = 'code'>
+```yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -56,6 +58,7 @@ spec:
 ```
 
 </div>
+</div>
 
 <br />
 *Note: if you do not wish to include your client ID and secret directly in the YAML
@@ -65,7 +68,7 @@ on secrets.*
 <br />
 ### ServiceAccount
 
-<div id="copycode1" style = {{padding: '1rem', backgroundColor:'grey',overflow: "auto", maxWidth: "1380px"}} >
+<div class="copycode" style = {{padding: '1rem', backgroundColor:'grey',overflow: "auto", maxWidth: "1380px"}} >
 
 ```yml
 apiVersion: apps/v1
@@ -95,7 +98,7 @@ rules:
 <br />
 <br />
 ### ClusterRoleBinding
-<div id= "ClusterRoleBinding" style = {{padding: '1rem', backgroundColor:'grey',overflow: "auto", maxWidth: "1380px"}}>
+<div class= "copycode" style = {{padding: '1rem', backgroundColor:'grey',overflow: "auto", maxWidth: "1380px"}}>
 
 <br />
 ```yml
@@ -126,7 +129,7 @@ roleRef:
 Optionally, if you prefer not to use the PodWatch Web Service, you can still set up your own custom server with a webhook that will be called by PodWatch upon receiving errors from the cluster. Within this custom server, you can set up custom actions, messages, notifications, or any other custom responses to cluster errors.
 <br />
 To set up a custom server, you can use the following deployment config (which is similar to the config example above, with different env variables). You will still need to create a ServiceAccount, ClusterRole, and ClusterRoleBinding as in the provided examples above.
-<div id= "clustomcode" style = {{padding: '1rem', backgroundColor:'grey',overflow: "auto", maxWidth: "1380px"}}>
+<div class= "copycode" style = {{padding: '1rem', backgroundColor:'grey',overflow: "auto", maxWidth: "1380px"}}>
 <br />
 
 ```yml
@@ -158,19 +161,21 @@ spec:
 <br />
 The PODWATCH_CUSTOM_SERVER_URL should be your endpoint to receive errors from PodWatch. This endpoint will be called by PodWatch with a POST request, with a request body that will be an array of the following:
 <br />
-<div id= "endpointcode" style = {{padding: '1rem', backgroundColor:'grey',overflow: "auto", maxWidth: "1380px"}}>
+<div class= "copycode" style = {{padding: '1rem', backgroundColor:'grey',overflow: "auto", maxWidth: "1380px"}}>
+
 ```yml
 {
-  "name": "podwatch-984hv9w8hf-384hf.c3niwfjr8h34f",
-  "reason": "FailedKillPod",
-  "message": "error killing pod: failed to \"KillContainer\" for \"podwatch\" with KillContainerError: \"rpc error: code = Unknown desc = Error response from daemon: No such container\"",
-  "type": "Warning",
-  "firstTimestamp": "2023-03-03T17:28:02Z",
-  "lastTimestamp": "2023-03-03T17:28:02Z",
-  "count": 1,
-  "nativeEvent": { "type": "DELETED", "object": { ... } }
+  'name': 'podwatch-984hv9w8hf-384hf.c3niwfjr8h34f',
+  'reason': 'FailedKillPod',
+  'message': 'error killing pod: failed to "KillContainer" for "podwatch" with KillContainerError: "rpc error: code = Unknown desc = Error response from daemon: No such container"',
+  'type': 'Warning',
+  'firstTimestamp': '2023-03-03T17:28:02Z',
+  'lastTimestamp': '2023-03-03T17:28:02Z',
+  'count': 1,
+  'nativeEvent': { 'type': 'DELETED', 'object': { ... } },
 }
 ```
+
 </div>
 <br />
 <br />
