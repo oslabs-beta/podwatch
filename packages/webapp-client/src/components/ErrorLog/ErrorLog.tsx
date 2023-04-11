@@ -6,7 +6,7 @@ import { KError } from '../../types/KError';
 import ErrorItem from '../ErrorItem/ErrorItem';
 import OverlapSpacer from '../OverlapSpacer/OverlapSpacer';
 import styles from './ErrorLog.module.scss';
-import { mockKErrors } from './mockKErrors';
+//import { mockKErrors } from './mockKErrors';
 
 interface ErrorLogProps {
   clusterId: string;
