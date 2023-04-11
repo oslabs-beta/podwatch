@@ -6,12 +6,13 @@ import { Logger } from './logger/Logger';
 import { KubernetesInstanceFactory } from './axios-instances/KubernetesInstanceFactory';
 import { WebhookInstanceFactory } from './axios-instances/WebhookInstanceFactory';
 import dotenv from 'dotenv';
+import { Heartbeat } from './heartbeat/Heartbeat';
 
 dotenv.config();
 
 const logger = new Logger();
 
-logger.log('Building environment configuration');
+logger.info('Building environment configuration');
 const config = new EnvConfiguration(
   {
     KUBERNETES_SERVICE_HOST: process.env.KUBERNETES_SERVICE_HOST,
@@ -30,28 +31,32 @@ const config = new EnvConfiguration(
     EXTERNAL_KUBERNETES_PROXY_HOST:
       process.env.EXTERNAL_KUBERNETES_PROXY_HOST ||
       'http://host.docker.internal',
+    HEARTBEAT_INTERVAL: process.env.HEARTBEAT_INTERVAL || '30000',
   },
   logger
 );
 
-logger.log('Validating environment configuration');
+logger.info('Validating environment configuration');
 config.validate();
 
-logger.log('Creating connection instance for cluster');
+logger.info('Creating connection instance for cluster');
 const kubernetesInstanceFactory = new KubernetesInstanceFactory(config, logger);
 const kubernetesInstance = kubernetesInstanceFactory.create();
 
-logger.log('Creating connection instance for webhook');
+logger.info('Creating connection instance for webhook');
 const webhookInstanceFactory = new WebhookInstanceFactory(config, logger);
 const webhookInstance = webhookInstanceFactory.create();
 
-logger.log('Instantiating JSON stream parser');
+logger.info('Creating heartbeat for service status reporting');
+new Heartbeat(webhookInstance, config, logger);
+
+logger.info('Instantiating JSON stream parser');
 const jsonStreamParser = new JsonStreamParser();
 
-logger.log('Instantiating event dispatcher');
+logger.info('Instantiating event dispatcher');
 const eventDispatcher = new EventDispatcher(webhookInstance, config, logger);
 
-logger.log('Instantiating event receiver');
+logger.info('Instantiating event receiver');
 const receiver = new EventReceiver(
   kubernetesInstance,
   jsonStreamParser,
@@ -59,5 +64,5 @@ const receiver = new EventReceiver(
   logger
 );
 
-logger.log('Starting event receiver');
+logger.info('Starting event receiver');
 receiver.start();

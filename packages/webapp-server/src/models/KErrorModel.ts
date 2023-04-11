@@ -81,7 +81,8 @@ const kErrorSchema = new mongoose.Schema<KErrorAttrs>(
     },
     count: {
       type: Number,
-      required: true,
+      required: false,
+      default: 1,
     },
     firstTimestamp: {
       type: Date,

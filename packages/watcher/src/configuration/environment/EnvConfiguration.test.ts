@@ -1,3 +1,4 @@
+import { Logger } from '../../logger/Logger';
 import { EnvConfiguration } from './EnvConfiguration';
 import { InvalidEnvironmentException } from './InvalidEnvironmentException';
 
@@ -6,7 +7,7 @@ describe('EnvConfiguration', () => {
     log: jest.fn(),
     warn: jest.fn(),
     error: jest.fn(),
-  };
+  } as unknown as Logger;
 
   afterEach(() => {
     jest.clearAllMocks();

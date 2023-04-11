@@ -96,8 +96,8 @@ export const kErrorController = {
       return next();
     } catch (error) {
       return next({
-        log: 'Error getting cluster from body',
-        message: 'Error getting cluster from body',
+        log: 'Error getting cluster',
+        message: 'Error getting cluster',
         status: 500,
         error,
       });

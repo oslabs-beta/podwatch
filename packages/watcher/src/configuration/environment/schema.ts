@@ -67,6 +67,12 @@ export interface EnvSchema {
    * @default http://host.docker.internal
    */
   EXTERNAL_KUBERNETES_PROXY_HOST: string | undefined;
+
+  /**
+   * The interval at which the service will send a heartbeat to the Podwatch Web Service, in milliseconds.
+   * @default 30000
+   */
+  HEARTBEAT_INTERVAL: string | undefined;
 }
 
 /**
@@ -129,6 +135,9 @@ const envSchema = Joi.object({
     .required(),
   PODWATCH_WEB_SERVICE_URL: Joi.string().required(),
   EXTERNAL_KUBERNETES_PROXY_HOST: Joi.string().required(),
+  HEARTBEAT_INTERVAL: Joi.string()
+    .required()
+    .regex(/^-?\d+$/),
 })
   .and('KUBERNETES_SERVICE_HOST', 'KUBERNETES_SERVICE_PORT')
   .and('PODWATCH_CLIENT_ID', 'PODWATCH_CLIENT_SECRET')

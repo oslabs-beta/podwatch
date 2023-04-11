@@ -1,4 +1,4 @@
-import { AxiosInstance } from 'axios';
+import { AxiosError, AxiosInstance } from 'axios';
 import { EnvConfiguration } from '../configuration/environment/EnvConfiguration';
 import { Logger } from '../logger/Logger';
 import { NativeKEvent } from '../types/NativeKEvent';
@@ -70,11 +70,8 @@ export class EventDispatcher {
       this.dataQueue = [];
       await this.webhookInstance.post('/watch', data);
     } catch (error: any) {
-      this.logger.error(
-        'Encountered an error dispatching error data: ',
-        error.message,
-        error
-      );
+      this.logger.error('Encountered an error dispatching error data: ');
+      this.logger.error(`Error: ${(error as AxiosError).message}`);
     }
   }
 
