@@ -6,10 +6,9 @@ image:
   tag: latest
   pullPolicy: IfNotPresent
 
-podwatch:
-  clientId: 'your cluster ID here'
-  clientSecret: 'your cluster secret here'
-  customServerUrl: ''
+clientId: ''
+clientSecret: ''
+customServerUrl: ''
 
 serviceAccount:
   create: true
