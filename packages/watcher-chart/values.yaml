@@ -1,0 +1,34 @@
+# Default values for the Podwatch Helm Chart
+replicaCount: 1
+
+image:
+  repository: wvaviator/podwatch
+  tag: latest
+  pullPolicy: IfNotPresent
+
+podwatch:
+  clientId: 'your cluster ID here'
+  clientSecret: 'your cluster secret here'
+  customServerUrl: ''
+
+serviceAccount:
+  create: true
+  name: podwatch-serviceaccount
+
+rbac:
+  create: true
+  clusterRole:
+    name: podwatch-role
+    rules:
+      - apiGroups: ['']
+        resources: ['events']
+        verbs: ['get', 'watch', 'list']
+
+  clusterRoleBinding:
+    name: podwatch-role-binding
+
+selectorLabels:
+  app: podwatch
+
+podLabels:
+  app: podwatch
