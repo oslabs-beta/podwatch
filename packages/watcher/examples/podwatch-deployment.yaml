@@ -20,4 +20,5 @@ spec:
                 name: podwatch-config
             - secretRef:
                 name: podwatch-secrets
+                optional: true
       serviceAccountName: podwatch-serviceaccount
