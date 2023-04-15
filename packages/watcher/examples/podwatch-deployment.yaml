@@ -15,9 +15,9 @@ spec:
       containers:
         - name: podwatch
           image: wvaviator/podwatch:latest
-          env:
-            - name: PODWATCH_CLIENT_ID
-              value: 'abc'
-            - name: PODWATCH_CLIENT_SECRET
-              value: '12345abcde'
+          envFrom:
+            - configMapRef:
+                name: podwatch-config
+            - secretRef:
+                name: podwatch-secrets
       serviceAccountName: podwatch-serviceaccount
