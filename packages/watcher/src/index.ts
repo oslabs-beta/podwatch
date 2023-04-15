@@ -5,10 +5,7 @@ import { EnvConfiguration } from './configuration/environment/EnvConfiguration';
 import { Logger } from './logger/Logger';
 import { KubernetesInstanceFactory } from './axios-instances/KubernetesInstanceFactory';
 import { WebhookInstanceFactory } from './axios-instances/WebhookInstanceFactory';
-import dotenv from 'dotenv';
 import { Heartbeat } from './heartbeat/Heartbeat';
-
-dotenv.config();
 
 const logger = new Logger();
 
@@ -17,8 +14,6 @@ const config = new EnvConfiguration(
   {
     KUBERNETES_SERVICE_HOST: process.env.KUBERNETES_SERVICE_HOST,
     KUBERNETES_SERVICE_PORT: process.env.KUBERNETES_SERVICE_PORT,
-    PODWATCH_SERVICE_ACCOUNT_TOKEN: process.env.PODWATCH_SERVICE_ACCOUNT_TOKEN,
-    PODWATCH_PORT: process.env.PODWATCH_PORT,
     PODWATCH_CUSTOM_SERVER_URL: process.env.PODWATCH_CUSTOM_SERVER_URL,
     PODWATCH_CLIENT_ID: process.env.PODWATCH_CLIENT_ID,
     PODWATCH_CLIENT_SECRET: process.env.PODWATCH_CLIENT_SECRET,
