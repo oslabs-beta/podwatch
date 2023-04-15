@@ -53,12 +53,6 @@ export interface EnvSchema {
   PODWATCH_WEB_SERVICE_URL: string | undefined;
 
   /**
-   * The host of the Kubernetes API when the service is hosted outside the cluster. This is used to proxy requests to the Kubernetes API. Only required if the service is hosted on a different host than the Kubernetes API.
-   * @default http://host.docker.internal
-   */
-  EXTERNAL_KUBERNETES_PROXY_HOST: string | undefined;
-
-  /**
    * The interval at which the service will send a heartbeat to the Podwatch Web Service, in milliseconds.
    * @default 30000
    */
@@ -102,7 +96,6 @@ const envSchema = Joi.object({
     .regex(/^-?\d+$/)
     .required(),
   PODWATCH_WEB_SERVICE_URL: Joi.string().required(),
-  EXTERNAL_KUBERNETES_PROXY_HOST: Joi.string().required(),
   HEARTBEAT_INTERVAL: Joi.string()
     .required()
     .regex(/^-?\d+$/),

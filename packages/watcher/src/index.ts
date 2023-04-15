@@ -23,9 +23,6 @@ const config = new EnvConfiguration(
     PODWATCH_WEB_SERVICE_URL:
       process.env.PODWATCH_WEB_SERVICE_URL ||
       'http://host.docker.internal:3001',
-    EXTERNAL_KUBERNETES_PROXY_HOST:
-      process.env.EXTERNAL_KUBERNETES_PROXY_HOST ||
-      'http://host.docker.internal',
     HEARTBEAT_INTERVAL: process.env.HEARTBEAT_INTERVAL || '30000',
   },
   logger
