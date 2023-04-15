@@ -9,7 +9,13 @@ export const createCluster = async (
   next: NextFunction
 ) => {
   try {
-    const { name, description } = req.body;
+    const {
+      name,
+      description,
+      notificationEnabled,
+      notificationType,
+      notificationAccess,
+    } = req.body;
     if (!name) throw new Error('Must provide name');
     const user = req.user as UserDocument;
 
@@ -17,6 +23,9 @@ export const createCluster = async (
     const clusterInfo: ClusterAttrs = {
       name,
       description,
+      notificationEnabled,
+      notificationType,
+      notificationAccess,
       owner: user,
       secret,
       members: [],

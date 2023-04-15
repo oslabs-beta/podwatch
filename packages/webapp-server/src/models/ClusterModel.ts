@@ -11,6 +11,13 @@ export interface Cluster {
    * The cluster's description, specified by the cluster owner.
    */
   description?: string;
+  notificationEnabled: boolean;
+  notificationType: string;
+  notificationAccess: string;
+  /**
+   * The cluster's notification setting, optional
+   */
+
   /**
    * The cluster's owner - this should be a reference to a user document.
    */
@@ -72,6 +79,18 @@ const clusterSchema = new mongoose.Schema<ClusterAttrs>(
       // select: false,
     },
     description: {
+      type: String,
+    },
+    notificationEnabled: {
+      type: Boolean,
+      required: false,
+      enum: ['true', 'false'],
+    },
+    notificationType: {
+      type: String,
+      enum: ['text', 'email', 'slack'],
+    },
+    notificationAccess: {
       type: String,
     },
     owner: {

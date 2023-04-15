@@ -42,8 +42,10 @@
     "@types/node": "^18.14.0",
     "@types/passport": "^1.0.12",
     "@types/passport-jwt": "^3.0.8",
+    "@types/twilio": "^3.19.3",
     "nodemon": "^2.0.20",
     "prettier": "^2.8.4",
+    "twilio": "^4.10.0",
     "typescript": "^4.9.5"
   }
 }

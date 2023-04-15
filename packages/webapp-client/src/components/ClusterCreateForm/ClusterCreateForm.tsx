@@ -20,7 +20,9 @@ const ClusterCreateForm = () => {
   const [clusterDescription, setClusterDescription] = React.useState('');
   const [clusterId, setClusterId] = React.useState('');
   const [clusterSecret, setClusterSecret] = React.useState('');
-
+  const [notificationEnabled, setNotificationEnabled] = React.useState(false);
+  const [notificationType, setNotificationType] = React.useState('');
+  const [notificationAccess, setNotificationAccess] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [showSecret, setShowSecret] = React.useState(false);
 
@@ -148,6 +150,7 @@ const ClusterCreateForm = () => {
           onChange={(e) => setClusterDescription(e.target.value)}
           autoFocus
         />
+
         <Button
           className={styles.button}
           color="secondary"
