@@ -119,7 +119,7 @@ data:
 
 #### Secret
 
-Always ensure your secret is stores in a secure location.
+Always ensure your secret is stored in a secure location.
 You may choose to include the secret from the command line, with the following command:
 
 ```bash
