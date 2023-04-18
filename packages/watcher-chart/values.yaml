@@ -6,9 +6,16 @@ image:
   tag: latest
   pullPolicy: IfNotPresent
 
-clientId: ''
-clientSecret: ''
-customServerUrl: ''
+configMap:
+  clientId: ''
+  customServerUrl: ''
+  maxDispatchQueueSize: ''
+  dispatchIdleTimeout: ''
+  webhookInstanceTimeout: ''
+  heartbeatInterval: ''
+
+secrets:
+  clientSecret: ''
 
 serviceAccount:
   create: true

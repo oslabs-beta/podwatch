@@ -18,14 +18,10 @@ spec:
         - name: {{ .Chart.Name }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          env:
-            {{- if .Values.customServerUrl }}
-            - name: PODWATCH_CUSTOM_SERVER_URL
-              value: {{ .Values.customServerUrl | quote }}
-            {{- else }}
-            - name: PODWATCH_CLIENT_ID
-              value: {{ .Values.clientId | quote }}
-            - name: PODWATCH_CLIENT_SECRET
-              value: {{ .Values.clientSecret | quote }}
-            {{- end }}
+          envFrom:
+            - configMapRef:
+                name: {{ include "podwatch.fullname" . }}-config
+            - secretRef:
+                name: {{ include "podwatch.fullname" . }}-secrets
+                optional: true
       serviceAccountName: {{ .Values.serviceAccount.name }}
