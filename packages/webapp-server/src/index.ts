@@ -31,13 +31,17 @@ app.use(
   })
 );
 
-//routers
+//router combo for cluster and notification
+// const clusterAndNotificationRouter = express.Router();
+// clusterAndNotificationRouter.use('/cluster', clusterRouter);
+// clusterAndNotificationRouter.use('/cluster', notificationRouter);
 app.use('/watch', watcherRouter);
 app.use('/kerrors', kErrorRouter);
 app.use('/auth', authRouter);
 app.use('/cluster', clusterRouter);
+app.use('/cluster', notificationRouter);
 app.use('/status', statusRouter);
-app.use('/', notificationRouter);
+
 app.use(errorHandler);
 
 const start = async () => {

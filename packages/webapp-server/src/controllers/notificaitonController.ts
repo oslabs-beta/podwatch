@@ -8,20 +8,21 @@ import { User, UserDocument, UserModel } from '../models/UserModel';
 import { Log, StatusModel } from '../models/StatusModel';
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_TOKEN;
-
+const nodemailer = require('nodemailer');
 require('dotenv');
 
 //for texts
 import { Twilio } from 'twilio';
 
 const client = require('twilio')(accountSid, authToken);
-//cluder/:id get cluster with given id
-
-//clusters with text notificaitons
-const textClusters: Array<any> = [];
-const emailClusters: Array<any> = [];
-const slackClusters: Array<any> = [];
-
+//to send emails need a transporter object
+let transporter = nodemailer.createTransport({
+  serice: 'gmail',
+  auth: {
+    user: process.env.EMAIL,
+    pass: process.env.PASSWORD,
+  },
+});
 //for text messages
 function sendText(toNumber: string, message: any) {
   client.message
@@ -33,7 +34,24 @@ function sendText(toNumber: string, message: any) {
     .then((message: any) => console.log(message.sid))
     .catch((error: Error) => console.log(error));
 }
-
+//for emails
+function sendEmail(toEmail: string, message: any) {
+  transporter.sendMail(
+    {
+      from: process.env.EMAIL,
+      to: toEmail,
+      subject: 'Error in Kuberentes Pod',
+      Text: message,
+    },
+    (err: Error, info: any) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log('Email send:' + info.response);
+      }
+    }
+  );
+}
 //notificaiton controller
 export const sendNotification = async (
   req: Request,
@@ -67,8 +85,7 @@ export const sendNotification = async (
     }
     //this is what the cluster error is and will be sent to the user
     const message = status.logs[0].message;
-
-    //work on the time interval in a moment
+    console.log('message', message);
 
     //check to ensure the the cluster has notifications enabled
     if (notificationsEnabled === true) {
@@ -78,7 +95,9 @@ export const sendNotification = async (
           sendText(notificationAccess, message);
         }, 5 * 60 * 1000);
       } else if (notificationType === 'email') {
-        return 'working on sending emails';
+        setInterval(() => {
+          sendEmail(notificationAccess, message);
+        }, 5 * 60 * 1000);
       } else {
         return 'working on sending slack';
       }
