@@ -9,6 +9,10 @@ import { authenticateUser } from '../controllers/authController';
 import { Request, Response, Router } from 'express';
 
 const router = Router();
+
+// router.use('/', (req: Request, res: Response) => {
+//   res.send('HELLO');
+// });
 //get all clusters associated with user
 router.get(
   '/',
@@ -18,6 +22,10 @@ router.get(
     return res.status(200).json(res.locals.allClusters);
   }
 );
+
+router.use('/', (req: Request, res: Response) => {
+  res.send('HELLO');
+});
 
 //create cluster associated with user
 router.post(

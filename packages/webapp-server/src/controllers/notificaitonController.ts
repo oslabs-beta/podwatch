@@ -1,31 +1,52 @@
 //check cluster notification settings
 //confirm wheter or not the incoming event meets min requirments (like number of times)
 //then call corresponding API
+require('dotenv');
 import { Request, Response, NextFunction } from 'express';
 import { ClusterAttrs, ClusterModel } from '../models/ClusterModel';
 import { KErrorModel, NativeKEvent } from '../models/KErrorModel';
 import { User, UserDocument, UserModel } from '../models/UserModel';
 import { Log, StatusModel } from '../models/StatusModel';
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_TOKEN;
+//const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const accountSid = 'AC6abdad614f2d1cec57c365d1f018ae74';
+//const authToken = process.env.TWILIO_TOKEN;
+const authToken = '50ab23db6979e18ceac43df7fa477673';
+const slackURL = process.env.SLACK_URL;
 const nodemailer = require('nodemailer');
-require('dotenv');
+const { App } = require('@slack/bolt');
+const { WebClient } = require('@slack/web-api');
+//set up for texts
+import twilio from 'twilio';
+import { json } from 'stream/consumers';
+const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN;
+const SLACK_SIGNING_SECRET = process.env.SLACK_SIGNING_SECRET;
+const WRITE = process.env.WRITE;
 
-//for texts
-import { Twilio } from 'twilio';
+const client = twilio(accountSid, authToken);
+//set up for slack bot
+// Initializes  app with your bot token and signing secret
+// const app = new App({
+//   token: SLACK_BOT_TOKEN,
+//   signingSecret: SLACK_SIGNING_SECRET,
+//   socketMode: true,
+//   appToken: WRITE,
+// });
 
-const client = require('twilio')(accountSid, authToken);
+const web = new WebClient(SLACK_BOT_TOKEN);
+const currentTime = new Date().toTimeString();
+
 //to send emails need a transporter object
 let transporter = nodemailer.createTransport({
-  serice: 'gmail',
+  service: 'gmail',
   auth: {
     user: process.env.EMAIL,
     pass: process.env.PASSWORD,
   },
 });
-//for text messages
+
+//function for text messages
 function sendText(toNumber: string, message: any) {
-  client.message
+  client.messages
     .create({
       body: message,
       from: process.env.TWILIO_PHONE_NUMBER,
@@ -52,14 +73,17 @@ function sendEmail(toEmail: string, message: any) {
     }
   );
 }
-//notificaiton controller
+//function for slack messages
+function sendSlack(message: any) {}
+
 export const sendNotification = async (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const clusterId = res.locals.cluster.id;
-  console.log('clusterId', clusterId);
+  //get all the clusters
+  const clusters = res.locals.allClusters;
+  console.log('clusters', clusters);
   //notificationAccess is assign the value of if that specific cluster has notifications on
   const notificationsEnabled = res.locals.cluster.notificationEnabled;
   //notificationType is assign the value of the clusters notification type (text,email,slack)
@@ -68,43 +92,37 @@ export const sendNotification = async (
   const notificationAccess = res.locals.cluster.notificationAccess;
 
   try {
-    //get the status of the cluster
-    const status = (
-      await StatusModel.find({ cluster: clusterId }, null, {
-        sort: { timestamp: -1 },
-        limit: 1,
-      })
-    )[0];
-
-    if (!status) {
-      return next({
-        log: 'No status found',
-        message: 'No status found',
-        status: 404,
-      });
-    }
-    //this is what the cluster error is and will be sent to the user
-    const message = status.logs[0].message;
-    console.log('message', message);
-
-    //check to ensure the the cluster has notifications enabled
-    if (notificationsEnabled === true) {
-      //if they do check the way that the user would like to be notified
-      if (notificationType === 'text') {
-        setInterval(() => {
-          sendText(notificationAccess, message);
-        }, 5 * 60 * 1000);
-      } else if (notificationType === 'email') {
-        setInterval(() => {
-          sendEmail(notificationAccess, message);
-        }, 5 * 60 * 1000);
-      } else {
-        return 'working on sending slack';
+    for (const cluster of clusters) {
+      let id = cluster.id;
+      const clusterError = await KErrorModel.findById(id);
+      if (clusterError) {
+        //this is the message for the Cluster
+        const message = clusterError.message;
+        console.log('message', message);
+        if (notificationsEnabled === true && clusterError.count >= 5) {
+          if (notificationType === 'text') {
+            sendText(notificationAccess, message);
+          } else if (notificationType === 'email') {
+            sendEmail(notificationAccess, message);
+          } else {
+            (async () => {
+              try {
+                // Use the `chat.postMessage` method to send a message from this app
+                await web.chat.postMessage({
+                  channel: '#building-kubernetes-error-managment',
+                  text: message,
+                });
+                console.log('Message posted!');
+              } catch (error) {
+                console.log(error);
+              }
+            })();
+          }
+        }
       }
+      console.log('The message has been sent');
+      return next();
     }
-
-    console.log('The message has been sent');
-    return next();
   } catch (error) {
     return next({
       log: 'Error getting status',
@@ -114,45 +132,3 @@ export const sendNotification = async (
     });
   }
 };
-
-////old material when id was in params
-//const { id } = req.params;
-
-//const user = req.user as UserDocument;
-
-//const cluster = await ClusterModel.findById(id);
-
-// if (!cluster) {
-//   return res.status(404).json({ message: 'Cluster not found' });
-// }
-//     //get phone number
-//     const { notificationAccess } = cluster;
-//     const message = `There is a __ error __ in cluster ${cluster.name}.`;
-//     sendText(notificationAccess, message);
-//     // clusters.forEach((cluster) => {
-//     //   if (cluster.notificationType === 'text') {
-//     //     textClusters.push(cluster);
-//     //   } else if (cluster.notificationType === 'email') {
-//     //     emailClusters.push(cluster);
-//     //   } else if (cluster.notificationType === 'slack') {
-//     //     slackClusters.push(cluster);
-//     //   }
-//     // });
-//     console.log('The message has been sent');
-//     return next();
-//   } catch (err) {
-//     return next({
-//       status: 400,
-//       message: 'Error getting cluster and sending message',
-//       log: err,
-//     });
-//   }
-// };
-
-// textClusters.forEach((textCluster: any) => {
-//   client.message.create({
-//     body: 'Sample Error Message',
-//     to: textCluster.notificationAccess,
-//     from: process.env.TWILIO_PHONE_NUMBER,
-//   });
-// });

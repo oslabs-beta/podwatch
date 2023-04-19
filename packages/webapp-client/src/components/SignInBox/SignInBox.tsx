@@ -47,9 +47,8 @@ const SignInBox: React.FC<React.PropsWithChildren<SignInProps>> = () => {
     // });
 
     try {
-      await serverInstance.post('/auth/local/signin', 
-        {email, password});
-      router.push('/cluster')
+      await serverInstance.post('/auth/local/signin', { email, password });
+      router.push('/cluster');
     } catch (err) {
       console.log(err);
     }

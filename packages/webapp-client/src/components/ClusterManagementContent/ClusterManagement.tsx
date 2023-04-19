@@ -9,10 +9,30 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import ClusterCard from '../ClusterCard/ClusterCard';
 import useClusters from '../../hooks/useClusters';
+import axios from 'axios';
 
 const ClusterManagement: React.FC = () => {
   const { clusters } = useClusters();
-
+  // useEffect(() => {
+  //   axios
+  //     .get('/notification/')
+  //     .then((response) => {
+  //       console.log(response);
+  //     })
+  //     .catch((error) => {
+  //       console.log(error);
+  //     });
+  // }, []);
+  if (clusters) {
+    axios
+      .get('/notification')
+      .then((response) => {
+        console.log(response);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
   return (
     <>
       <div className={styles.spacer}>
