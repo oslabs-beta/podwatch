@@ -20,7 +20,7 @@ const ClusterCreateForm = () => {
   const [clusterDescription, setClusterDescription] = React.useState('');
   const [clusterId, setClusterId] = React.useState('');
   const [clusterSecret, setClusterSecret] = React.useState('');
-  const [notificationEnabled, setNotificationEnabled] = React.useState(false);
+  const [notificationEnabled, setNotificationEnabled] = React.useState(true);
   const [notificationType, setNotificationType] = React.useState('');
   const [notificationAccess, setNotificationAccess] = React.useState('');
   const [loading, setLoading] = React.useState(false);
@@ -34,9 +34,11 @@ const ClusterCreateForm = () => {
       name: clusterName,
       description: clusterDescription,
       notificationEnabled: notificationEnabled,
+      notificationType: notificationType,
+      notificationAccess: notificationAccess,
     });
 
-    console.log(data);
+    console.log('DATA', data);
 
     setClusterId(data.cluster.id);
     setClusterSecret(data.secret);

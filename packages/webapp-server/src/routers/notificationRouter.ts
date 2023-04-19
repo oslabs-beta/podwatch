@@ -24,12 +24,12 @@ const router = Router();
 router.get(
   //this needs to be all the clusters that the user has associated with them... user id
   '/',
-  // //make sure the user has been authenticated
-  // authenticateUser,
-  // //getting all the clusters associated with the user
-  // getAllClusters,
+  //make sure the user has been authenticated
+  authenticateUser,
+  //getting all the clusters associated with the user
+  getAllClusters,
   // //neeed to change notification to filter through all
-  // sendNotification,
+  sendNotification,
   (req: Request, res: Response) => {
     res.status(200).send('Text Messages Working');
   }

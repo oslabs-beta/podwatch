@@ -23,10 +23,6 @@ router.get(
   }
 );
 
-router.use('/', (req: Request, res: Response) => {
-  res.send('HELLO');
-});
-
 //create cluster associated with user
 router.post(
   '/',

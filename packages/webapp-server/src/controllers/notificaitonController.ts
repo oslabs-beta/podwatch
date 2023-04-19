@@ -1,7 +1,7 @@
 //check cluster notification settings
 //confirm wheter or not the incoming event meets min requirments (like number of times)
 //then call corresponding API
-require('dotenv');
+
 import { Request, Response, NextFunction } from 'express';
 import { ClusterAttrs, ClusterModel } from '../models/ClusterModel';
 import { KErrorModel, NativeKEvent } from '../models/KErrorModel';
@@ -11,16 +11,23 @@ import { Log, StatusModel } from '../models/StatusModel';
 const accountSid = 'AC6abdad614f2d1cec57c365d1f018ae74';
 //const authToken = process.env.TWILIO_TOKEN;
 const authToken = '50ab23db6979e18ceac43df7fa477673';
-const slackURL = process.env.SLACK_URL;
+//const slackURL = process.env.SLACK_URL;
+
 const nodemailer = require('nodemailer');
 const { App } = require('@slack/bolt');
 const { WebClient } = require('@slack/web-api');
 //set up for texts
 import twilio from 'twilio';
 import { json } from 'stream/consumers';
-const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN;
-const SLACK_SIGNING_SECRET = process.env.SLACK_SIGNING_SECRET;
-const WRITE = process.env.WRITE;
+import { idText } from 'typescript';
+//const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN;
+const SLACK_BOT_TOKEN =
+  'xoxb-5148669881568-5148690677904-qujxIPUr9fMgKy448EcVspJG';
+//const SLACK_SIGNING_SECRET = process.env.SLACK_SIGNING_SECRET;
+const SLACK_SIGNING_SECRET = 'e12538bacc9650ac5a7042cd5a166e03';
+//const WRITE = process.env.WRITE;
+const WRITE =
+  'xapp-1-A053GBH4SRL-5161408436352-579b7e9e58856a48c32ba7676d3e8a38c0a30eb14f1f9e0afe02b221f31fb885';
 
 const client = twilio(accountSid, authToken);
 //set up for slack bot
@@ -73,8 +80,6 @@ function sendEmail(toEmail: string, message: any) {
     }
   );
 }
-//function for slack messages
-function sendSlack(message: any) {}
 
 export const sendNotification = async (
   req: Request,
@@ -84,39 +89,43 @@ export const sendNotification = async (
   //get all the clusters
   const clusters = res.locals.allClusters;
   console.log('clusters', clusters);
-  //notificationAccess is assign the value of if that specific cluster has notifications on
-  const notificationsEnabled = res.locals.cluster.notificationEnabled;
-  //notificationType is assign the value of the clusters notification type (text,email,slack)
-  const notificationType = res.locals.cluster.notificationType;
-  //const notificationAccess is set to the means of accesss (phone number, email address, slack info)
-  const notificationAccess = res.locals.cluster.notificationAccess;
 
   try {
     for (const cluster of clusters) {
+      //notificationAccess is assign the value of if that specific cluster has notifications on
+      const notificationsEnabled = cluster.notificationEnabled;
+      //notificationType is assign the value of the clusters notification type (text,email,slack)
+      const notificationType = cluster.notificationType;
+      //const notificationAccess is set to the means of accesss (phone number, email address, slack info)
+      const notificationAccess = cluster.notificationAccess;
+
       let id = cluster.id;
-      const clusterError = await KErrorModel.findById(id);
+      const clusterError = await KErrorModel.find({ cluster: id });
+      console.log('clusterError', clusterError);
       if (clusterError) {
         //this is the message for the Cluster
-        const message = clusterError.message;
-        console.log('message', message);
-        if (notificationsEnabled === true && clusterError.count >= 5) {
-          if (notificationType === 'text') {
-            sendText(notificationAccess, message);
-          } else if (notificationType === 'email') {
-            sendEmail(notificationAccess, message);
-          } else {
-            (async () => {
-              try {
-                // Use the `chat.postMessage` method to send a message from this app
-                await web.chat.postMessage({
-                  channel: '#building-kubernetes-error-managment',
-                  text: message,
-                });
-                console.log('Message posted!');
-              } catch (error) {
-                console.log(error);
-              }
-            })();
+        for (const error of clusterError) {
+          const message = error.message;
+          console.log('message', message);
+          if (notificationsEnabled === true && error.count >= 5) {
+            if (notificationType === 'text') {
+              sendText(notificationAccess, message);
+            } else if (notificationType === 'email') {
+              sendEmail(notificationAccess, message);
+            } else {
+              (async () => {
+                try {
+                  // Use the `chat.postMessage` method to send a message from this app
+                  await web.chat.postMessage({
+                    channel: '#building-kubernetes-error-managment',
+                    text: message,
+                  });
+                  console.log('Message posted!');
+                } catch (error) {
+                  console.log(error);
+                }
+              })();
+            }
           }
         }
       }

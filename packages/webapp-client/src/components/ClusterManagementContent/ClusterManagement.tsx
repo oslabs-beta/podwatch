@@ -10,21 +10,13 @@ import Button from '@mui/material/Button';
 import ClusterCard from '../ClusterCard/ClusterCard';
 import useClusters from '../../hooks/useClusters';
 import axios from 'axios';
+import serverInstance from '../../utils/serverInstance';
 
 const ClusterManagement: React.FC = () => {
   const { clusters } = useClusters();
-  // useEffect(() => {
-  //   axios
-  //     .get('/notification/')
-  //     .then((response) => {
-  //       console.log(response);
-  //     })
-  //     .catch((error) => {
-  //       console.log(error);
-  //     });
-  // }, []);
+
   if (clusters) {
-    axios
+    serverInstance
       .get('/notification')
       .then((response) => {
         console.log(response);
