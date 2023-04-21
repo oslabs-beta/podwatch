@@ -12,6 +12,7 @@
   "dependencies": {
     "@mdx-js/loader": "^2.3.0",
     "@mdx-js/react": "^2.3.0",
+    "@sendgrid/mail": "^7.7.0",
     "@slack/bolt": "^3.13.0",
     "@slack/web-api": "^6.8.1",
     "@types/cors": "^2.8.13",

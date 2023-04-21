@@ -10,7 +10,7 @@ import { Log, StatusModel } from '../models/StatusModel';
 //const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const accountSid = 'AC6abdad614f2d1cec57c365d1f018ae74';
 //const authToken = process.env.TWILIO_TOKEN;
-const authToken = '50ab23db6979e18ceac43df7fa477673';
+const authToken = '091f2b87d26122c04beb10b258d153f6';
 //const slackURL = process.env.SLACK_URL;
 
 const nodemailer = require('nodemailer');
@@ -19,7 +19,8 @@ const { WebClient } = require('@slack/web-api');
 //set up for texts
 import twilio from 'twilio';
 import { json } from 'stream/consumers';
-import { idText } from 'typescript';
+import { forEachChild, idText } from 'typescript';
+import { send } from 'process';
 //const SLACK_BOT_TOKEN = process.env.SLACK_BOT_TOKEN;
 const SLACK_BOT_TOKEN =
   'xoxb-5148669881568-5148690677904-qujxIPUr9fMgKy448EcVspJG';
@@ -43,11 +44,20 @@ const web = new WebClient(SLACK_BOT_TOKEN);
 const currentTime = new Date().toTimeString();
 
 //to send emails need a transporter object
+// let transporter = nodemailer.createTransport({
+//   service: 'gmail',
+//   auth: {
+//     user: 'podwatchnoerrors1@gmail.com',
+//     pass: 'codesmith',
+//   },
+// });
 let transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: 'smtp.gmail.com',
+  port: 465,
+  secure: true,
   auth: {
-    user: process.env.EMAIL,
-    pass: process.env.PASSWORD,
+    user: 'podwatchnoerrors1@gmail.com',
+    pass: 'codesmith',
   },
 });
 
@@ -56,20 +66,20 @@ function sendText(toNumber: string, message: any) {
   client.messages
     .create({
       body: message,
-      from: process.env.TWILIO_PHONE_NUMBER,
+      from: '+18449771565',
       to: toNumber,
     })
-    .then((message: any) => console.log(message.sid))
+    .then((message: any) => console.log('TEXT MESSAGE', message.sid))
     .catch((error: Error) => console.log(error));
 }
 //for emails
 function sendEmail(toEmail: string, message: any) {
   transporter.sendMail(
     {
-      from: process.env.EMAIL,
-      to: toEmail,
+      from: '"PodWatch"<podwatchnoerrors1@gmail.com>',
+      to: 'kmcromer1@gmail.com',
       subject: 'Error in Kuberentes Pod',
-      Text: message,
+      text: message,
     },
     (err: Error, info: any) => {
       if (err) {
@@ -92,17 +102,20 @@ export const sendNotification = async (
 
   try {
     for (const cluster of clusters) {
+      console.log('clusters[i]:', cluster);
       //notificationAccess is assign the value of if that specific cluster has notifications on
       const notificationsEnabled = cluster.notificationEnabled;
+      console.log('NOTIFEN:', notificationsEnabled);
       //notificationType is assign the value of the clusters notification type (text,email,slack)
       const notificationType = cluster.notificationType;
+      console.log('NOTTYPE', notificationType);
       //const notificationAccess is set to the means of accesss (phone number, email address, slack info)
       const notificationAccess = cluster.notificationAccess;
 
       let id = cluster.id;
       const clusterError = await KErrorModel.find({ cluster: id });
       console.log('clusterError', clusterError);
-      if (clusterError) {
+      if (clusterError[0]) {
         //this is the message for the Cluster
         for (const error of clusterError) {
           const message = error.message;
@@ -110,6 +123,7 @@ export const sendNotification = async (
           if (notificationsEnabled === true && error.count >= 5) {
             if (notificationType === 'text') {
               sendText(notificationAccess, message);
+              console.log('TEXT WAS TRIGGERED');
             } else if (notificationType === 'email') {
               sendEmail(notificationAccess, message);
             } else {
@@ -128,10 +142,37 @@ export const sendNotification = async (
             }
           }
         }
+      } else {
+        if (notificationType === 'text') {
+          console.log('MADE IT TO NON ERRORS TEXT MESSAGES');
+          let message = 'all good';
+          sendText(notificationAccess, message);
+          console.log('TEXT WAS TRIGGERED');
+        } else if (notificationType === 'email') {
+          console.log('MADE IT TO EMAIL');
+
+          const sgMail = require('@sendgrid/mail');
+          sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+          const msg = {
+            to: 'kmcromer1@example.com', // Change to your recipient
+            from: 'podwatchnoerrors1@gmail.com', // Change to your verified sender
+            subject: 'Sending with SendGrid is Fun',
+            text: 'and easy to do anywhere, even with Node.js',
+            html: '<strong>and easy to do anywhere, even with Node.js</strong>',
+          };
+          sgMail
+            .send(msg)
+            .then(() => {
+              console.log('Email sent');
+            })
+            .catch((error: any) => {
+              console.error(error);
+            });
+        }
       }
       console.log('The message has been sent');
-      return next();
     }
+    return next();
   } catch (error) {
     return next({
       log: 'Error getting status',

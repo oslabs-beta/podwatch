@@ -144,6 +144,7 @@ export const kErrorController = {
         limit,
         skip,
       });
+      console.log('kERROS', kErrors);
 
       res.locals.kErrors = kErrors;
 
@@ -162,7 +163,7 @@ export const kErrorController = {
 
     try {
       const kError = await KErrorModel.findById(id);
-
+      console.log('kERROR', kError);
       if (!kError) {
         return next({
           log: 'kError not found',
