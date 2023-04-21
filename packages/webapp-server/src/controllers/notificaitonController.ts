@@ -43,24 +43,6 @@ const client = twilio(accountSid, authToken);
 const web = new WebClient(SLACK_BOT_TOKEN);
 const currentTime = new Date().toTimeString();
 
-//to send emails need a transporter object
-// let transporter = nodemailer.createTransport({
-//   service: 'gmail',
-//   auth: {
-//     user: 'podwatchnoerrors1@gmail.com',
-//     pass: 'codesmith',
-//   },
-// });
-let transporter = nodemailer.createTransport({
-  host: 'smtp.gmail.com',
-  port: 465,
-  secure: true,
-  auth: {
-    user: 'podwatchnoerrors1@gmail.com',
-    pass: 'codesmith',
-  },
-});
-
 //function for text messages
 function sendText(toNumber: string, message: any) {
   client.messages
@@ -74,21 +56,25 @@ function sendText(toNumber: string, message: any) {
 }
 //for emails
 function sendEmail(toEmail: string, message: any) {
-  transporter.sendMail(
-    {
-      from: '"PodWatch"<podwatchnoerrors1@gmail.com>',
-      to: 'kmcromer1@gmail.com',
-      subject: 'Error in Kuberentes Pod',
-      text: message,
-    },
-    (err: Error, info: any) => {
-      if (err) {
-        console.error(err);
-      } else {
-        console.log('Email send:' + info.response);
-      }
-    }
+  const sgMail = require('@sendgrid/mail');
+  sgMail.setApiKey(
+    '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'
   );
+  const msg = {
+    to: toEmail, // Change to your recipient
+    from: 'podwatchnoerrors1@gmail.com', // Change to your verified sender
+    subject: 'Cluster Error',
+    text: message,
+  };
+  sgMail
+    .send(msg)
+    .then(() => {
+      console.log('Email sent');
+      console.log('msg', msg);
+    })
+    .catch((error: any) => {
+      console.error(error);
+    });
 }
 
 export const sendNotification = async (
@@ -150,27 +136,11 @@ export const sendNotification = async (
           console.log('TEXT WAS TRIGGERED');
         } else if (notificationType === 'email') {
           console.log('MADE IT TO EMAIL');
-
-          const sgMail = require('@sendgrid/mail');
-          sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-          const msg = {
-            to: 'kmcromer1@example.com', // Change to your recipient
-            from: 'podwatchnoerrors1@gmail.com', // Change to your verified sender
-            subject: 'Sending with SendGrid is Fun',
-            text: 'and easy to do anywhere, even with Node.js',
-            html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-          };
-          sgMail
-            .send(msg)
-            .then(() => {
-              console.log('Email sent');
-            })
-            .catch((error: any) => {
-              console.error(error);
-            });
+          let message = 'all good';
+          sendEmail(notificationAccess, message);
         }
+        console.log('The message has been sent');
       }
-      console.log('The message has been sent');
     }
     return next();
   } catch (error) {
