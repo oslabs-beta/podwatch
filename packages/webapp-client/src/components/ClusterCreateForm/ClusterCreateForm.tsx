@@ -20,9 +20,6 @@ const ClusterCreateForm = () => {
   const [clusterDescription, setClusterDescription] = React.useState('');
   const [clusterId, setClusterId] = React.useState('');
   const [clusterSecret, setClusterSecret] = React.useState('');
-  const [notificationEnabled, setNotificationEnabled] = React.useState(true);
-  const [notificationType, setNotificationType] = React.useState('');
-  const [notificationAccess, setNotificationAccess] = React.useState('');
   const [loading, setLoading] = React.useState(false);
   const [showSecret, setShowSecret] = React.useState(false);
 
@@ -33,9 +30,6 @@ const ClusterCreateForm = () => {
     const { data } = await serverInstance.post('/cluster', {
       name: clusterName,
       description: clusterDescription,
-      notificationEnabled: notificationEnabled,
-      notificationType: notificationType,
-      notificationAccess: notificationAccess,
     });
 
     console.log('DATA', data);
@@ -151,51 +145,6 @@ const ClusterCreateForm = () => {
           sx={{ input: { color: 'white' }, label: { color: '#FFFFFF80' } }}
           value={clusterDescription}
           onChange={(e) => setClusterDescription(e.target.value)}
-          autoFocus
-        />
-        <TextField
-          className={styles.input}
-          margin="normal"
-          required
-          fullWidth
-          id="notificationEnabled"
-          label="Notification Enabaled (true/false)"
-          name="notificationEnabled"
-          color="secondary"
-          autoComplete="notificationEnabled"
-          sx={{ input: { color: 'white' }, label: { color: '#FFFFFF80' } }}
-          value={notificationEnabled}
-          onChange={(e) => setNotificationEnabled(true)}
-          autoFocus
-        />
-        <TextField
-          className={styles.input}
-          margin="normal"
-          required
-          fullWidth
-          id="notificationType"
-          label="Notification Type (phone, email, slack)"
-          name="notificationType"
-          color="secondary"
-          autoComplete="notificationType"
-          sx={{ input: { color: 'white' }, label: { color: '#FFFFFF80' } }}
-          value={notificationType}
-          onChange={(e) => setNotificationType(e.target.value)}
-          autoFocus
-        />
-        <TextField
-          className={styles.input}
-          margin="normal"
-          required
-          fullWidth
-          id="notificationAccess"
-          label="Notification Access (phone #, email address, slack)"
-          name="notificationAccess"
-          color="secondary"
-          autoComplete="notificationAccess"
-          sx={{ input: { color: 'white' }, label: { color: '#FFFFFF80' } }}
-          value={notificationAccess}
-          onChange={(e) => setNotificationAccess(e.target.value)}
           autoFocus
         />
 

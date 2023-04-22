@@ -11,20 +11,10 @@ import ClusterCard from '../ClusterCard/ClusterCard';
 import useClusters from '../../hooks/useClusters';
 import axios from 'axios';
 import serverInstance from '../../utils/serverInstance';
-
+import { useEffect } from 'react';
 const ClusterManagement: React.FC = () => {
   const { clusters } = useClusters();
 
-  if (clusters) {
-    serverInstance
-      .get('/notification')
-      .then((response) => {
-        console.log(response);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
   return (
     <>
       <div className={styles.spacer}>
