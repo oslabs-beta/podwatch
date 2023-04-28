@@ -11,9 +11,9 @@ export interface Cluster {
    * The cluster's description, specified by the cluster owner.
    */
   description?: string;
-  notificationEnabled: boolean;
-  notificationType: string;
-  notificationAccess: string;
+  notificationEnabled?: boolean;
+  notificationType?: string;
+  notificationAccess?: string;
   /**
    * The cluster's notification setting, optional
    */

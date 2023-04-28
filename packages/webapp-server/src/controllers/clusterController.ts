@@ -39,6 +39,44 @@ export const createCluster = async (
     return next(err);
   }
 };
+export const addNotification = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  const { id } = req.params;
+  try {
+    const { notificationEnabled, notificationType, notificationAccess } =
+      req.body;
+    if (!id) throw new Error('cluster must be selected');
+    const user = req.user as UserDocument;
+
+    const cluster: any = await ClusterModel.findById(id);
+    if (!cluster) throw new Error('No cluster matching that id');
+    const searchUser: any = await UserModel.findById(cluster.owner.valueOf());
+    if (searchUser == user)
+      throw new Error("This cluster doesn't belong to this user");
+    ClusterModel.findByIdAndUpdate(
+      id,
+      {
+        notificationEnabled: notificationEnabled,
+        notificationType: notificationType,
+        notificationAccess: notificationAccess,
+      },
+      { new: true }
+    )
+      .then((notificationCluster) => {
+        console.log('notificationCluster', notificationCluster);
+        console.log('notifications have been added to cluster');
+        return next();
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  } catch (err) {
+    return next(err);
+  }
+};
 
 //get all clusters associated with user
 export const getAllClusters = async (
@@ -129,10 +167,6 @@ export const updateCluster = async (
       .catch((err) => {
         console.error(err);
       });
-
-    // console.log('updatedClusters', updatedClusters);
-    // res.locals.getCluster = updatedClusters;
-    // return next();
   } catch (err) {
     return next(err);
   }

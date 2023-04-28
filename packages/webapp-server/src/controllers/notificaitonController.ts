@@ -58,7 +58,6 @@ function sendSlack(conversationId: string, message: string, name: string) {
     channel: conversationId,
   });
 }
-
 export const sendNotification = async (
   req: Request,
   res: Response,
