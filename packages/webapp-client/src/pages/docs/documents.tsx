@@ -10,9 +10,6 @@ import Content from '!@mdx-js/loader!./documentMDX.mdx';
 import type { MDXComponents } from 'mdx/types.js';
 
 const myDocument: NextPage = () => {
-  function selectElementContents() {
-    console.log('yay');
-  }
   return <Content />;
 };
 

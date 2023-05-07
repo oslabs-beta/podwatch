@@ -14,6 +14,7 @@ import { errorHandler } from './errors/errorHandler';
 //import clusterRouter
 import clusterRouter from './routers/clusterRouter';
 import statusRouter from './routers/statusRouter';
+import notificationRouter from './routers/notificationRouter';
 
 dotenv.config();
 
@@ -30,13 +31,12 @@ app.use(
   })
 );
 
-//routers
 app.use('/watch', watcherRouter);
 app.use('/kerrors', kErrorRouter);
 app.use('/auth', authRouter);
 app.use('/cluster', clusterRouter);
 app.use('/status', statusRouter);
-
+app.use('/notification', notificationRouter);
 app.use(errorHandler);
 
 const start = async () => {
