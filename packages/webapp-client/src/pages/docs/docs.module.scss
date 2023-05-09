@@ -1,5 +1,5 @@
 .docs {
-  color: white;
+  color: black;
   padding: 2rem;
 
   h1,
@@ -9,6 +9,11 @@
   h5,
   p,
   ul {
-    margin-block: 1rem;
+    margin-block: 1.25rem;
+    list-style: none;
+  }
+
+  img {
+    max-width: 100%;
   }
 }
