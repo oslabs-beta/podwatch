@@ -55,7 +55,7 @@ const Header = () => {
                     Sign In
                   </Button>
                 ),
-                href: '/signin',
+                href: '/auth/signin',
                 visible: 'all',
               },
             ]}
