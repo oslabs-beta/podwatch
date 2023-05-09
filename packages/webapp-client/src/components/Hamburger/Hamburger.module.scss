@@ -1,0 +1,88 @@
+@use '@/styles/variables.scss' as *;
+
+$iconSize: 30px;
+$iconBarWidth: 5px;
+$iconBarBorderRadius: 2px;
+$iconBarColor: black;
+
+$animationTime: 300ms;
+$timingFunctionOpenSlide: ease-in-out;
+$timingFunctionOpenRotate: ease-in-out;
+$timingFunctionCloseRotate: ease-in-out;
+$timingFunctionCloseSlide: ease-in-out;
+
+.menuIcon {
+  top: 50%;
+  transform: translateY(-50%);
+
+  &,
+  &::before,
+  &::after {
+    content: '';
+    width: 100%;
+    height: $iconBarWidth;
+    background-color: $iconBarColor;
+    border-radius: $iconBarBorderRadius;
+    transform-origin: center;
+    position: absolute;
+    left: 0;
+  }
+
+  &Container {
+    background: none;
+    color: inherit;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+
+    display: block;
+    width: $iconSize;
+    height: $iconSize;
+    margin-right: 1rem;
+    position: relative;
+    cursor: pointer;
+  }
+}
+
+$animationTimeSplit: ($animationTime * 0.5);
+$iconSpacing: calc($iconSize / 3);
+
+.closed {
+  transition: all 0ms $animationTimeSplit;
+
+  &::before {
+    bottom: $iconSpacing;
+    transition: bottom $animationTimeSplit $animationTimeSplit
+        $timingFunctionOpenSlide,
+      transform $animationTimeSplit $timingFunctionOpenRotate;
+  }
+  &::after {
+    bottom: -$iconSpacing;
+    transition: bottom $animationTimeSplit $animationTimeSplit
+        $timingFunctionOpenSlide,
+      transform $animationTimeSplit $timingFunctionOpenRotate;
+  }
+}
+
+.open {
+  background-color: transparent;
+  transition: all 0ms $animationTimeSplit;
+
+  &::before {
+    bottom: 0;
+    transform: rotate(-45deg);
+    transition: bottom $animationTimeSplit $timingFunctionCloseSlide,
+      transform $animationTimeSplit $animationTimeSplit
+        $timingFunctionCloseRotate;
+  }
+
+  &::after {
+    bottom: 0;
+    transform: rotate(45deg);
+    transition: bottom $animationTimeSplit $timingFunctionCloseSlide,
+      transform $animationTimeSplit $animationTimeSplit
+        $timingFunctionCloseRotate;
+  }
+}

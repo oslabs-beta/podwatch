@@ -42,18 +42,24 @@ const Header = () => {
           </Link>
           <Navigation
             items={[
-              { label: 'Docs', href: '/docs/documents', visible: 'all' },
-              { label: 'Examples', href: '/', visible: 'all' },
-              { label: 'GitRepo', href: '/', visible: 'all' },
+              { component: <>Docs</>, href: '/docs/documents', visible: 'all' },
+              { component: <>Examples</>, href: '/', visible: 'all' },
+              { component: <>GitRepo</>, href: '/', visible: 'all' },
+              {
+                component: (
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    sx={{ minWidth: '6rem' }}
+                  >
+                    Sign In
+                  </Button>
+                ),
+                href: '/signin',
+                visible: 'all',
+              },
             ]}
           />
-          <div className={styles.corner}>
-            <div className={styles.signin}>{getUserAvatar()}</div>
-            <div className={styles.divider} />
-            <div className={styles.toggle}>
-              <DarkModeToggle />
-            </div>
-          </div>
         </div>
       </header>
     </>
