@@ -4,11 +4,12 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import Link from 'next/link';
 import styles from './Navigation.module.scss';
+import Hamburger from '../Hamburger/Hamburger';
 
 interface NavigationItem {
-  label: string;
   href: string;
   visible: 'all' | 'desktop' | 'mobile';
+  component: React.ReactElement<any, string | React.JSXElementConstructor<any>>;
 }
 
 interface NavigationProps {
@@ -16,30 +17,38 @@ interface NavigationProps {
 }
 
 const Navigation: React.FC<NavigationProps> = ({ items }) => {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
-
-  const handleClick = (event: React.MouseEvent<HTMLElement>) => {
-    if (open) {
-      setAnchorEl(null);
-      return;
-    }
-    setAnchorEl(event.currentTarget);
-  };
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const [open, setOpen] = React.useState(false);
 
   return (
-    <div className={styles.desktop}>
-      {items
-        .filter((item) => item.visible !== 'mobile')
-        .map((item) => (
-          <Link key={item.label} href={item.href} className={styles.link}>
-            {item.label}
-          </Link>
-        ))}
-    </div>
+    <>
+      <div className={styles.desktop}>
+        {items
+          .filter((item) => item.visible !== 'mobile')
+          .map((item, i) => (
+            <Link key={i} href={item.href} className={styles.link}>
+              {item.component && React.cloneElement(item.component)}
+            </Link>
+          ))}
+      </div>
+      <div className={styles.mobile}>
+        <Hamburger open={open} setOpen={setOpen} />
+        <div
+          className={`${styles.menu} ${
+            open ? styles.menuOpen : styles.menuClosed
+          }`}
+        >
+          {items
+            .filter((item) => item.visible !== 'desktop')
+            .map((item, i) => (
+              <Link key={i} href={item.href} className={styles.link}>
+                <li className={styles.item}>
+                  {React.cloneElement(item.component)}
+                </li>
+              </Link>
+            ))}
+        </div>
+      </div>
+    </>
   );
 };
 
