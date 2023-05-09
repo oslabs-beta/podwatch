@@ -4,7 +4,7 @@ import { HearbeatData } from '../types/HeartbeatData';
 import { Logger } from './../logger/Logger';
 
 /**
- * Heartbeat is responsible for sending heartbeat data to the Podwatch Service or custom server.
+ * Heartbeat is responsible for sending heartbeat data to the Podwatch Service or custom server. Disable by setting HEARBEAT_INTERVAL environment variable to 0.
  */
 export class Heartbeat {
   private timeInterval: number;
@@ -16,6 +16,10 @@ export class Heartbeat {
     private readonly logger: Logger
   ) {
     this.timeInterval = Number(this.config.get('HEARTBEAT_INTERVAL'));
+
+    if (this.timeInterval === 0) {
+      return;
+    }
 
     setInterval(() => {
       this.heartbeat();

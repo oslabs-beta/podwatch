@@ -1,0 +1,27 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: podwatch-config
+data:
+  # The client ID is obtained from the Podwatch web service when you register a new cluster.
+  PODWATCH_CLIENT_ID: your-client-id
+
+  # Uncomment and set the following environment variable if you are using a custom Podwatch server.
+  # Make sure to exclude the client ID in this config map and exclude the client secret in the deployment.
+  # PODWATCH_CUSTOM_SERVER_URL: your-custom-server-url
+
+  # The remaining variables are set by default and can be excluded. They are included here for reference or for further customization.
+
+  # The maximum number of subsequent error events reported by the cluster before the events are dispatched.
+  # MAX_DISPATCH_QUEUE_SIZE: '20'
+
+  # The amount of time to wait before dispatching a partial queue of error events.
+  # DISPATCH_IDLE_TIMEOUT: '1000'
+
+  # The amount of time to wait before a dispatch request times out.
+  # WEBHOOK_INSTANCE_TIMEOUT: '10000'
+
+  # How often to send a heartbeat with status and log information to the Podwatch service or customer server.
+  # Do not set unless you are using a custom Podwatch server with a '/status' endpoint to receive heartbeats.
+  # Setting to 0 will disable heartbeats.
+  # HEARTBEAT_INTERVAL: '30000'

@@ -12,34 +12,7 @@ export class KubernetesInstanceFactory extends AxiosInstanceFactory {
    * @returns An AxiosInstance for the Kubernetes API.
    */
   public create() {
-    if (this.config.isHostedInternally) {
-      this.logger.log(
-        'Service hosted internally. Building instance with internal API token and certificate.'
-      );
-      return this.createClusterInstance();
-    }
-
-    this.logger.log(
-      'Service hosted externally. Building instance with provided service account token and proxy port.'
-    );
-    return this.createExternalInstance();
-  }
-
-  /**
-   * Creates an AxiosInstance for the Kubernetes API with the appropriate headers and base URL for when the service is hosted outside the cluster.
-   * @returns An AxiosInstance for the Kubernetes API.
-   */
-  private createExternalInstance() {
-    const token = this.config.get('PODWATCH_SERVICE_ACCOUNT_TOKEN');
-    const host = this.config.get('EXTERNAL_KUBERNETES_PROXY_HOST');
-    const port = this.config.get('PODWATCH_PORT');
-    return axios.create({
-      baseURL: `${host}:${port}`,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'Content-Type': 'application/json',
-      },
-    });
+    return this.createClusterInstance();
   }
 
   /**

@@ -5,16 +5,6 @@ import Joi from 'joi';
  */
 export interface EnvSchema {
   /**
-   * The service account token used to authenticate with the Kubernetes API when the service is hosted outside the cluster.
-   */
-  PODWATCH_SERVICE_ACCOUNT_TOKEN: string | undefined;
-
-  /**
-   * The port used to host the service when the service is hosted outside the cluster.
-   */
-  PODWATCH_PORT: string | undefined;
-
-  /**
    * The host of the Kubernetes API when the service is hosted inside the cluster. This is automatically set by Kubernetes.
    */
   KUBERNETES_SERVICE_HOST: string | undefined;
@@ -63,12 +53,6 @@ export interface EnvSchema {
   PODWATCH_WEB_SERVICE_URL: string | undefined;
 
   /**
-   * The host of the Kubernetes API when the service is hosted outside the cluster. This is used to proxy requests to the Kubernetes API. Only required if the service is hosted on a different host than the Kubernetes API.
-   * @default http://host.docker.internal
-   */
-  EXTERNAL_KUBERNETES_PROXY_HOST: string | undefined;
-
-  /**
    * The interval at which the service will send a heartbeat to the Podwatch Web Service, in milliseconds.
    * @default 30000
    */
@@ -79,28 +63,6 @@ export interface EnvSchema {
  * The schema for the application environment variables.
  */
 const envSchema = Joi.object({
-  PODWATCH_SERVICE_ACCOUNT_TOKEN: Joi.string().when('KUBERNETES_SERVICE_HOST', {
-    is: Joi.exist(),
-    then: Joi.optional().empty().warning('external.host', {}).messages({
-      'external.host':
-        'Environment variable PODWATCH_SERVICE_ACCOUNT_TOKEN is not required when running inside the cluster',
-    }),
-    otherwise: Joi.required().messages({
-      'any.only':
-        'Environment variable PODWATCH_SERVICE_ACCOUNT_TOKEN is required when running outside the cluster.',
-    }),
-  }),
-  PODWATCH_PORT: Joi.string().when('KUBERNETES_SERVICE_HOST', {
-    is: Joi.exist(),
-    then: Joi.optional().empty().warning('external.host', {}).messages({
-      'external.host':
-        'Environment variable PODWATCH_SERVICE_ACCOUNT_PORT is not required when running inside the cluster',
-    }),
-    otherwise: Joi.required().messages({
-      'any.only':
-        'Environment variable PODWATCH_SERVICE_ACCOUNT_PORT is required when running outside the cluster.',
-    }),
-  }),
   KUBERNETES_SERVICE_HOST: Joi.string().optional(),
   KUBERNETES_SERVICE_PORT: Joi.string().optional(),
   PODWATCH_CUSTOM_SERVER_URL: Joi.string().optional(),
@@ -134,13 +96,11 @@ const envSchema = Joi.object({
     .regex(/^-?\d+$/)
     .required(),
   PODWATCH_WEB_SERVICE_URL: Joi.string().required(),
-  EXTERNAL_KUBERNETES_PROXY_HOST: Joi.string().required(),
   HEARTBEAT_INTERVAL: Joi.string()
     .required()
     .regex(/^-?\d+$/),
 })
   .and('KUBERNETES_SERVICE_HOST', 'KUBERNETES_SERVICE_PORT')
-  .and('PODWATCH_CLIENT_ID', 'PODWATCH_CLIENT_SECRET')
-  .and('PODWATCH_SERVICE_ACCOUNT_TOKEN', 'PODWATCH_PORT');
+  .and('PODWATCH_CLIENT_ID', 'PODWATCH_CLIENT_SECRET');
 
 export default envSchema;
