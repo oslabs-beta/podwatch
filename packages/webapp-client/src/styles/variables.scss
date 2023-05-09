@@ -29,3 +29,8 @@ $footer-height: 6rem;
     @content;
   }
 }
+
+@mixin restrict-width {
+  width: min(100%, 90rem);
+  margin: 0 auto;
+}

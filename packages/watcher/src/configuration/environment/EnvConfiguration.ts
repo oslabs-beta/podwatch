@@ -25,13 +25,6 @@ export class EnvConfiguration extends Configuration<EnvSchema> {
   }
 
   /**
-   * Returns a boolean indicating whether the application is running internally in a Kubernetes cluster.
-   */
-  public get isHostedInternally(): boolean {
-    return this.env.KUBERNETES_SERVICE_HOST !== undefined;
-  }
-
-  /**
    * Returns a boolean indicating whether the application is using a custom server.
    */
   public get isUsingCustomServer(): boolean {

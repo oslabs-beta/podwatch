@@ -1,0 +1,19 @@
+.docs {
+  color: black;
+  padding: 2rem;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  p,
+  ul {
+    margin-block: 1.25rem;
+    list-style: none;
+  }
+
+  img {
+    max-width: 100%;
+  }
+}
