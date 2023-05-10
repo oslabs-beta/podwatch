@@ -4,6 +4,7 @@
   display: grid;
   grid-template-columns: auto;
   padding-block: 2rem;
+  @include restrict-width;
   @include breakpoint-md {
     gap: 2rem;
     padding-block: 4rem;
