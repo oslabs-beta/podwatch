@@ -1,0 +1,11 @@
+@use '../../styles/variables' as *;
+
+.layout {
+  @include restrict-width;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding-inline: 1rem;
+}
