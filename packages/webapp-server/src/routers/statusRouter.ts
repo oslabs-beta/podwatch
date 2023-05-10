@@ -20,7 +20,7 @@ statusRouter.get(
   kErrorController.getClusterFromParams,
   statusController.getStatus,
   (req: Request, res: Response) => {
-    res.status(200).json(res.locals.status);
+    res.status(200).json({ status: res.locals.status });
   }
 );
 
