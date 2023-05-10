@@ -4,6 +4,8 @@ import LandingContent from '@/components/LandingContent/LandingContent';
 import logo from '/public/images/logo/512.png';
 import LandingHeader from '../components/LandingHeader/LandingHeader';
 import { Button } from '@mui/material';
+import Accordion from '../components/Accordion/Accordion';
+import Link from 'next/link';
 
 export default function Home() {
   return (
@@ -18,11 +20,24 @@ export default function Home() {
           <h1>PodWatch</h1>
           <h2>Kubernetes Error Hub</h2>
           <p>Streamline your Kubernetes monitoring with Pod Watch</p>
-          <Button variant="contained" color="secondary">
-            v0.0.1 Documentation
-          </Button>
+          <Link href="/docs">
+            <Button variant="contained" color="secondary">
+              v0.0.1 Documentation
+            </Button>
+          </Link>
         </LandingHeader>
       </LandingContent>
+      <Accordion title="What is PodWatch?">
+        <p>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
+          dolore possimus voluptas vero velit, mollitia accusamus esse minus
+          unde officiis autem. Repudiandae totam odio consectetur modi!
+          Quibusdam aliquid velit aliquam. Sed eum optio cumque ullam unde
+          deserunt voluptatibus est impedit fuga ea doloribus necessitatibus
+          corrupti, sequi aperiam animi dolores aut officiis tenetur nesciunt,
+          repellendus, facilis fugit.
+        </p>
+      </Accordion>
     </>
   );
 }
