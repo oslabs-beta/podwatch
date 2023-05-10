@@ -44,7 +44,11 @@ const Header = () => {
             items={[
               { component: <>Docs</>, href: '/docs', visible: 'all' },
               { component: <>Examples</>, href: '/', visible: 'all' },
-              { component: <>GitRepo</>, href: '/', visible: 'all' },
+              {
+                component: <>Repository</>,
+                href: 'https://github.com/oslabs-beta/podwatch',
+                visible: 'all',
+              },
               {
                 component: (
                   <Button
