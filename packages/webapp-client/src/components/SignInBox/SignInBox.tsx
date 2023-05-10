@@ -46,7 +46,6 @@ const SignInBox: React.FC<React.PropsWithChildren<SignInProps>> = () => {
   };
 
   return (
-    <div className={styles.overlay}>
     <div className={styles.main}>
       <div className={styles.innerBox}>
         <h1>Welcome back</h1>
@@ -118,7 +117,6 @@ const SignInBox: React.FC<React.PropsWithChildren<SignInProps>> = () => {
       </div>
       <Copyright sx={{ mt: 8, mb: 4 }} />
       </div>
-    </div>
   );
 };
 
