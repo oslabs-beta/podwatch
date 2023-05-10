@@ -84,14 +84,18 @@ const clusterSchema = new mongoose.Schema<ClusterAttrs>(
     notificationEnabled: {
       type: Boolean,
       required: false,
-      enum: ['true', 'false'],
+      default: false,
     },
     notificationType: {
       type: String,
+      required: false,
+      default: false,
       enum: ['text', 'email', 'slack'],
     },
     notificationAccess: {
       type: String,
+      required: false,
+      default: false,
     },
     owner: {
       type: mongoose.Schema.Types.ObjectId,

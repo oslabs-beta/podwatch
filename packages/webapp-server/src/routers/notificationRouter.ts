@@ -3,7 +3,7 @@ import { Request, Response, Router } from 'express';
 import { authenticateUser } from '../controllers/authController';
 import { kErrorController } from '../controllers/kErrorController';
 import { getAllClusters } from '../controllers/clusterController';
-import { sendNotification } from '../controllers/notificaitonController';
+import { sendNotification } from '../controllers/notificationController';
 import { statusController } from '../controllers/statusController';
 const router = Router();
 
