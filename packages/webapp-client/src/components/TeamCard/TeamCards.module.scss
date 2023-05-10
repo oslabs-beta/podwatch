@@ -1,0 +1,85 @@
+@use '../../styles/variables.scss' as *;
+
+.outer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  @include restrict-width;
+}
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  @include breakpoint-md {
+    gap: 2rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+
+.card {
+  width: 100%;
+  aspect-ratio: 1;
+  position: relative;
+
+  @include breakpoint-md {
+    width: 250px;
+  }
+
+  @include breakpoint-lg {
+    // width: 300px;
+  }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  &:hover {
+    .overlay {
+      opacity: 0.5;
+    }
+    .title {
+      opacity: 1;
+    }
+  }
+}
+
+.overlay {
+  background-color: $color-secondary;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+.title {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  color: white;
+  font-size: large;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  transition: opacity 0.2s ease-in-out;
+  user-select: none;
+
+  & > *:first-child {
+    font-size: x-large;
+  }
+}

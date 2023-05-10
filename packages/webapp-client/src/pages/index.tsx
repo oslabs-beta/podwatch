@@ -7,6 +7,12 @@ import { Button } from '@mui/material';
 import Accordion from '../components/Accordion/Accordion';
 import Link from 'next/link';
 import PageContent from '../components/PageContent/PageContent';
+import TeamCards from '../components/TeamCard/TeamCards';
+import Andrew from '/public/images/team/Andrew.jpg';
+import Alex from '/public/images/team/Alex.jpg';
+import Katherine from '/public/images/team/Katherine.png';
+import Roy from '/public/images/team/Roy.jpg';
+import Maria from '/public/images/team/Maria.png';
 
 export default function Home() {
   return (
@@ -57,6 +63,42 @@ export default function Home() {
             access the dashboard here through the PodWatch website.
           </p>
         </Accordion>
+      </PageContent>
+      <PageContent>
+        <TeamCards
+          team={[
+            {
+              name: 'Alexander Durham',
+              role: 'Fullstack Engineer',
+              image: Alex,
+              link: 'https://www.linkedin.com/in/wvaviator/',
+            },
+            {
+              name: 'Andrew Luu',
+              role: 'Fullstack Engineer',
+              image: Andrew,
+              link: 'https://www.linkedin.com/in/drewluu/',
+            },
+            {
+              name: 'Katherine Marrow',
+              role: 'Fullstack Engineer',
+              image: Katherine,
+              link: 'https://www.linkedin.com/in/katherine-marrow-668a8a1a6',
+            },
+            {
+              name: 'Roy Bae',
+              role: 'Fullstack Engineer',
+              image: Roy,
+              link: 'https://www.linkedin.com/in/roysbae/',
+            },
+            {
+              name: 'Maria Novokhatska',
+              role: 'Fullstack Engineer',
+              image: Maria,
+              link: 'https://www.linkedin.com/in/mariyanovok/',
+            },
+          ]}
+        />
       </PageContent>
     </>
   );
