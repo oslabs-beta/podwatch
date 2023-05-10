@@ -64,46 +64,45 @@ export const sendNotification = async (
   next: NextFunction
 ) => {
   //get all the clusters
-  const clustersAll = res.locals.allClusters;
+  //const clustersAll = res.locals.allClusters;
+  const cluster = res.locals.cluster;
   try {
-    for (const cluster of clustersAll) {
-      //notificationAccess is assign the value of if that specific cluster has notifications on
-      const notificationsEnabled = cluster.notificationEnabled;
-      //notificationType is assign the value of the clusters notification type (text,email,slack)
-      const notificationType = cluster.notificationType;
-      //const notificationAccess is set to the means of accesss (phone number, email address, slack info)
-      const notificationAccess = cluster.notificationAccess;
-      //grab the name of the cluster
-      const name = cluster.name;
-      const clusterError = await KErrorModel.find({ cluster: cluster.id });
-      //check if a error does exist in the cluster
-      if (clusterError[0]) {
-        //for each error associated with the cluster
-        for (const error of clusterError) {
-          //the user readable message regarding the error
-          const message = error.message;
-          //if the cluster notificaitons have been enabled adn the error count is greater or equal to 5
-          if (notificationsEnabled === true && error.count >= 5) {
-            //if the notificationType is text
-            if (notificationType === 'text') {
-              await sendText(notificationAccess, message, name);
-              //reset the error count to 0
-              error.count = 0;
-            }
-            //if the notificationType is email
-            else if (notificationType === 'email') {
-              await sendEmail(notificationAccess, message, name);
-              //rest the error count to 0
-              error.count = 0;
-            } else {
-              await sendSlack(notificationAccess, message, name);
-              error.count = 0;
-            }
+    //notificationAccess is assign the value of if that specific cluster has notifications on
+    const notificationsEnabled = cluster.notificationEnabled;
+    //notificationType is assign the value of the clusters notification type (text,email,slack)
+    const notificationType = cluster.notificationType;
+    //const notificationAccess is set to the means of accesss (phone number, email address, slack info)
+    const notificationAccess = cluster.notificationAccess;
+    //grab the name of the cluster
+    const name = cluster.name;
+    const clusterError = await KErrorModel.find({ cluster: cluster.id });
+    //check if a error does exist in the cluster
+    if (clusterError[0]) {
+      //for each error associated with the cluster
+      for (const error of clusterError) {
+        //the user readable message regarding the error
+        const message = error.message;
+        //if the cluster notificaitons have been enabled adn the error count is greater or equal to 5
+        if (notificationsEnabled === true && error.count >= 5) {
+          //if the notificationType is text
+          if (notificationType === 'text') {
+            await sendText(notificationAccess, message, name);
+            //reset the error count to 0
+            error.count = 0;
+          }
+          //if the notificationType is email
+          else if (notificationType === 'email') {
+            await sendEmail(notificationAccess, message, name);
+            //rest the error count to 0
+            error.count = 0;
+          } else {
+            await sendSlack(notificationAccess, message, name);
+            error.count = 0;
           }
         }
       }
-      return next();
     }
+    return next();
   } catch (error) {
     return next({
       log: 'Error getting status',
