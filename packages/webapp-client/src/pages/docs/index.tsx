@@ -1,12 +1,12 @@
-import { GetStaticProps, NextPage } from 'next';
-import { serialize } from 'next-mdx-remote/serialize';
-import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
 import fs from 'fs';
+import { GetStaticProps, NextPage } from 'next';
+import { MDXRemote, MDXRemoteSerializeResult } from 'next-mdx-remote';
+import { serialize } from 'next-mdx-remote/serialize';
 
-import CodeBlock from '../../components/CodeBlock/CodeBlock';
-import styles from './docs.module.scss';
 import { MDXComponents } from 'mdx/types';
 import path from 'path';
+import CodeBlock from '../../components/CodeBlock/CodeBlock';
+import Docs from '../../components/Docs/Docs';
 
 const components: MDXComponents = {
   pre: (props) => <pre {...props} />,
@@ -19,9 +19,9 @@ interface PageProps {
 
 const myDocument: NextPage<PageProps> = ({ mdxSource }) => {
   return (
-    <div className={styles.docs}>
+    <Docs>
       <MDXRemote {...mdxSource} components={components} />
-    </div>
+    </Docs>
   );
 };
 
