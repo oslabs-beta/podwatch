@@ -138,7 +138,7 @@ catch(err){
                 />
               </Grid>
             </Grid>
-            <Grid container justifyContent="flex-end" className={styles.links}>
+            <Grid container justifyContent="center" className={styles.links}>
               <Grid item>
                 <Link href="/auth/signin" variant="body2" color='secondary'>
                   Already have an account? Sign in

@@ -33,8 +33,10 @@
       flex-direction: column;
       justify-content: space-around;
       align-items: center;
-
       width: 80%;
+      .links {
+        margin-top: 2rem;
+      }
     }
 
     @media only screen and (min-width: 360px){
@@ -101,12 +103,12 @@
 
 .oauthItem {
   color: darken(whitesmoke, 50%);
-  margin: 2rem;
+  margin: 1rem;
   font-size: 40pt;
 }
 
 .button {
-  margin-top: 5rem;
+  margin-top: 3rem;
   height: 2.5rem;
   background-color: $color-secondary;
   border-radius: 20px;
