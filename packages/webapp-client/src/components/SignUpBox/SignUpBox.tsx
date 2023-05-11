@@ -88,6 +88,7 @@ catch(err){
                   name="firstName"
                   required
                   fullWidth
+                  color="secondary"
                   id="firstName"
                   label="First Name"
                   value={firstName}
@@ -100,6 +101,7 @@ catch(err){
                 className={styles.input}
                   required
                   fullWidth
+                  color="secondary"
                   id="lastName"
                   label="Last Name"
                   name="lastName"
@@ -113,11 +115,11 @@ catch(err){
                 className={styles.input}
                   required
                   fullWidth
+                  color="secondary"
                   id="email"
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  sx={{ input: { color: 'white' } }}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -131,8 +133,8 @@ catch(err){
                   label="Password"
                   type="password"
                   id="password"
+                  color="secondary"
                   autoComplete="new-password"
-                  sx={{ input: { color: 'white' } }}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
