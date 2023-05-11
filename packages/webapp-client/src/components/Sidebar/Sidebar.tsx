@@ -28,79 +28,82 @@ const Sidebar: React.FC<SidebarProps> = ({ pageName }) => {
   const { clusters } = useClusters();
 
   return (
-    <div className={styles.container}>
-      <Drawer
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          '& .MuiDrawer-paper': {
+    <>
+      <div className={styles.spacer}></div>
+      <div className={styles.container}>
+        <Drawer
+          sx={{
             width: drawerWidth,
-            boxSizing: 'border-box',
-            position: 'absolute',
-          },
-        }}
-        variant="permanent"
-        anchor="left"
-      >
-        <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <DataUsageOutlinedIcon />
-              </ListItemIcon>
-              <ListItemText primary={'Overview'} />
-            </ListItemButton>
-          </ListItem>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <HexagonOutlinedIcon />
-              </ListItemIcon>
-              <ListItemText primary={pageName} />
-            </ListItemButton>
-          </ListItem>
-        </List>
-        <Divider />
-        <List>
-          <ListItem>
-            <ListItemText primary={'Quick View'} />
-          </ListItem>
-          {clusters.map((cluster, index) => (
-            <Link href={`/dashboard/${cluster.id}`}>
-              <ListItem key={cluster.id} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    <TokenIcon />
-                  </ListItemIcon>
-                  <ListItemText primary={cluster.name} />
-                </ListItemButton>
-              </ListItem>
-            </Link>
-          ))}
-        </List>
-        <Divider sx={{ marginTop: 'auto' }} />
-        <List>
-          <Link href={'/cluster/create'}>
+            flexShrink: 0,
+            '& .MuiDrawer-paper': {
+              width: drawerWidth,
+              boxSizing: 'border-box',
+              position: 'absolute',
+            },
+          }}
+          variant="permanent"
+          anchor="left"
+        >
+          <List>
             <ListItem disablePadding>
               <ListItemButton>
                 <ListItemIcon>
-                  <AddCircleOutlineIcon />
+                  <DataUsageOutlinedIcon />
                 </ListItemIcon>
-                <ListItemText primary="Create Cluster" />
+                <ListItemText primary={'Overview'} />
               </ListItemButton>
             </ListItem>
-          </Link>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <SettingsIcon />
-              </ListItemIcon>
-              <ListItemText primary="Settings" />
-            </ListItemButton>
-          </ListItem>
-        </List>
-      </Drawer>
-    </div>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <HexagonOutlinedIcon />
+                </ListItemIcon>
+                <ListItemText primary={pageName} />
+              </ListItemButton>
+            </ListItem>
+          </List>
+          <Divider />
+          <List>
+            <ListItem>
+              <ListItemText primary={'Quick View'} />
+            </ListItem>
+            {clusters.map((cluster, index) => (
+              <Link href={`/dashboard/${cluster.id}`}>
+                <ListItem key={cluster.id} disablePadding>
+                  <ListItemButton>
+                    <ListItemIcon>
+                      <TokenIcon />
+                    </ListItemIcon>
+                    <ListItemText primary={cluster.name} />
+                  </ListItemButton>
+                </ListItem>
+              </Link>
+            ))}
+          </List>
+          <Divider sx={{ marginTop: 'auto' }} />
+          <List>
+            <Link href={'/cluster/create'}>
+              <ListItem disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>
+                    <AddCircleOutlineIcon />
+                  </ListItemIcon>
+                  <ListItemText primary="Create Cluster" />
+                </ListItemButton>
+              </ListItem>
+            </Link>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <SettingsIcon />
+                </ListItemIcon>
+                <ListItemText primary="Settings" />
+              </ListItemButton>
+            </ListItem>
+          </List>
+        </Drawer>
+      </div>
+    </>
   );
 };
 

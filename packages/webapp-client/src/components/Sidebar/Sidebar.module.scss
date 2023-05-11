@@ -4,11 +4,24 @@
 
   @include breakpoint-md {
     width: 240px;
-    height: calc(100vh - $header-height - $footer-height);
+    position: fixed;
+    height: calc(100vh - $header-height);
+    top: $header-height;
+    left: 0;
     // background-color: $color-charcoal;
     // display: flex;
     // flex-direction: column;
-    position: relative;
+    // position: relative;
     display: inline-block;
+  }
+}
+
+.spacer {
+  height: 100vh;
+  width: 280px;
+  display: none;
+
+  @include breakpoint-md {
+    display: block;
   }
 }

@@ -11,6 +11,12 @@
   transition: height 0.2s ease-in-out;
   overflow: hidden;
   cursor: pointer;
+  h2 {
+    font-size: 1.25rem;
+    @include breakpoint-md {
+      font-size: 1.5rem;
+    }
+  }
 }
 
 .button {
@@ -54,6 +60,13 @@
   transition: all 0.2s ease-in-out;
   transform-origin: top;
   color: black;
+  a {
+    color: $color-secondary;
+
+    &:hover {
+      color: darken($color-secondary, 10);
+    }
+  }
 }
 
 .childrenOpen {

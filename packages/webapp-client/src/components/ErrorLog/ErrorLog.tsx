@@ -4,8 +4,8 @@ import useErrorInformation from '../../hooks/useErrorInformation';
 import useErrors from '../../hooks/useErrors';
 import { KError } from '../../types/KError';
 import ErrorItem from '../ErrorItem/ErrorItem';
-import OverlapSpacer from '../OverlapSpacer/OverlapSpacer';
 import styles from './ErrorLog.module.scss';
+import PageContent from '../PageContent/PageContent';
 //import { mockKErrors } from './mockKErrors';
 
 interface ErrorLogProps {
@@ -25,14 +25,14 @@ const ErrorLog: React.FC<ErrorLogProps> = ({ clusterId }) => {
   }
 
   return (
-    <OverlapSpacer className={styles.spacer}>
+    <PageContent>
       <ul className={styles.container}>
         {errors.map((error) => {
           const info = getErrorInformation(error.reason);
           return <ErrorItem key={error.id} error={error} info={info} />;
         })}
       </ul>
-    </OverlapSpacer>
+    </PageContent>
   );
 };
 

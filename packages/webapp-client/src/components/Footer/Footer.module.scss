@@ -1,0 +1,60 @@
+@use '../../styles/variables' as *;
+
+.layout {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #e1e1e1;
+}
+
+.inner {
+  @include restrict-width;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding-block: 2rem;
+  @include breakpoint-md {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.copyright {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 20px;
+  color: #6e7191;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  @include breakpoint-sm {
+    text-align: left;
+    .name {
+      display: none;
+    }
+  }
+  @include breakpoint-md {
+    text-align: left;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  @include breakpoint-md {
+    align-items: flex-end;
+  }
+}

@@ -6,6 +6,13 @@ import LandingHeader from '../components/LandingHeader/LandingHeader';
 import { Button } from '@mui/material';
 import Accordion from '../components/Accordion/Accordion';
 import Link from 'next/link';
+import PageContent from '../components/PageContent/PageContent';
+import TeamCards from '../components/TeamCard/TeamCards';
+import Andrew from '/public/images/team/Andrew.jpg';
+import Alex from '/public/images/team/Alex.jpg';
+import Katherine from '/public/images/team/Katherine.png';
+import Roy from '/public/images/team/Roy.jpg';
+import Maria from '/public/images/team/Maria.png';
 
 export default function Home() {
   return (
@@ -27,17 +34,72 @@ export default function Home() {
           </Link>
         </LandingHeader>
       </LandingContent>
-      <Accordion title="What is PodWatch?">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum
-          dolore possimus voluptas vero velit, mollitia accusamus esse minus
-          unde officiis autem. Repudiandae totam odio consectetur modi!
-          Quibusdam aliquid velit aliquam. Sed eum optio cumque ullam unde
-          deserunt voluptatibus est impedit fuga ea doloribus necessitatibus
-          corrupti, sequi aperiam animi dolores aut officiis tenetur nesciunt,
-          repellendus, facilis fugit.
-        </p>
-      </Accordion>
+      <PageContent>
+        <Accordion title="What is PodWatch?">
+          <p>
+            PodWatch is an error monitoring tool for Kubernetes clusters that
+            reads from the Kubernetes API and forwards errors to a centralized
+            dashboard. PodWatch is designed to be a lightweight, easy to use
+            tool that can be deployed in any Kubernetes cluster.
+          </p>
+        </Accordion>
+        <Accordion title="Why should I use PodWatch?">
+          <p>
+            Debugging errors in a Kubernetes cluster can be challenging and time
+            consuming. PodWatch provides a centralized dashboard that allows you
+            to quickly identify and debug errors in your cluster. Additional
+            information and documentation links are provided for each error to
+            help you quickly resolve the issue.
+          </p>
+        </Accordion>
+        <Accordion title="How do I implement PodWatch?">
+          <p>
+            You can implement PodWatch by first signing up, and then by
+            following our{' '}
+            <Link onClick={(e) => e.stopPropagation()} href="/docs">
+              documentation
+            </Link>{' '}
+            to deploy the PodWatch agent in your cluster. Once deployed, you can
+            access the dashboard here through the PodWatch website.
+          </p>
+        </Accordion>
+      </PageContent>
+      <PageContent>
+        <TeamCards
+          team={[
+            {
+              name: 'Alexander Durham',
+              role: 'Fullstack Engineer',
+              image: Alex,
+              link: 'https://www.linkedin.com/in/wvaviator/',
+            },
+            {
+              name: 'Andrew Luu',
+              role: 'Fullstack Engineer',
+              image: Andrew,
+              link: 'https://www.linkedin.com/in/drewluu/',
+            },
+            {
+              name: 'Katherine Marrow',
+              role: 'Fullstack Engineer',
+              image: Katherine,
+              link: 'https://www.linkedin.com/in/katherine-marrow-668a8a1a6',
+            },
+            {
+              name: 'Roy Bae',
+              role: 'Fullstack Engineer',
+              image: Roy,
+              link: 'https://www.linkedin.com/in/roysbae/',
+            },
+            {
+              name: 'Maria Novokhatska',
+              role: 'Fullstack Engineer',
+              image: Maria,
+              link: 'https://www.linkedin.com/in/mariyanovok/',
+            },
+          ]}
+        />
+      </PageContent>
     </>
   );
 }
