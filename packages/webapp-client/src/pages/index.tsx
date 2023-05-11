@@ -22,7 +22,7 @@ export default function Home() {
           <p>Streamline your Kubernetes monitoring with Pod Watch</p>
           <Link href="/docs">
             <Button variant="contained" color="secondary">
-              v0.0.1 Documentation
+              v1.0.0 Documentation
             </Button>
           </Link>
         </LandingHeader>
