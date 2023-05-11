@@ -1,22 +1,28 @@
 //check cluster notification settings
 //confirm wheter or not the incoming event meets min requirments (like number of times)
 //then call corresponding API
-const dotenv = require('dotenv');
-dotenv.config();
+import dotenv from 'dotenv';
 import { Request, Response, NextFunction } from 'express';
 import { KErrorModel, NativeKEvent } from '../models/KErrorModel';
-
-//slack downloads
-const accountSid = process.env.TWILIO_ACCOUNT_SID;
-const authToken = process.env.TWILIO_TOKEN;
 import process from 'process';
 import { WebClient } from '@slack/web-api';
-import twilio from 'twilio';
+import twilio, { Twilio } from 'twilio';
 
-//set up for slack bot
-const botToken = process.env.SLACK_BOT_TOKEN;
-const web = new WebClient(botToken);
-const client = twilio(accountSid, authToken);
+let client: Twilio;
+let web: WebClient;
+
+export const setupTwilio = () => {
+  //slack downloads
+  const accountSid = process.env.TWILIO_ACCOUNT_SID;
+  const authToken = process.env.TWILIO_TOKEN;
+
+  //set up for slack bot
+  const botToken = process.env.SLACK_BOT_TOKEN;
+  web = new WebClient(botToken);
+  client = twilio(accountSid, authToken);
+};
+
+dotenv.config();
 
 //function for text messages
 async function sendText(toNumber: string, message: string, name: string) {

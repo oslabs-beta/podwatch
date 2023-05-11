@@ -14,6 +14,7 @@ import { errorHandler } from './errors/errorHandler';
 //import clusterRouter
 import clusterRouter from './routers/clusterRouter';
 import statusRouter from './routers/statusRouter';
+import { setupTwilio } from './controllers/notificationController';
 //import notificationRouter from './routers/oldNotificationRouter';
 
 dotenv.config();
@@ -49,6 +50,7 @@ const start = async () => {
   }
 
   setupPassport(app);
+  setupTwilio();
 
   app.listen(3001, () => {
     console.log('Listening on port 3001');
