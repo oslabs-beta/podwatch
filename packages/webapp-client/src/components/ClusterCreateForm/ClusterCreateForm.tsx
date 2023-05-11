@@ -62,10 +62,6 @@ const ClusterCreateForm = () => {
           name="clusterId"
           color="secondary"
           autoComplete="clusterId"
-          sx={{
-            input: { color: 'white' },
-            label: { color: '#FFFFFF80' },
-          }}
           value={clusterId}
           onChange={(e) => e.preventDefault()}
           onFocus={(e) => {
@@ -82,10 +78,6 @@ const ClusterCreateForm = () => {
           name="clusterSecret"
           color="secondary"
           autoComplete="clusterSecret"
-          sx={{
-            input: { color: 'white' },
-            label: { color: '#FFFFFF80' },
-          }}
           value={clusterSecret}
           onChange={(e) => e.preventDefault()}
           onFocus={(e) => {
@@ -95,7 +87,6 @@ const ClusterCreateForm = () => {
           onBlur={() => setShowSecret(false)}
           type={showSecret ? 'text' : 'password'}
           helperText="You will only be able to see this once. Please save it somewhere safe."
-          FormHelperTextProps={{ style: { color: 'white' } }}
         />
         <Link href={`/dashboard/${clusterId}`}>
           <Button variant="contained" color="secondary">
@@ -107,7 +98,7 @@ const ClusterCreateForm = () => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={styles.container} onClick={(e) => e.stopPropagation()}>
       <Box
         component="form"
         className={styles.form}
@@ -125,10 +116,6 @@ const ClusterCreateForm = () => {
           name="clusterName"
           color="secondary"
           autoComplete="clusterName"
-          sx={{
-            input: { color: 'white' },
-            label: { color: '#FFFFFF80' },
-          }}
           value={clusterName}
           onChange={(e) => setClusterName(e.target.value)}
           autoFocus
@@ -143,7 +130,6 @@ const ClusterCreateForm = () => {
           name="clusterDescription"
           color="secondary"
           autoComplete="clusterDescription"
-          sx={{ input: { color: 'white' }, label: { color: '#FFFFFF80' } }}
           value={clusterDescription}
           onChange={(e) => setClusterDescription(e.target.value)}
           autoFocus

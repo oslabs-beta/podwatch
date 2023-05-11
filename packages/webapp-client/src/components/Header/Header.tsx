@@ -50,15 +50,7 @@ const Header = () => {
                 visible: 'all',
               },
               {
-                component: (
-                  <Button
-                    variant="contained"
-                    color="secondary"
-                    sx={{ minWidth: '6rem' }}
-                  >
-                    Sign In
-                  </Button>
-                ),
+                component: getUserAvatar(),
                 href: '/auth/signin',
                 visible: 'all',
               },

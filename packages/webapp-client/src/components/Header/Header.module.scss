@@ -16,7 +16,7 @@
   justify-content: center;
   color: $color-white;
 
-  z-index: 4;
+  z-index: 1203;
 }
 
 .corner {
@@ -34,7 +34,7 @@
 
   align-items: center;
   justify-content: space-between;
-  padding: 0.7em;
+
   @include restrict-width;
   height: 100%;
   position: relative;
