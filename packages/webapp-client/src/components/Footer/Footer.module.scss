@@ -1,73 +1,60 @@
 @use '../../styles/variables' as *;
 
-.footer {
-  background: rgb(2, 50, 183);
-  background: rgb(2, 50, 183);
-  background: linear-gradient(
-    180deg,
-    rgba(2, 50, 183, 1) 0%,
-    rgba(0, 25, 144, 1) 81%
-  );
-  width: 100%;
+.layout {
+  width: 100vw;
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #e1e1e1;
+}
 
-  color: $color-white;
-
-  width: 99vw;
-  height: $footer-height;
-
-  font-size: 3rem;
-  position: fixed;
-  bottom: -1px;
-  z-index: 1;
-
-  .link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    width: 20%;
-    height: 4rem;
-    .icon {
-      scale: 1.4;
-    }
-    p {
-      font-size: 1rem;
-    }
-  }
-  .desktop {
-    display: none;
-  }
+.inner {
+  @include restrict-width;
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  padding-block: 2rem;
   @include breakpoint-md {
-    height: 17em;
-    position: relative;
-    .link {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+.copyright {
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 20px;
+  color: #6e7191;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  @include breakpoint-sm {
+    text-align: left;
+    .name {
       display: none;
     }
-    .desktop {
-      width: 99%;
-      height: 100%;
-      position: absolute;
-      bottom: 0;
-      display: flex;
-      img {
-        border-radius: 50%;
-        width: 25vh;
-      }
-      a {
-        font-size: 0.35em;
-      }
-      p {
-        font-size: 0.35em;
-      }
-      .teamLinks {
-        width: 100%;
-        display: flex;
-        justify-content: space-evenly;
-        align-items: center;
-        flex-wrap: wrap;
-      }
-    }
+  }
+  @include breakpoint-md {
+    text-align: left;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+.list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  @include breakpoint-md {
+    align-items: flex-end;
   }
 }

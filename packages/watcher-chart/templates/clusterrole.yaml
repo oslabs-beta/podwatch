@@ -1,0 +1,8 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ .Values.rbac.clusterRole.name }}
+  labels:
+    {{- include "podwatch.labels" . | nindent 4 }}
+rules:
+{{ toYaml .Values.rbac.clusterRole.rules | indent 2 }}

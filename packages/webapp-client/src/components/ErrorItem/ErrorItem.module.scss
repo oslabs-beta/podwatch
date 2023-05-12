@@ -1,3 +1,5 @@
+@use '../../styles/variables.scss' as *;
+
 .container {
   list-style: none;
   width: 100%;
@@ -7,6 +9,7 @@
   border-radius: 0.5rem;
   padding: 0.5em 0.75em;
   color: white;
+  background-color: $color-charcoal;
 }
 
 .preview {

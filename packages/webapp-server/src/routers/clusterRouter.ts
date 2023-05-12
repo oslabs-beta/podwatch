@@ -4,18 +4,22 @@ import {
   getCluster,
   updateCluster,
   deleteCluster,
+  addNotification,
 } from '../controllers/clusterController';
 import { authenticateUser } from '../controllers/authController';
 import { Request, Response, Router } from 'express';
 
 const router = Router();
+
+// router.use('/', (req: Request, res: Response) => {
+//   res.send('HELLO');
+// });
 //get all clusters associated with user
 router.get(
   '/',
   authenticateUser,
   getAllClusters,
   (req: Request, res: Response) => {
-    // return res.status(200).send("YAY")
     return res.status(200).json(res.locals.allClusters);
   }
 );
@@ -40,6 +44,16 @@ router.get(
   getCluster,
   (req: Request, res: Response) => {
     return res.status(200).json(res.locals.getCluster);
+  }
+);
+
+//create a notification setting for specific cluster
+router.patch(
+  '/:id/addNotification',
+  authenticateUser,
+  addNotification,
+  (req: Request, res: Response) => {
+    return res.status(201).json(res.locals.getCluster);
   }
 );
 

@@ -72,11 +72,14 @@ catch(err){
 };
 
   return (
-      <Container className={styles.main}>
-        <Box
-          className={styles.innerBox}
+    <div className={styles.main}>
+      <div className={styles.innerBox}>
+        <h1>Welcome</h1>
+        <form
+          className={styles.form}
+          onSubmit={handleSubmit}
+          noValidate
         >
-          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -85,9 +88,9 @@ catch(err){
                   name="firstName"
                   required
                   fullWidth
+                  color="secondary"
                   id="firstName"
                   label="First Name"
-                  sx={{ input: { color: 'white' } }}
                   value={firstName}
                   onChange={(e) => setFirstName(e.target.value)}
                   autoFocus
@@ -98,11 +101,11 @@ catch(err){
                 className={styles.input}
                   required
                   fullWidth
+                  color="secondary"
                   id="lastName"
                   label="Last Name"
                   name="lastName"
                   autoComplete="family-name"
-                  sx={{ input: { color: 'white' } }}
                   value={lastName}
                   onChange={(e) => setLastName(e.target.value)}
                 />
@@ -112,11 +115,11 @@ catch(err){
                 className={styles.input}
                   required
                   fullWidth
+                  color="secondary"
                   id="email"
                   label="Email Address"
                   name="email"
                   autoComplete="email"
-                  sx={{ input: { color: 'white' } }}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                 />
@@ -130,12 +133,23 @@ catch(err){
                   label="Password"
                   type="password"
                   id="password"
+                  color="secondary"
                   autoComplete="new-password"
-                  sx={{ input: { color: 'white' } }}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                 />
               </Grid>
+            </Grid>
+            <Grid container justifyContent="center" className={styles.links}>
+              <Grid item>
+                <Link href="/auth/signin" variant="body2" color='secondary'>
+                  Already have an account? Sign in
+                </Link>
+              </Grid>
+            </Grid>
+            <Grid className={styles.oauthIcons}>
+                <IconButton><GitHubIcon className={styles.oauthItem}/></IconButton>
+                <IconButton><GoogleIcon className={styles.oauthItem}/></IconButton>
             </Grid>
             <Button
             className={styles.button}
@@ -147,21 +161,10 @@ catch(err){
             >
               Sign Up
             </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="/auth/signin" variant="body2" color='secondary'>
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
-            <Grid className={styles.oauthIcons}>
-                <IconButton><GitHubIcon className={styles.oauthItem}/></IconButton>
-                <IconButton><GoogleIcon className={styles.oauthItem}/></IconButton>
-            </Grid>
-          </Box>
-        </Box>
+          </form>
+        </div>
         <Copyright sx={{ mt: 5 }} />
-      </Container>
+      </div>
   );
 };
 

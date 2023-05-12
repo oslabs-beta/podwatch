@@ -20,8 +20,8 @@ export const kErrorController = {
     res: Response,
     next: NextFunction
   ) => {
-    const clusterId = req.headers['clusterid'] as string;
-    const clusterSecret = req.headers['clustersecret'] as string;
+    const clusterId = req.get('Cluster-ID') as string;
+    const clusterSecret = req.get('Cluster-Secret') as string;
 
     if (!clusterId || !clusterSecret) {
       return next({
@@ -96,8 +96,8 @@ export const kErrorController = {
       return next();
     } catch (error) {
       return next({
-        log: 'Error getting cluster from body',
-        message: 'Error getting cluster from body',
+        log: 'Error getting cluster',
+        message: 'Error getting cluster',
         status: 500,
         error,
       });

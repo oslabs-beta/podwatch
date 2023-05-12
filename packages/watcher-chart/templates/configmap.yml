@@ -1,0 +1,25 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "podwatch.fullname" . }}-config
+  labels:
+    {{- include "podwatch.labels" . | nindent 4 }}
+data:
+  {{- if .Values.configMap.clientId }}
+  PODWATCH_CLIENT_ID: {{ .Values.configMap.clientId }}
+  {{- end }}
+  {{- if .Values.configMap.customServerUrl }}
+  PODWATCH_CUSTOM_SERVER_URL: {{ .Values.configMap.customServerUrl }}
+  {{- end }}
+  {{- if .Values.configMap.maxDispatchQueueSize }}
+  MAX_DISPATCH_QUEUE_SIZE: {{ .Values.configMap.maxDispatchQueueSize }}
+  {{- end }}
+  {{- if .Values.configMap.dispatchIdleTimeout }}
+  DISPATCH_IDLE_TIMEOUT: {{ .Values.configMap.dispatchIdleTimeout }}
+  {{- end }}
+  {{- if .Values.configMap.webhookInstanceTimeout }}
+  WEBHOOK_INSTANCE_TIMEOUT: {{ .Values.configMap.webhookInstanceTimeout }}
+  {{- end }}
+  {{- if .Values.configMap.heartbeatInterval }}
+  HEARTBEAT_INTERVAL: {{ .Values.configMap.heartbeatInterval }}
+  {{- end }}

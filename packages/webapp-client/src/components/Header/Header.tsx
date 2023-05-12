@@ -17,7 +17,7 @@ const Header = () => {
           <Button
             variant="contained"
             color="secondary"
-            sx={{ minWidth: '6rem' }}
+            sx={{ minWidth: '6rem', borderRadius: '20px', height: '2.5rem' }}
           >
             Sign In
           </Button>
@@ -42,18 +42,20 @@ const Header = () => {
           </Link>
           <Navigation
             items={[
-              { label: 'Docs', href: '/', visible: 'all' },
-              { label: 'Examples', href: '/', visible: 'all' },
-              { label: 'GitRepo', href: '/', visible: 'all' },
+              { component: <>Docs</>, href: '/docs', visible: 'all' },
+              { component: <>Clusters</>, href: '/cluster', visible: 'all' },
+              {
+                component: <>Repository</>,
+                href: 'https://github.com/oslabs-beta/podwatch',
+                visible: 'all',
+              },
+              {
+                component: getUserAvatar(),
+                href: '/auth/signin',
+                visible: 'all',
+              },
             ]}
           />
-          <div className={styles.corner}>
-            <div className={styles.signin}>{getUserAvatar()}</div>
-            <div className={styles.divider} />
-            <div className={styles.toggle}>
-              <DarkModeToggle />
-            </div>
-          </div>
         </div>
       </header>
     </>

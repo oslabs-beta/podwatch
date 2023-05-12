@@ -5,7 +5,6 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import styles from './SignInBox.module.scss';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import GoogleIcon from '@mui/icons-material/Google';
@@ -36,15 +35,6 @@ const SignInBox: React.FC<React.PropsWithChildren<SignInProps>> = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // const body = JSON.stringify({
-    //   email,
-    //   password,
-    // });
-    // const response = await fetch('http://localhost:3001/auth/local/signin', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body,
-    // });
 
     try {
       await serverInstance.post('/auth/local/signin', 
@@ -53,21 +43,16 @@ const SignInBox: React.FC<React.PropsWithChildren<SignInProps>> = () => {
     } catch (err) {
       console.log(err);
     }
-
-    //   if (response.status === 200) {
-    //     router.push('/');
-    //   }
   };
 
   return (
-    <Container className={styles.main}>
-      <Box className={styles.innerBox}>
-        <Box
-          component="form"
+    <div className={styles.main}>
+      <div className={styles.innerBox}>
+        <h1>Welcome back</h1>
+        <form
           className={styles.form}
           onSubmit={handleSubmit}
           noValidate
-          sx={{ mt: 1 }}
         >
           <TextField
             className={styles.input}
@@ -79,7 +64,6 @@ const SignInBox: React.FC<React.PropsWithChildren<SignInProps>> = () => {
             name="email"
             color="secondary"
             autoComplete="email"
-            sx={{ input: { color: 'white' } }}
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             autoFocus
@@ -94,22 +78,11 @@ const SignInBox: React.FC<React.PropsWithChildren<SignInProps>> = () => {
             type="password"
             id="password"
             color="secondary"
-            sx={{ input: { color: 'white' } }}
             autoComplete="current-password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <Button
-            className={styles.button}
-            color="secondary"
-            type="submit"
-            fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            Sign In
-          </Button>
-          <Grid container>
+          <Grid container className={styles.links}>
             <Grid item xs>
               <Link href="#" variant="body2" color="secondary">
                 Forgot password?
@@ -125,14 +98,23 @@ const SignInBox: React.FC<React.PropsWithChildren<SignInProps>> = () => {
             <IconButton>
               <GitHubIcon className={styles.oauthItem} />
             </IconButton>
-            <IconButton href="http://localhost:3001/auth/google">
+            <IconButton href={`${process.env.API_URL}/auth/google`}>
               <GoogleIcon className={styles.oauthItem} />
             </IconButton>
           </Grid>
-        </Box>
-      </Box>
+          <Button
+            className={styles.button}
+            color="secondary"
+            type="submit"
+            fullWidth
+            variant="contained"
+          >
+            Sign In
+          </Button>
+        </form>
+      </div>
       <Copyright sx={{ mt: 8, mb: 4 }} />
-    </Container>
+      </div>
   );
 };
 

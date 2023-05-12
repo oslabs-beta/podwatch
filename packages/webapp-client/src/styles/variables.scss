@@ -29,3 +29,34 @@ $footer-height: 6rem;
     @content;
   }
 }
+
+@mixin restrict-width {
+  width: min(100%, 90rem);
+  margin: 0 auto;
+  padding-inline: 1rem;
+  @include breakpoint-md {
+    padding-inline: 2rem;
+  }
+}
+
+@mixin hide-scrollbar {
+  .example::-webkit-scrollbar {
+    display: none;
+  }
+
+  .example {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@mixin show-scrollbar {
+  .example::-webkit-scrollbar {
+    display: block;
+  }
+
+  .example {
+    -ms-overflow-style: auto;
+    scrollbar-width: auto;
+  }
+}

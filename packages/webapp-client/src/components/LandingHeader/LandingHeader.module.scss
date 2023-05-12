@@ -1,0 +1,36 @@
+@use '../../styles/variables' as *;
+
+.layout {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 1rem;
+  text-align: left;
+  width: 100%;
+  height: 100%;
+  padding: 1rem;
+  > *:last-child {
+    margin-top: 1rem;
+  }
+
+  h1 {
+    font-size: 40px;
+    font-weight: bold;
+  }
+
+  h2 {
+    font-size: 30px;
+    font-weight: bold;
+    @include breakpoint-md {
+      font-size: 60px;
+    }
+  }
+
+  p {
+    font-size: 20px;
+    font-weight: normal;
+    line-height: 28px;
+    color: #6e7191;
+  }
+}
