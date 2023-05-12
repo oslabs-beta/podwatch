@@ -47,7 +47,7 @@ authRouter.get(
   passport.authenticate('google', { failureRedirect: '/login' }),
   generateJwt,
   (req: Request, res: Response) => {
-    res.redirect('http://localhost:3000/cluster');
+    res.redirect(`${process.env.CLIENT_URL}/cluster`);
   }
 );
 

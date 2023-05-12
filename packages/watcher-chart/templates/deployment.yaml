@@ -22,6 +22,6 @@ spec:
             - configMapRef:
                 name: {{ include "podwatch.fullname" . }}-config
             - secretRef:
-                name: {{ include "podwatch.fullname" . }}-secrets
+                name: {{ include "podwatch.fullname" . }}-secret
                 optional: true
       serviceAccountName: {{ .Values.serviceAccount.name }}

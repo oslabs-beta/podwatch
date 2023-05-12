@@ -50,7 +50,7 @@ const ClusterCreateForm = () => {
 
   if (clusterId && clusterSecret) {
     return (
-      <div className={styles.container}>
+      <div className={styles.container} onClick={(e) => e.stopPropagation()}>
         <h2>Cluster {clusterName} Created!</h2>
         <TextField
           className={styles.input}

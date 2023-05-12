@@ -1,2 +1,5 @@
 # Chart builds
 *.tgz
+
+# Custom values file
+custom-values.yaml
