@@ -11,8 +11,8 @@ import TeamCards from '../components/TeamCard/TeamCards';
 import Andrew from '/public/images/team/Andrew.jpg';
 import Alex from '/public/images/team/Alex.jpg';
 import Katherine from '/public/images/team/Katherine.png';
-import Roy from '/public/images/team/Roy.jpg';
 import Maria from '/public/images/team/Maria.png';
+import Roy from '/public/images/team/Roy.jpg';
 
 export default function Home() {
   return (
@@ -26,9 +26,9 @@ export default function Home() {
         <LandingHeader>
           <h1>PodWatch</h1>
           <h2>Kubernetes Error Hub</h2>
-          <p>Streamline your Kubernetes monitoring with Pod Watch</p>
+          <p>Streamline your Kubernetes monitoring with PodWatch</p>
           <Link href="/docs">
-            <Button variant="contained" color="secondary">
+            <Button variant="contained" color="secondary" sx={{borderRadius: '20px', height: '2.5rem', textTransform: 'none'}}>
               v1.0.0 Documentation
             </Button>
           </Link>
@@ -86,16 +86,16 @@ export default function Home() {
               link: 'https://www.linkedin.com/in/katherine-marrow-668a8a1a6',
             },
             {
-              name: 'Roy Bae',
-              role: 'Fullstack Engineer',
-              image: Roy,
-              link: 'https://www.linkedin.com/in/roysbae/',
-            },
-            {
               name: 'Maria Novokhatska',
               role: 'Fullstack Engineer',
               image: Maria,
               link: 'https://www.linkedin.com/in/mariyanovok/',
+            },
+            {
+              name: 'Roy Bae',
+              role: 'Fullstack Engineer',
+              image: Roy,
+              link: 'https://www.linkedin.com/in/roysbae/',
             },
           ]}
         />
