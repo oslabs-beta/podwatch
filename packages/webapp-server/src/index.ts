@@ -23,7 +23,7 @@ const app = express();
 
 app.use(express.json());
 app.use(cookieParser(process.env.COOKIE_SECRET));
-app.use(cors({ origin: 'http://localhost:3000', credentials: true }));
+app.use(cors({ origin: 'https://www.podwatch.dev', credentials: true }));
 app.use(
   session({
     secret: process.env.COOKIE_SECRET || '',
@@ -52,7 +52,7 @@ const start = async () => {
   setupPassport(app);
   setupTwilio();
 
-  app.listen(3001, () => {
+  app.listen(3000, () => {
     console.log('Listening on port 3001');
   });
 };
