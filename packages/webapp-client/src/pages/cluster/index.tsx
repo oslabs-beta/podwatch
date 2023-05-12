@@ -7,6 +7,7 @@ import useClusters from '../../hooks/useClusters';
 import { CircularProgress } from '@mui/material';
 import Accordion from '../../components/Accordion/Accordion';
 import ClusterCreateForm from '../../components/ClusterCreateForm/ClusterCreateForm';
+import Link from 'next/link';
 
 const ClusterManagementPage = () => {
   useAuthenticate('/signin');
@@ -19,9 +20,14 @@ const ClusterManagementPage = () => {
       ) : (
         <div>
           {clusters.map((cluster) => (
-            <Accordion title={cluster.name}>
-              <div>{cluster.description}</div>
-            </Accordion>
+            <>
+              <Link href={`/dashboard/${cluster.id}`}>
+                <Accordion title={cluster.name}>
+                  <div>{cluster.description}</div>
+                </Accordion>
+              </Link>
+              <br />
+            </>
           ))}
           <Accordion title="Add New">
             <ClusterCreateForm />
