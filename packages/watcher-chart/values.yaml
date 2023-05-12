@@ -3,7 +3,7 @@ replicaCount: 1
 
 image:
   repository: wvaviator/podwatch
-  tag: latest
+  tag: 0.1.0
   pullPolicy: IfNotPresent
 
 configMap:

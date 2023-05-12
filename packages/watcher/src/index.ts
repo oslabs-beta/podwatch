@@ -21,8 +21,7 @@ const config = new EnvConfiguration(
     DISPATCH_IDLE_TIMEOUT: process.env.DISPATCH_IDLE_TIMEOUT || '1000',
     WEBHOOK_INSTANCE_TIMEOUT: process.env.WEBHOOK_INSTANCE_TIMEOUT || '10000',
     PODWATCH_WEB_SERVICE_URL:
-      process.env.PODWATCH_WEB_SERVICE_URL ||
-      'http://host.docker.internal:3001',
+      process.env.PODWATCH_WEB_SERVICE_URL || 'https://api.podwatch.dev',
     HEARTBEAT_INTERVAL: process.env.HEARTBEAT_INTERVAL || '30000',
   },
   logger
