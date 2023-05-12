@@ -98,7 +98,7 @@ const SignInBox: React.FC<React.PropsWithChildren<SignInProps>> = () => {
             <IconButton>
               <GitHubIcon className={styles.oauthItem} />
             </IconButton>
-            <IconButton href={`${process.env.API_URL}/auth/google`}>
+            <IconButton href={`${process.env.NEXT_PUBLIC_API_URL}/auth/google`}>
               <GoogleIcon className={styles.oauthItem} />
             </IconButton>
           </Grid>
