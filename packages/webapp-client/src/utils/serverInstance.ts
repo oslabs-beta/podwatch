@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 const serverInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL || 'https://api.podwatch.dev',
-  timeout: 5000,
+  timeout: 6000,
   withCredentials: true,
 });
 
