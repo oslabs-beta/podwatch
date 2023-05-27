@@ -34,7 +34,7 @@ spec:
     spec:
       containers:
         - name: podwatch
-          image: wvaviator/podwatch:latest
+          image: podwatch/watcher:latest
           envFrom:
             - configMapRef:
                 name: podwatch-config

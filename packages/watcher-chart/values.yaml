@@ -2,7 +2,7 @@
 replicaCount: 1
 
 image:
-  repository: wvaviator/podwatch
+  repository: podwatch/watcher
   tag: 0.1.0
   pullPolicy: IfNotPresent
 
