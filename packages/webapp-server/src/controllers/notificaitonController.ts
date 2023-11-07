@@ -51,12 +51,21 @@ function sendEmail(toEmail: string, message: string, name: string) {
     });
 }
 //for slack
-function sendSlack(conversationId: string, message: string, name: string) {
-  const result = web.chat.postMessage({
-    text: `The cluster: ${name} is experiencing the error: ${message}`,
-    blocks: [],
-    channel: conversationId,
-  });
+async function sendSlack(
+  conversationId: string,
+  message: string,
+  name: string
+) {
+  try {
+    const result = await web.chat.postMessage({
+      text: `The cluster: ${name} is experiencing the error: ${message}`,
+      blocks: [],
+      channel: conversationId,
+    });
+    console.log('Slack Message Sent');
+  } catch (error) {
+    console.error(error);
+  }
 }
 export const sendNotification = async (
   req: Request,
